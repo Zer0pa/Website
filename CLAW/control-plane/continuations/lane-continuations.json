@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-03T11:09:55Z",
+  "lanes": {
+    "homepage-fidelity": {
+      "status": "accepted",
+      "next_hypothesis": "Hold canonical geometry unless integration replay surfaces a regression.",
+      "rollback_target": "2799941"
+    },
+    "imc-flagship": {
+      "status": "accepted",
+      "next_hypothesis": "Protect flagship-only class and editorial boundaries while product-family laws are extracted.",
+      "rollback_target": "4f43c0d"
+    },
+    "product-family-kernel": {
+      "status": "accepted",
+      "next_hypothesis": "Hold the accepted kernel law unless C4 proof pages surface a contradiction.",
+      "rollback_target": "b940d26"
+    },
+    "product-family": {
+      "status": "active",
+      "next_hypothesis": "Use the accepted kernel to make /work/xr the first generic proof page, then replicate on /work/ft.",
+      "rollback_target": null
+    },
+    "data-truth": {
+      "status": "waiting",
+      "next_hypothesis": "Audit XR and FT packet sufficiency before family rollout.",
+      "rollback_target": null
+    },
+    "systems-qa": {
+      "status": "waiting",
+      "next_hypothesis": "Add product-kernel law compliance to the QA bundle before C4 promotion.",
+      "rollback_target": null
+    },
+    "integration": {
+      "status": "waiting",
+      "next_hypothesis": "Replay accepted routes and product-kernel checkpoints once C3 exits cleanly.",
+      "rollback_target": null
+    }
+  }
+}

@@ -71,6 +71,25 @@
         "null"
       ]
     },
+    "hardening_artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "active_cadence_profile": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "run_window": {
+      "type": "object",
+      "additionalProperties": true
+    },
     "lanes": {
       "type": "object",
       "additionalProperties": {
@@ -114,6 +133,70 @@
       "items": {
         "type": "string"
       }
+    },
+    "queue": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "active_jobs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "locks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "current_checkpoint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rollback_checkpoint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pause_requested": {
+      "type": "boolean"
+    },
+    "stop_requested": {
+      "type": "boolean"
+    },
+    "heartbeat_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retry_budget": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "active_cycle": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "last_recovery_event": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_health_check": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "additionalProperties": true

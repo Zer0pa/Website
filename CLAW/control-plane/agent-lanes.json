@@ -65,6 +65,7 @@
         "site/src/app/work/**",
         "site/src/components/lane/**",
         "site/src/lib/data/presentation.ts",
+        "site/src/lib/product-kernel/**",
         "site/src/app/globals.css"
       ],
       "role": "batch rollout of approved product-page law"
@@ -78,6 +79,7 @@
         "site/src/app/work/**",
         "site/src/components/lane/**",
         "site/src/lib/data/presentation.ts",
+        "site/src/lib/product-kernel/**",
         "site/src/app/globals.css"
       ],
       "role": "general product-page law"

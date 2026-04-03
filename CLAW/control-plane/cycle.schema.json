@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Website-main Recursive Cycle",
+  "type": "object",
+  "required": [
+    "version",
+    "cycle_id",
+    "created_at",
+    "phase_id",
+    "phase_title",
+    "profile",
+    "jobs"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "cycle_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "phase_id": {
+      "type": "string"
+    },
+    "phase_title": {
+      "type": "string"
+    },
+    "profile": {
+      "type": "string"
+    },
+    "materialize": {
+      "type": "boolean"
+    },
+    "allowed_path_prefixes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "jobs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "lane_id",
+          "branch",
+          "worktree",
+          "objective"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "lane_id": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "worktree": {
+            "type": "string"
+          },
+          "objective": {
+            "type": "string"
+          },
+          "deliverables": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "acceptance": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

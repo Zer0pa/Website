@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "default_profile": "supervised_dry_run",
+  "phases": {
+    "C3": {
+      "title": "Product kernel lock",
+      "profile": "supervised_dry_run",
+      "materialize_by_default": false,
+      "lanes": [
+        {
+          "lane_id": "product-family-kernel",
+          "objective": "Extract a reusable product-family kernel from the closed homepage and /imc laws, and separate flagship-only behavior from generic dossier law.",
+          "deliverables": [
+            "kernel law artifact",
+            "packet binding rules",
+            "generic route grammar",
+            "flagship exception boundary"
+          ],
+          "acceptance": [
+            "kernel law artifact exists",
+            "generic /work/[slug] law is explicit",
+            "flagship exceptions are separated from family law"
+          ]
+        },
+        {
+          "lane_id": "data-truth",
+          "objective": "Verify that XR and FT packets satisfy the minimum binding requirements for generic product routes without presentation-time fabrication.",
+          "deliverables": [
+            "XR sufficiency verdict",
+            "FT sufficiency verdict",
+            "packet fallback audit"
+          ],
+          "acceptance": [
+            "packet bindings remain honest",
+            "fallback rules are explicit"
+          ]
+        },
+        {
+          "lane_id": "systems-qa",
+          "objective": "Define and validate the falsification bundle for the product-family kernel before rollout starts.",
+          "deliverables": [
+            "kernel QA gate definition",
+            "generic route audit coverage",
+            "mobile overflow guardrail confirmation"
+          ],
+          "acceptance": [
+            "kernel QA bundle is declared",
+            "generic route promotion rules are explicit"
+          ]
+        }
+      ]
+    },
+    "C4": {
+      "title": "First generic product proof",
+      "profile": "supervised_dry_run",
+      "materialize_by_default": false,
+      "lanes": [
+        {
+          "lane_id": "product-family",
+          "objective": "Apply the locked product-family kernel to /work/xr without bespoke route hacks.",
+          "deliverables": [
+            "XR route instance",
+            "XR layout closure",
+            "XR law-compliance report"
+          ],
+          "acceptance": [
+            "XR renders from the kernel",
+            "XR remains packet-truthful"
+          ]
+        },
+        {
+          "lane_id": "data-truth",
+          "objective": "Audit the XR packet and GitHub truth surfaces that feed the first generic proof page.",
+          "deliverables": [
+            "XR packet truth report"
+          ],
+          "acceptance": [
+            "XR packet truth is sufficient and current"
+          ]
+        },
+        {
+          "lane_id": "systems-qa",
+          "objective": "Run falsification against /work/xr and reject any kernel or responsive regression.",
+          "deliverables": [
+            "XR layout and responsive reports"
+          ],
+          "acceptance": [
+            "XR has zero critical and zero major diffs"
+          ]
+        },
+        {
+          "lane_id": "integration",
+          "objective": "Replay the accepted XR candidate through the integration lane before promotion.",
+          "deliverables": [
+            "XR integration rehearsal"
+          ],
+          "acceptance": [
+            "XR candidate replays cleanly in integration"
+          ]
+        }
+      ]
+    },
+    "C5": {
+      "title": "Second replication proof",
+      "profile": "supervised_dry_run",
+      "materialize_by_default": false,
+      "lanes": [
+        {
+          "lane_id": "product-family",
+          "objective": "Prove the same kernel generalizes to /work/ft without undeclared bespoke logic.",
+          "deliverables": [
+            "FT route instance",
+            "replication delta report"
+          ],
+          "acceptance": [
+            "FT is produced from the same kernel",
+            "replication delta is explainable by content or declared variants"
+          ]
+        },
+        {
+          "lane_id": "data-truth",
+          "objective": "Audit FT packet sufficiency and route bindings before replication promotion.",
+          "deliverables": [
+            "FT packet truth report"
+          ],
+          "acceptance": [
+            "FT packet truth is sufficient and current"
+          ]
+        },
+        {
+          "lane_id": "systems-qa",
+          "objective": "Run falsification against /work/ft and the kernel inheritance boundary.",
+          "deliverables": [
+            "FT layout and responsive reports"
+          ],
+          "acceptance": [
+            "FT has zero critical and zero major diffs"
+          ]
+        },
+        {
+          "lane_id": "integration",
+          "objective": "Replay the accepted FT candidate through the integration lane before promotion.",
+          "deliverables": [
+            "FT integration rehearsal"
+          ],
+          "acceptance": [
+            "FT candidate replays cleanly in integration"
+          ]
+        }
+      ]
+    },
+    "C6": {
+      "title": "Producing readiness",
+      "profile": "supervised_dry_run",
+      "materialize_by_default": false,
+      "lanes": [
+        {
+          "lane_id": "orchestrator",
+          "objective": "Verify that the recursive machine is operating on stable laws rather than moving targets.",
+          "deliverables": [
+            "readiness verdict",
+            "press-go evidence update"
+          ],
+          "acceptance": [
+            "automation would operate on stable laws"
+          ]
+        },
+        {
+          "lane_id": "systems-qa",
+          "objective": "Confirm that guarded recursion rejects regressions and respects locks, paths, and overflow rules.",
+          "deliverables": [
+            "recursive safety verdict"
+          ],
+          "acceptance": [
+            "safety gates remain intact"
+          ]
+        },
+        {
+          "lane_id": "integration",
+          "objective": "Replay all accepted canonical and generic routes through integration before any unattended cadence begins.",
+          "deliverables": [
+            "integration replay bundle"
+          ],
+          "acceptance": [
+            "integration replay is current"
+          ]
+        }
+      ]
+    }
+  }
+}

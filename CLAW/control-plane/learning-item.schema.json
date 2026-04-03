@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Learning Item",
+  "type": "object",
+  "required": [
+    "id",
+    "category",
+    "route",
+    "observation",
+    "evidence",
+    "proposed_law_change",
+    "owner_lane",
+    "status"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "category": { "type": "string" },
+    "route": { "type": "string" },
+    "observation": { "type": "string" },
+    "evidence": { "type": "string" },
+    "proposed_law_change": { "type": "string" },
+    "owner_lane": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["open", "closed", "superseded"]
+    }
+  },
+  "additionalProperties": false
+}

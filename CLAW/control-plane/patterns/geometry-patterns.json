@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-03T11:09:55Z",
+  "patterns": [
+    {
+      "id": "home-macro-spacing-regression",
+      "domain": "geometry",
+      "applies_to": ["/"],
+      "trigger": "A local spacing improvement causes downstream macro layout drift.",
+      "law": "Do not alter macro section spacing outside a declared section-position law.",
+      "evidence": "CLAW/control-plane/reports/W1-homepage-supervised.md"
+    },
+    {
+      "id": "mobile-overflow-guardrails",
+      "domain": "responsive",
+      "applies_to": ["/", "/imc", "/work/[slug]"],
+      "trigger": "Desktop closure passes but footer, CTA, authority meta, or evidence strings overflow on mobile.",
+      "law": "Require a mobile overflow falsification pass before canonical promotion.",
+      "evidence": "CLAW/control-plane/reports/W2-canonical-closure.md"
+    },
+    {
+      "id": "flagship-exception-boundary",
+      "domain": "product-kernel",
+      "applies_to": ["/imc", "/work/[slug]"],
+      "trigger": "A generic product page starts inheriting flagship-only class tokens or editorial framing.",
+      "law": "Keep IMC exceptions explicit and non-inheritable in family law.",
+      "evidence": "CLAW/control-plane/product-kernel/flagship-exceptions.imc.json"
+    },
+    {
+      "id": "dependency-closure-before-audit",
+      "domain": "ops",
+      "applies_to": ["/", "/imc", "/work/[slug]"],
+      "trigger": "A lane cannot run build or parser verification because repo-local dependencies are absent.",
+      "law": "Treat lane-local dependency closure as required before autonomous verification.",
+      "evidence": "Homepage-fidelity and product-family-kernel dependency closure on 2026-04-03"
+    },
+    {
+      "id": "product-kernel-flow-groups",
+      "domain": "product-kernel",
+      "applies_to": ["/work/[slug]"],
+      "trigger": "A verifier treats generic product pages like IMC-style fixed vertical screenshots and reports false regressions.",
+      "law": "Verify generic product pages by anchored hero geometry plus section-flow groups, not by flagship absolute Y positions.",
+      "evidence": "CLAW/control-plane/reports/W3-product-kernel-lock.md"
+    },
+    {
+      "id": "metric-path-compaction",
+      "domain": "product-kernel",
+      "applies_to": ["/work/[slug]"],
+      "trigger": "Path-like metric values overflow metric cards and create avoidable responsive regressions.",
+      "law": "Compact path-like metric values before display and allow hard wrapping as a safety backstop.",
+      "evidence": "CLAW/control-plane/reports/W3-product-kernel-lock.md"
+    }
+  ]
+}

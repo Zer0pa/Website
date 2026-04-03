@@ -3,7 +3,7 @@
   "program": "canonical-routes-to-producing",
   "authoritative_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
   "status": "active",
-  "current_phase": "C3-product-kernel-lock",
+  "current_phase": "C4-first-generic-product-proof",
   "routes": {
     "homepage": "/",
     "flagship": "/imc",
@@ -51,7 +51,7 @@
     {
       "id": "C3",
       "title": "Product kernel lock",
-      "status": "in_progress",
+      "status": "completed",
       "depends_on": [
         "C1",
         "C2"
@@ -64,13 +64,15 @@
       "exit_gates": [
         "Kernel law artifact exists.",
         "Packet binding rules are explicit.",
-        "Flagship exceptions are separated from family law."
+        "Flagship exceptions are separated from family law.",
+        "A product-kernel law audit exists for /work/xr and /work/ft.",
+        "Pattern library and continuation state are seeded for the product-family rollout."
       ]
     },
     {
       "id": "C4",
       "title": "First generic product proof",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "C3"
       ],

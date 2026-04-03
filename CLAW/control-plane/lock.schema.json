@@ -3,22 +3,39 @@
   "title": "CLAW Lock",
   "type": "object",
   "required": [
+    "version",
     "lock_id",
     "resource",
     "owner_lane",
+    "cycle_id",
+    "phase_id",
     "status",
-    "acquired_at"
+    "acquired_at",
+    "heartbeat_at"
   ],
   "properties": {
+    "version": { "type": "integer" },
     "lock_id": { "type": "string" },
     "resource": { "type": "string" },
     "owner_lane": { "type": "string" },
+    "cycle_id": { "type": "string" },
+    "phase_id": { "type": "string" },
     "status": {
       "type": "string",
-      "enum": ["held", "released", "stale"]
+      "enum": ["held", "released", "stale", "recovered"]
     },
     "acquired_at": { "type": "string" },
+    "heartbeat_at": { "type": "string" },
+    "heartbeat_ttl_minutes": {
+      "type": ["integer", "null"]
+    },
     "expires_at": {
+      "type": ["string", "null"]
+    },
+    "worktree": {
+      "type": ["string", "null"]
+    },
+    "branch": {
       "type": ["string", "null"]
     },
     "recovery_action": {

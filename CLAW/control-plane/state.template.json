@@ -12,6 +12,19 @@
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "execution_prd": null,
   "execution_plan": null,
+  "hardening_artifacts": {
+    "pattern_library": "CLAW/control-plane/patterns/geometry-patterns.json",
+    "continuation_state": "CLAW/control-plane/continuations/lane-continuations.json",
+    "queue_index": "CLAW/control-plane/queue/index.json",
+    "checkpoint_pointer": "CLAW/control-plane/checkpoints/current.json"
+  },
+  "active_cadence_profile": "supervised_dry_run",
+  "run_window": {
+    "mode": "manual-supervised-only",
+    "timezone": "Africa/Johannesburg",
+    "hours": "09:00-23:00",
+    "lane_iteration_minutes": 20
+  },
   "lanes": {
     "orchestrator": {
       "status": "active",
@@ -101,5 +114,24 @@
     "lane scope violation",
     "data-truth contradiction",
     "cross-repo write detected"
-  ]
+  ],
+  "queue": {
+    "active": null,
+    "history": []
+  },
+  "active_jobs": [],
+  "locks": [],
+  "current_checkpoint": "CLAW/control-plane/checkpoints/current.json",
+  "rollback_checkpoint": null,
+  "pause_requested": false,
+  "stop_requested": false,
+  "heartbeat_at": null,
+  "retry_budget": {
+    "max_attempts_per_slice": 2,
+    "max_recovery_attempts_per_cycle": 1,
+    "lock_heartbeat_ttl_minutes": 90
+  },
+  "active_cycle": null,
+  "last_recovery_event": null,
+  "last_health_check": null
 }

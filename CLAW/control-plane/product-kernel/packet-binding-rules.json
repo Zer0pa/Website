@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "status": "active",
+  "selection_limits": {
+    "headline_metrics_max": 4,
+    "assertions_max": 3,
+    "nonclaims_max": 4,
+    "modality_rows_max": 6,
+    "proof_anchors_max": 2,
+    "repo_shape_max": 3,
+    "related_lanes_max": 3,
+    "terminal_lines_max": 5
+  },
+  "fallback_order": {
+    "summary": [
+      "tagline",
+      "whatThisIs[0]",
+      "whatThisIs[1]",
+      "authorityState.summary",
+      "laneTitle",
+      "laneIdentifier"
+    ],
+    "metric_row": [
+      "headlineMetrics",
+      "authorityState.status",
+      "confidenceScore",
+      "authorityState.timestamp"
+    ],
+    "proof_terminal": [
+      "proofAnchors",
+      "verificationPath",
+      "parserWarnings"
+    ]
+  },
+  "quality_minima": {
+    "required_fields": [
+      "laneIdentifier",
+      "repoUrl",
+      "authorityState.status",
+      "confidenceScore"
+    ],
+    "generic_product_ready_requires": [
+      "at least one identity line",
+      "at least one metric or lawful fallback metric",
+      "at least one proof anchor or verification path",
+      "explicit non-claims or declared absence"
+    ]
+  },
+  "truth_rules": [
+    "Do not synthesize proof anchors that are not present in packet truth.",
+    "Do not upgrade authorityState.status through presentation logic.",
+    "Do not hide explicit non-claims to improve aesthetics.",
+    "Every generic route must remain GitHub-bound through repoUrl and proof paths."
+  ]
+}

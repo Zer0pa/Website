@@ -14,7 +14,13 @@
     "layout:measure": "tsx src/scripts/layout-measure.ts",
     "layout:diff": "tsx src/scripts/layout-diff.ts",
     "audit:layout": "tsx src/scripts/layout-audit.ts",
-    "audit:responsive": "tsx src/scripts/responsive-audit.ts"
+    "audit:responsive": "tsx src/scripts/responsive-audit.ts",
+    "claw:validate": "node ../CLAW/scripts/validate-control-plane.mjs",
+    "claw:plan": "node ../CLAW/scripts/plan-next-cycle.mjs",
+    "claw:run-cycle": "node ../CLAW/scripts/run-cycle.mjs",
+    "claw:settle-cycle": "node ../CLAW/scripts/settle-cycle.mjs",
+    "claw:health": "node ../CLAW/scripts/health-check.mjs",
+    "claw:recover": "node ../CLAW/scripts/recover-cycle.mjs"
   },
   "dependencies": {
     "@observablehq/plot": "^0.6",

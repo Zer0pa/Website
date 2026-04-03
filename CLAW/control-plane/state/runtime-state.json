@@ -4,15 +4,28 @@
   "mode": "hardening",
   "press_go": false,
   "current_milestone": "M1-recursive-autonomy-hardening",
-  "current_phase": "C3-product-kernel-lock",
-  "active_wave": "W2",
-  "last_updated": "2026-04-03T12:42:31+02:00",
+  "current_phase": "C4-first-generic-product-proof",
+  "active_wave": "W3",
+  "last_updated": "2026-04-03T11:32:34Z",
   "control_style": "evaluator-optimizer",
-  "latest_wave_report": "CLAW/control-plane/reports/W2-canonical-closure.md",
+  "latest_wave_report": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "execution_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
   "execution_plan": "CLAW/control-plane/plans/canonical-routes-to-producing.json",
+  "hardening_artifacts": {
+    "pattern_library": "CLAW/control-plane/patterns/geometry-patterns.json",
+    "continuation_state": "CLAW/control-plane/continuations/lane-continuations.json",
+    "queue_index": "CLAW/control-plane/queue/index.json",
+    "checkpoint_pointer": "CLAW/control-plane/checkpoints/current.json"
+  },
+  "active_cadence_profile": "supervised_dry_run",
+  "run_window": {
+    "mode": "manual-supervised-only",
+    "timezone": "Africa/Johannesburg",
+    "hours": "09:00-23:00",
+    "lane_iteration_minutes": 20
+  },
   "lanes": {
     "orchestrator": {
       "status": "active",
@@ -31,12 +44,13 @@
       "last_handoff": "CLAW/control-plane/reports/W2-canonical-closure.md"
     },
     "product-family-kernel": {
-      "status": "active",
-      "reason": null
+      "status": "accepted",
+      "last_accepted_commit": "b940d26",
+      "last_handoff": "CLAW/control-plane/reports/W3-product-kernel-lock.md"
     },
     "product-family": {
-      "status": "blocked",
-      "reason": "Wait for product-family-kernel to stabilize."
+      "status": "active",
+      "reason": null
     },
     "data-truth": {
       "status": "waiting",
@@ -55,10 +69,10 @@
     }
   },
   "latest_audits": {
-    "build": "pass: homepage-fidelity and imc-flagship site builds on 2026-04-03",
-    "parser": "pass: homepage-fidelity and imc-flagship parser falsification loops on 2026-04-03",
-    "layout": "home: 0 critical, 0 major, 0 minor, 12 cosmetic; imc: 0 critical, 0 major, 0 minor, 14 cosmetic",
-    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile in homepage-fidelity and imc-flagship"
+    "build": "pass: homepage-fidelity, imc-flagship, and product-family-kernel site builds on 2026-04-03",
+    "parser": "pass: homepage-fidelity, imc-flagship, and product-family-kernel parser falsification loops on 2026-04-03",
+    "layout": "home: 0 critical, 0 major, 0 minor, 12 cosmetic; imc: 0 critical, 0 major, 0 minor, 14 cosmetic; product-kernel law audit: /work/xr 0 critical 0 major 0 minor, /work/ft 0 critical 0 major 0 minor",
+    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile in homepage-fidelity, imc-flagship, /work/xr, and /work/ft"
   },
   "current_scores": {
     "fidelity": null,
@@ -80,18 +94,17 @@
     "p0_drift_eradicated": true,
     "p1_homepage_canonical": true,
     "p2_imc_canonical": true,
-    "p3_product_kernel_ready": false,
+    "p3_product_kernel_ready": true,
     "p4_recovery_hardened": false
   },
   "blockers": [
     "Press-go criteria are not yet satisfied.",
-    "Product-family kernel is not yet locked.",
     "No accepted candidate has been replayed through integration.",
     "No recovery drill has been proven yet."
   ],
   "next_actions": [
-    "Execute C3 product kernel lock for generic authority pages.",
-    "Close /work/xr as the first generic proof page and /work/ft as the replication proof page.",
+    "Execute C4 on /work/xr using the accepted product-family kernel.",
+    "Replay the accepted kernel through /work/ft as the replication proof page.",
     "Replay the accepted homepage and IMC candidates through integration.",
     "Keep press_go false until the canonical-routes-to-producing program is complete."
   ],
@@ -125,6 +138,26 @@
       "proposed_law_change": "Require a mobile overflow falsification pass before canonical route promotion.",
       "owner_lane": "systems-qa",
       "status": "closed"
+    },
+    {
+      "id": "W3-product-kernel-flow-grammar",
+      "category": "law-gap",
+      "route": "work-family",
+      "observation": "Generic product pages cannot be falsified against IMC-style fixed vertical positions without producing false regressions.",
+      "evidence": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
+      "proposed_law_change": "Verify product pages by anchored hero geometry and section-flow groups.",
+      "owner_lane": "systems-qa",
+      "status": "closed"
+    },
+    {
+      "id": "W3-metric-path-compaction",
+      "category": "presentation-gap",
+      "route": "work-family",
+      "observation": "Path-like metric values create avoidable overflow unless compacted before display.",
+      "evidence": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
+      "proposed_law_change": "Compact path-like metric values before rendering metric cards.",
+      "owner_lane": "product-family-kernel",
+      "status": "closed"
     }
   ],
   "stop_conditions": [
@@ -134,5 +167,27 @@
     "lane scope violation",
     "data-truth contradiction",
     "cross-repo write detected"
-  ]
+  ],
+  "queue": {
+    "active": null,
+    "history": [
+      "CLAW/control-plane/queue/C3-20260403T110543Z.json",
+      "CLAW/control-plane/queue/C3-20260403T113227Z.json"
+    ]
+  },
+  "active_jobs": [],
+  "locks": [],
+  "current_checkpoint": "CLAW/control-plane/checkpoints/current.json",
+  "rollback_checkpoint": null,
+  "pause_requested": false,
+  "stop_requested": false,
+  "heartbeat_at": null,
+  "retry_budget": {
+    "max_attempts_per_slice": 2,
+    "max_recovery_attempts_per_cycle": 1,
+    "lock_heartbeat_ttl_minutes": 90
+  },
+  "active_cycle": null,
+  "last_recovery_event": null,
+  "last_health_check": null
 }

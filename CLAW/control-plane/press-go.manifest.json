@@ -5,6 +5,10 @@
   "required_evidence": {
     "authoritative_prd": "CLAW/PRD_24_7_LOCAL_AUTONOMY.md",
     "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
+    "pattern_library": "CLAW/control-plane/patterns/geometry-patterns.json",
+    "continuation_state": "CLAW/control-plane/continuations/lane-continuations.json",
+    "runner_state_bundle": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
+    "product_kernel_law_bundle": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
     "supervised_run": null,
     "integration_checkpoint": null,
     "full_qa_bundle": null,

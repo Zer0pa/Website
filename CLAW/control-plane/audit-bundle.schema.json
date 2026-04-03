@@ -1,24 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "CLAW QA Verdict",
+  "title": "CLAW Audit Bundle",
   "type": "object",
   "required": [
-    "lane",
-    "route",
     "candidate_commit",
     "build",
     "parser",
     "layout",
     "responsive",
-    "law_compliance",
-    "recommendation"
+    "law_compliance"
   ],
   "properties": {
-    "lane": { "type": "string" },
-    "route": { "type": "string" },
-    "candidate_branch": {
-      "type": ["string", "null"]
-    },
     "candidate_commit": { "type": "string" },
     "build": { "type": "string" },
     "parser": { "type": "string" },
@@ -33,17 +25,6 @@
     "law_compliance": {
       "type": "object",
       "additionalProperties": true
-    },
-    "regression_delta": {
-      "type": ["object", "null"],
-      "additionalProperties": true
-    },
-    "audit_bundle": {
-      "type": ["string", "null"]
-    },
-    "recommendation": {
-      "type": "string",
-      "enum": ["accept", "reject", "hold"]
     }
   },
   "additionalProperties": false

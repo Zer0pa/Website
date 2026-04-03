@@ -272,6 +272,10 @@ Exit criteria:
 - `/work/[slug]` law is explicit
 - kernel is separate from `/imc` exceptions
 - kernel is versioned and reviewable
+- a product-kernel law audit exists for `/work/xr` and `/work/ft`
+- continuation state and learned patterns are seeded for family rollout
+
+`C3` is where the system stops rediscovering product-page rules and starts inheriting them. The kernel lock must therefore include machine-readable family laws, explicit flagship exceptions, a route-law verifier for `/work/[slug]`, and continuation artifacts that let later cycles resume from accepted law instead of from vague intent.
 
 ### C4. First Generic Product Proof: `/work/xr`
 

@@ -55,17 +55,25 @@ Canonical control-plane stores:
 
 - `CLAW/control-plane/handoffs/**`
 - `CLAW/control-plane/checkpoints/**`
+- `CLAW/control-plane/continuations/**`
 - `CLAW/control-plane/logs/**`
 - `CLAW/control-plane/locks/**`
+- `CLAW/control-plane/patterns/**`
 - `CLAW/control-plane/queue/**`
+- `CLAW/control-plane/recoveries/**`
 - `CLAW/control-plane/press-go.manifest.json`
 
 Canonical schemas:
 
+- `CLAW/control-plane/brief.schema.json`
+- `CLAW/control-plane/queue-item.schema.json`
+- `CLAW/control-plane/audit-bundle.schema.json`
 - `CLAW/control-plane/handoff.schema.json`
 - `CLAW/control-plane/checkpoint.schema.json`
+- `CLAW/control-plane/learning-item.schema.json`
 - `CLAW/control-plane/qa-verdict.schema.json`
 - `CLAW/control-plane/lock.schema.json`
+- `CLAW/control-plane/recovery-event.schema.json`
 - `CLAW/control-plane/state-machine.json`
 
 ## Press-Go Evidence Bundle
@@ -81,3 +89,5 @@ The minimum bundle required before unattended launch is:
 - one successful full QA bundle
 - one recorded recovery drill
 - one current `press-go.manifest.json`
+- one seeded pattern library
+- one current continuation state bundle
