@@ -5,11 +5,56 @@
   "execution": {
     "max_active_jobs": 1,
     "loop_interval_seconds": 60,
+    "monitor_interval_seconds": 5,
+    "max_lane_runtime_seconds": 900,
+    "max_lane_quiet_seconds": 180,
+    "allow_stalled_result_salvage": true,
     "use_search": false,
     "sandbox": "workspace-write",
     "capture_json_events": true,
     "allow_remote_push": false,
     "allow_production_writes": false
+  },
+  "salvage": {
+    "fatal_stderr_patterns": [
+      "UnhandledPromiseRejection",
+      "SyntaxError:",
+      "TypeError:",
+      "ReferenceError:",
+      "ERR_REQUIRE_CYCLE_MODULE",
+      "ERR_MODULE_",
+      "Cannot find module"
+    ],
+    "required_command_groups_by_lane": {
+      "homepage-fidelity": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "imc-flagship": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "product-family": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "product-family-kernel": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "data-truth": [
+        [
+          "npm run test:parser",
+          "node --import tsx src/scripts/test-parser.ts",
+          "./node_modules/.bin/tsc -p tsconfig.json --noEmit",
+          "./node_modules/.bin/tsc -p tsconfig.json --noEmit --incremental false"
+        ]
+      ],
+      "integration": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ]
+    }
   },
   "resources": {
     "exclusive": [

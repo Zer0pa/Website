@@ -41,6 +41,8 @@ import {
   phaseLabel,
   promptSnapshotPath,
   queueJobIsTerminal,
+  readCodexCommandExecutions,
+  readRunnerPolicy,
   readRunnerState,
   replayCommitRange,
   resolveCodexBin,
@@ -88,6 +90,42 @@ function quoteShellArg(value) {
   }
 
   return `'${String(value).replace(/'/g, `'\"'\"'`)}'`;
+}
+
+function positiveInteger(value, fallback) {
+  const parsed = Number.parseInt(String(value ?? ''), 10);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+}
+
+function normalizeCommandText(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function matchingRequiredCommand(commandExecutions, commandOptions) {
+  const normalizedOptions = (commandOptions || []).map(normalizeCommandText).filter(Boolean);
+  if (normalizedOptions.length === 0) {
+    return null;
+  }
+
+  return (
+    commandExecutions.find(
+      (entry) =>
+        entry.status === 'completed' &&
+        entry.exitCode === 0 &&
+        normalizedOptions.some((option) => normalizeCommandText(entry.command).includes(option)),
+    ) || null
+  );
+}
+
+function stderrLooksFatal(stderrText, runnerPolicy) {
+  const patterns = runnerPolicy?.salvage?.fatal_stderr_patterns || [];
+  return patterns.some((pattern) => {
+    try {
+      return new RegExp(pattern, 'i').test(stderrText);
+    } catch {
+      return stderrText.toLowerCase().includes(String(pattern).toLowerCase());
+    }
+  });
 }
 
 function buildBrief(control, queue, job) {
@@ -409,7 +447,87 @@ function finalizeCycle(control, queue) {
   };
 }
 
-function spawnCodexForJob(job, prompt) {
+function salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) {
+  if (!runnerPolicy?.execution?.allow_stalled_result_salvage || diff.all.length === 0) {
+    return null;
+  }
+
+  if (fs.existsSync(execResult.outputPath)) {
+    return null;
+  }
+
+  const requiredGroups = runnerPolicy?.salvage?.required_command_groups_by_lane?.[job.lane_id];
+  if (!Array.isArray(requiredGroups) || requiredGroups.length === 0) {
+    return null;
+  }
+
+  const stderrText = readTextTail(execResult.stderrPath, 12000);
+  if (stderrText && stderrLooksFatal(stderrText, runnerPolicy)) {
+    return null;
+  }
+
+  const commands = readCodexCommandExecutions(execResult.stdoutPath);
+  if (commands.length === 0) {
+    return null;
+  }
+
+  const matchedCommands = [];
+  for (const group of requiredGroups) {
+    const match = matchingRequiredCommand(commands, group);
+    if (!match) {
+      return null;
+    }
+    matchedCommands.push(match);
+  }
+
+  const verifiedNotes = matchedCommands.map((entry) => `verified command: ${entry.command}`);
+  return {
+    cycle_id: queue.cycle_id,
+    job_id: job.job_id,
+    lane: job.lane_id,
+    phase: queue.phase_id,
+    target: job.objective,
+    hypothesis:
+      'If Codex stalls after producing an allowed bounded diff and passing the lane-required verification commands, the host runner can salvage the slice deterministically.',
+    status: 'accepted',
+    summary: `The host runner salvaged a bounded ${job.lane_id} slice after Codex stalled before emitting the final JSON handoff.`,
+    files_changed: diff.all,
+    commands_run: [...new Set(matchedCommands.map((entry) => entry.command))],
+    preflight_baseline: {
+      notes: [`worktree_head=${worktreeHead}`],
+    },
+    postflight_metrics: {
+      notes: [
+        `termination_reason=${execResult.terminationReason || 'unknown'}`,
+        `changed_files=${diff.all.length}`,
+        ...verifiedNotes,
+      ],
+    },
+    audit_result: {
+      summary: 'The host runner salvaged a stalled bounded slice from required command and diff evidence.',
+      status: `host-salvaged-${job.lane_id}`,
+      notes: [
+        'Codex did not emit the final structured handoff.',
+        'Allowed writes remained within lane scope.',
+        ...verifiedNotes,
+      ],
+      report: null,
+    },
+    known_risks: [
+      'The lane self-report was missing, so the host runner reconstructed acceptance from required command evidence and the verified diff.',
+    ],
+    blockers: [],
+    recommendation: 'Continue to the next lane, but inspect the missing final handoff path if this repeats.',
+    next_hypothesis: null,
+    rollback_target: worktreeHead,
+    learning_captured: [
+      'The runner can salvage a stalled bounded slice when the required verification commands pass and the diff remains in scope.',
+    ],
+    commit: null,
+  };
+}
+
+function spawnCodexForJob(job, prompt, executionPolicy = {}) {
   const outputPath = finalMessagePath(job.job_id);
   const stdoutPath = stdoutLogPath(job.job_id);
   const stderrPath = stderrLogPath(job.job_id);
@@ -418,6 +536,11 @@ function spawnCodexForJob(job, prompt) {
   const codexBin = resolveCodexBin();
   const stdoutStream = fs.createWriteStream(stdoutPath, { flags: 'w' });
   const stderrStream = fs.createWriteStream(stderrPath, { flags: 'w' });
+  const startedAt = Date.now();
+  const maxRuntimeMs = positiveInteger(executionPolicy.max_lane_runtime_seconds, 900) * 1000;
+  const maxIdleMs = positiveInteger(executionPolicy.max_lane_quiet_seconds, 180) * 1000;
+  const monitorIntervalMs = Math.max(1000, positiveInteger(executionPolicy.monitor_interval_seconds, 5) * 1000);
+  const killGraceMs = positiveInteger(executionPolicy.kill_grace_seconds, 5) * 1000;
 
   const args = [
     'exec',
@@ -429,7 +552,7 @@ function spawnCodexForJob(job, prompt) {
     '-c',
     `model_reasoning_effort="${job.reasoning || 'high'}"`,
     '--sandbox',
-    'workspace-write',
+    executionPolicy.sandbox || 'workspace-write',
     '--add-dir',
     gitAdminDir,
     '--add-dir',
@@ -446,14 +569,34 @@ function spawnCodexForJob(job, prompt) {
 
   return new Promise((resolve) => {
     let finished = false;
+    let lastActivityAt = Date.now();
+    let terminationReason = null;
+    let watchdog = null;
+    let killGraceTimer = null;
+
+    const touch = () => {
+      lastActivityAt = Date.now();
+    };
+
     const finish = (payload) => {
       if (finished) {
         return;
       }
       finished = true;
+      if (watchdog) {
+        clearInterval(watchdog);
+      }
+      if (killGraceTimer) {
+        clearTimeout(killGraceTimer);
+      }
       stdoutStream.end();
       stderrStream.end();
-      resolve(payload);
+      resolve({
+        ...payload,
+        terminationReason,
+        startedAt: new Date(startedAt).toISOString(),
+        lastActivityAt: new Date(lastActivityAt).toISOString(),
+      });
     };
 
     const child = spawn(codexBin, args, {
@@ -462,9 +605,49 @@ function spawnCodexForJob(job, prompt) {
       stdio: ['pipe', 'pipe', 'pipe'],
     });
 
-    child.stdout.pipe(stdoutStream);
-    child.stderr.pipe(stderrStream);
+    child.stdout.on('data', (chunk) => {
+      touch();
+      stdoutStream.write(chunk);
+    });
+    child.stderr.on('data', (chunk) => {
+      stderrStream.write(chunk);
+    });
     child.stdin.end(prompt);
+
+    watchdog = setInterval(() => {
+      if (finished) {
+        return;
+      }
+
+      const now = Date.now();
+      const runtimeMs = now - startedAt;
+      const idleMs = now - lastActivityAt;
+      let nextTerminationReason = null;
+
+      if (maxRuntimeMs > 0 && runtimeMs >= maxRuntimeMs) {
+        nextTerminationReason = 'max-runtime-exceeded';
+      } else if (maxIdleMs > 0 && idleMs >= maxIdleMs) {
+        nextTerminationReason = 'max-idle-exceeded';
+      }
+
+      if (!nextTerminationReason || terminationReason) {
+        return;
+      }
+
+      terminationReason = nextTerminationReason;
+      stderrStream.write(`[runner-watchdog] ${terminationReason} on ${job.job_id}\n`);
+      try {
+        child.kill('SIGTERM');
+      } catch {}
+
+      killGraceTimer = setTimeout(() => {
+        if (!finished) {
+          try {
+            child.kill('SIGKILL');
+          } catch {}
+        }
+      }, killGraceMs);
+    }, monitorIntervalMs);
 
     child.on('error', (error) => {
       finish({
@@ -494,6 +677,9 @@ function spawnCodexForJob(job, prompt) {
 function syntheticLaneResult(queue, job, worktreeHead, execResult, reason) {
   const stderrTail = execResult?.stderrPath ? readTextTail(execResult.stderrPath) : '';
   const blockers = [reason];
+  if (execResult?.terminationReason) {
+    blockers.push(`termination_reason: ${execResult.terminationReason}`);
+  }
   if (execResult?.spawnError) {
     blockers.push(`spawn_error: ${execResult.spawnError}`);
   }
@@ -831,6 +1017,7 @@ async function main() {
   }
 
   const runnerState = readRunnerState();
+  const runnerPolicy = readRunnerPolicy();
   let queuePath = projectPath(control.runtime.active_cycle.queue_file);
   const staleRecovery = recoverStaleActiveJobs(control, queue, queuePath, runnerState);
   if (staleRecovery.recovered) {
@@ -931,7 +1118,7 @@ async function main() {
 
   const execResult = parseBoolFlag('--dry-run')
     ? { code: 0, outputPath: finalMessagePath(job.job_id), stdoutPath: stdoutLogPath(job.job_id), stderrPath: stderrLogPath(job.job_id) }
-    : await spawnCodexForJob(job, prompt);
+    : await spawnCodexForJob(job, prompt, runnerPolicy.execution || {});
 
   if (parseBoolFlag('--dry-run')) {
     fs.writeFileSync(
@@ -966,11 +1153,14 @@ async function main() {
   }
 
   let laneResult = null;
+  let diff = diffFilesSince(job.worktree, worktreeHead);
 
   if (parseBoolFlag('--dry-run')) {
     laneResult = JSON.parse(fs.readFileSync(execResult.outputPath, 'utf8'));
   } else if (execResult.code !== 0) {
-      laneResult = syntheticLaneResult(
+    laneResult =
+      salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
+      syntheticLaneResult(
         queue,
         job,
         worktreeHead,
@@ -978,13 +1168,15 @@ async function main() {
         `codex exec exited with code ${execResult.code} and signal ${String(execResult.signal ?? 'null')}`,
       );
   } else if (!fs.existsSync(execResult.outputPath)) {
-    laneResult = syntheticLaneResult(
-      queue,
-      job,
-      worktreeHead,
-      execResult,
-      `Lane ${job.lane_id} did not produce a final message file.`,
-    );
+    laneResult =
+      salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
+      syntheticLaneResult(
+        queue,
+        job,
+        worktreeHead,
+        execResult,
+        `Lane ${job.lane_id} did not produce a final message file.`,
+      );
   } else {
     try {
       laneResult = JSON.parse(fs.readFileSync(execResult.outputPath, 'utf8'));
@@ -1005,7 +1197,6 @@ async function main() {
     fs.writeFileSync(execResult.outputPath, JSON.stringify(laneResult, null, 2));
   }
 
-  let diff = diffFilesSince(job.worktree, worktreeHead);
   const unauthorized = diff.all.filter((filePath) => !matchesAllowedPath(filePath, job.writes));
   let dirtyAfterRun = diff.dirty.length > 0;
   let hostCommit = null;

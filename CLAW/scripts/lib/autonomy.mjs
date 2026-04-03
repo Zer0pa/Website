@@ -24,12 +24,73 @@ export const RUNTIME_HANDOFFS_DIR = controlPath('runtime', 'handoffs');
 export const RUNTIME_LOGS_DIR = controlPath('runtime', 'logs');
 export const CONTROL_LOGS_DIR = controlPath('logs');
 export const LANE_RESULT_SCHEMA = projectPath('CLAW/control-plane/lane-exec-result.schema.json');
+export const RUNNER_POLICY_PATH = projectPath('CLAW/control-plane/runner-policy.json');
 const CODEX_BIN_FALLBACKS = [
   process.env.CODEX_BIN || '',
   '/Applications/Codex.app/Contents/Resources/codex',
   '/usr/local/bin/codex',
   '/opt/homebrew/bin/codex',
 ].filter(Boolean);
+const DEFAULT_RUNNER_POLICY = {
+  version: 1,
+  mode: 'guarded-local-override',
+  operator_interface: 'codex-supervised',
+  execution: {
+    max_active_jobs: 1,
+    loop_interval_seconds: 60,
+    monitor_interval_seconds: 5,
+    max_lane_runtime_seconds: 900,
+    max_lane_quiet_seconds: 180,
+    allow_stalled_result_salvage: true,
+    use_search: false,
+    sandbox: 'workspace-write',
+    capture_json_events: true,
+    allow_remote_push: false,
+    allow_production_writes: false,
+  },
+  salvage: {
+    fatal_stderr_patterns: [],
+    required_command_groups_by_lane: {},
+  },
+  resources: {
+    exclusive: [],
+  },
+  notes: [],
+};
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function mergePolicy(base, overlay) {
+  if (Array.isArray(base)) {
+    return Array.isArray(overlay) ? structuredClone(overlay) : structuredClone(base);
+  }
+
+  if (!isPlainObject(base)) {
+    return overlay === undefined ? base : overlay;
+  }
+
+  const result = structuredClone(base);
+  if (!isPlainObject(overlay)) {
+    return result;
+  }
+
+  for (const [key, value] of Object.entries(overlay)) {
+    const baseValue = result[key];
+    if (Array.isArray(value)) {
+      result[key] = structuredClone(value);
+    } else if (isPlainObject(value) && isPlainObject(baseValue)) {
+      result[key] = mergePolicy(baseValue, value);
+    } else if (isPlainObject(value)) {
+      result[key] = mergePolicy({}, value);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  return result;
+}
 
 export function ensureAutonomyDirs() {
   ensureDir(RUNTIME_ROOT);
@@ -104,6 +165,14 @@ export function readRunnerState() {
 export function writeRunnerState(value) {
   ensureAutonomyDirs();
   writeJson(AUTONOMY_STATE_PATH, value);
+}
+
+export function readRunnerPolicy() {
+  if (!fs.existsSync(RUNNER_POLICY_PATH)) {
+    return structuredClone(DEFAULT_RUNNER_POLICY);
+  }
+
+  return mergePolicy(DEFAULT_RUNNER_POLICY, readJson(RUNNER_POLICY_PATH));
 }
 
 export function activeQueuePath(runtime) {
@@ -199,6 +268,37 @@ export function briefPath(jobId) {
 
 export function handoffPath(jobId) {
   return path.join(RUNTIME_HANDOFFS_DIR, `${jobId}.json`);
+}
+
+export function readCodexCommandExecutions(logPath) {
+  if (!logPath || !fs.existsSync(logPath)) {
+    return [];
+  }
+
+  return fs
+    .readFileSync(logPath, 'utf8')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .flatMap((line) => {
+      try {
+        const payload = JSON.parse(line);
+        if (payload?.type !== 'item.completed' || payload?.item?.type !== 'command_execution') {
+          return [];
+        }
+
+        return [
+          {
+            command: String(payload.item.command || ''),
+            status: String(payload.item.status || ''),
+            exitCode: typeof payload.item.exit_code === 'number' ? payload.item.exit_code : null,
+            aggregatedOutput: String(payload.item.aggregated_output || ''),
+          },
+        ];
+      } catch {
+        return [];
+      }
+    });
 }
 
 export function phaseLabel(phase) {
