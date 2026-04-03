@@ -43,12 +43,12 @@ const pages: PageConfig[] = [
   {
     id: 'work-xr',
     route: '/work/xr',
-    readySelector: '[data-spec="imc.page"]',
+    readySelector: '[data-spec="work.lane.page"]',
   },
   {
     id: 'work-ft',
     route: '/work/ft',
-    readySelector: '[data-spec="imc.page"]',
+    readySelector: '[data-spec="work.lane.page"]',
   },
 ];
 

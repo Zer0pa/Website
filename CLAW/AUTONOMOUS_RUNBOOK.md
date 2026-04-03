@@ -141,11 +141,12 @@ No handoff means no promotion.
 
 ## Safe Promotion Path
 
-1. lane commits locally
-2. QA evaluates lane output
-3. integration replays the accepted result
-4. full QA runs on integration
-5. orchestrator records accepted checkpoint
+1. lane produces a bounded candidate in its own worktree
+2. the host runner validates write scope and finalizes the lane commit
+3. QA evaluates the committed lane output
+4. integration replays the accepted result
+5. full QA runs on integration
+6. orchestrator records accepted checkpoint
 
 ## Failure Rules
 

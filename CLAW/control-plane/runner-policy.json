@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "mode": "guarded-local-override",
+  "operator_interface": "codex-supervised",
+  "execution": {
+    "max_active_jobs": 1,
+    "use_search": false,
+    "sandbox": "workspace-write",
+    "capture_json_events": true,
+    "allow_remote_push": false,
+    "allow_production_writes": false
+  },
+  "resources": {
+    "exclusive": [
+      "next-build",
+      "browser-audit",
+      "truth-sync",
+      "integration-promotion",
+      "dev-server-port"
+    ]
+  },
+  "notes": [
+    "This file documents the autonomous runner posture before press_go.",
+    "All runs are local-only and repo-scoped.",
+    "Codex CLI is the cognition layer. The Node runner owns queue, locks, settlement, and commit finalization."
+  ]
+}

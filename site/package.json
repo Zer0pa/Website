@@ -25,7 +25,12 @@
     "claw:recover": "node ../CLAW/scripts/recover-cycle.mjs",
     "claw:integration-replay": "node ../CLAW/scripts/integration-replay.mjs",
     "claw:recovery-drill": "node ../CLAW/scripts/run-recovery-drill.mjs",
-    "claw:telegram": "node ../CLAW/scripts/telegram-control.mjs"
+    "claw:telegram": "node ../CLAW/scripts/telegram-control.mjs",
+    "claw:autonomy:status": "node ../CLAW/scripts/autonomy-status.mjs",
+    "claw:autonomy:once": "node ../CLAW/scripts/autonomy-once.mjs",
+    "claw:autonomy:loop": "node ../CLAW/scripts/autonomy-loop.mjs",
+    "claw:autonomy:install-service": "node ../CLAW/scripts/install-autonomy-service.mjs",
+    "claw:autonomy:uninstall-service": "node ../CLAW/scripts/uninstall-autonomy-service.mjs"
   },
   "dependencies": {
     "@observablehq/plot": "^0.6",

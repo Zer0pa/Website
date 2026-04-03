@@ -308,7 +308,10 @@ export function findLockConflicts(cycle) {
   const locks = activeLocks();
 
   for (const job of cycle.jobs) {
-    const conflictingLock = locks.find((lock) => lock.payload.lane_id === job.lane_id);
+    const conflictingLock = locks.find((lock) => {
+      const ownerLane = lock.payload.owner_lane || lock.payload.lane_id || null;
+      return ownerLane === job.lane_id;
+    });
     if (conflictingLock) {
       conflicts.push({
         lane_id: job.lane_id,

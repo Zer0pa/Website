@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 
-const pages = ['home', 'imc'] as const;
+const pages = ['home', 'imc', 'work-xr', 'work-ft'] as const;
 
 function resolvePages() {
   const positionalPages = process.argv.slice(2).filter((arg) => !arg.startsWith('--')) as Array<(typeof pages)[number]>;

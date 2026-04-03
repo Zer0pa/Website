@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { loadControlPlane, settleActiveCycle } from './lib/control-plane.mjs';
+import { loadControlPlane, localTimestamp, settleActiveCycle } from './lib/control-plane.mjs';
+import { readRunnerState, writeRunnerState } from './lib/autonomy.mjs';
 
 function readArg(prefix) {
   return process.argv.find((arg) => arg.startsWith(prefix))?.slice(prefix.length) || null;
@@ -23,6 +24,13 @@ if (!allowedOutcomes.has(outcome)) {
 
 const control = loadControlPlane();
 settleActiveCycle(control, outcome, note);
+
+const runner = readRunnerState();
+runner.last_tick_at = localTimestamp();
+runner.active_cycle = null;
+runner.active_job = null;
+runner.last_error = null;
+writeRunnerState(runner);
 
 console.log(
   JSON.stringify(

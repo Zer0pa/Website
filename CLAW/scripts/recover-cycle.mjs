@@ -12,6 +12,7 @@ import {
   readJson,
   writeJson,
 } from './lib/control-plane.mjs';
+import { readRunnerState, writeRunnerState } from './lib/autonomy.mjs';
 
 function readArg(prefix) {
   return process.argv.find((arg) => arg.startsWith(prefix))?.slice(prefix.length) || null;
@@ -73,6 +74,13 @@ if (staleLocks.length > 0) {
   runtime.last_recovery_event = `CLAW/control-plane/recoveries/${eventId}.json`;
   runtime.last_updated = localTimestamp();
   writeJson(path.join(CONTROL_ROOT, 'state', 'runtime-state.json'), runtime);
+
+  const runner = readRunnerState();
+  runner.last_tick_at = localTimestamp();
+  runner.active_cycle = null;
+  runner.active_job = null;
+  runner.last_error = null;
+  writeRunnerState(runner);
 }
 
 console.log(JSON.stringify(event, null, 2));
