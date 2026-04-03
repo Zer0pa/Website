@@ -1,8 +1,7 @@
-import { Octokit } from '@octokit/rest';
+import { createGitHubOctokit, describeGitHubTokenProvisioning, getGitHubAuthContext } from './auth';
 
-const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
-});
+const githubAuth = getGitHubAuthContext();
+const octokit = createGitHubOctokit();
 
 export async function fetchRawFile(
   owner: string,
@@ -11,7 +10,7 @@ export async function fetchRawFile(
   branch = 'main',
 ): Promise<{ content: string; sha: string } | null> {
   try {
-    if (!process.env.GITHUB_TOKEN) {
+    if (!githubAuth.token) {
       return fetchFromRaw(owner, repo, path, branch);
     }
 
@@ -41,7 +40,7 @@ export async function fetchRawFile(
     }
     if (error.status === 403 && /rate limit/i.test(error.message || '')) {
       console.error(
-        `[FETCHER] GitHub rate limit reached while fetching ${repo}/${path}. Set GITHUB_TOKEN to continue.`,
+        `[FETCHER] GitHub rate limit reached while fetching ${repo}/${path}. ${describeGitHubTokenProvisioning()}`,
       );
       throw error;
     }
