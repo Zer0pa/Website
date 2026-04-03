@@ -5,6 +5,17 @@
   "default_base_branch": "codex/clawstation-setup",
   "protected_branches": ["main"],
   "allowed_repo_remote": "https://github.com/Zer0pa/Website.git",
+  "execution_model": {
+    "parallel_cognition": true,
+    "single_writer_per_lane": true,
+    "subagent_rule": "Subagents may analyze and falsify in parallel, but only the owning lane writes and commits.",
+    "ephemeral_roles": [
+      "law-checker",
+      "layout-analyst",
+      "truth-auditor",
+      "falsifier"
+    ]
+  },
   "allowed_path_prefixes": [
     "/Users/zer0palab/Zer0pa Website/Website-main",
     "/Users/zer0palab/Zer0pa Website/worktrees"

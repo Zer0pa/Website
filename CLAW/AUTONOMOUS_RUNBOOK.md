@@ -70,6 +70,10 @@ Only after guarded and extended local autonomy pass:
 
 ## Cadence
 
+Use `CLAW/control-plane/cadence.json` as the authoritative cadence map.
+
+The timings below describe the supervised dry-run posture, not the unattended posture.
+
 ### Lane Cycle: every 20 minutes
 
 Each active lane:

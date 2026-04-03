@@ -2,11 +2,12 @@
   "version": 1,
   "program": "zer0pa-website-24x7-local-autonomy",
   "status": "active",
-  "current_phase": "P0-drift-eradication-and-prd-lock",
+  "current_phase": "P1-canonical-homepage-closure",
   "phases": [
     {
       "id": "P0",
       "title": "Drift eradication and PRD lock",
+      "status": "completed",
       "depends_on": [],
       "streams": [
         "orchestrator",
@@ -23,6 +24,7 @@
     {
       "id": "P1",
       "title": "Canonical homepage closure",
+      "status": "in_progress",
       "depends_on": [
         "P0"
       ],
@@ -40,6 +42,7 @@
     {
       "id": "P2",
       "title": "Canonical flagship closure",
+      "status": "pending",
       "depends_on": [
         "P1"
       ],
@@ -57,6 +60,7 @@
     {
       "id": "P3",
       "title": "Product kernel and truth readiness",
+      "status": "pending",
       "depends_on": [
         "P1",
         "P2"
@@ -76,6 +80,7 @@
     {
       "id": "P4",
       "title": "Integration and recovery hardening",
+      "status": "pending",
       "depends_on": [
         "P1",
         "P2",
@@ -96,6 +101,7 @@
     {
       "id": "P5",
       "title": "Guarded local autonomy",
+      "status": "pending",
       "depends_on": [
         "P4"
       ],
@@ -118,6 +124,7 @@
     {
       "id": "P6",
       "title": "Extended local autonomy",
+      "status": "pending",
       "depends_on": [
         "P5"
       ],
@@ -135,6 +142,7 @@
     {
       "id": "P7",
       "title": "Press-go authorization",
+      "status": "pending",
       "depends_on": [
         "P6"
       ],

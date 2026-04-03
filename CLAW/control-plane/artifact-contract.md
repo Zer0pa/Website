@@ -13,6 +13,7 @@ Every autonomous lane cycle must emit:
 - claimed improvement
 - known risks
 - recommended next action
+- learning captured
 
 If a cycle does not emit a handoff, it is not promotable.
 
@@ -25,6 +26,7 @@ Systems QA must emit:
 - parser result
 - layout result
 - responsive result
+- law compliance summary
 - regression delta versus baseline
 - regression summary
 - accept or reject recommendation
@@ -36,6 +38,7 @@ Integration must emit:
 - assembled commit list
 - rollback point
 - full-stack QA verdict
+- recovery rehearsal verdict when applicable
 - current best checkpoint status
 - open blockers
 
@@ -52,6 +55,8 @@ The control plane depends on these deterministic artifacts:
 
 The minimum bundle required before unattended launch is:
 
+- canonical PRD
+- perpetual operation runbook
 - clean worktree map
 - current state template
 - one supervised dry-run handoff set

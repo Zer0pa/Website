@@ -12,7 +12,7 @@
   "lanes": {
     "orchestrator": {
       "status": "active",
-      "last_accepted_commit": "7ef102d",
+      "last_accepted_commit": null,
       "last_handoff": null
     },
     "homepage-fidelity": {

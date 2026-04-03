@@ -19,7 +19,7 @@
     "homepage-fidelity": {
       "status": "active",
       "last_accepted_commit": null,
-      "last_candidate_commit": "7e8ad84",
+      "last_candidate_commit": "6822b4a",
       "last_handoff": "CLAW/control-plane/reports/W1-homepage-supervised.md"
     },
     "imc-flagship": {

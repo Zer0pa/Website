@@ -1,18 +1,41 @@
 {
-  "version": 1,
+  "version": 2,
   "timezone": "Africa/Johannesburg",
-  "lane_iteration_minutes": 20,
-  "orchestrator_checkin_minutes": 45,
-  "full_falsification_hours": 2,
-  "integration_checkpoint_hours": 4,
-  "recovery_drill_hours": 12,
-  "system_health_review_hours": 24,
-  "truth_sync_minutes": 30,
+  "authoritative_prd": "CLAW/PRD_24_7_LOCAL_AUTONOMY.md",
+  "profiles": {
+    "supervised_dry_run": {
+      "lane_iteration_minutes": 20,
+      "orchestrator_checkin_minutes": 45,
+      "full_falsification_hours": 2,
+      "integration_checkpoint_hours": 4,
+      "recovery_drill_hours": 12,
+      "system_health_review_hours": 24,
+      "truth_sync_minutes": 30
+    },
+    "guarded_local_autonomy": {
+      "lane_iteration_minutes": 15,
+      "orchestrator_checkin_minutes": 60,
+      "full_falsification_hours": 4,
+      "integration_checkpoint_hours": 4,
+      "recovery_drill_hours": 12,
+      "system_health_review_hours": 24,
+      "truth_sync_minutes": 30
+    },
+    "extended_local_autonomy": {
+      "lane_iteration_minutes": 15,
+      "orchestrator_checkin_minutes": 60,
+      "full_falsification_hours": 4,
+      "integration_checkpoint_hours": 4,
+      "recovery_drill_hours": 24,
+      "system_health_review_hours": 24,
+      "truth_sync_minutes": 30
+    }
+  },
   "notes": [
     "Do not run unattended until press_go is true.",
     "Run one bounded evaluator-optimizer slice per lane cycle.",
     "Escalate any slice after two failed attempts.",
-    "Promotion review means deciding whether canonical laws can move into product-family code.",
-    "System health review means checking drift, installs, blockers, and stop conditions."
+    "Use supervised_dry_run until recovery and integration evidence exist.",
+    "Use guarded_local_autonomy and extended_local_autonomy only after their prior phase gates pass."
   ]
 }
