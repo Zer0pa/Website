@@ -4,11 +4,11 @@
   "mode": "hardening",
   "press_go": false,
   "current_milestone": "M1-recursive-autonomy-hardening",
-  "current_phase": "P1-canonical-homepage-closure",
-  "active_wave": "W1",
-  "last_updated": "2026-04-03T12:10:18+02:00",
+  "current_phase": "C3-product-kernel-lock",
+  "active_wave": "W2",
+  "last_updated": "2026-04-03T12:42:31+02:00",
   "control_style": "evaluator-optimizer",
-  "latest_wave_report": "CLAW/control-plane/reports/W1-homepage-supervised.md",
+  "latest_wave_report": "CLAW/control-plane/reports/W2-canonical-closure.md",
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "execution_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
@@ -20,19 +20,19 @@
       "last_handoff": null
     },
     "homepage-fidelity": {
-      "status": "active",
-      "last_accepted_commit": null,
-      "last_candidate_commit": "6822b4a",
-      "last_handoff": "CLAW/control-plane/reports/W1-homepage-supervised.md"
+      "status": "accepted",
+      "last_accepted_commit": "2799941",
+      "last_candidate_commit": "2799941",
+      "last_handoff": "CLAW/control-plane/reports/W2-canonical-closure.md"
     },
     "imc-flagship": {
-      "status": "waiting",
-      "last_accepted_commit": null,
-      "last_handoff": null
+      "status": "accepted",
+      "last_accepted_commit": "4f43c0d",
+      "last_handoff": "CLAW/control-plane/reports/W2-canonical-closure.md"
     },
     "product-family-kernel": {
-      "status": "blocked",
-      "reason": "Wait for homepage and /imc canonical laws."
+      "status": "active",
+      "reason": null
     },
     "product-family": {
       "status": "blocked",
@@ -55,10 +55,10 @@
     }
   },
   "latest_audits": {
-    "build": "pass: homepage-fidelity site build on 2026-04-03",
-    "parser": "pass: homepage-fidelity parser falsification loop on 2026-04-03",
-    "layout": "home: 0 critical, 0 major, 7 minor, 5 cosmetic after bounded rollback",
-    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile"
+    "build": "pass: homepage-fidelity and imc-flagship site builds on 2026-04-03",
+    "parser": "pass: homepage-fidelity and imc-flagship parser falsification loops on 2026-04-03",
+    "layout": "home: 0 critical, 0 major, 0 minor, 12 cosmetic; imc: 0 critical, 0 major, 0 minor, 14 cosmetic",
+    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile in homepage-fidelity and imc-flagship"
   },
   "current_scores": {
     "fidelity": null,
@@ -78,23 +78,21 @@
     "integration_qa_passed": false,
     "cross_repo_writes_detected": false,
     "p0_drift_eradicated": true,
-    "p1_homepage_canonical": false,
-    "p2_imc_canonical": false,
+    "p1_homepage_canonical": true,
+    "p2_imc_canonical": true,
     "p3_product_kernel_ready": false,
     "p4_recovery_hardened": false
   },
   "blockers": [
     "Press-go criteria are not yet satisfied.",
-    "Homepage canonical closure is not yet complete.",
-    "IMC canonical closure has not yet started.",
+    "Product-family kernel is not yet locked.",
     "No accepted candidate has been replayed through integration.",
     "No recovery drill has been proven yet."
   ],
   "next_actions": [
-    "Execute C1 homepage canonical closure until two consecutive non-regressing passes exist.",
-    "Execute C2 flagship IMC closure.",
-    "Lock the product-family kernel for generic authority pages.",
+    "Execute C3 product kernel lock for generic authority pages.",
     "Close /work/xr as the first generic proof page and /work/ft as the replication proof page.",
+    "Replay the accepted homepage and IMC candidates through integration.",
     "Keep press_go false until the canonical-routes-to-producing program is complete."
   ],
   "learning_backlog": [
@@ -117,6 +115,16 @@
       "proposed_law_change": "Treat lane-local dependency closure as required before autonomous verification.",
       "owner_lane": "systems-qa",
       "status": "open"
+    },
+    {
+      "id": "W2-mobile-guardrail-closure",
+      "category": "law-gap",
+      "route": "home+imc",
+      "observation": "Desktop closure alone was insufficient; both canonical routes still needed explicit mobile overflow guardrails for footer, heading, authority, and CTA layouts.",
+      "evidence": "CLAW/control-plane/reports/W2-canonical-closure.md",
+      "proposed_law_change": "Require a mobile overflow falsification pass before canonical route promotion.",
+      "owner_lane": "systems-qa",
+      "status": "closed"
     }
   ],
   "stop_conditions": [

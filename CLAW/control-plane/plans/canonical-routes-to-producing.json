@@ -3,7 +3,7 @@
   "program": "canonical-routes-to-producing",
   "authoritative_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
   "status": "active",
-  "current_phase": "C1-homepage-canonical-closure",
+  "current_phase": "C3-product-kernel-lock",
   "routes": {
     "homepage": "/",
     "flagship": "/imc",
@@ -14,7 +14,7 @@
     {
       "id": "C1",
       "title": "Homepage canonical closure",
-      "status": "in_progress",
+      "status": "completed",
       "streams": [
         "homepage-fidelity",
         "systems-qa",
@@ -31,7 +31,7 @@
     {
       "id": "C2",
       "title": "Flagship IMC canonical closure",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "C1"
       ],
@@ -51,7 +51,7 @@
     {
       "id": "C3",
       "title": "Product kernel lock",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "C1",
         "C2"
