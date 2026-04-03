@@ -101,6 +101,18 @@ function buildBrief(control, queue, job) {
       handoff_file: candidate.handoff_file || null,
       handoff_file_absolute: candidate.handoff_file ? projectPath(candidate.handoff_file) : null,
     }));
+  const flagshipInvariants =
+    queue.phase_id === 'C4' || queue.phase_id === 'C5'
+      ? [
+          'ZPE-IMC must remain a dedicated flagship profile inside the shared work-lane kernel.',
+          'The /imc route must continue to expose imc.* data-spec keys, not work.lane.* keys.',
+          'Generic work-lane generalization may remove IMC drift from /work/[slug], but it may not flatten or delete flagship-only behavior.',
+        ]
+      : [];
+  const acceptance = [...(job.acceptance || [])];
+  if (flagshipInvariants.length > 0 && ['product-family', 'systems-qa', 'integration'].includes(job.lane_id)) {
+    acceptance.push('ZPE-IMC flagship invariants remain intact.');
+  }
 
   return {
     version: 1,
@@ -116,10 +128,11 @@ function buildBrief(control, queue, job) {
     authority_commit: gitHead(projectPath('.')),
     runner_policy: 'CLAW/control-plane/runner-policy.json',
     allowed_writes: job.writes,
-    acceptance: job.acceptance || [],
+    acceptance,
     deliverables: job.deliverables || [],
     stop_conditions: queue.stop_conditions || [],
     operator_interface: control.runtime.operator_interface,
+    flagship_invariants: flagshipInvariants,
     suggested_starting_points: suggestedStartingPoints(job),
     deterministic_rules: [
       'No guessing or probabilistic invention.',
@@ -128,6 +141,7 @@ function buildBrief(control, queue, job) {
       'Keep the worktree clean before exit. Commit locally if possible; otherwise leave an allowed diff for host-runner finalization.',
       'Do not write outside the lane worktree.',
       'Do not push, deploy, or touch other repositories.',
+      'Generic route work may not flatten or delete flagship-only IMC behavior.',
     ],
     upstream: previousJobs,
     runtime_focus: {
@@ -239,6 +253,13 @@ function buildPrompt(control, queue, job, brief, briefFile) {
     '- geometry, ratios, and color decisions must be explicit and measurable',
     '- truth surfaces may not fabricate claims or repo state',
     '- reject any regression rather than rationalize it',
+    ...(brief.flagship_invariants?.length
+      ? [
+          '',
+          'Flagship invariants that must remain true in this phase:',
+          ...brief.flagship_invariants.map((rule) => `- ${rule}`),
+        ]
+      : []),
     '',
     'Do the work now.',
     '',
@@ -252,6 +273,7 @@ function laneExecutionRecipe(job) {
       '- When using the shell, wrap `site/src/app/work/[slug]/page.tsx` in single quotes so the brackets are treated literally.',
       '- If a shared work-lane kernel model does not exist, add exactly one under `site/src/lib/product-kernel/**` and keep it packet-driven.',
       '- Remove IMC-only or flagship-only truth drift from generic work-lane rendering. Do not invent new marketing copy.',
+      '- Preserve the dedicated `ZPE-IMC` flagship branch in `site/src/lib/product-kernel/workLaneKernel.ts`; do not collapse IMC into the generic work-lane profile.',
       '- Verify with `npm run build` and `node --import tsx src/scripts/test-parser.ts` from `site/`.',
       '- Prefer one bounded kernel/generalization slice over route-specific tweaks.',
     ],
@@ -261,12 +283,16 @@ function laneExecutionRecipe(job) {
       '- Favor a report-only slice if truth is already sufficient.',
     ],
     'systems-qa': [
-      '- Audit only the target route and the shared laws it depends on.',
+      '- Audit the target route and any shared law or shared kernel dependency it relies on.',
+      '- If the accepted upstream slice touches `site/src/lib/product-kernel/**` or `site/src/components/lane/LaneAuthorityPage.tsx`, verify `/imc` still exposes flagship-only behavior and `imc.*` measurement keys.',
+      '- Prefer running `npm run audit:quality` when a shared route/kernel surface changed, then add targeted layout/responsive falsification for the target route.',
       '- Reject regressions instead of explaining them away.',
       '- Prefer report artifacts over code edits unless the audit harness itself is broken.',
     ],
     integration: [
       '- Replay only the accepted candidate into the integration lane.',
+      '- If the replayed slice touched the shared work-lane kernel or lane authority page, verify the IMC flagship invariants before accepting promotion.',
+      '- Favor build, parser, and quality falsification over narrative reassurance.',
       '- Do not broaden scope beyond conflict-free promotion and replay verification.',
     ],
   };

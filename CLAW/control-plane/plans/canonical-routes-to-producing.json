@@ -88,7 +88,8 @@
         "Zero critical diffs.",
         "Zero major diffs.",
         "No more than three minor diffs.",
-        "XR candidate replayed through integration."
+        "XR candidate replayed through integration.",
+        "ZPE-IMC remains a dedicated flagship profile with imc.* measurement keys."
       ]
     },
     {
@@ -110,7 +111,8 @@
         "Zero critical diffs.",
         "Zero major diffs.",
         "No undeclared bespoke route hacks.",
-        "Replication delta is explainable by content or declared variants."
+        "Replication delta is explainable by content or declared variants.",
+        "ZPE-IMC remains a dedicated flagship profile with imc.* measurement keys."
       ]
     },
     {
