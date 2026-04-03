@@ -1,0 +1,199 @@
+{
+  "generatedAt": "2026-04-03T12:45:35.845Z",
+  "findings": [],
+  "routes": [
+    {
+      "page": "home",
+      "route": "/",
+      "title": "ZER0PA — Zero-Point Architecture for Intelligent Machines",
+      "description": "Proof-first authority surface for Zero-Point Architecture.",
+      "canonicalHref": "http://127.0.0.1:3006/",
+      "jsonLdCount": 2,
+      "lang": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "ZERO-POINTARCHITECTURE:PROOF-FIRSTTECHNICALSURFACE"
+        },
+        {
+          "level": 2,
+          "text": "INTEGRATED_MEMORY_CLUSTER"
+        },
+        {
+          "level": 2,
+          "text": "SYSTEM_COMPONENTS_INDEX"
+        },
+        {
+          "level": 3,
+          "text": "NEURAL_VOID"
+        },
+        {
+          "level": 3,
+          "text": "SIGNAL_FABRIC"
+        },
+        {
+          "level": 3,
+          "text": "ETERNAL_LEDGER"
+        },
+        {
+          "level": 3,
+          "text": "VOID_SENTRY"
+        },
+        {
+          "level": 2,
+          "text": "PROOF_LOGIC"
+        }
+      ],
+      "headingSkips": [],
+      "h1Count": 1,
+      "landmarks": {
+        "header": 1,
+        "nav": 2,
+        "main": 1,
+        "footer": 1
+      },
+      "unlabeledLinks": [],
+      "unlabeledButtons": [],
+      "missingAltImages": [],
+      "nestedInteractive": [],
+      "duplicateIds": []
+    },
+    {
+      "page": "imc",
+      "route": "/imc",
+      "title": "ZPE-IMC | ZER0PA",
+      "description": "ZPE-IMC is the Wave-1 integration and dispatch layer for Zero-Point Encoding. It is a deterministic, CPU-native transport system that carries ten user-facing mo",
+      "canonicalHref": "http://127.0.0.1:3006/imc",
+      "jsonLdCount": 2,
+      "lang": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "ZPE-IMC"
+        },
+        {
+          "level": 2,
+          "text": "Historical Context Only"
+        },
+        {
+          "level": 2,
+          "text": "ZPE-Neuro"
+        },
+        {
+          "level": 2,
+          "text": "ZPE-XR"
+        },
+        {
+          "level": 2,
+          "text": "SECURE THE EVIDENCE. JOIN THE CLUSTER."
+        }
+      ],
+      "headingSkips": [],
+      "h1Count": 1,
+      "landmarks": {
+        "header": 1,
+        "nav": 2,
+        "main": 1,
+        "footer": 1
+      },
+      "unlabeledLinks": [],
+      "unlabeledButtons": [],
+      "missingAltImages": [],
+      "nestedInteractive": [],
+      "duplicateIds": []
+    },
+    {
+      "page": "work-xr",
+      "route": "/work/xr",
+      "title": "ZPE-XR | ZER0PA",
+      "description": "ZPE-XR is the canonical Zer0pa XR workstream for a deterministic hand-pose transport codec and evaluation harness. This repository is the governing public-facin",
+      "canonicalHref": "http://127.0.0.1:3006/work/xr",
+      "jsonLdCount": 2,
+      "lang": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "ZPE-XR"
+        },
+        {
+          "level": 2,
+          "text": "Historical Context Only"
+        },
+        {
+          "level": 2,
+          "text": "ZPE-IMC"
+        },
+        {
+          "level": 2,
+          "text": "ZPE-Neuro"
+        },
+        {
+          "level": 2,
+          "text": "SECURE THE EVIDENCE. JOIN THE CLUSTER."
+        }
+      ],
+      "headingSkips": [],
+      "h1Count": 1,
+      "landmarks": {
+        "header": 1,
+        "nav": 2,
+        "main": 1,
+        "footer": 1
+      },
+      "unlabeledLinks": [],
+      "unlabeledButtons": [],
+      "missingAltImages": [],
+      "nestedInteractive": [],
+      "duplicateIds": []
+    },
+    {
+      "page": "work-ft",
+      "route": "/work/ft",
+      "title": "ZPE-FT | ZER0PA",
+      "description": "ZPE-FT is a deterministic financial time-series codec and pattern-search workstream. The repo exposes an installable Python package, an optional repo-local Rust",
+      "canonicalHref": "http://127.0.0.1:3006/work/ft",
+      "jsonLdCount": 2,
+      "lang": "en",
+      "headings": [
+        {
+          "level": 1,
+          "text": "ZPE-FT"
+        },
+        {
+          "level": 2,
+          "text": "Historical Context Only"
+        },
+        {
+          "level": 2,
+          "text": "ZPE-IMC"
+        },
+        {
+          "level": 2,
+          "text": "ZPE-Neuro"
+        },
+        {
+          "level": 2,
+          "text": "SECURE THE EVIDENCE. JOIN THE CLUSTER."
+        }
+      ],
+      "headingSkips": [],
+      "h1Count": 1,
+      "landmarks": {
+        "header": 1,
+        "nav": 2,
+        "main": 1,
+        "footer": 1
+      },
+      "unlabeledLinks": [],
+      "unlabeledButtons": [],
+      "missingAltImages": [],
+      "nestedInteractive": [],
+      "duplicateIds": []
+    }
+  ],
+  "summary": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0
+  }
+}

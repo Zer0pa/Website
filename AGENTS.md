@@ -8,13 +8,15 @@ Treat `/Users/zer0palab/Zer0pa Website/AGENTS.md` and the `CLAW/` docs in the pa
 Treat [`CLAW/GET_GEOMETRY_DONE_PROGRAM.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/GET_GEOMETRY_DONE_PROGRAM.md) as the repo-local operating doctrine for math-first layout work.
 Treat [`CLAW/AUTONOMOUS_CONTROL_PLANE.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/AUTONOMOUS_CONTROL_PLANE.md) and [`CLAW/AUTONOMOUS_RUNBOOK.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/AUTONOMOUS_RUNBOOK.md) as the controlling documents for long-running multi-agent operation.
 Use the repo-local skill [`$get-geometry-done`](/Users/zer0palab/Zer0pa%20Website/Website-main/.agents/skills/get-geometry-done/SKILL.md) for deterministic geometry, fidelity, and layout-verification tasks.
+Treat [`CLAW/PRD_DETERMINISTIC_RECURSIVE_PRODUCTION.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/PRD_DETERMINISTIC_RECURSIVE_PRODUCTION.md) as the current system-engineering overlay.
+Treat [`CLAW/RUNBOOK_CODEX_OPERATOR.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/RUNBOOK_CODEX_OPERATOR.md) as the operator desk while Telegram is deferred.
 
 ## Immediate Priorities
 
-1. Tighten homepage fidelity.
-2. Tighten flagship `/imc` fidelity.
-3. Improve shared primitives before broad page work.
-4. Preserve the data pipeline while reducing generic visual treatment.
+1. Keep all design decisions deterministic and law-backed.
+2. Tighten structural quality: semantics, metadata discipline, and lintable code.
+3. Complete `/work/xr` and `/work/ft` under the product kernel.
+4. Expand responsive, contrast, and augmentation gates only in the declared phase order.
 
 ## Code Focus
 
@@ -31,5 +33,8 @@ Use the repo-local skill [`$get-geometry-done`](/Users/zer0palab/Zer0pa%20Websit
 - Do not replace the deterministic layout workflow with generic component churn.
 - Do not flatten the flagship IMC surface into the same template logic as every other lane.
 - Do not make creative changes that cannot be defended as tokens, constraints, ratios, or explicit exceptions.
+- Do not skip semantic, metadata, or code-quality fixes just because visual parity looks close.
+- Do not treat responsive work as only a last-mile polish step.
+- Do not accept low-contrast text just because it feels atmospheric.
 - Do not rewrite parser or lane-truth surfaces during visual refinement unless they are actually broken.
 - Do not run unattended loops until the control-plane `press_go` gate is satisfied.

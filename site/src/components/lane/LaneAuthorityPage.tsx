@@ -185,7 +185,7 @@ export default function LaneAuthorityPage({
                 className="related-lane-card"
               >
                 <span className="label-micro">{item.laneIdentifier}</span>
-                <h3>{laneDisplayName(item)}</h3>
+                <h2 className="related-lane-title">{laneDisplayName(item)}</h2>
               </Link>
             ))}
           </div>

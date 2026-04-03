@@ -3,16 +3,17 @@
   "project": "zer0pa-website",
   "mode": "hardening",
   "press_go": false,
-  "current_milestone": "M1-recursive-autonomy-hardening",
+  "current_milestone": "M2-deterministic-production-system-engineering",
   "current_phase": "C4-first-generic-product-proof",
-  "active_wave": "W4",
-  "last_updated": "2026-04-03T12:07:16Z",
+  "active_wave": "W5",
+  "last_updated": "2026-04-03T12:46:13Z",
   "control_style": "evaluator-optimizer",
-  "latest_wave_report": "CLAW/control-plane/reports/W4-integration-replay.md",
+  "latest_wave_report": "CLAW/control-plane/reports/W5-deterministic-production-foundation.md",
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
-  "execution_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
-  "execution_plan": "CLAW/control-plane/plans/canonical-routes-to-producing.json",
+  "execution_prd": "CLAW/PRD_DETERMINISTIC_RECURSIVE_PRODUCTION.md",
+  "execution_plan": "CLAW/control-plane/plans/deterministic-recursive-production.json",
+  "operator_interface": "codex-supervised",
   "hardening_artifacts": {
     "pattern_library": "CLAW/control-plane/patterns/geometry-patterns.json",
     "continuation_state": "CLAW/control-plane/continuations/lane-continuations.json",
@@ -72,7 +73,9 @@
     "build": "pass: integration replay build on 2026-04-03",
     "parser": "pass: integration replay parser falsification loop on 2026-04-03",
     "layout": "home: 0 critical, 0 major, 0 minor, 12 cosmetic; imc: 0 critical, 0 major, 0 minor, 14 cosmetic; product-kernel law audit: /work/xr 0 critical 0 major 0 minor, /work/ft 0 critical 0 major 0 minor",
-    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile in integration checkpoint routes"
+    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile in integration checkpoint routes",
+    "quality": "pass: 0 critical, 0 major, 0 minor across /, /imc, /work/xr, and /work/ft",
+    "contrast": "fail: 72 major contrast failures across low-emphasis labels and telemetry surfaces"
   },
   "current_scores": {
     "fidelity": null,
@@ -95,16 +98,23 @@
     "p1_homepage_canonical": true,
     "p2_imc_canonical": true,
     "p3_product_kernel_ready": true,
-    "p4_recovery_hardened": true
+    "p4_recovery_hardened": true,
+    "code_quality_foundation_ready": true,
+    "semantic_seo_foundation_ready": true,
+    "responsive_matrix_ready": false,
+    "contrast_legibility_ready": false,
+    "augmentation_program_seeded": false,
+    "codex_operator_interface_ready": true
   },
   "blockers": [
     "Press-go criteria are not yet satisfied."
   ],
   "next_actions": [
+    "Begin D4 by correcting the low-emphasis grey token family and other measured contrast failures.",
     "Execute C4 on /work/xr using the accepted product-family kernel.",
     "Replay the accepted kernel through /work/ft as the replication proof page.",
-    "Promote the first generic product proof through integration once XR and FT are accepted.",
-    "Keep press_go false until the canonical-routes-to-producing program is complete."
+    "Expand D3 after XR and FT are replayed through integration with a larger breakpoint matrix.",
+    "Keep press_go false until deterministic production engineering gates are complete."
   ],
   "learning_backlog": [
     {

@@ -1186,7 +1186,7 @@ p {
   background: rgba(255, 255, 255, 0.015);
 }
 
-.related-lane-card h3 {
+.related-lane-title {
   font-size: 1.1rem;
 }
 
@@ -3587,7 +3587,7 @@ p {
     padding: calc(16px * var(--desktop-proportion-scale));
   }
 
-  .related-lane-card h3 {
+  .related-lane-title {
     font-size: calc(1.1rem * var(--desktop-proportion-scale));
   }
 

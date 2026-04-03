@@ -9,11 +9,18 @@
     "parallel_cognition": true,
     "single_writer_per_lane": true,
     "subagent_rule": "Subagents may analyze and falsify in parallel, but only the owning lane writes and commits.",
+    "operator_interface": "codex-supervised",
+    "page_squads_file": "CLAW/control-plane/page-squads.json",
     "ephemeral_roles": [
       "law-checker",
       "layout-analyst",
       "truth-auditor",
-      "falsifier"
+      "falsifier",
+      "code-quality-auditor",
+      "semantic-seo-auditor",
+      "responsive-architect",
+      "contrast-auditor",
+      "augmentation-planner"
     ]
   },
   "allowed_path_prefixes": [

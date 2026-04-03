@@ -1,9 +1,40 @@
+import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import LaneAuthorityPage from '@/components/lane/LaneAuthorityPage';
-import { loadLaneBySlug, loadLaneCatalog } from '@/lib/data/lane-data';
+import StructuredData from '@/components/seo/StructuredData';
+import { loadLaneBySlug, loadLaneCatalog, laneSlug } from '@/lib/data/lane-data';
+import { canonicalUrl, summarizeDescription } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const lane = await loadLaneBySlug(params.slug);
+
+  if (!lane) {
+    return {
+      title: 'Authority Dossier Missing | ZER0PA',
+      description: 'Requested authority dossier could not be resolved from the live packet set.',
+      alternates: {
+        canonical: `/work/${params.slug}`,
+      },
+    };
+  }
+
+  return {
+    title: `${lane.laneIdentifier} | ZER0PA`,
+    description: summarizeDescription(
+      lane.tagline || lane.authorityState.summary || `Authority dossier for ${lane.laneIdentifier}.`,
+    ),
+    alternates: {
+      canonical: `/work/${laneSlug(lane.laneIdentifier)}`,
+    },
+  };
+}
 
 export default async function WorkLanePage({
   params,
@@ -34,6 +65,30 @@ export default async function WorkLanePage({
   return (
     <div className="substrate">
       <Header variant="product" />
+      <StructuredData
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: lane.laneIdentifier,
+          url: canonicalUrl(`/work/${laneSlug(lane.laneIdentifier)}`),
+          description: summarizeDescription(
+            lane.tagline || lane.authorityState.summary || `Authority dossier for ${lane.laneIdentifier}.`,
+          ),
+          isPartOf: {
+            '@type': 'WebSite',
+            name: 'ZER0PA',
+            url: canonicalUrl('/'),
+          },
+          mainEntity: {
+            '@type': 'SoftwareSourceCode',
+            name: lane.laneIdentifier,
+            codeRepository: lane.repoUrl,
+            description: summarizeDescription(
+              lane.tagline || lane.authorityState.summary || `Authority dossier for ${lane.laneIdentifier}.`,
+            ),
+          },
+        }}
+      />
       <LaneAuthorityPage lane={lane} lanes={catalog.lanes} />
       <Footer />
     </div>

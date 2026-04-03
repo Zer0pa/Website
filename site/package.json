@@ -14,6 +14,8 @@
     "layout:measure": "tsx src/scripts/layout-measure.ts",
     "layout:diff": "tsx src/scripts/layout-diff.ts",
     "audit:layout": "tsx src/scripts/layout-audit.ts",
+    "audit:quality": "tsx src/scripts/quality-audit.ts",
+    "audit:contrast": "tsx src/scripts/contrast-audit.ts",
     "audit:responsive": "tsx src/scripts/responsive-audit.ts",
     "claw:validate": "node ../CLAW/scripts/validate-control-plane.mjs",
     "claw:plan": "node ../CLAW/scripts/plan-next-cycle.mjs",
