@@ -337,6 +337,7 @@ export function buildCyclePlan(control, options = {}) {
         objective: laneTemplate.objective,
         deliverables: laneTemplate.deliverables || [],
         acceptance: laneTemplate.acceptance || [],
+        depends_on: laneTemplate.depends_on || [],
       };
     }),
   };

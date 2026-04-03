@@ -67,6 +67,9 @@
         },
         {
           "lane_id": "product-family",
+          "depends_on": [
+            "data-truth"
+          ],
           "objective": "Apply the locked product-family kernel to /work/xr without bespoke route hacks.",
           "deliverables": [
             "XR route instance",
@@ -80,6 +83,9 @@
         },
         {
           "lane_id": "systems-qa",
+          "depends_on": [
+            "product-family"
+          ],
           "objective": "Run falsification against /work/xr and reject any kernel or responsive regression.",
           "deliverables": [
             "XR layout and responsive reports"
@@ -90,6 +96,10 @@
         },
         {
           "lane_id": "integration",
+          "depends_on": [
+            "product-family",
+            "systems-qa"
+          ],
           "objective": "Replay the accepted XR candidate through the integration lane before promotion.",
           "deliverables": [
             "XR integration rehearsal"
@@ -117,6 +127,9 @@
         },
         {
           "lane_id": "product-family",
+          "depends_on": [
+            "data-truth"
+          ],
           "objective": "Prove the same kernel generalizes to /work/ft without undeclared bespoke logic.",
           "deliverables": [
             "FT route instance",
@@ -129,6 +142,9 @@
         },
         {
           "lane_id": "systems-qa",
+          "depends_on": [
+            "product-family"
+          ],
           "objective": "Run falsification against /work/ft and the kernel inheritance boundary.",
           "deliverables": [
             "FT layout and responsive reports"
@@ -139,6 +155,10 @@
         },
         {
           "lane_id": "integration",
+          "depends_on": [
+            "product-family",
+            "systems-qa"
+          ],
           "objective": "Replay the accepted FT candidate through the integration lane before promotion.",
           "deliverables": [
             "FT integration rehearsal"

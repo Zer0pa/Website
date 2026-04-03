@@ -915,6 +915,13 @@ function recoverStaleActiveJobs(control, queue, queuePath, runnerState) {
 }
 
 function acceptedUpstreamJobs(queue, job) {
+  const dependencyLaneIds = Array.isArray(job.depends_on) ? job.depends_on.filter(Boolean) : [];
+  if (dependencyLaneIds.length > 0) {
+    return dependencyLaneIds
+      .map((laneId) => (queue.jobs || []).find((candidate) => candidate.lane_id === laneId))
+      .filter((candidate) => candidate && candidate.status === 'accepted' && candidate.candidate_commit);
+  }
+
   const currentIndex = (queue.jobs || []).findIndex((candidate) => candidate.job_id === job.job_id);
   if (currentIndex <= 0) {
     return [];
@@ -1089,9 +1096,21 @@ async function main() {
   freshRunnerState.mode = 'guarded-override';
   freshRunnerState.last_tick_at = localTimestamp();
   freshRunnerState.active_cycle = queue.cycle_id;
-  freshRunnerState.active_job = null;
+  freshRunnerState.active_job = job.job_id;
   freshRunnerState.last_error = null;
   writeRunnerState(freshRunnerState);
+
+  job.status = 'leased';
+  job.started_at = localTimestamp();
+  queue.status = 'running';
+  writeActiveQueue(queuePath, queue);
+
+  updateRuntime((runtime) => {
+    runtime.active_jobs = (runtime.active_jobs || []).map((candidate) =>
+      candidate.job_id === job.job_id ? { ...candidate, status: 'leased' } : candidate,
+    );
+    runtime.heartbeat_at = localTimestamp();
+  });
 
   ensureLaneSiteDependencies(job.worktree);
   ensureCleanWorktree(job.worktree);
@@ -1106,7 +1125,6 @@ async function main() {
   fs.writeFileSync(promptSnapshotPath(job.job_id), prompt, 'utf8');
 
   job.status = 'running';
-  job.started_at = localTimestamp();
   if (replayedCommits.length > 0) {
     job.upstream_replayed_commits = replayedCommits;
   }

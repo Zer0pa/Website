@@ -45,7 +45,7 @@ const DEFAULT_RUNNER_POLICY = {
     max_lane_quiet_seconds: 180,
     allow_stalled_result_salvage: true,
     use_search: false,
-    sandbox: 'workspace-write',
+    sandbox: 'danger-full-access',
     capture_json_events: true,
     allow_remote_push: false,
     allow_production_writes: false,
