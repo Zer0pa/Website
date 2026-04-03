@@ -86,12 +86,17 @@
           "depends_on": [
             "product-family"
           ],
-          "objective": "Run falsification against /work/xr and reject any kernel or responsive regression.",
+          "objective": "Run falsification against /work/xr and reject any kernel, proportionality, or responsive regression.",
           "deliverables": [
-            "XR layout and responsive reports"
+            "XR layout report",
+            "XR geometry-law report",
+            "XR responsive report",
+            "XR gap verdict"
           ],
           "acceptance": [
-            "XR has zero critical and zero major diffs"
+            "XR has zero critical and zero major layout diffs",
+            "XR has no blocking geometry-law failure",
+            "XR blocking route gaps are cleared truthfully"
           ]
         },
         {
@@ -102,10 +107,12 @@
           ],
           "objective": "Replay the accepted XR candidate through the integration lane before promotion.",
           "deliverables": [
-            "XR integration rehearsal"
+            "XR integration rehearsal",
+            "XR geometry-law evidence replay"
           ],
           "acceptance": [
-            "XR candidate replays cleanly in integration"
+            "XR candidate replays cleanly in integration",
+            "XR has no open blocking GGD gaps at promotion time"
           ]
         }
       ]
@@ -145,12 +152,17 @@
           "depends_on": [
             "product-family"
           ],
-          "objective": "Run falsification against /work/ft and the kernel inheritance boundary.",
+          "objective": "Run falsification against /work/ft and the kernel inheritance boundary, including proportionality law.",
           "deliverables": [
-            "FT layout and responsive reports"
+            "FT layout report",
+            "FT geometry-law report",
+            "FT responsive report",
+            "FT gap verdict"
           ],
           "acceptance": [
-            "FT has zero critical and zero major diffs"
+            "FT has zero critical and zero major layout diffs",
+            "FT has no blocking geometry-law failure",
+            "FT blocking route gaps are cleared truthfully"
           ]
         },
         {
@@ -161,10 +173,12 @@
           ],
           "objective": "Replay the accepted FT candidate through the integration lane before promotion.",
           "deliverables": [
-            "FT integration rehearsal"
+            "FT integration rehearsal",
+            "FT geometry-law evidence replay"
           ],
           "acceptance": [
-            "FT candidate replays cleanly in integration"
+            "FT candidate replays cleanly in integration",
+            "FT has no open blocking GGD gaps at promotion time"
           ]
         }
       ]
@@ -189,10 +203,12 @@
           "lane_id": "systems-qa",
           "objective": "Confirm that guarded recursion rejects regressions and respects locks, paths, and overflow rules.",
           "deliverables": [
-            "recursive safety verdict"
+            "recursive safety verdict",
+            "current geometry-law coverage verdict"
           ],
           "acceptance": [
-            "safety gates remain intact"
+            "safety gates remain intact",
+            "geometry-law evidence is current for canonical and route-family targets"
           ]
         },
         {

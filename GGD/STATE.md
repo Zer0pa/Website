@@ -4,8 +4,8 @@
 
 - date: `2026-04-03`
 - status: `in_progress`
-- current phase: `Phase 3 - Wire runtime route gates and deterministic gap closure`
-- current plan: `runtime-route-gates`
+- current phase: `Phase 4 - Propagate contract and promote geometry-law evidence`
+- current plan: `lane-contract-propagation`
 
 ## Command Binding
 
@@ -37,8 +37,10 @@
 
 ## Open Gaps
 
+- Propagate the current GGD/CLAW contract commits into the active lane worktrees.
+- Run contract-readiness verification after worktree propagation.
+- Resume XR closure under the stronger geometry-law contract.
 - Add explicit FT route-gap export once the first FT falsification exists.
-- Promote the geometry-law audit into the systems-qa lane acceptance recipe.
 - Expose the named bundle entrypoints directly in the ggd-* command surface.
 
 ## Blockers

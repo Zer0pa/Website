@@ -1,7 +1,8 @@
 {
   "version": 1,
   "program": "zer0pa-website-24x7-local-autonomy",
-  "status": "active",
+  "status": "superseded",
+  "superseded_by": "CLAW/control-plane/plans/ggd-autonomy-production-horizon.json",
   "current_phase": "P1-canonical-homepage-closure",
   "phases": [
     {

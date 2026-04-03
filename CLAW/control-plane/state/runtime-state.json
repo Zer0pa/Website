@@ -3,15 +3,15 @@
   "project": "zer0pa-website",
   "mode": "hardening",
   "press_go": false,
-  "current_milestone": "M3-autonomous-go-live-hardening",
+  "current_milestone": "M4-ggd-autonomy-production-horizon",
   "current_phase": "C4-first-generic-product-proof",
   "active_wave": "W6",
   "last_updated": "2026-04-03T17:03:42Z",
   "control_style": "evaluator-optimizer",
   "latest_wave_report": "CLAW/control-plane/reports/C4-20260403T165341Z.md",
-  "phase_plan": "CLAW/control-plane/plans/autonomous-go-live-hardening.json",
+  "phase_plan": "CLAW/control-plane/plans/ggd-autonomy-production-horizon.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
-  "execution_prd": "CLAW/PRD_AUTONOMOUS_GO_LIVE_HARDENING.md",
+  "execution_prd": "CLAW/PRD_GGD_AUTONOMY_PRODUCTION_HORIZON.md",
   "execution_plan": "CLAW/control-plane/plans/deterministic-recursive-production.json",
   "operator_interface": "codex-supervised",
   "hardening_artifacts": {
@@ -108,17 +108,18 @@
     "semantic_seo_foundation_ready": true,
     "responsive_matrix_ready": false,
     "contrast_legibility_ready": true,
-    "augmentation_program_seeded": false,
+    "augmentation_program_seeded": true,
     "codex_operator_interface_ready": true
   },
   "blockers": [
+    "XR remains blocked by an open deterministic geometry gap.",
     "Press-go criteria are not yet satisfied."
   ],
   "next_actions": [
-    "Finish A0 by committing runner truth hardening and recovering the stale active cycle.",
-    "Re-run C4 under the active-lane lock and ephemeral replay contract.",
-    "Close XR, then FT, through systems-qa and integration before guarded_local_autonomy proof.",
-    "Keep press_go false until the autonomous go-live hardening program is complete."
+    "Finish H0 by collapsing runtime, manifest, and PRD truth onto the same active horizon program.",
+    "Finish H1 by propagating the current contract into active lane worktrees.",
+    "Promote geometry-law verification into systems-qa and integration acceptance before resuming XR closure.",
+    "Close XR, then FT, through systems-qa and integration before guarded_local_autonomy proof."
   ],
   "learning_backlog": [
     {

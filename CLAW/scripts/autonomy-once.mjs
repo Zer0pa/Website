@@ -367,14 +367,18 @@ function laneExecutionRecipe(job) {
     'systems-qa': [
       '- Audit the target route and any shared law or shared kernel dependency it relies on.',
       '- If the accepted upstream slice touches `site/src/lib/product-kernel/**` or `site/src/components/lane/LaneAuthorityPage.tsx`, verify `/imc` still exposes flagship-only behavior and `imc.*` measurement keys.',
-      '- Prefer running `npm run audit:quality` when a shared route/kernel surface changed, then add targeted layout/responsive falsification for the target route.',
+      '- Treat geometry-law verification as first-class evidence, not an optional appendix.',
+      '- Prefer running `npm run audit:quality` when a shared route/kernel surface changed, then run targeted layout, geometry-law, and responsive falsification for the target route.',
+      '- If geometry-law findings remain critical or major, reject the candidate even when screenshot diff drift is smaller.',
+      '- Export route-gap truthfully when the route remains blocked, and close route gaps truthfully only when the evidence is actually clean.',
       '- Reject regressions instead of explaining them away.',
       '- Prefer report artifacts over code edits unless the audit harness itself is broken.',
     ],
     integration: [
       '- Replay only the accepted candidate into the integration lane.',
       '- If the replayed slice touched the shared work-lane kernel or lane authority page, verify the IMC flagship invariants before accepting promotion.',
-      '- Favor build, parser, and quality falsification over narrative reassurance.',
+      '- Favor build, parser, quality, and geometry-law falsification over narrative reassurance.',
+      '- Do not accept a route-family candidate while any blocking GGD route gap remains open for the subject route.',
       '- Do not broaden scope beyond conflict-free promotion and replay verification.',
     ],
   };

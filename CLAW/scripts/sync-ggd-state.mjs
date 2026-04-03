@@ -37,15 +37,15 @@ const routeStatus = {
 
 state.project_reference.project_md_updated = localTimestamp().slice(0, 10);
 state.project_reference.current_focus =
-  'Make GGD contract artifacts actively govern CLAW route execution, downstream acceptance, and route-gap closure.';
-state.position.current_phase = '3';
-state.position.current_phase_name = 'Wire runtime route gates and deterministic gap closure';
-state.position.current_plan = 'runtime-route-gates';
+  'Propagate the GGD contract into active lane worktrees, require geometry-law evidence in lane execution, and resume route-family closure under one horizon program.';
+state.position.current_phase = '4';
+state.position.current_phase_name = 'Propagate contract and promote geometry-law evidence';
+state.position.current_plan = 'lane-contract-propagation';
 state.position.status = 'in_progress';
 state.position.last_activity = localTimestamp();
 state.position.last_activity_desc =
-  'Wired route-level bundle governance, gap export, gap closure, downstream acceptance blocking, and a first geometry-law audit into the autonomy layer.';
-state.position.progress_percent = 62;
+  'Established the horizon program, promoted geometry-law evidence into lane contracts, and began contract propagation into active worktrees.';
+state.position.progress_percent = 68;
 state.command_binding = {
   command_namespace: binding.command_namespace,
   binding_file: binding.binding_file,
@@ -70,8 +70,10 @@ state.gap_records = gapRecords.map((gap) => ({
 }));
 state.augmentation_backlog = augmentationBacklog;
 state.pending_todos = [
+  'Propagate the current GGD/CLAW contract commits into the active lane worktrees.',
+  'Run contract-readiness verification after worktree propagation.',
+  'Resume XR closure under the stronger geometry-law contract.',
   'Add explicit FT route-gap export once the first FT falsification exists.',
-  'Promote the geometry-law audit into the systems-qa lane acceptance recipe.',
   'Expose the named bundle entrypoints directly in the ggd-* command surface.',
 ];
 state.blockers = [

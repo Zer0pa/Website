@@ -19,6 +19,7 @@
     "audit:contrast": "node --import tsx src/scripts/contrast-audit.ts",
     "audit:responsive": "node --import tsx src/scripts/responsive-audit.ts",
     "claw:validate": "node ../CLAW/scripts/validate-control-plane.mjs",
+    "claw:test:contracts": "node ../CLAW/scripts/verify-lane-contracts.mjs",
     "claw:plan": "node ../CLAW/scripts/plan-next-cycle.mjs",
     "claw:run-cycle": "node ../CLAW/scripts/run-cycle.mjs",
     "claw:settle-cycle": "node ../CLAW/scripts/settle-cycle.mjs",

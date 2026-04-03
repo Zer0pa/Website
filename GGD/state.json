@@ -3,7 +3,7 @@
   "project_reference": {
     "project_md_updated": "2026-04-03",
     "core_research_question": "How do we turn the Zer0pa website into a deterministic geometry program whose layout, typography, color, semantic hierarchy, packet truth, and code quality are governed by explicit laws and falsified continuously until canonical closure is reached?",
-    "current_focus": "Make GGD contract artifacts actively govern CLAW route execution, downstream acceptance, and route-gap closure."
+    "current_focus": "Propagate the GGD contract into active lane worktrees, require geometry-law evidence in lane execution, and resume route-family closure under one horizon program."
   },
   "project_contract": {
     "program_id": "ggd-zer0pa-website-v1",
@@ -54,15 +54,15 @@
     ]
   },
   "position": {
-    "current_phase": "3",
-    "current_phase_name": "Wire runtime route gates and deterministic gap closure",
+    "current_phase": "4",
+    "current_phase_name": "Propagate contract and promote geometry-law evidence",
     "total_phases": 8,
-    "current_plan": "runtime-route-gates",
+    "current_plan": "lane-contract-propagation",
     "total_plans_in_phase": 3,
     "status": "in_progress",
-    "last_activity": "2026-04-03T20:02:14Z",
-    "last_activity_desc": "Wired route-level bundle governance, gap export, gap closure, downstream acceptance blocking, and a first geometry-law audit into the autonomy layer.",
-    "progress_percent": 62
+    "last_activity": "2026-04-03T20:48:51Z",
+    "last_activity_desc": "Established the horizon program, promoted geometry-law evidence into lane contracts, and began contract propagation into active worktrees.",
+    "progress_percent": 68
   },
   "open_questions": [
     "Which GGD command surface should be wired first into the Codex execution layer?",
@@ -82,8 +82,10 @@
     }
   ],
   "pending_todos": [
+    "Propagate the current GGD/CLAW contract commits into the active lane worktrees.",
+    "Run contract-readiness verification after worktree propagation.",
+    "Resume XR closure under the stronger geometry-law contract.",
     "Add explicit FT route-gap export once the first FT falsification exists.",
-    "Promote the geometry-law audit into the systems-qa lane acceptance recipe.",
     "Expose the named bundle entrypoints directly in the ggd-* command surface."
   ],
   "blockers": [

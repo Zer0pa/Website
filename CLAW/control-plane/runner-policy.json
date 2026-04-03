@@ -51,9 +51,18 @@
           "./node_modules/.bin/tsc -p tsconfig.json --noEmit --incremental false"
         ]
       ],
+      "systems-qa": [
+        ["npm run audit:quality"],
+        ["npm run audit:responsive"],
+        ["npm run audit:geometry-law"],
+        ["npm run audit:layout", "npm run layout:measure"],
+        ["npm run audit:layout", "npm run layout:diff"]
+      ],
       "integration": [
         ["npm run build"],
-        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"],
+        ["npm run audit:quality"],
+        ["npm run audit:geometry-law"]
       ]
     }
   },

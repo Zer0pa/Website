@@ -32,6 +32,7 @@
       ],
       "required_artifacts": [
         "deterministic-design-system/reports/home.verification.md",
+        "deterministic-design-system/reports/geometry-laws/home.geometry-law.md",
         "deterministic-design-system/reports/responsive/responsive.verification.md",
         "deterministic-design-system/reports/quality/quality.verification.md",
         "deterministic-design-system/reports/contrast/contrast.verification.md"
@@ -49,6 +50,7 @@
       ],
       "required_artifacts": [
         "deterministic-design-system/reports/imc.verification.md",
+        "deterministic-design-system/reports/geometry-laws/imc.geometry-law.md",
         "deterministic-design-system/reports/responsive/responsive.verification.md",
         "deterministic-design-system/reports/quality/quality.verification.md",
         "deterministic-design-system/reports/contrast/contrast.verification.md"
@@ -68,6 +70,8 @@
       ],
       "required_artifacts": [
         "deterministic-design-system/reports/product-kernel.verification.md",
+        "deterministic-design-system/reports/geometry-laws/work-xr.geometry-law.md",
+        "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.md",
         "deterministic-design-system/reports/responsive/responsive.verification.md",
         "deterministic-design-system/reports/quality/quality.verification.md",
         "deterministic-design-system/reports/contrast/contrast.verification.md"
