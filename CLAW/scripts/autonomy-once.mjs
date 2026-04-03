@@ -539,7 +539,9 @@ function spawnCodexForJob(job, prompt, executionPolicy = {}) {
   const gitAdminDir = gitAbsolutePath(job.worktree, '--git-dir');
   const gitCommonDir = gitAbsolutePath(job.worktree, '--git-common-dir');
   const codexBin = resolveCodexBin();
-  const sharedPacketCacheDir = ensureSharedPacketCacheSeeded(job.worktree);
+  const sharedPacketCacheDir = ensureSharedPacketCacheSeeded(job.worktree, {
+    preferWorktree: job.lane_id === 'data-truth',
+  });
   const stdoutStream = fs.createWriteStream(stdoutPath, { flags: 'w' });
   const stderrStream = fs.createWriteStream(stderrPath, { flags: 'w' });
   const startedAt = Date.now();

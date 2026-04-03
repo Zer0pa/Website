@@ -104,8 +104,9 @@ export function ensureAutonomyDirs() {
   ensureDir(path.dirname(AUTONOMY_STATE_PATH));
 }
 
-export function ensureSharedPacketCacheSeeded(worktree = null) {
+export function ensureSharedPacketCacheSeeded(worktree = null, options = {}) {
   ensureDir(RUNTIME_TRUTH_CACHE_DIR);
+  const preferWorktree = Boolean(options.preferWorktree && worktree);
 
   const candidateDirs = [
     projectPath('site/.cache/packets'),
@@ -123,7 +124,11 @@ export function ensureSharedPacketCacheSeeded(worktree = null) {
 
       const sourceStat = fs.statSync(sourcePath);
       const targetStat = fs.existsSync(targetPath) ? fs.statSync(targetPath) : null;
-      if (!targetStat || sourceStat.mtimeMs > targetStat.mtimeMs) {
+      const shouldReplace =
+        !targetStat ||
+        sourceStat.mtimeMs > targetStat.mtimeMs ||
+        (preferWorktree && sourceDir === path.join(worktree, 'site/.cache/packets'));
+      if (shouldReplace) {
         fs.copyFileSync(sourcePath, targetPath);
       }
     }
