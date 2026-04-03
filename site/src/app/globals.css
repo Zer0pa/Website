@@ -15,7 +15,8 @@
   --color-fail: #d07a75;
   --color-warning: #a98a44;
 
-  --font-masthead: var(--font-oswald), 'Oswald', sans-serif;
+  --font-oswald: 'Oswald', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  --font-masthead: var(--font-oswald);
   --font-ui: 'Courier New', Courier, monospace;
 
   --grid-max: 984px;

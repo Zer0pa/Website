@@ -1,15 +1,7 @@
 import type { Metadata } from 'next';
-import { Oswald } from 'next/font/google';
 import StructuredData from '@/components/seo/StructuredData';
 import { getSiteUrl } from '@/lib/seo';
 import './globals.css';
-
-const oswald = Oswald({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-oswald',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -31,7 +23,7 @@ export default function RootLayout({
   const siteUrl = getSiteUrl();
 
   return (
-    <html lang="en" className={oswald.variable}>
+    <html lang="en">
       <body>
         <StructuredData
           data={{
