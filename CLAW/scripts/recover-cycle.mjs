@@ -12,7 +12,7 @@ import {
   readJson,
   writeJson,
 } from './lib/control-plane.mjs';
-import { readRunnerState, writeRunnerState } from './lib/autonomy.mjs';
+import { readRunnerState, updateRuntimeRunnerState, writeRunnerState } from './lib/autonomy.mjs';
 
 function readArg(prefix) {
   return process.argv.find((arg) => arg.startsWith(prefix))?.slice(prefix.length) || null;
@@ -22,10 +22,17 @@ const maxAgeMinutes = Number.parseInt(readArg('--max-age-minutes=') || '180', 10
 const now = Date.now();
 const control = loadControlPlane();
 const runtime = structuredClone(control.runtime);
+const runner = readRunnerState();
 const locks = activeLocks();
+const runnerUnavailableForRecovery =
+  Boolean(runtime.active_cycle) &&
+  (!runner.enabled || !runner.pid || ['uninstalled', 'stopped', 'error'].includes(runner.mode || 'idle'));
 const staleLocks = locks.filter((lock) => {
   const expiresAt = lock.payload.expires_at ? Date.parse(lock.payload.expires_at) : null;
   if (!runtime.active_cycle) {
+    return true;
+  }
+  if (runnerUnavailableForRecovery) {
     return true;
   }
   if (Number.isFinite(expiresAt)) {
@@ -34,6 +41,7 @@ const staleLocks = locks.filter((lock) => {
   const heartbeatAt = lock.payload.heartbeat_at ? Date.parse(lock.payload.heartbeat_at) : Date.parse(lock.payload.acquired_at);
   return Number.isFinite(heartbeatAt) && heartbeatAt + maxAgeMinutes * 60 * 1000 < now;
 });
+const recoveryRequired = staleLocks.length > 0 || runnerUnavailableForRecovery;
 
 const releasedLocks = [];
 for (const lock of staleLocks) {
@@ -47,15 +55,15 @@ const eventId = `RECOVER-${new Date().toISOString().replace(/[-:]/g, '').replace
 const event = {
   event_id: eventId,
   cycle_id: runtime.active_cycle?.cycle_id || null,
-  reason: staleLocks.length > 0 ? 'stale-lock-recovery' : 'no-op',
+  reason: runnerUnavailableForRecovery ? 'runner-state-recovery' : staleLocks.length > 0 ? 'stale-lock-recovery' : 'no-op',
   released_locks: releasedLocks,
-  runtime_mutation: staleLocks.length > 0 ? 'active cycle cleared after stale lock recovery' : 'none',
+  runtime_mutation: recoveryRequired ? 'active cycle cleared after recovery' : 'none',
   created_at: localTimestamp(),
 };
 
 writeJson(controlPath('recoveries', `${eventId}.json`), event);
 
-if (staleLocks.length > 0) {
+if (recoveryRequired) {
   const queueIndexPath = controlPath('queue', 'index.json');
   const queueIndex = fs.existsSync(queueIndexPath)
     ? readJson(queueIndexPath)
@@ -75,12 +83,17 @@ if (staleLocks.length > 0) {
   runtime.last_updated = localTimestamp();
   writeJson(path.join(CONTROL_ROOT, 'state', 'runtime-state.json'), runtime);
 
-  const runner = readRunnerState();
   runner.last_tick_at = localTimestamp();
   runner.active_cycle = null;
   runner.active_job = null;
   runner.last_error = null;
   writeRunnerState(runner);
+  updateRuntimeRunnerState({
+    enabled: runner.enabled,
+    mode: runner.mode,
+    last_cycle: event.cycle_id,
+    last_outcome: staleLocks.length > 0 ? 'recovered' : runtime.runner?.last_outcome || null,
+  });
 }
 
 console.log(JSON.stringify(event, null, 2));

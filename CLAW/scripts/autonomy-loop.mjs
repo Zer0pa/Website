@@ -2,7 +2,13 @@
 
 import { execFileSync } from 'node:child_process';
 import { localTimestamp, projectPath } from './lib/control-plane.mjs';
-import { AUTONOMY_SERVICE_LABEL, readRunnerPolicy, readRunnerState, writeRunnerState } from './lib/autonomy.mjs';
+import {
+  AUTONOMY_SERVICE_LABEL,
+  readRunnerPolicy,
+  readRunnerState,
+  updateRuntimeRunnerState,
+  writeRunnerState,
+} from './lib/autonomy.mjs';
 
 function readArg(prefix, fallback = null) {
   return process.argv.find((arg) => arg.startsWith(prefix))?.slice(prefix.length) || fallback;
@@ -56,6 +62,10 @@ async function main() {
   state.started_at = state.started_at || localTimestamp();
   state.last_error = null;
   writeRunnerState(state);
+  updateRuntimeRunnerState({
+    enabled: true,
+    mode: 'guarded-override',
+  });
 
   while (true) {
     const latest = readRunnerState();
@@ -67,6 +77,10 @@ async function main() {
       latest.active_cycle = null;
       latest.last_tick_at = localTimestamp();
       writeRunnerState(latest);
+      updateRuntimeRunnerState({
+        enabled: false,
+        mode: 'stopped',
+      });
       break;
     }
 
@@ -80,6 +94,10 @@ async function main() {
       failed.last_tick_at = localTimestamp();
       failed.last_error = error instanceof Error ? error.message : String(error);
       writeRunnerState(failed);
+      updateRuntimeRunnerState({
+        enabled: true,
+        mode: failed.mode || 'guarded-override',
+      });
     }
 
     await sleep(nextSleepSeconds() * 1000);
@@ -94,6 +112,10 @@ main().catch((error) => {
   failed.last_tick_at = localTimestamp();
   failed.last_error = error instanceof Error ? error.message : String(error);
   writeRunnerState(failed);
+  updateRuntimeRunnerState({
+    enabled: false,
+    mode: 'error',
+  });
   console.error(error);
   process.exit(1);
 });

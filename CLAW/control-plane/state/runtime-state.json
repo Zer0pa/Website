@@ -3,15 +3,15 @@
   "project": "zer0pa-website",
   "mode": "hardening",
   "press_go": false,
-  "current_milestone": "M2-deterministic-production-system-engineering",
+  "current_milestone": "M3-autonomous-go-live-hardening",
   "current_phase": "C4-first-generic-product-proof",
   "active_wave": "W6",
-  "last_updated": "2026-04-03T12:59:18Z",
+  "last_updated": "2026-04-03T17:03:42Z",
   "control_style": "evaluator-optimizer",
-  "latest_wave_report": "CLAW/control-plane/reports/W6-contrast-closure.md",
-  "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
+  "latest_wave_report": "CLAW/control-plane/reports/C4-20260403T165341Z.md",
+  "phase_plan": "CLAW/control-plane/plans/autonomous-go-live-hardening.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
-  "execution_prd": "CLAW/PRD_DETERMINISTIC_RECURSIVE_PRODUCTION.md",
+  "execution_prd": "CLAW/PRD_AUTONOMOUS_GO_LIVE_HARDENING.md",
   "execution_plan": "CLAW/control-plane/plans/deterministic-recursive-production.json",
   "operator_interface": "codex-supervised",
   "hardening_artifacts": {
@@ -20,7 +20,7 @@
     "queue_index": "CLAW/control-plane/queue/index.json",
     "checkpoint_pointer": "CLAW/control-plane/checkpoints/current.json"
   },
-  "active_cadence_profile": "supervised_dry_run",
+  "active_cadence_profile": "guarded_local_autonomy",
   "run_window": {
     "mode": "manual-supervised-only",
     "timezone": "Africa/Johannesburg",
@@ -51,22 +51,27 @@
     },
     "product-family": {
       "status": "active",
-      "reason": null
+      "reason": null,
+      "last_candidate_commit": null,
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T165341Z-02.json"
     },
     "data-truth": {
-      "status": "waiting",
+      "status": "active",
       "last_accepted_commit": null,
-      "last_handoff": null
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T165341Z-01.json",
+      "last_candidate_commit": null
     },
     "systems-qa": {
-      "status": "waiting",
+      "status": "rejected",
       "last_accepted_commit": null,
-      "last_handoff": null
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T165341Z-03.json",
+      "last_candidate_commit": "d6cc2d9c21531891d88dfbbb61ec9b1451dfddb1"
     },
     "integration": {
-      "status": "checkpointed",
+      "status": "active",
       "last_accepted_commit": "50b71220a69167eb73c60b6de58c52dd5228c8c1",
-      "last_handoff": "CLAW/control-plane/reports/W4-integration-replay.md"
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T135814Z-04.json",
+      "last_candidate_commit": null
     }
   },
   "latest_audits": {
@@ -110,10 +115,10 @@
     "Press-go criteria are not yet satisfied."
   ],
   "next_actions": [
-    "Execute C4 on /work/xr using the accepted product-family kernel.",
-    "Replay the accepted kernel through /work/ft as the replication proof page.",
-    "Expand D3 after XR and FT are replayed through integration with a larger breakpoint matrix.",
-    "Keep press_go false until deterministic production engineering gates are complete."
+    "Finish A0 by committing runner truth hardening and recovering the stale active cycle.",
+    "Re-run C4 under the active-lane lock and ephemeral replay contract.",
+    "Close XR, then FT, through systems-qa and integration before guarded_local_autonomy proof.",
+    "Keep press_go false until the autonomous go-live hardening program is complete."
   ],
   "learning_backlog": [
     {
@@ -180,7 +185,49 @@
     "history": [
       "CLAW/control-plane/queue/C3-20260403T110543Z.json",
       "CLAW/control-plane/queue/C3-20260403T113227Z.json",
-      "CLAW/control-plane/queue/C4-20260403T115843Z.json"
+      "CLAW/control-plane/queue/C4-20260403T115843Z.json",
+      "CLAW/control-plane/queue/C4-20260403T131954Z.json",
+      "CLAW/control-plane/queue/C4-20260403T132212Z.json",
+      "CLAW/control-plane/queue/C4-20260403T133122Z.json",
+      "CLAW/control-plane/queue/C4-20260403T133632Z.json",
+      "CLAW/control-plane/queue/C4-20260403T133905Z.json",
+      "CLAW/control-plane/queue/C4-20260403T134518Z.json",
+      "CLAW/control-plane/queue/C4-20260403T134549Z.json",
+      "CLAW/control-plane/queue/C4-20260403T134925Z.json",
+      "CLAW/control-plane/queue/C4-20260403T135814Z.json",
+      "CLAW/control-plane/queue/C4-20260403T141822Z.json",
+      "CLAW/control-plane/queue/C4-20260403T142419Z.json",
+      "CLAW/control-plane/queue/C4-20260403T142520Z.json",
+      "CLAW/control-plane/queue/C4-20260403T142523Z.json",
+      "CLAW/control-plane/queue/C4-20260403T142623Z.json",
+      "CLAW/control-plane/queue/C4-20260403T142848Z.json",
+      "CLAW/control-plane/queue/C4-20260403T142949Z.json",
+      "CLAW/control-plane/queue/C4-20260403T143034Z.json",
+      "CLAW/control-plane/queue/C4-20260403T143630Z.json",
+      "CLAW/control-plane/queue/C4-20260403T144027Z.json",
+      "CLAW/control-plane/queue/C4-20260403T144044Z.json",
+      "CLAW/control-plane/queue/C4-20260403T150055Z.json",
+      "CLAW/control-plane/queue/C4-20260403T151540Z.json",
+      "CLAW/control-plane/queue/C4-20260403T151658Z.json",
+      "CLAW/control-plane/queue/C4-20260403T151916Z.json",
+      "CLAW/control-plane/queue/C4-20260403T152154Z.json",
+      "CLAW/control-plane/queue/C4-20260403T152310Z.json",
+      "CLAW/control-plane/queue/C4-20260403T152608Z.json",
+      "CLAW/control-plane/queue/C4-20260403T153028Z.json",
+      "CLAW/control-plane/queue/C4-20260403T153525Z.json",
+      "CLAW/control-plane/queue/C4-20260403T154303Z.json",
+      "CLAW/control-plane/queue/C4-20260403T154948Z.json",
+      "CLAW/control-plane/queue/C4-20260403T155057Z.json",
+      "CLAW/control-plane/queue/C4-20260403T155120Z.json",
+      "CLAW/control-plane/queue/C4-20260403T155153Z.json",
+      "CLAW/control-plane/queue/C4-20260403T160311Z.json",
+      "CLAW/control-plane/queue/C4-20260403T161144Z.json",
+      "CLAW/control-plane/queue/C4-20260403T161723Z.json",
+      "CLAW/control-plane/queue/C4-20260403T162306Z.json",
+      "CLAW/control-plane/queue/C4-20260403T162835Z.json",
+      "CLAW/control-plane/queue/C4-20260403T163420Z.json",
+      "CLAW/control-plane/queue/C4-20260403T164911Z.json",
+      "CLAW/control-plane/queue/C4-20260403T165341Z.json"
     ]
   },
   "active_jobs": [],
@@ -196,6 +243,15 @@
     "lock_heartbeat_ttl_minutes": 90
   },
   "active_cycle": null,
-  "last_recovery_event": "CLAW/control-plane/recoveries/RECOVER-20260403T115843Z.json",
-  "last_health_check": "2026-04-03T12:59:18Z"
+  "last_recovery_event": "CLAW/control-plane/recoveries/RECOVER-20260403T164647Z.json",
+  "last_health_check": "2026-04-03T17:03:42Z",
+  "runner": {
+    "enabled": false,
+    "mode": "uninstalled",
+    "last_job": "C4-20260403T165341Z-03",
+    "last_lane": "systems-qa",
+    "last_cycle": "C4-20260403T165341Z",
+    "last_outcome": "rejected"
+  },
+  "operator_authorized_local_runner": true
 }

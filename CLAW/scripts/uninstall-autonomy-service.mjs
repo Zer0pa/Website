@@ -6,6 +6,7 @@ import {
   AUTONOMY_PLIST_TARGET,
   AUTONOMY_SERVICE_LABEL,
   readRunnerState,
+  updateRuntimeRunnerState,
   writeRunnerState,
 } from './lib/autonomy.mjs';
 import { localTimestamp } from './lib/control-plane.mjs';
@@ -34,6 +35,10 @@ state.active_job = null;
 state.active_cycle = null;
 state.last_tick_at = localTimestamp();
 writeRunnerState(state);
+updateRuntimeRunnerState({
+  enabled: false,
+  mode: 'uninstalled',
+});
 
 console.log(
   JSON.stringify(

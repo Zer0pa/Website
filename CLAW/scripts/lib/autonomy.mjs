@@ -26,6 +26,7 @@ export const RUNTIME_TRUTH_CACHE_DIR = controlPath('runtime', 'truth-cache', 'pa
 export const CONTROL_LOGS_DIR = controlPath('logs');
 export const LANE_RESULT_SCHEMA = projectPath('CLAW/control-plane/lane-exec-result.schema.json');
 export const RUNNER_POLICY_PATH = projectPath('CLAW/control-plane/runner-policy.json');
+export const RUNTIME_STATE_PATH = projectPath('CLAW/control-plane/state/runtime-state.json');
 const CODEX_BIN_FALLBACKS = [
   process.env.CODEX_BIN || '',
   '/Applications/Codex.app/Contents/Resources/codex',
@@ -203,6 +204,21 @@ export function writeRunnerState(value) {
   writeJson(AUTONOMY_STATE_PATH, value);
 }
 
+export function updateRuntimeRunnerState(updates = {}) {
+  if (!fs.existsSync(RUNTIME_STATE_PATH)) {
+    return null;
+  }
+
+  const runtime = readJson(RUNTIME_STATE_PATH);
+  runtime.runner = {
+    ...(runtime.runner || {}),
+    ...updates,
+  };
+  runtime.last_updated = localTimestamp();
+  writeJson(RUNTIME_STATE_PATH, runtime);
+  return runtime;
+}
+
 export function readRunnerPolicy() {
   if (!fs.existsSync(RUNNER_POLICY_PATH)) {
     return structuredClone(DEFAULT_RUNNER_POLICY);
@@ -236,16 +252,28 @@ export function nextRunnableJob(queue) {
     return null;
   }
 
+  const dependenciesSatisfied = (job) => {
+    const dependencyLaneIds = Array.isArray(job.depends_on) ? job.depends_on.filter(Boolean) : [];
+    if (dependencyLaneIds.length === 0) {
+      return true;
+    }
+
+    return dependencyLaneIds.every((laneId) => {
+      const dependency = (queue.jobs || []).find((candidate) => candidate.lane_id === laneId);
+      return dependency?.status === 'accepted';
+    });
+  };
+
   for (const job of queue.jobs || []) {
     if (queueJobIsTerminal(job.status)) {
       continue;
     }
 
-    if (job.status === 'queued') {
+    if (job.status === 'queued' && dependenciesSatisfied(job)) {
       return job;
     }
 
-    if (job.status === 'hold' || job.status === 'leased') {
+    if ((job.status === 'hold' || job.status === 'leased') && dependenciesSatisfied(job)) {
       return job;
     }
   }

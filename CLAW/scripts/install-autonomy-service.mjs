@@ -9,6 +9,7 @@ import {
   AUTONOMY_PLIST_TARGET,
   AUTONOMY_SERVICE_LABEL,
   readRunnerState,
+  updateRuntimeRunnerState,
   writeRunnerState,
 } from './lib/autonomy.mjs';
 import { ensureDir, localTimestamp } from './lib/control-plane.mjs';
@@ -37,6 +38,10 @@ state.service_label = AUTONOMY_SERVICE_LABEL;
 state.installed_at = localTimestamp();
 state.stop_requested = false;
 writeRunnerState(state);
+updateRuntimeRunnerState({
+  enabled: true,
+  mode: 'guarded-override',
+});
 
 console.log(
   JSON.stringify(

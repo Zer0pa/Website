@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import {
+  acquireLaneLock,
   buildCyclePlan,
   controlPath,
   git,
@@ -12,6 +13,7 @@ import {
   materializeCycle,
   projectPath,
   readJson,
+  releaseLaneLock,
   relativeProjectPath,
   settleActiveCycle,
   validateControlPlane,
@@ -420,13 +422,13 @@ function finalizeCycle(control, queue) {
   const next = outcome === 'checkpointed' ? updateCanonicalPlans(control, queue.phase_id) : null;
 
   updateRuntime((runtime) => {
+    const persistedRunner = persistedRunnerMode(readRunnerState());
     runtime.latest_wave_report = reportRelativePath;
     runtime.last_updated = localTimestamp();
     runtime.last_health_check = localTimestamp();
     runtime.runner = {
       ...(runtime.runner || {}),
-      enabled: true,
-      mode: 'guarded-override',
+      ...persistedRunner,
       last_cycle: queue.cycle_id,
       last_outcome: outcome,
     };
@@ -733,6 +735,45 @@ function syntheticLaneResult(queue, job, worktreeHead, execResult, reason) {
   };
 }
 
+function replayConflictLaneResult(queue, job, worktreeHead, reason) {
+  return {
+    cycle_id: queue.cycle_id,
+    job_id: job.job_id,
+    lane: job.lane_id,
+    phase: queue.phase_id,
+    target: job.objective,
+    hypothesis:
+      'Replay conflicts must fail closed as lane-local rejections so the runner can settle cleanly and preserve deterministic state.',
+    status: 'rejected',
+    summary: 'The lane rejected because upstream replay could not be applied safely onto the downstream worktree.',
+    files_changed: [],
+    commands_run: ['upstream-replay'],
+    preflight_baseline: {
+      notes: [`worktree_head=${worktreeHead}`],
+    },
+    postflight_metrics: {
+      notes: ['replay_status=conflict'],
+    },
+    audit_result: {
+      summary: 'Upstream replay conflicted before lane execution could begin.',
+      status: 'replay-conflict',
+      notes: [reason],
+      report: null,
+    },
+    known_risks: [
+      'The downstream lane did not run because upstream accepted commits could not be overlaid cleanly.',
+    ],
+    blockers: [reason],
+    recommendation: 'Reconcile the upstream/downstream overlap, then re-run the bounded slice from a clean base.',
+    next_hypothesis: null,
+    rollback_target: worktreeHead,
+    learning_captured: [
+      'Replay conflicts must settle as lane-local rejections instead of runner-fatal errors.',
+    ],
+    commit: null,
+  };
+}
+
 function laneEscalationIsCommitOnly(laneResult) {
   if (laneResult.status !== 'escalated') {
     return false;
@@ -758,6 +799,14 @@ function laneEscalationIsCommitOnly(laneResult) {
 
 function shouldHostFinalizeDirtySlice(laneResult) {
   return laneResult.status === 'accepted' || laneEscalationIsCommitOnly(laneResult);
+}
+
+function persistedRunnerMode(state) {
+  const serviceManaged = Boolean(state?.enabled && state?.pid);
+  return {
+    enabled: serviceManaged,
+    mode: serviceManaged ? 'guarded-override' : state?.mode || 'manual-once',
+  };
 }
 
 function defaultHostCommitMessage(queue, job) {
@@ -872,6 +921,7 @@ function recoverStaleActiveJobs(control, queue, queuePath, runnerState) {
   settleActiveCycle(loadControlPlane(), 'escalated', note);
 
   updateRuntime((runtime) => {
+    const persistedRunner = persistedRunnerMode(readRunnerState());
     runtime.last_recovery_event = recoveryEvent;
     runtime.last_updated = recoveredAt;
     for (const update of staleLaneUpdates) {
@@ -883,8 +933,7 @@ function recoverStaleActiveJobs(control, queue, queuePath, runnerState) {
     }
     runtime.runner = {
       ...(runtime.runner || {}),
-      enabled: true,
-      mode: 'guarded-override',
+      ...persistedRunner,
       last_cycle: queue.cycle_id,
       last_outcome: 'escalated',
     };
@@ -1050,6 +1099,7 @@ async function main() {
   const activeJobs = activeQueueJobs(queue);
   if (activeJobs.length > 0) {
     const activeJob = activeJobs[0];
+    const persistedRunner = persistedRunnerMode(readRunnerState());
     const busyPayload = {
       cycle_id: queue.cycle_id,
       job_id: activeJob.job_id,
@@ -1062,8 +1112,7 @@ async function main() {
     };
     writeRunnerState({
       ...readRunnerState(),
-      enabled: true,
-      mode: 'guarded-override',
+      ...persistedRunner,
       last_tick_at: localTimestamp(),
       last_result: busyPayload,
       active_cycle: queue.cycle_id,
@@ -1077,10 +1126,10 @@ async function main() {
   const job = nextRunnableJob(queue);
   if (!job) {
     const finalized = finalizeCycle(control, queue);
+    const persistedRunner = persistedRunnerMode(readRunnerState());
     writeRunnerState({
       ...readRunnerState(),
-      enabled: true,
-      mode: 'guarded-override',
+      ...persistedRunner,
       last_tick_at: localTimestamp(),
       last_result: finalized,
       active_cycle: null,
@@ -1092,8 +1141,7 @@ async function main() {
   }
 
   const freshRunnerState = readRunnerState();
-  freshRunnerState.enabled = true;
-  freshRunnerState.mode = 'guarded-override';
+  Object.assign(freshRunnerState, persistedRunnerMode(freshRunnerState));
   freshRunnerState.last_tick_at = localTimestamp();
   freshRunnerState.active_cycle = queue.cycle_id;
   freshRunnerState.active_job = job.job_id;
@@ -1112,17 +1160,29 @@ async function main() {
     runtime.heartbeat_at = localTimestamp();
   });
 
+  const preReplayHead = gitHead(job.worktree);
+  const lockFile = acquireLaneLock(job, queue.cycle_id, queue.phase_id, job.started_at);
+
+  updateRuntime((runtime) => {
+    runtime.locks = [...new Set([...(runtime.locks || []), lockFile])];
+    runtime.heartbeat_at = localTimestamp();
+    runtime.last_updated = localTimestamp();
+  });
+
   ensureLaneSiteDependencies(job.worktree);
   ensureCleanWorktree(job.worktree);
-  const replayedCommits = replayAcceptedUpstreamCommits(queue, job);
-  const worktreeHead = gitHead(job.worktree);
-
-  const brief = buildBrief(control, queue, job);
-  const briefFile = briefPath(job.job_id);
-  writeJson(briefFile, brief);
-
-  const prompt = buildPrompt(control, queue, job, brief, briefFile);
-  fs.writeFileSync(promptSnapshotPath(job.job_id), prompt, 'utf8');
+  let replayedCommits = [];
+  let replayFailure = null;
+  try {
+    replayedCommits = replayAcceptedUpstreamCommits(queue, job);
+  } catch (error) {
+    replayFailure = error instanceof Error ? error.message : String(error);
+    try {
+      git(job.worktree, 'cherry-pick', '--abort');
+    } catch {}
+    hardReset(job.worktree, preReplayHead);
+  }
+  const worktreeHead = preReplayHead;
 
   job.status = 'running';
   if (replayedCommits.length > 0) {
@@ -1132,8 +1192,7 @@ async function main() {
   writeActiveQueue(queuePath, queue);
 
   const leasedRunnerState = readRunnerState();
-  leasedRunnerState.enabled = true;
-  leasedRunnerState.mode = 'guarded-override';
+  Object.assign(leasedRunnerState, persistedRunnerMode(leasedRunnerState));
   leasedRunnerState.last_tick_at = localTimestamp();
   leasedRunnerState.active_cycle = queue.cycle_id;
   leasedRunnerState.active_job = job.job_id;
@@ -1152,48 +1211,73 @@ async function main() {
     runtime.heartbeat_at = localTimestamp();
   });
 
-  const execResult = parseBoolFlag('--dry-run')
-    ? { code: 0, outputPath: finalMessagePath(job.job_id), stdoutPath: stdoutLogPath(job.job_id), stderrPath: stderrLogPath(job.job_id) }
-    : await spawnCodexForJob(job, prompt, runnerPolicy.execution || {});
+  let execResult = null;
+  let laneResult = null;
 
-  if (parseBoolFlag('--dry-run')) {
-    fs.writeFileSync(
-      execResult.outputPath,
-      JSON.stringify(
-        {
-          cycle_id: queue.cycle_id,
-          job_id: job.job_id,
-          lane: job.lane_id,
-          phase: queue.phase_id,
-          target: job.objective,
-          hypothesis: 'Dry-run output only.',
-          status: 'hold',
-          summary: 'Dry-run mode did not execute Codex.',
-          files_changed: [],
-          commands_run: ['dry-run'],
-          preflight_baseline: { notes: [] },
-          postflight_metrics: { notes: [] },
-          audit_result: null,
-          known_risks: [],
-          blockers: ['dry-run'],
-          recommendation: 'resume without dry-run',
-          next_hypothesis: null,
-          rollback_target: worktreeHead,
-          learning_captured: [],
-          commit: null,
-        },
-        null,
-        2,
-      ),
-    );
+  if (replayFailure) {
+    execResult = {
+      code: 0,
+      signal: null,
+      outputPath: finalMessagePath(job.job_id),
+      stdoutPath: stdoutLogPath(job.job_id),
+      stderrPath: stderrLogPath(job.job_id),
+      commandText: 'upstream-replay',
+      terminationReason: 'replay-conflict',
+    };
+    fs.writeFileSync(execResult.stdoutPath, '', 'utf8');
+    fs.writeFileSync(execResult.stderrPath, `${replayFailure}\n`, 'utf8');
+    laneResult = replayConflictLaneResult(queue, job, worktreeHead, replayFailure);
+    fs.writeFileSync(execResult.outputPath, JSON.stringify(laneResult, null, 2));
+  } else {
+    const brief = buildBrief(control, queue, job);
+    const briefFile = briefPath(job.job_id);
+    writeJson(briefFile, brief);
+
+    const prompt = buildPrompt(control, queue, job, brief, briefFile);
+    fs.writeFileSync(promptSnapshotPath(job.job_id), prompt, 'utf8');
+
+    execResult = parseBoolFlag('--dry-run')
+      ? { code: 0, outputPath: finalMessagePath(job.job_id), stdoutPath: stdoutLogPath(job.job_id), stderrPath: stderrLogPath(job.job_id) }
+      : await spawnCodexForJob(job, prompt, runnerPolicy.execution || {});
+
+    if (parseBoolFlag('--dry-run')) {
+      fs.writeFileSync(
+        execResult.outputPath,
+        JSON.stringify(
+          {
+            cycle_id: queue.cycle_id,
+            job_id: job.job_id,
+            lane: job.lane_id,
+            phase: queue.phase_id,
+            target: job.objective,
+            hypothesis: 'Dry-run output only.',
+            status: 'hold',
+            summary: 'Dry-run mode did not execute Codex.',
+            files_changed: [],
+            commands_run: ['dry-run'],
+            preflight_baseline: { notes: [] },
+            postflight_metrics: { notes: [] },
+            audit_result: null,
+            known_risks: [],
+            blockers: ['dry-run'],
+            recommendation: 'resume without dry-run',
+            next_hypothesis: null,
+            rollback_target: worktreeHead,
+            learning_captured: [],
+            commit: null,
+          },
+          null,
+          2,
+        ),
+      );
+    }
   }
 
-  let laneResult = null;
   let diff = diffFilesSince(job.worktree, worktreeHead);
 
-  if (parseBoolFlag('--dry-run')) {
+  if (!laneResult && parseBoolFlag('--dry-run')) {
     laneResult = JSON.parse(fs.readFileSync(execResult.outputPath, 'utf8'));
-  } else if (execResult.code !== 0) {
+  } else if (!laneResult && execResult.code !== 0) {
     laneResult =
       salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
       syntheticLaneResult(
@@ -1203,7 +1287,7 @@ async function main() {
         execResult,
         `codex exec exited with code ${execResult.code} and signal ${String(execResult.signal ?? 'null')}`,
       );
-  } else if (!fs.existsSync(execResult.outputPath)) {
+  } else if (!laneResult && !fs.existsSync(execResult.outputPath)) {
     laneResult =
       salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
       syntheticLaneResult(
@@ -1213,7 +1297,7 @@ async function main() {
         execResult,
         `Lane ${job.lane_id} did not produce a final message file.`,
       );
-  } else {
+  } else if (!laneResult) {
     try {
       laneResult = JSON.parse(fs.readFileSync(execResult.outputPath, 'utf8'));
       validateLaneResultShape(laneResult);
@@ -1277,6 +1361,10 @@ async function main() {
     hardReset(job.worktree, worktreeHead);
   }
 
+  if (!hostCommit && !laneResult.commit && replayedCommits.length > 0) {
+    hardReset(job.worktree, preReplayHead);
+  }
+
   const handoff = {
     cycle_id: laneResult.cycle_id,
     job_id: laneResult.job_id,
@@ -1313,8 +1401,10 @@ async function main() {
   queueJob.candidate_commit = violation ? worktreeHead : laneResult.commit;
   queue.status = (queue.jobs || []).some((candidate) => !queueJobIsTerminal(candidate.status)) ? 'running' : queue.status;
   writeActiveQueue(queuePath, queue);
+  releaseLaneLock(job.lane_id);
 
   updateRuntime((runtime) => {
+    const persistedRunner = persistedRunnerMode(readRunnerState());
     runtime.active_jobs = (runtime.active_jobs || []).map((candidate) =>
       candidate.job_id === job.job_id
         ? {
@@ -1327,6 +1417,7 @@ async function main() {
     );
     runtime.heartbeat_at = localTimestamp();
     runtime.last_updated = localTimestamp();
+    runtime.locks = (runtime.locks || []).filter((entry) => !entry.endsWith(`/${job.lane_id}.json`));
     runtime.lanes[job.lane_id] = {
       ...(runtime.lanes[job.lane_id] || {}),
       status: queueStatus === 'accepted' ? 'active' : queueStatus,
@@ -1335,8 +1426,7 @@ async function main() {
     };
     runtime.runner = {
       ...(runtime.runner || {}),
-      enabled: true,
-      mode: 'guarded-override',
+      ...persistedRunner,
       last_job: job.job_id,
       last_lane: job.lane_id,
     };

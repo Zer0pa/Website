@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "program": "zer0pa-website-autonomous-go-live-hardening",
+  "status": "active",
+  "current_phase": "A0-control-plane-truth-and-runner-safety",
+  "phases": [
+    {
+      "id": "A0",
+      "title": "Control plane truth and runner safety",
+      "status": "in_progress",
+      "depends_on": [],
+      "streams": [
+        "orchestrator",
+        "systems-qa"
+      ],
+      "tasks": [
+        "commit active-lane lock acquisition and release",
+        "make upstream replay ephemeral when a downstream lane does not land its own commit",
+        "synchronize runtime runner state with install, stop, error, and recovery paths",
+        "recover the stale active cycle before rematerializing autonomy",
+        "lock the go-live hardening PRD and plan into runtime state"
+      ],
+      "exit_gates": [
+        "validate-control-plane clean",
+        "health-check clean after recovery",
+        "runtime and runner state agree about service posture",
+        "only active lanes hold live locks"
+      ]
+    },
+    {
+      "id": "A1",
+      "title": "Shared generic geometry closure",
+      "status": "pending",
+      "depends_on": [
+        "A0"
+      ],
+      "streams": [
+        "product-family",
+        "systems-qa"
+      ],
+      "tasks": [
+        "inspect the active product-family and systems-qa artifacts",
+        "fix shared lane geometry in kernel-owned code only",
+        "close /work/xr with zero critical and zero major diffs"
+      ],
+      "exit_gates": [
+        "/work/xr closes through systems-qa",
+        "responsive overflow remains zero on the current matrix",
+        "no XR-only bespoke layout hack exists"
+      ]
+    },
+    {
+      "id": "A2",
+      "title": "Replication proof",
+      "status": "pending",
+      "depends_on": [
+        "A1"
+      ],
+      "streams": [
+        "product-family",
+        "systems-qa",
+        "integration"
+      ],
+      "tasks": [
+        "replay the accepted kernel into /work/ft",
+        "verify XR and FT through integration",
+        "reject any kernel patch that does not generalize"
+      ],
+      "exit_gates": [
+        "/work/ft closes through systems-qa",
+        "XR and FT replay cleanly in integration",
+        "kernel generalization is proven"
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "Responsive matrix expansion",
+      "status": "pending",
+      "depends_on": [
+        "A1",
+        "A2"
+      ],
+      "streams": [
+        "systems-qa",
+        "integration"
+      ],
+      "tasks": [
+        "expand the target viewport matrix",
+        "rerun falsification on canonical and generic routes",
+        "capture viewport regressions as deterministic system learnings"
+      ],
+      "exit_gates": [
+        "homepage passes expanded matrix",
+        "IMC passes expanded matrix",
+        "XR passes expanded matrix",
+        "FT passes expanded matrix"
+      ]
+    },
+    {
+      "id": "A4",
+      "title": "Supervised autonomy proof",
+      "status": "pending",
+      "depends_on": [
+        "A0",
+        "A1",
+        "A2"
+      ],
+      "streams": [
+        "orchestrator",
+        "data-truth",
+        "product-family",
+        "systems-qa",
+        "integration"
+      ],
+      "tasks": [
+        "reinstall the service",
+        "run a supervised C4 to C5 sequence",
+        "require clean settlement without manual queue repair"
+      ],
+      "window_hours": 1,
+      "exit_gates": [
+        "one supervised cycle passes",
+        "runner and runtime state remain consistent",
+        "no stale locks survive settlement"
+      ]
+    },
+    {
+      "id": "A5",
+      "title": "Guarded local autonomy proof",
+      "status": "pending",
+      "depends_on": [
+        "A4",
+        "A3"
+      ],
+      "streams": [
+        "all"
+      ],
+      "window_hours": 4,
+      "tasks": [
+        "run guarded local autonomy inside repo boundaries",
+        "observe improvement-or-hold cycles",
+        "prove recovery under interruption or lane failure"
+      ],
+      "exit_gates": [
+        "guarded autonomy passes",
+        "recovery evidence remains current",
+        "no cross-repo writes occur"
+      ]
+    },
+    {
+      "id": "A6",
+      "title": "Press-go eligibility bundle",
+      "status": "pending",
+      "depends_on": [
+        "A5"
+      ],
+      "streams": [
+        "orchestrator"
+      ],
+      "tasks": [
+        "update runtime gates",
+        "update the press-go evidence bundle",
+        "keep press_go false until explicit authorization"
+      ],
+      "exit_gates": [
+        "all evidence is current",
+        "operator runbooks are current",
+        "system readiness is truthful"
+      ]
+    }
+  ],
+  "stop_conditions": [
+    "new critical diff",
+    "new major diff",
+    "build failure",
+    "parser failure",
+    "path-scope violation",
+    "cross-repo write",
+    "stale lock that cannot be recovered cleanly",
+    "runner/runtime truth drift",
+    "integration replay contradiction",
+    "packet-truth contradiction"
+  ],
+  "press_go_rule": "press_go remains false until A0-A6 are satisfied and explicit human authorization is recorded"
+}

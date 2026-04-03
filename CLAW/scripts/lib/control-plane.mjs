@@ -359,6 +359,41 @@ export function activeLocks() {
     }));
 }
 
+export function laneLockPath(laneId) {
+  return controlPath('locks', `${laneId}.json`);
+}
+
+export function acquireLaneLock(job, cycleId, phaseId, acquiredAt = localTimestamp()) {
+  const heartbeatTtlMinutes = 90;
+  const expiresAt = new Date(Date.parse(acquiredAt) + heartbeatTtlMinutes * 60 * 1000).toISOString();
+  const lockPath = laneLockPath(job.lane_id);
+  writeJson(lockPath, {
+    version: 1,
+    lock_id: `lock-${job.lane_id}`,
+    resource: job.lane_id,
+    owner_lane: job.lane_id,
+    cycle_id: cycleId,
+    phase_id: phaseId,
+    acquired_at: acquiredAt,
+    heartbeat_at: acquiredAt,
+    heartbeat_ttl_minutes: heartbeatTtlMinutes,
+    expires_at: expiresAt,
+    worktree: job.worktree,
+    branch: job.branch,
+    status: 'held',
+    recovery_action: null,
+  });
+  return relativeProjectPath(lockPath);
+}
+
+export function releaseLaneLock(laneId) {
+  const lockPath = laneLockPath(laneId);
+  if (fs.existsSync(lockPath)) {
+    fs.unlinkSync(lockPath);
+  }
+  return relativeProjectPath(lockPath);
+}
+
 export function findLockConflicts(cycle) {
   const conflicts = [];
   const locks = activeLocks();
@@ -385,8 +420,6 @@ export function materializeCycle(control, cycle) {
   const queueIndexPath = controlPath('queue', 'index.json');
   const runtimePath = projectPath('CLAW/control-plane/state/runtime-state.json');
   const runtime = structuredClone(control.runtime);
-  const heartbeatTtlMinutes = runtime.retry_budget?.lock_heartbeat_ttl_minutes || 90;
-  const expiresAt = new Date(Date.parse(cycle.created_at) + heartbeatTtlMinutes * 60 * 1000).toISOString();
 
   writeJson(queuePath, {
     ...cycle,
@@ -406,26 +439,6 @@ export function materializeCycle(control, cycle) {
   }
   writeJson(queueIndexPath, queueIndex);
 
-  for (const job of cycle.jobs) {
-    const lockPath = controlPath('locks', `${job.lane_id}.json`);
-    writeJson(lockPath, {
-      version: 1,
-      lock_id: `lock-${job.lane_id}`,
-      resource: job.lane_id,
-      owner_lane: job.lane_id,
-      cycle_id: cycle.cycle_id,
-      phase_id: cycle.phase_id,
-      acquired_at: cycle.created_at,
-      heartbeat_at: cycle.created_at,
-      heartbeat_ttl_minutes: heartbeatTtlMinutes,
-      expires_at: expiresAt,
-      worktree: job.worktree,
-      branch: job.branch,
-      status: 'held',
-      recovery_action: null,
-    });
-  }
-
   runtime.active_cycle = {
     cycle_id: cycle.cycle_id,
     phase_id: cycle.phase_id,
@@ -444,7 +457,7 @@ export function materializeCycle(control, cycle) {
     status: 'queued',
     target: job.objective,
   }));
-  runtime.locks = cycle.jobs.map((job) => `CLAW/control-plane/locks/${job.lane_id}.json`);
+  runtime.locks = [];
   runtime.heartbeat_at = cycle.created_at;
   runtime.active_cadence_profile = cycle.profile;
   runtime.last_updated = cycle.created_at;
