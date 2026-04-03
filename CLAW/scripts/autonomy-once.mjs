@@ -933,14 +933,12 @@ function replayAcceptedUpstreamCommits(queue, job) {
 
   const applied = [];
   for (const upstreamJob of upstreamJobs) {
-    const replayRange = replayCommitRange(job.worktree, upstreamJob.candidate_commit);
-    for (const commit of replayRange) {
-      if (commitReachable(job.worktree, commit) || commitPatchEquivalent(job.worktree, commit)) {
-        continue;
-      }
-      cherryPickCommit(job.worktree, commit);
-      applied.push(commit);
+    const commit = upstreamJob.candidate_commit;
+    if (!commit || commitReachable(job.worktree, commit) || commitPatchEquivalent(job.worktree, commit)) {
+      continue;
     }
+    cherryPickCommit(job.worktree, commit);
+    applied.push(commit);
   }
   return applied;
 }
