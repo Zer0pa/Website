@@ -19,3 +19,10 @@ site/tsconfig.tsbuildinfo
 deterministic-design-system/reports/**/*.png
 CLAW/control-plane/runtime/
 CLAW/services/autonomy/state.json
+CLAW/control-plane/locks/*.json
+CLAW/control-plane/queue/C*.json
+CLAW/control-plane/recoveries/RECOVER-*.json
+CLAW/control-plane/reports/C*.md
+deterministic-design-system/maps/live/work-*.json
+deterministic-design-system/maps/diff/work-*.diff.json
+deterministic-design-system/reports/work-*.verification.md

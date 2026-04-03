@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as path from 'path';
+import { resolvePacketCacheDir } from '../data/packet-cache';
 import { createGitHubOctokit, describeGitHubTokenProvisioning } from './auth';
 
 const octokit = createGitHubOctokit();
@@ -43,7 +43,7 @@ export async function discoverZpeRepos(org: string = 'Zer0pa'): Promise<RepoInfo
 }
 
 function discoverFromCache(): RepoInfo[] {
-  const cacheDir = path.join(process.cwd(), '.cache/packets');
+  const cacheDir = resolvePacketCacheDir();
   if (!fs.existsSync(cacheDir)) {
     return [];
   }

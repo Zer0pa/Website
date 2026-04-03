@@ -29,6 +29,7 @@ import {
   ensureAutonomyDirs,
   ensureCleanWorktree,
   ensureLaneSiteDependencies,
+  ensureSharedPacketCacheSeeded,
   finalMessagePath,
   gitAbsolutePath,
   gitHead,
@@ -44,6 +45,7 @@ import {
   readCodexCommandExecutions,
   readRunnerPolicy,
   readRunnerState,
+  RUNTIME_TRUTH_CACHE_DIR,
   replayCommitRange,
   resolveCodexBin,
   settleQueueAndRuntime,
@@ -173,6 +175,7 @@ function buildBrief(control, queue, job) {
     deliverables: job.deliverables || [],
     stop_conditions: queue.stop_conditions || [],
     operator_interface: control.runtime.operator_interface,
+    shared_truth_cache_dir: RUNTIME_TRUTH_CACHE_DIR,
     flagship_invariants: flagshipInvariants,
     suggested_starting_points: suggestedStartingPoints(job),
     deterministic_rules: [
@@ -183,6 +186,7 @@ function buildBrief(control, queue, job) {
       'Do not write outside the lane worktree.',
       'Do not push, deploy, or touch other repositories.',
       'Generic route work may not flatten or delete flagship-only IMC behavior.',
+      'The shared truth cache is authoritative for packet reads during autonomous execution.',
     ],
     upstream: previousJobs,
     runtime_focus: {
@@ -203,10 +207,10 @@ function suggestedStartingPoints(job) {
       'site/src/components/lane/LaneAuthorityPage.tsx',
       'site/src/lib/data/presentation.ts',
       'site/src/lib/layout/specs.ts',
-      'site/.cache/packets/ZPE-XR.json',
+      path.join(RUNTIME_TRUTH_CACHE_DIR, 'ZPE-XR.json'),
     ],
     'data-truth': [
-      'site/.cache/packets/ZPE-XR.json',
+      path.join(RUNTIME_TRUTH_CACHE_DIR, 'ZPE-XR.json'),
       'site/src/lib/data/lane-data.ts',
       'site/src/lib/parser/**',
       'site/src/lib/github/**',
@@ -311,6 +315,7 @@ function laneExecutionRecipe(job) {
   const recipes = {
     'product-family': [
       '- Read only these files first: `site/src/app/work/[slug]/page.tsx`, `site/src/components/lane/LaneAuthorityPage.tsx`, `site/src/lib/data/presentation.ts`, `site/src/lib/types/lane.ts`, and `site/.cache/packets/ZPE-XR.json`.',
+      '- Treat the brief\'s `shared_truth_cache_dir` as the authoritative packet surface during autonomous execution. Only inspect the worktree-local `.cache/packets` snapshot if you are explicitly checking for divergence.',
       '- When using the shell, wrap `site/src/app/work/[slug]/page.tsx` in single quotes so the brackets are treated literally.',
       '- If a shared work-lane kernel model does not exist, add exactly one under `site/src/lib/product-kernel/**` and keep it packet-driven.',
       '- Remove IMC-only or flagship-only truth drift from generic work-lane rendering. Do not invent new marketing copy.',
@@ -319,7 +324,7 @@ function laneExecutionRecipe(job) {
       '- Prefer one bounded kernel/generalization slice over route-specific tweaks.',
     ],
     'data-truth': [
-      '- Read the XR packet and only the smallest parser/data files needed to confirm truth sufficiency.',
+      '- Read the XR packet from the brief\'s shared truth cache and only the smallest parser/data files needed to confirm truth sufficiency.',
       '- Do not rewrite ingestion architecture unless the XR packet is provably insufficient or contradictory.',
       '- Favor a report-only slice if truth is already sufficient.',
     ],
@@ -534,6 +539,7 @@ function spawnCodexForJob(job, prompt, executionPolicy = {}) {
   const gitAdminDir = gitAbsolutePath(job.worktree, '--git-dir');
   const gitCommonDir = gitAbsolutePath(job.worktree, '--git-common-dir');
   const codexBin = resolveCodexBin();
+  const sharedPacketCacheDir = ensureSharedPacketCacheSeeded();
   const stdoutStream = fs.createWriteStream(stdoutPath, { flags: 'w' });
   const stderrStream = fs.createWriteStream(stderrPath, { flags: 'w' });
   const startedAt = Date.now();
@@ -601,7 +607,10 @@ function spawnCodexForJob(job, prompt, executionPolicy = {}) {
 
     const child = spawn(codexBin, args, {
       cwd: job.worktree,
-      env: process.env,
+      env: {
+        ...process.env,
+        ZEROPA_LANE_PACKET_CACHE_DIR: sharedPacketCacheDir,
+      },
       stdio: ['pipe', 'pipe', 'pipe'],
     });
 
@@ -1080,7 +1089,7 @@ async function main() {
   freshRunnerState.mode = 'guarded-override';
   freshRunnerState.last_tick_at = localTimestamp();
   freshRunnerState.active_cycle = queue.cycle_id;
-  freshRunnerState.active_job = job.job_id;
+  freshRunnerState.active_job = null;
   freshRunnerState.last_error = null;
   writeRunnerState(freshRunnerState);
 
@@ -1103,6 +1112,15 @@ async function main() {
   }
   queue.status = 'running';
   writeActiveQueue(queuePath, queue);
+
+  const leasedRunnerState = readRunnerState();
+  leasedRunnerState.enabled = true;
+  leasedRunnerState.mode = 'guarded-override';
+  leasedRunnerState.last_tick_at = localTimestamp();
+  leasedRunnerState.active_cycle = queue.cycle_id;
+  leasedRunnerState.active_job = job.job_id;
+  leasedRunnerState.last_error = null;
+  writeRunnerState(leasedRunnerState);
 
   updateRuntime((runtime) => {
     runtime.active_jobs = (runtime.active_jobs || []).map((candidate) =>
@@ -1333,7 +1351,7 @@ async function main() {
   finalRunnerState.last_tick_at = localTimestamp();
   finalRunnerState.last_result = payload;
   finalRunnerState.active_cycle = payload.finalized ? null : refreshedQueue.cycle_id;
-  finalRunnerState.active_job = remaining?.job_id || null;
+  finalRunnerState.active_job = null;
   writeRunnerState(finalRunnerState);
 
   console.log(JSON.stringify(payload, null, 2));

@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { resolvePacketCacheDir } from '../lib/data/packet-cache';
 import { discoverZpeRepos } from '../lib/github/discovery';
 import { fetchRawFile } from '../lib/github/fetcher';
 import { parseRepoTruth } from '../lib/parser';
@@ -21,7 +22,7 @@ const CANDIDATE_FILES = [
 ];
 
 async function main() {
-  const CACHE_DIR = path.join(process.cwd(), '.cache/packets');
+  const CACHE_DIR = resolvePacketCacheDir();
   if (!fs.existsSync(CACHE_DIR)) {
     fs.mkdirSync(CACHE_DIR, { recursive: true });
   }

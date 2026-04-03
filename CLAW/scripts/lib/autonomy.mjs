@@ -22,6 +22,7 @@ export const RUNTIME_ROOT = controlPath('runtime');
 export const RUNTIME_BRIEFS_DIR = controlPath('runtime', 'briefs');
 export const RUNTIME_HANDOFFS_DIR = controlPath('runtime', 'handoffs');
 export const RUNTIME_LOGS_DIR = controlPath('runtime', 'logs');
+export const RUNTIME_TRUTH_CACHE_DIR = controlPath('runtime', 'truth-cache', 'packets');
 export const CONTROL_LOGS_DIR = controlPath('logs');
 export const LANE_RESULT_SCHEMA = projectPath('CLAW/control-plane/lane-exec-result.schema.json');
 export const RUNNER_POLICY_PATH = projectPath('CLAW/control-plane/runner-policy.json');
@@ -38,6 +39,7 @@ const DEFAULT_RUNNER_POLICY = {
   execution: {
     max_active_jobs: 1,
     loop_interval_seconds: 60,
+    active_cycle_interval_seconds: 2,
     monitor_interval_seconds: 5,
     max_lane_runtime_seconds: 900,
     max_lane_quiet_seconds: 180,
@@ -97,8 +99,31 @@ export function ensureAutonomyDirs() {
   ensureDir(RUNTIME_BRIEFS_DIR);
   ensureDir(RUNTIME_HANDOFFS_DIR);
   ensureDir(RUNTIME_LOGS_DIR);
+  ensureDir(RUNTIME_TRUTH_CACHE_DIR);
   ensureDir(CONTROL_LOGS_DIR);
   ensureDir(path.dirname(AUTONOMY_STATE_PATH));
+}
+
+export function ensureSharedPacketCacheSeeded() {
+  ensureDir(RUNTIME_TRUTH_CACHE_DIR);
+
+  const rootPacketDir = projectPath('site/.cache/packets');
+  if (!fs.existsSync(rootPacketDir)) {
+    return RUNTIME_TRUTH_CACHE_DIR;
+  }
+
+  for (const file of fs.readdirSync(rootPacketDir).filter((entry) => entry.endsWith('.json'))) {
+    const sourcePath = path.join(rootPacketDir, file);
+    const targetPath = path.join(RUNTIME_TRUTH_CACHE_DIR, file);
+
+    const sourceStat = fs.statSync(sourcePath);
+    const targetStat = fs.existsSync(targetPath) ? fs.statSync(targetPath) : null;
+    if (!targetStat || sourceStat.mtimeMs > targetStat.mtimeMs) {
+      fs.copyFileSync(sourcePath, targetPath);
+    }
+  }
+
+  return RUNTIME_TRUTH_CACHE_DIR;
 }
 
 export function ensureLaneSiteDependencies(worktree) {

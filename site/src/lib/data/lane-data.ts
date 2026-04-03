@@ -3,6 +3,7 @@ import 'server-only';
 import fs from 'node:fs';
 import path from 'node:path';
 import { client } from '@/lib/sanity/client';
+import { resolvePacketCacheDir } from '@/lib/data/packet-cache';
 import type { LanePacket } from '@/lib/types/lane';
 
 export type LaneDataSource = 'sanity' | 'cache' | 'none';
@@ -26,8 +27,6 @@ type RawLanePacket = Partial<LanePacket> & {
   tagline?: string;
   syncedAt?: string;
 };
-
-const CACHE_DIR = path.join(process.cwd(), '.cache/packets');
 
 const SANITY_SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0]{
   featuredLaneIdentifier,
@@ -257,15 +256,17 @@ function normalizeGithubUrl(value: string) {
 }
 
 function readCachePackets(): LanePacket[] {
-  if (!fs.existsSync(CACHE_DIR)) {
+  const cacheDir = resolvePacketCacheDir();
+
+  if (!fs.existsSync(cacheDir)) {
     return [];
   }
 
   const packets: LanePacket[] = [];
 
-  for (const file of fs.readdirSync(CACHE_DIR).filter((entry) => entry.endsWith('.json'))) {
+  for (const file of fs.readdirSync(cacheDir).filter((entry) => entry.endsWith('.json'))) {
     try {
-      const raw = JSON.parse(fs.readFileSync(path.join(CACHE_DIR, file), 'utf8')) as RawLanePacket;
+      const raw = JSON.parse(fs.readFileSync(path.join(cacheDir, file), 'utf8')) as RawLanePacket;
       packets.push(normalizeLanePacket(raw, raw.repoUrl || ''));
     } catch (error) {
       console.warn(`[lane-data] Skipping malformed cache packet ${file}:`, error);

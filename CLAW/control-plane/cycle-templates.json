@@ -56,6 +56,16 @@
       "materialize_by_default": false,
       "lanes": [
         {
+          "lane_id": "data-truth",
+          "objective": "Audit the XR packet and GitHub truth surfaces that feed the first generic proof page.",
+          "deliverables": [
+            "XR packet truth report"
+          ],
+          "acceptance": [
+            "XR packet truth is sufficient and current"
+          ]
+        },
+        {
           "lane_id": "product-family",
           "objective": "Apply the locked product-family kernel to /work/xr without bespoke route hacks.",
           "deliverables": [
@@ -66,16 +76,6 @@
           "acceptance": [
             "XR renders from the kernel",
             "XR remains packet-truthful"
-          ]
-        },
-        {
-          "lane_id": "data-truth",
-          "objective": "Audit the XR packet and GitHub truth surfaces that feed the first generic proof page.",
-          "deliverables": [
-            "XR packet truth report"
-          ],
-          "acceptance": [
-            "XR packet truth is sufficient and current"
           ]
         },
         {
@@ -106,6 +106,16 @@
       "materialize_by_default": false,
       "lanes": [
         {
+          "lane_id": "data-truth",
+          "objective": "Audit FT packet sufficiency and route bindings before replication promotion.",
+          "deliverables": [
+            "FT packet truth report"
+          ],
+          "acceptance": [
+            "FT packet truth is sufficient and current"
+          ]
+        },
+        {
           "lane_id": "product-family",
           "objective": "Prove the same kernel generalizes to /work/ft without undeclared bespoke logic.",
           "deliverables": [
@@ -115,16 +125,6 @@
           "acceptance": [
             "FT is produced from the same kernel",
             "replication delta is explainable by content or declared variants"
-          ]
-        },
-        {
-          "lane_id": "data-truth",
-          "objective": "Audit FT packet sufficiency and route bindings before replication promotion.",
-          "deliverables": [
-            "FT packet truth report"
-          ],
-          "acceptance": [
-            "FT packet truth is sufficient and current"
           ]
         },
         {

@@ -98,6 +98,7 @@
       "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/data-truth",
       "reasoning": "medium",
       "writes": [
+        "site/.cache/packets/**",
         "site/src/lib/github/**",
         "site/src/lib/parser/**",
         "site/src/lib/data/**",

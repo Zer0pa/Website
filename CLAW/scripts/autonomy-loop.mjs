@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
-import { localTimestamp, projectPath, readJson } from './lib/control-plane.mjs';
-import { AUTONOMY_SERVICE_LABEL, readRunnerState, writeRunnerState } from './lib/autonomy.mjs';
+import { localTimestamp, projectPath } from './lib/control-plane.mjs';
+import { AUTONOMY_SERVICE_LABEL, readRunnerPolicy, readRunnerState, writeRunnerState } from './lib/autonomy.mjs';
 
 function readArg(prefix, fallback = null) {
   return process.argv.find((arg) => arg.startsWith(prefix))?.slice(prefix.length) || fallback;
@@ -12,25 +12,40 @@ async function sleep(ms) {
   await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function resolveLoopIntervalSeconds() {
-  const override = readArg('--interval-seconds=');
-  if (override) {
-    return Number.parseInt(override, 10);
-  }
-
-  try {
-    const policy = readJson(projectPath('CLAW/control-plane/runner-policy.json'));
-    const configured = Number.parseInt(String(policy.execution?.loop_interval_seconds ?? ''), 10);
-    if (Number.isFinite(configured) && configured > 0) {
-      return configured;
-    }
-  } catch {}
-
-  return 60;
+function parsePositiveInt(value, fallback) {
+  const parsed = Number.parseInt(String(value ?? ''), 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
-const intervalSeconds = resolveLoopIntervalSeconds();
+function resolveLoopIntervals() {
+  const override = readArg('--interval-seconds=');
+  if (override) {
+    const seconds = parsePositiveInt(override, 60);
+    return {
+      idleSeconds: seconds,
+      activeCycleSeconds: seconds,
+    };
+  }
+
+  const policy = readRunnerPolicy();
+  const idleSeconds = parsePositiveInt(policy.execution?.loop_interval_seconds, 60);
+  const activeCycleSeconds = parsePositiveInt(
+    policy.execution?.active_cycle_interval_seconds,
+    Math.min(idleSeconds, 5),
+  );
+  return {
+    idleSeconds,
+    activeCycleSeconds,
+  };
+}
+
 const onceScript = projectPath('CLAW/scripts/autonomy-once.mjs');
+
+function nextSleepSeconds() {
+  const intervals = resolveLoopIntervals();
+  const state = readRunnerState();
+  return state.active_cycle ? intervals.activeCycleSeconds : intervals.idleSeconds;
+}
 
 async function main() {
   const state = readRunnerState();
@@ -67,7 +82,7 @@ async function main() {
       writeRunnerState(failed);
     }
 
-    await sleep(intervalSeconds * 1000);
+    await sleep(nextSleepSeconds() * 1000);
   }
 }
 

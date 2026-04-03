@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { createClient } from '@sanity/client';
+import { resolvePacketCacheDir } from '../lib/data/packet-cache';
 import { LanePacket } from '../lib/types/lane';
 
 const client = createClient({
@@ -12,7 +13,7 @@ const client = createClient({
 });
 
 async function syncToSanity() {
-  const PACKET_DIR = path.join(process.cwd(), '.cache/packets');
+  const PACKET_DIR = resolvePacketCacheDir();
   if (!fs.existsSync(PACKET_DIR)) {
     console.error('[SYNC] No packets found in .cache/packets');
     return;
