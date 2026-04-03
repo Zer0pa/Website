@@ -170,6 +170,8 @@ Use these repo-local files as the machine-readable control surface:
 - `CLAW/control-plane/state.template.json`
 - `CLAW/control-plane/agent-lanes.json`
 - `CLAW/control-plane/cadence.json`
+- `CLAW/control-plane/runtime-state.schema.json`
+- `CLAW/control-plane/artifact-contract.md`
 
 ## Recovery Model
 
