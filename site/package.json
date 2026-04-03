@@ -20,7 +20,10 @@
     "claw:run-cycle": "node ../CLAW/scripts/run-cycle.mjs",
     "claw:settle-cycle": "node ../CLAW/scripts/settle-cycle.mjs",
     "claw:health": "node ../CLAW/scripts/health-check.mjs",
-    "claw:recover": "node ../CLAW/scripts/recover-cycle.mjs"
+    "claw:recover": "node ../CLAW/scripts/recover-cycle.mjs",
+    "claw:integration-replay": "node ../CLAW/scripts/integration-replay.mjs",
+    "claw:recovery-drill": "node ../CLAW/scripts/run-recovery-drill.mjs",
+    "claw:telegram": "node ../CLAW/scripts/telegram-control.mjs"
   },
   "dependencies": {
     "@observablehq/plot": "^0.6",

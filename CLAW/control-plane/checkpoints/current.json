@@ -1,8 +1,12 @@
 {
   "version": 1,
-  "checkpoint_id": null,
-  "status": "none",
-  "source_commits": [],
-  "rollback_point": null,
-  "updated_at": null
+  "checkpoint_id": "INT-20260403T120500Z",
+  "status": "accepted",
+  "source_commits": [
+    "2799941",
+    "4f43c0d",
+    "b940d26"
+  ],
+  "rollback_point": "cf7b49ee7e3dad686427ec3326da6a8152a4c0e8",
+  "updated_at": "2026-04-03T12:05:00Z"
 }

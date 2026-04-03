@@ -10,9 +10,9 @@
     "runner_state_bundle": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
     "product_kernel_law_bundle": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
     "supervised_run": null,
-    "integration_checkpoint": null,
-    "full_qa_bundle": null,
-    "recovery_drill_bundle": null,
+    "integration_checkpoint": "CLAW/control-plane/checkpoints/INT-20260403T120500Z.json",
+    "full_qa_bundle": "CLAW/control-plane/reports/W4-integration-replay.md",
+    "recovery_drill_bundle": "CLAW/control-plane/reports/W4-recovery-hardening.md",
     "guarded_local_autonomy_bundle": null,
     "extended_local_autonomy_bundle": null,
     "runtime_state": "CLAW/control-plane/state/runtime-state.json"

@@ -1,0 +1,19 @@
+{
+  "token_env": "ZEROPA_TELEGRAM_BOT_TOKEN",
+  "allowed_chat_ids_env": "ZEROPA_TELEGRAM_ALLOWED_CHAT_IDS",
+  "pairing_code_env": "ZEROPA_TELEGRAM_PAIRING_CODE",
+  "keychain_service": "zer0palab-claw-telegram-bot",
+  "local_config_path": "~/.config/zer0pa-claw/telegram.json",
+  "mode": "operator-desk-supervised",
+  "commands": [
+    "/status",
+    "/health",
+    "/phase",
+    "/queue",
+    "/checkpoint",
+    "/pair",
+    "/request",
+    "/approve",
+    "/reject"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "R1-20260403T120716Z",
+  "scenario": "candidate-rollback",
+  "lane_id": "homepage-fidelity",
+  "rollback_target": "279994148141ff77e4337feeb8aeba29f91ff17e",
+  "regression_commit": "501c63bf65329085be6ac0c3651a840b533990b7",
+  "restored_head": "279994148141ff77e4337feeb8aeba29f91ff17e",
+  "created_at": "2026-04-03T12:07:16Z",
+  "pass": true
+}

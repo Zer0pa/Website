@@ -1,0 +1,13 @@
+{
+  "event_id": "RECOVER-20260403T115843Z",
+  "cycle_id": "C4-20260403T115843Z",
+  "reason": "stale-lock-recovery",
+  "released_locks": [
+    "CLAW/control-plane/locks/data-truth.json",
+    "CLAW/control-plane/locks/integration.json",
+    "CLAW/control-plane/locks/product-family.json",
+    "CLAW/control-plane/locks/systems-qa.json"
+  ],
+  "runtime_mutation": "active cycle cleared after stale lock recovery",
+  "created_at": "2026-04-03T11:58:43Z"
+}

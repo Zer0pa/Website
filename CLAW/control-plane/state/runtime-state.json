@@ -5,10 +5,10 @@
   "press_go": false,
   "current_milestone": "M1-recursive-autonomy-hardening",
   "current_phase": "C4-first-generic-product-proof",
-  "active_wave": "W3",
-  "last_updated": "2026-04-03T11:32:34Z",
+  "active_wave": "W4",
+  "last_updated": "2026-04-03T12:07:16Z",
   "control_style": "evaluator-optimizer",
-  "latest_wave_report": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
+  "latest_wave_report": "CLAW/control-plane/reports/W4-integration-replay.md",
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "execution_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
@@ -63,16 +63,16 @@
       "last_handoff": null
     },
     "integration": {
-      "status": "waiting",
-      "last_accepted_commit": null,
-      "last_handoff": null
+      "status": "checkpointed",
+      "last_accepted_commit": "50b71220a69167eb73c60b6de58c52dd5228c8c1",
+      "last_handoff": "CLAW/control-plane/reports/W4-integration-replay.md"
     }
   },
   "latest_audits": {
-    "build": "pass: homepage-fidelity, imc-flagship, and product-family-kernel site builds on 2026-04-03",
-    "parser": "pass: homepage-fidelity, imc-flagship, and product-family-kernel parser falsification loops on 2026-04-03",
+    "build": "pass: integration replay build on 2026-04-03",
+    "parser": "pass: integration replay parser falsification loop on 2026-04-03",
     "layout": "home: 0 critical, 0 major, 0 minor, 12 cosmetic; imc: 0 critical, 0 major, 0 minor, 14 cosmetic; product-kernel law audit: /work/xr 0 critical 0 major 0 minor, /work/ft 0 critical 0 major 0 minor",
-    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile in homepage-fidelity, imc-flagship, /work/xr, and /work/ft"
+    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile in integration checkpoint routes"
   },
   "current_scores": {
     "fidelity": null,
@@ -88,24 +88,22 @@
     "supervised_cycle_passed": false,
     "guarded_local_autonomy_passed": false,
     "extended_local_autonomy_passed": false,
-    "recovery_drill_passed": false,
-    "integration_qa_passed": false,
+    "recovery_drill_passed": true,
+    "integration_qa_passed": true,
     "cross_repo_writes_detected": false,
     "p0_drift_eradicated": true,
     "p1_homepage_canonical": true,
     "p2_imc_canonical": true,
     "p3_product_kernel_ready": true,
-    "p4_recovery_hardened": false
+    "p4_recovery_hardened": true
   },
   "blockers": [
-    "Press-go criteria are not yet satisfied.",
-    "No accepted candidate has been replayed through integration.",
-    "No recovery drill has been proven yet."
+    "Press-go criteria are not yet satisfied."
   ],
   "next_actions": [
     "Execute C4 on /work/xr using the accepted product-family kernel.",
     "Replay the accepted kernel through /work/ft as the replication proof page.",
-    "Replay the accepted homepage and IMC candidates through integration.",
+    "Promote the first generic product proof through integration once XR and FT are accepted.",
     "Keep press_go false until the canonical-routes-to-producing program is complete."
   ],
   "learning_backlog": [
@@ -172,13 +170,14 @@
     "active": null,
     "history": [
       "CLAW/control-plane/queue/C3-20260403T110543Z.json",
-      "CLAW/control-plane/queue/C3-20260403T113227Z.json"
+      "CLAW/control-plane/queue/C3-20260403T113227Z.json",
+      "CLAW/control-plane/queue/C4-20260403T115843Z.json"
     ]
   },
   "active_jobs": [],
   "locks": [],
-  "current_checkpoint": "CLAW/control-plane/checkpoints/current.json",
-  "rollback_checkpoint": null,
+  "current_checkpoint": "CLAW/control-plane/checkpoints/INT-20260403T120500Z.json",
+  "rollback_checkpoint": "cf7b49ee7e3dad686427ec3326da6a8152a4c0e8",
   "pause_requested": false,
   "stop_requested": false,
   "heartbeat_at": null,
@@ -188,6 +187,6 @@
     "lock_heartbeat_ttl_minutes": 90
   },
   "active_cycle": null,
-  "last_recovery_event": null,
-  "last_health_check": null
+  "last_recovery_event": "CLAW/control-plane/recoveries/RECOVER-20260403T115843Z.json",
+  "last_health_check": "2026-04-03T12:05:00Z"
 }
