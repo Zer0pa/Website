@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
-import { localTimestamp, projectPath } from './lib/control-plane.mjs';
+import { localTimestamp, projectPath, readJson } from './lib/control-plane.mjs';
 import { AUTONOMY_SERVICE_LABEL, readRunnerState, writeRunnerState } from './lib/autonomy.mjs';
 
 function readArg(prefix, fallback = null) {
@@ -12,7 +12,24 @@ async function sleep(ms) {
   await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const intervalSeconds = Number.parseInt(readArg('--interval-seconds=', '300'), 10);
+function resolveLoopIntervalSeconds() {
+  const override = readArg('--interval-seconds=');
+  if (override) {
+    return Number.parseInt(override, 10);
+  }
+
+  try {
+    const policy = readJson(projectPath('CLAW/control-plane/runner-policy.json'));
+    const configured = Number.parseInt(String(policy.execution?.loop_interval_seconds ?? ''), 10);
+    if (Number.isFinite(configured) && configured > 0) {
+      return configured;
+    }
+  } catch {}
+
+  return 60;
+}
+
+const intervalSeconds = resolveLoopIntervalSeconds();
 const onceScript = projectPath('CLAW/scripts/autonomy-once.mjs');
 
 async function main() {
