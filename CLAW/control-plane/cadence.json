@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "timezone": "Africa/Johannesburg",
+  "lane_iteration_minutes": 15,
+  "orchestrator_checkin_minutes": 60,
+  "full_falsification_hours": 4,
+  "promotion_review_hours": 12,
+  "system_health_review_hours": 24,
+  "truth_sync_minutes": 30,
+  "notes": [
+    "Do not run unattended until press_go is true.",
+    "Promotion review means deciding whether canonical laws can move into product-family code.",
+    "System health review means checking drift, installs, blockers, and stop conditions."
+  ]
+}

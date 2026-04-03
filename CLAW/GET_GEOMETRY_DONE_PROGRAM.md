@@ -103,6 +103,13 @@ What is still under-specified is the governing math:
 Use highest reasoning for `orchestrator`, `geometry-architect`, `flagship-art-direction`, and `falsification`.
 Use faster agents for batch audits, route completeness, and data checks.
 
+Long-running operation is governed by:
+
+- `CLAW/AUTONOMOUS_CONTROL_PLANE.md`
+- `CLAW/AUTONOMOUS_RUNBOOK.md`
+- `CLAW/AUTONOMOUS_STATE_TEMPLATE.json`
+- `CLAW/control-plane/`
+
 ## Artifact Contract
 
 Every serious refinement cycle should preserve or regenerate:
@@ -168,3 +175,4 @@ npm run audit:responsive -- --baseUrl=http://127.0.0.1:3010
 - No generic-card drift.
 - No claiming success from screenshots alone.
 - No site-wide expansion before homepage and flagship closure.
+- No unattended operation before `press_go` is explicitly true in control-plane state.

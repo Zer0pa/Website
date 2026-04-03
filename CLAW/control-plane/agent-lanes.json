@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "project_root": "/Users/zer0palab/Zer0pa Website/Website-main",
+  "worktree_root": "/Users/zer0palab/Zer0pa Website/worktrees",
+  "default_base_branch": "codex/clawstation-setup",
+  "protected_branches": ["main"],
+  "allowed_repo_remote": "https://github.com/Zer0pa/Website.git",
+  "allowed_path_prefixes": [
+    "/Users/zer0palab/Zer0pa Website/Website-main",
+    "/Users/zer0palab/Zer0pa Website/worktrees"
+  ],
+  "lanes": [
+    {
+      "id": "orchestrator",
+      "branch": "codex/clawstation-setup",
+      "worktree": "/Users/zer0palab/Zer0pa Website/Website-main",
+      "reasoning": "xhigh",
+      "writes": ["CLAW/**", "AGENTS.md"],
+      "role": "control-plane and acceptance"
+    },
+    {
+      "id": "homepage-fidelity",
+      "branch": "codex/homepage-fidelity",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/homepage-fidelity",
+      "reasoning": "xhigh",
+      "writes": [
+        "site/src/components/home/**",
+        "site/src/components/layout/**",
+        "site/src/app/page.tsx",
+        "site/src/app/globals.css",
+        "site/src/lib/layout/specs.ts"
+      ],
+      "role": "homepage shell law"
+    },
+    {
+      "id": "imc-flagship",
+      "branch": "codex/imc-flagship",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/imc-flagship",
+      "reasoning": "xhigh",
+      "writes": [
+        "site/src/app/imc/**",
+        "site/src/components/lane/**",
+        "site/src/app/globals.css",
+        "site/src/lib/layout/specs.ts"
+      ],
+      "role": "flagship authority law"
+    },
+    {
+      "id": "product-family",
+      "branch": "codex/product-family",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/product-family",
+      "reasoning": "high",
+      "writes": [
+        "site/src/app/work/**",
+        "site/src/components/lane/**",
+        "site/src/lib/data/presentation.ts",
+        "site/src/app/globals.css"
+      ],
+      "role": "batch rollout of approved product-page law"
+    },
+    {
+      "id": "product-family-kernel",
+      "branch": "codex/product-family-kernel",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/product-family-kernel",
+      "reasoning": "high",
+      "writes": [
+        "site/src/app/work/**",
+        "site/src/components/lane/**",
+        "site/src/lib/data/presentation.ts",
+        "site/src/app/globals.css"
+      ],
+      "role": "general product-page law"
+    },
+    {
+      "id": "data-truth",
+      "branch": "codex/data-truth",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/data-truth",
+      "reasoning": "high",
+      "writes": [
+        "site/src/lib/github/**",
+        "site/src/lib/parser/**",
+        "site/src/lib/data/**",
+        "site/src/scripts/ingest.ts",
+        "site/src/scripts/sync-to-sanity.ts"
+      ],
+      "role": "GitHub truth ingestion and sync"
+    },
+    {
+      "id": "systems-qa",
+      "branch": "codex/systems-qa",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/systems-qa",
+      "reasoning": "xhigh",
+      "writes": [
+        "deterministic-design-system/maps/**",
+        "deterministic-design-system/reports/**",
+        "CLAW/**"
+      ],
+      "role": "verification, regression, and rejection"
+    },
+    {
+      "id": "integration",
+      "branch": "codex/integration",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/integration",
+      "reasoning": "high",
+      "writes": [
+        "site/**",
+        "deterministic-design-system/**",
+        "CLAW/**"
+      ],
+      "role": "staging and conflict-free integration rehearsal"
+    }
+  ]
+}

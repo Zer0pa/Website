@@ -1,0 +1,115 @@
+{
+  "mode": "architecture-ready",
+  "project": "Website-main",
+  "project_root": "/Users/zer0palab/Zer0pa Website/Website-main",
+  "allowed_paths": [
+    "/Users/zer0palab/Zer0pa Website/Website-main",
+    "/Users/zer0palab/Zer0pa Website/worktrees/homepage-fidelity",
+    "/Users/zer0palab/Zer0pa Website/worktrees/imc-flagship",
+    "/Users/zer0palab/Zer0pa Website/worktrees/product-family-kernel",
+    "/Users/zer0palab/Zer0pa Website/worktrees/product-family",
+    "/Users/zer0palab/Zer0pa Website/worktrees/data-truth",
+    "/Users/zer0palab/Zer0pa Website/worktrees/systems-qa",
+    "/Users/zer0palab/Zer0pa Website/worktrees/integration"
+  ],
+  "forbidden_paths": [
+    "/Users/zer0palab/.codex",
+    "/Users/zer0palab/.zshrc",
+    "/Users/zer0palab",
+    "/Users/zer0palab/Claw Agents"
+  ],
+  "branch_policy": {
+    "allowed_prefix": "codex/",
+    "blocked_refs": [
+      "main"
+    ],
+    "remote_push_mode": "gated"
+  },
+  "locks": {
+    "build": null,
+    "browser": null,
+    "network_sync": null,
+    "release": null
+  },
+  "lanes": {
+    "orchestrator": {
+      "branch": "codex/clawstation-setup",
+      "worktree": "/Users/zer0palab/Zer0pa Website/Website-main",
+      "status": "ready"
+    },
+    "homepage-fidelity": {
+      "branch": "codex/homepage-fidelity",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/homepage-fidelity",
+      "status": "ready"
+    },
+    "imc-flagship": {
+      "branch": "codex/imc-flagship",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/imc-flagship",
+      "status": "ready"
+    },
+    "product-family-kernel": {
+      "branch": "codex/product-family-kernel",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/product-family-kernel",
+      "status": "ready"
+    },
+    "product-family": {
+      "branch": "codex/product-family",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/product-family",
+      "status": "ready"
+    },
+    "data-truth": {
+      "branch": "codex/data-truth",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/data-truth",
+      "status": "ready"
+    },
+    "systems-qa": {
+      "branch": "codex/systems-qa",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/systems-qa",
+      "status": "ready"
+    },
+    "integration": {
+      "branch": "codex/integration",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/integration",
+      "status": "ready"
+    }
+  },
+  "fully_autonomous_actions": [
+    "edit_own_worktree",
+    "local_commit",
+    "repo_local_npm_install",
+    "build",
+    "parser_test",
+    "layout_audit",
+    "responsive_audit",
+    "local_ingest",
+    "github_read_only_fetch",
+    "update_repo_local_claw_state"
+  ],
+  "gated_actions": [
+    "remote_push",
+    "pull_request",
+    "merge_to_main",
+    "production_deploy",
+    "sanity_write_production",
+    "global_install",
+    "global_config_mutation",
+    "touch_other_repos"
+  ],
+  "cadence_minutes": {
+    "lane_cycle": 10,
+    "orchestrator_review": 30,
+    "qa_sweep": 90,
+    "product_family_sweep": 240,
+    "stability_sweep": 1440
+  },
+  "press_go_checklist": {
+    "docs_written": false,
+    "worktrees_clean": true,
+    "state_template_present": true,
+    "supervised_cycle_passed": false,
+    "guarded_local_autonomy_passed": false,
+    "extended_local_autonomy_passed": false,
+    "recovery_drill_passed": false,
+    "integration_qa_passed": false
+  }
+}
