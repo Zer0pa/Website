@@ -314,9 +314,27 @@ export function commitReachable(cwd, commit) {
 
 export function commitPatchEquivalent(cwd, commit) {
   try {
-    const parent = git(['rev-parse', `${commit}^`], cwd);
-    const output = git(['cherry', 'HEAD', parent, commit], cwd).trim();
-    return output.startsWith('- ');
+    const targetPatchId = commitPatchId(cwd, commit);
+    if (!targetPatchId) {
+      return false;
+    }
+
+    const recentCommits = git(['rev-list', '--max-count=200', 'HEAD'], cwd)
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    for (const candidate of recentCommits) {
+      if (candidate === commit) {
+        continue;
+      }
+
+      if (commitPatchId(cwd, candidate) === targetPatchId) {
+        return true;
+      }
+    }
+
+    return false;
   } catch {
     return false;
   }
@@ -326,6 +344,29 @@ export function replayCommitRange(cwd, commit) {
   const mergeBase = git(['merge-base', 'HEAD', commit], cwd);
   const output = git(['rev-list', '--reverse', `${mergeBase}..${commit}`], cwd).trim();
   return output ? output.split('\n').map((line) => line.trim()).filter(Boolean) : [];
+}
+
+function commitPatchId(cwd, commit) {
+  const patch = execFileSync('git', ['show', '--pretty=format:', '--binary', commit], {
+    cwd,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    maxBuffer: 10 * 1024 * 1024,
+  }).trim();
+
+  if (!patch) {
+    return '';
+  }
+
+  const output = execFileSync('git', ['patch-id', '--stable'], {
+    cwd,
+    input: patch,
+    encoding: 'utf8',
+    stdio: ['pipe', 'pipe', 'pipe'],
+    maxBuffer: 10 * 1024 * 1024,
+  }).trim();
+
+  return output.split(/\s+/)[0] || '';
 }
 
 export function cherryPickCommit(cwd, commit) {
