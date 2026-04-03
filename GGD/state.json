@@ -3,7 +3,7 @@
   "project_reference": {
     "project_md_updated": "2026-04-03",
     "core_research_question": "How do we turn the Zer0pa website into a deterministic geometry program whose layout, typography, color, semantic hierarchy, packet truth, and code quality are governed by explicit laws and falsified continuously until canonical closure is reached?",
-    "current_focus": "Bootstrap a literal GPD-derived geometry contract layer in GGD/ and use it to replace the softer doctrine that currently sits beside the CLAW control plane."
+    "current_focus": "Bind the installed ggd-* command surface to the live Zer0pa Website GGD/CLAW state, verification bundles, route gaps, and deterministic augmentation backlog."
   },
   "project_contract": {
     "program_id": "ggd-zer0pa-website-v1",
@@ -54,15 +54,15 @@
     ]
   },
   "position": {
-    "current_phase": "1",
-    "current_phase_name": "Port deterministic law into contracts",
+    "current_phase": "2",
+    "current_phase_name": "Build the verification catalog and command binding",
     "total_phases": 8,
-    "current_plan": "contract-port-and-law-lock",
+    "current_plan": "binding-bundles-gaps-sync",
     "total_plans_in_phase": 3,
     "status": "in_progress",
-    "last_activity": "2026-04-03T18:00:00Z",
-    "last_activity_desc": "Instantiated GGD artifacts and rewired the repo geometry skill and AGENTS contract to the new GGD layer.",
-    "progress_percent": 25
+    "last_activity": "2026-04-03T19:41:45Z",
+    "last_activity_desc": "Bound GGD command surface to project binding, verification bundle index, route gaps, and augmentation backlog.",
+    "progress_percent": 40
   },
   "open_questions": [
     "Which GGD command surface should be wired first into the Codex execution layer?",
@@ -82,13 +82,13 @@
     }
   ],
   "pending_todos": [
-    "Port current route failures into GGD-native gap records.",
-    "Bind verification bundles to concrete scripts and reports.",
-    "Teach CLAW runtime promotion logic to read from GGD state and gap records."
+    "Teach CLAW runtime promotion logic to read GGD gap records before promoting product-family work.",
+    "Add explicit FT route-gap export once the first FT falsification exists.",
+    "Bind named GGD verification bundles to executable audit entrypoints in the command surface."
   ],
   "blockers": [
-    "GGD command and verification surfaces are defined but not yet wired into the active CLAW loops.",
-    "XR remains a real unresolved geometry failure outside the new GGD gap layer."
+    "XR remains blocked by an open deterministic geometry gap.",
+    "Press-go remains false until supervised and guarded autonomy proofs are complete."
   ],
   "session": {
     "last_date": "2026-04-03",
@@ -96,5 +96,183 @@
     "platform": "macOS",
     "stopped_at": null,
     "resume_file": "CLAW/PRD_GPD_GEOMETRY_ADAPTATION.md"
-  }
+  },
+  "command_binding": {
+    "command_namespace": "ggd",
+    "binding_file": "GGD/project.binding.json",
+    "verification_bundle_index": "GGD/verification/bundles.json",
+    "gap_dir": "GGD/gaps/routes",
+    "sync_script": "CLAW/scripts/sync-ggd-state.mjs",
+    "export_gap_script": "CLAW/scripts/export-ggd-gap.mjs",
+    "verify_binding_script": "CLAW/scripts/verify-ggd-binding.mjs"
+  },
+  "route_status": {
+    "/": {
+      "role": "home",
+      "status": "canonical",
+      "summary": "homepage accepted through canonical closure"
+    },
+    "/imc": {
+      "role": "flagship",
+      "status": "canonical",
+      "summary": "flagship IMC accepted through canonical closure"
+    },
+    "/work/xr": {
+      "role": "product-family",
+      "status": "blocked",
+      "summary": "Rejected: fresh XR falsification still fails the phase acceptance rule with `14` critical layout diffs; IMC flagship invariants remain intact and XR responsive overflow is clear."
+    },
+    "/work/ft": {
+      "role": "product-family",
+      "status": "pending-proof",
+      "summary": "FT replication proof still pending"
+    }
+  },
+  "verification_bundle_index": {
+    "file": "GGD/verification/bundles.json",
+    "bundle_count": 6,
+    "bundle_ids": [
+      "geometry",
+      "breakpoint",
+      "color-contrast",
+      "semantic-seo",
+      "truth",
+      "code-quality"
+    ]
+  },
+  "gap_records": [
+    {
+      "id": "work-xr.geometry-gap",
+      "route": "/work/xr",
+      "status": "open",
+      "severity_counts": {
+        "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T165341Z-03.json"
+    }
+  ],
+  "augmentation_backlog": [
+    {
+      "id": "aug.proportional-hero-law",
+      "category": "proportionality",
+      "hypothesis": "Hero regions should resolve from explicit ratio families per route role instead of implicit current widths, so flagship and product-family pages preserve identity under the same mathematical system.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "hero split ratios stay inside approved families",
+        "hero authority and identity blocks remain aligned at all declared breakpoints"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.section-flow-integral",
+      "category": "geometry",
+      "hypothesis": "Section transitions should be governed by a declared vertical-flow law so macro spacing and sectional density can be improved without introducing local hacks.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "section offsets remain on the spacing ladder",
+        "macro section movement is attributable to declared law changes"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.typographic-baseline-rhythm",
+      "category": "typography",
+      "hypothesis": "Baseline rhythm and line-length control should be made explicit so density, legibility, and mathematical proportionality improve together rather than by visual compromise.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "type roles map cleanly to the modular scale",
+        "critical headings preserve intended line breaks and readable line lengths"
+      ],
+      "owner_lane": "fidelity-reviewer",
+      "priority": "medium"
+    },
+    {
+      "id": "aug.numeric-color-field",
+      "category": "color-system",
+      "hypothesis": "Foreground, surface, rule, and accent tokens should be governed by explicit numeric relationships so color behavior is algebraic and contrast-safe rather than taste-driven.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "token luminance deltas remain declared and inspectable",
+        "accent-soft and secondary text remain derived instead of hand-tuned"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.viewport-limiting-cases",
+      "category": "responsive-law",
+      "hypothesis": "Responsive behavior should be treated as explicit limiting cases, including larger displays, so routes do not merely avoid overflow but preserve geometric intent across dimensions.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "no overflow across expanded viewport set",
+        "hero and metric regions preserve lawful proportionality on wide displays"
+      ],
+      "owner_lane": "systems-qa",
+      "priority": "high"
+    },
+    {
+      "id": "aug.depth-and-z-order-law",
+      "category": "dimensionality",
+      "hypothesis": "Visual depth, overlay ordering, and emphasis should be encoded as a limited dimensional system so perceived hierarchy follows declared structure rather than ad hoc layering.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "elevated surfaces use declared depth roles only",
+        "z-order and emphasis do not contradict semantic priority"
+      ],
+      "owner_lane": "fidelity-reviewer",
+      "priority": "medium"
+    },
+    {
+      "id": "aug.semantic-depth-minimization",
+      "category": "code-quality",
+      "hypothesis": "Semantic hierarchy and DOM depth should be simplified where possible so content management, SEO, and inspection quality improve without changing route truth.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "main landmark and heading hierarchy remain valid",
+        "no unnecessary wrapper nesting in route-critical regions"
+      ],
+      "owner_lane": "integration",
+      "priority": "medium"
+    }
+  ]
 }

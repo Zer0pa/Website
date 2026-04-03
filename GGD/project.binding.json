@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "project_id": "zer0pa-website",
+  "command_namespace": "ggd",
+  "binding_file": "GGD/project.binding.json",
+  "project_root": "/Users/zer0palab/Zer0pa Website/Website-main",
+  "authoritative_layers": {
+    "contract": "GGD",
+    "runtime": "CLAW/control-plane",
+    "application": "site",
+    "audits": "deterministic-design-system"
+  },
+  "state_files": {
+    "human": "GGD/STATE.md",
+    "machine": "GGD/state.json",
+    "runtime": "CLAW/control-plane/state/runtime-state.json"
+  },
+  "schemas": {
+    "project_binding": "GGD/schemas/project-binding.schema.json",
+    "route_gap": "GGD/schemas/route-gap.schema.json",
+    "verification_bundle_index": "GGD/schemas/verification-bundle-index.schema.json",
+    "augmentation_backlog": "GGD/schemas/augmentation-backlog.schema.json"
+  },
+  "scripts": {
+    "sync_state": "CLAW/scripts/sync-ggd-state.mjs",
+    "export_gap": "CLAW/scripts/export-ggd-gap.mjs",
+    "verify_binding": "CLAW/scripts/verify-ggd-binding.mjs"
+  },
+  "verification_bundle_index": "GGD/verification/bundles.json",
+  "augmentation_backlog": "GGD/augmentations/augmentation-backlog.json",
+  "gap_dir": "GGD/gaps/routes",
+  "route_roles": {
+    "/": "home",
+    "/imc": "flagship",
+    "/work/[slug]": "product-family"
+  },
+  "focus_routes": [
+    "/",
+    "/imc",
+    "/work/xr",
+    "/work/ft"
+  ],
+  "geometry_authority": {
+    "route_specs": "site/src/lib/layout/specs.ts",
+    "measurement_script": "site/src/scripts/layout-measure.ts",
+    "diff_script": "site/src/scripts/layout-diff.ts",
+    "kernel_constants": "CLAW/control-plane/product-kernel/design-constants.json"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "id": "work-xr.geometry-gap",
+  "route": "/work/xr",
+  "route_role": "product-family",
+  "kind": "geometry-gap",
+  "status": "open",
+  "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T165341Z-03.json",
+  "cycle_id": "C4-20260403T165341Z",
+  "phase_id": "C4",
+  "lane": "systems-qa",
+  "hypothesis": "The current generic /work/xr candidate may still hide a kernel or responsive regression; fresh falsification should reject promotion if XR no longer holds zero critical and zero major diffs while preserving IMC flagship isolation.",
+  "summary": "Rejected: fresh XR falsification still fails the phase acceptance rule with `14` critical layout diffs; IMC flagship invariants remain intact and XR responsive overflow is clear.",
+  "severity_counts": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "top_drift_surfaces": [
+    "work.lane.hero.authority",
+    "work.lane.nonclaims",
+    "work.lane.metric.row",
+    "work.lane.hero.meta",
+    "work.lane.hero.identity"
+  ],
+  "flagship_invariants_intact": true,
+  "responsive_integrity": {
+    "horizontal_overflow": true,
+    "notes": [
+      "`deterministic-design-system/reports/responsive/responsive.verification.md` shows `/work/xr` has no horizontal overflow on laptop, tablet, or mobile."
+    ]
+  },
+  "quality_findings_summary": "`npm run audit:quality -- --baseUrl=http://127.0.0.1:3016` produced `1` critical, `2` major, and `3` minor findings across the audited shared routes.",
+  "recommendation": "Do not promote this C4 candidate. Repair the XR live/reference geometry mismatch in the shared work-lane surface and clear the shared quality findings before rerunning falsification.",
+  "next_hypothesis": "IMC flagship isolation is still intact, but the shared work-lane rendering used by `/work/xr` has regressed away from the locked reference geometry; the next bounded slice should identify which current kernel/layout change introduced the global XR y/x/width drift.",
+  "rollback_target": "e832a0ce568b697d7047600ccda98a6274ae5fca",
+  "evidence_files": [
+    "deterministic-design-system/maps/diff/work-xr.diff.json",
+    "deterministic-design-system/maps/live/work-xr.live.json",
+    "deterministic-design-system/reports/C4-20260403T165341Z-03.xr-falsification.rejected.md",
+    "deterministic-design-system/reports/quality/quality.verification.json",
+    "deterministic-design-system/reports/quality/quality.verification.md",
+    "deterministic-design-system/reports/responsive/responsive.verification.md"
+  ],
+  "learning_captured": [
+    "Fresh falsification was necessary because the repo-local XR artifacts did not match the cycle summary.",
+    "Current `/work/xr` failure is a layout-law regression, not a responsive overflow failure.",
+    "The flagship `/imc` route still preserves `imc.*` measurement keys and avoids `work.lane.*` page-level keys in rendered output."
+  ],
+  "commands_run": [
+    "pwd && git rev-parse --short HEAD && git status --short && rg --files deterministic-design-system/reports deterministic-design-system/maps site/src/scripts site/src/lib/layout | sed -n '1,120p'",
+    "sed -n '1,220p' 'site/src/scripts/quality-audit.ts'",
+    "sed -n '1,240p' 'site/src/scripts/responsive-audit.ts'",
+    "sed -n '1,240p' 'site/src/scripts/layout-diff.ts'",
+    "sed -n '1,220p' 'deterministic-design-system/reports/work-xr.verification.md'",
+    "sed -n '1,240p' '/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/handoffs/C4-20260403T165341Z-02.json'",
+    "sed -n '1,240p' 'site/package.json'",
+    "npm run build",
+    "npm run start -- --hostname 127.0.0.1 --port 3006",
+    "npm run start -- --hostname 127.0.0.1 --port 3016",
+    "node --input-type=module -e \"const res=await fetch('http://127.0.0.1:3016/imc'); const html=await res.text(); const hasImc=html.includes('data-spec=\\\"imc.page\\\"'); const hasWorkLane=html.includes('data-spec=\\\"work.lane.page\\\"'); console.log(JSON.stringify({hasImc,hasWorkLane}, null, 2));\"",
+    "npm run audit:quality -- --baseUrl=http://127.0.0.1:3016",
+    "npm run audit:responsive -- --baseUrl=http://127.0.0.1:3016",
+    "npm run layout:measure -- work-xr --baseUrl=http://127.0.0.1:3016",
+    "npm run layout:diff -- work-xr",
+    "sed -n '1,220p' 'deterministic-design-system/reports/work-xr.verification.md'",
+    "sed -n '1,220p' 'deterministic-design-system/reports/quality/quality.verification.md'",
+    "rg -n \"WORK-XR /|Horizontal overflow|work-xr\" 'deterministic-design-system/reports/responsive/responsive.verification.md'",
+    "node --input-type=module -e \"const fs=require('node:fs'); const p='deterministic-design-system/maps/diff/work-xr.diff.json'; const data=JSON.parse(fs.readFileSync(p,'utf8')); const counts=data.diffs.reduce((acc,d)=>{acc[d.severity]=(acc[d.severity]||0)+1; return acc;},{}); console.log(JSON.stringify({route:data.route, counts, top:data.diffs.sort((a,b)=>b.distance-a.distance).slice(0,5)}, null, 2));\"",
+    "git status --short",
+    "node --input-type=module -e \"import fs from 'node:fs'; const p='deterministic-design-system/maps/diff/work-xr.diff.json'; const data=JSON.parse(fs.readFileSync(p,'utf8')); const counts=data.diffs.reduce((acc,d)=>{acc[d.severity]=(acc[d.severity]||0)+1; return acc;},{}); const top=[...data.diffs].sort((a,b)=>b.distance-a.distance).slice(0,5); console.log(JSON.stringify({route:data.route, counts, top}, null, 2));\"",
+    "sed -n '70,110p' 'deterministic-design-system/reports/responsive/responsive.verification.md'",
+    "node --input-type=module -e \"const html=await (await fetch('http://127.0.0.1:3016/imc')).text(); const checks={imcPage:html.includes('data-spec=\\\"imc.page\\\"'), imcHeroIdentity:html.includes('data-spec=\\\"imc.hero.identity\\\"'), workLanePage:html.includes('data-spec=\\\"work.lane.page\\\"'), workLaneHeroIdentity:html.includes('data-spec=\\\"work.lane.hero.identity\\\"')}; console.log(JSON.stringify(checks, null, 2));\"",
+    "sed -n '1,220p' 'deterministic-design-system/reports/C4-20260403T155153Z-03.xr-falsification.rejected.md'",
+    "node --input-type=module -e \"import fs from 'node:fs'; const file='deterministic-design-system/reports/quality/quality.verification.json'; const data=JSON.parse(fs.readFileSync(file,'utf8')); const counts=data.findings.reduce((acc,f)=>{acc[f.severity]=(acc[f.severity]||0)+1; return acc;},{}); console.log(JSON.stringify({counts, findings:data.findings}, null, 2));\"",
+    "git rev-parse HEAD && git merge-base --is-ancestor 49ecb04bdeb6ba4803bf753d0d27c59260320cf0 HEAD; echo $?",
+    "git status --short",
+    "git diff --stat",
+    "git add 'deterministic-design-system/maps/diff/work-xr.diff.json' 'deterministic-design-system/maps/live/work-xr.live.json' 'deterministic-design-system/reports/quality/quality.verification.json' 'deterministic-design-system/reports/quality/quality.verification.md' 'deterministic-design-system/reports/responsive/responsive.verification.md' 'deterministic-design-system/reports/C4-20260403T165341Z-03.xr-falsification.rejected.md' && git commit -m \"systems-qa: reject xr candidate\"",
+    "git status --short && git rev-parse HEAD",
+    "git show --name-only --format=oneline --stat --summary HEAD"
+  ],
+  "known_risks": [
+    "The fresh audit outputs contradict the brief's `runtime_focus.latest_audits` pass summary, so another lane may still be carrying a stale green state.",
+    "Shared quality audit remains red outside the target route (`home` missing a main landmark; duplicate title and description across routes), which broadens promotion risk beyond XR layout drift."
+  ]
+}

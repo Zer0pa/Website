@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "project_id": "zer0pa-website",
+  "items": [
+    {
+      "id": "aug.proportional-hero-law",
+      "category": "proportionality",
+      "hypothesis": "Hero regions should resolve from explicit ratio families per route role instead of implicit current widths, so flagship and product-family pages preserve identity under the same mathematical system.",
+      "status": "seeded",
+      "route_scope": ["/", "/imc", "/work/[slug]"],
+      "measured_checks": [
+        "hero split ratios stay inside approved families",
+        "hero authority and identity blocks remain aligned at all declared breakpoints"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.section-flow-integral",
+      "category": "geometry",
+      "hypothesis": "Section transitions should be governed by a declared vertical-flow law so macro spacing and sectional density can be improved without introducing local hacks.",
+      "status": "seeded",
+      "route_scope": ["/", "/imc", "/work/[slug]"],
+      "measured_checks": [
+        "section offsets remain on the spacing ladder",
+        "macro section movement is attributable to declared law changes"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.typographic-baseline-rhythm",
+      "category": "typography",
+      "hypothesis": "Baseline rhythm and line-length control should be made explicit so density, legibility, and mathematical proportionality improve together rather than by visual compromise.",
+      "status": "seeded",
+      "route_scope": ["/", "/imc", "/work/[slug]"],
+      "measured_checks": [
+        "type roles map cleanly to the modular scale",
+        "critical headings preserve intended line breaks and readable line lengths"
+      ],
+      "owner_lane": "fidelity-reviewer",
+      "priority": "medium"
+    },
+    {
+      "id": "aug.numeric-color-field",
+      "category": "color-system",
+      "hypothesis": "Foreground, surface, rule, and accent tokens should be governed by explicit numeric relationships so color behavior is algebraic and contrast-safe rather than taste-driven.",
+      "status": "seeded",
+      "route_scope": ["/", "/imc", "/work/[slug]"],
+      "measured_checks": [
+        "token luminance deltas remain declared and inspectable",
+        "accent-soft and secondary text remain derived instead of hand-tuned"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.viewport-limiting-cases",
+      "category": "responsive-law",
+      "hypothesis": "Responsive behavior should be treated as explicit limiting cases, including larger displays, so routes do not merely avoid overflow but preserve geometric intent across dimensions.",
+      "status": "seeded",
+      "route_scope": ["/", "/imc", "/work/[slug]"],
+      "measured_checks": [
+        "no overflow across expanded viewport set",
+        "hero and metric regions preserve lawful proportionality on wide displays"
+      ],
+      "owner_lane": "systems-qa",
+      "priority": "high"
+    },
+    {
+      "id": "aug.depth-and-z-order-law",
+      "category": "dimensionality",
+      "hypothesis": "Visual depth, overlay ordering, and emphasis should be encoded as a limited dimensional system so perceived hierarchy follows declared structure rather than ad hoc layering.",
+      "status": "seeded",
+      "route_scope": ["/", "/imc", "/work/[slug]"],
+      "measured_checks": [
+        "elevated surfaces use declared depth roles only",
+        "z-order and emphasis do not contradict semantic priority"
+      ],
+      "owner_lane": "fidelity-reviewer",
+      "priority": "medium"
+    },
+    {
+      "id": "aug.semantic-depth-minimization",
+      "category": "code-quality",
+      "hypothesis": "Semantic hierarchy and DOM depth should be simplified where possible so content management, SEO, and inspection quality improve without changing route truth.",
+      "status": "seeded",
+      "route_scope": ["/", "/imc", "/work/[slug]"],
+      "measured_checks": [
+        "main landmark and heading hierarchy remain valid",
+        "no unnecessary wrapper nesting in route-critical regions"
+      ],
+      "owner_lane": "integration",
+      "priority": "medium"
+    }
+  ]
+}

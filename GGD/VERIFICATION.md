@@ -4,6 +4,10 @@ Verification is a first-class system.
 
 Every serious route pass must produce evidence, not just a feeling.
 
+The machine-readable bundle index is:
+
+- `GGD/verification/bundles.json`
+
 ## Severity
 
 - `CRITICAL`: route is wrong or unsafe to promote
@@ -89,3 +93,7 @@ Every failed verification pass must create a gap record with:
 - top drift surfaces
 - suspected ownership boundary
 - next bounded slice
+
+Route gaps live in:
+
+- `GGD/gaps/routes/*.json`

@@ -3,37 +3,54 @@
 ## Current Position
 
 - date: `2026-04-03`
-- status: `active reset`
-- current phase: `Phase 1 - Port deterministic law into contracts`
-- next phase: `Phase 2 - Build the verification catalog`
+- status: `in_progress`
+- current phase: `Phase 2 - Build the verification catalog and command binding`
+- current plan: `binding-bundles-gaps-sync`
 
-## Current Truth
+## Command Binding
 
-- homepage is the strongest closed route
-- `/imc` remains the flagship route
-- the product-family kernel exists
-- `/work/xr` is still not canonically closed
-- the current claw control plane can run bounded cycles, but it is not yet ready for unattended operation
+- command namespace: `ggd`
+- binding file: `GGD/project.binding.json`
+- verification bundle index: `GGD/verification/bundles.json`
+- route gap dir: `GGD/gaps/routes`
 
-## Current Decisions
+## Route Status
 
-- `GGD/` is now the intended deterministic contract layer
-- `CLAW/` remains the autonomy and runner layer
-- geometry work must move under GGD rather than continue as parallel doctrine
-- GPD is being adapted structurally, not treated as a loose inspiration
-- the geometry skill and repo AGENTS contract now point at `GGD/`
+- `/`: canonical — homepage accepted through canonical closure
+- `/imc`: canonical — flagship IMC accepted through canonical closure
+- `/work/xr`: blocked — Rejected: fresh XR falsification still fails the phase acceptance rule with `14` critical layout diffs; IMC flagship invariants remain intact and XR responsive overflow is clear.
+- `/work/ft`: pending-proof — FT replication proof still pending
+
+## Active Gaps
+
+- `work-xr.geometry-gap`: /work/xr — open (14 critical, 0 major)
+
+## Augmentation Backlog
+
+- `aug.proportional-hero-law`: Hero regions should resolve from explicit ratio families per route role instead of implicit current widths, so flagship and product-family pages preserve identity under the same mathematical system.
+- `aug.section-flow-integral`: Section transitions should be governed by a declared vertical-flow law so macro spacing and sectional density can be improved without introducing local hacks.
+- `aug.typographic-baseline-rhythm`: Baseline rhythm and line-length control should be made explicit so density, legibility, and mathematical proportionality improve together rather than by visual compromise.
+- `aug.numeric-color-field`: Foreground, surface, rule, and accent tokens should be governed by explicit numeric relationships so color behavior is algebraic and contrast-safe rather than taste-driven.
+- `aug.viewport-limiting-cases`: Responsive behavior should be treated as explicit limiting cases, including larger displays, so routes do not merely avoid overflow but preserve geometric intent across dimensions.
+- `aug.depth-and-z-order-law`: Visual depth, overlay ordering, and emphasis should be encoded as a limited dimensional system so perceived hierarchy follows declared structure rather than ad hoc layering.
+- `aug.semantic-depth-minimization`: Semantic hierarchy and DOM depth should be simplified where possible so content management, SEO, and inspection quality improve without changing route truth.
 
 ## Open Gaps
 
-- GGD command surface is defined but not yet wired
-- GGD verification bundles are defined but not yet fully encoded in machine checks
-- active XR and FT failures are not yet migrated into GGD-native gap records
-- CLAW runtime-state still promotes from its own state layer rather than GGD state
+- Teach CLAW runtime promotion logic to read GGD gap records before promoting product-family work.
+- Add explicit FT route-gap export once the first FT falsification exists.
+- Bind named GGD verification bundles to executable audit entrypoints in the command surface.
+
+## Blockers
+
+- XR remains blocked by an open deterministic geometry gap.
+- Press-go remains false until supervised and guarded autonomy proofs are complete.
 
 ## Stop Rule
 
 Do not claim unattended recursive readiness until:
 
 - GGD state and CLAW state agree
-- GGD verification is operational
-- current route failures are represented inside GGD
+- GGD verification bundles are operational
+- active route failures are represented as explicit gap records
+- CLAW promotion decisions consume GGD contract artifacts

@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "project_id": "zer0pa-website",
+  "bundles": [
+    {
+      "id": "geometry",
+      "title": "Geometry Bundle",
+      "owner_lane": "systems-qa",
+      "checks": [
+        "spacing ladder compliance",
+        "grid and span compliance",
+        "macro section flow drift",
+        "top drift surface ranking"
+      ],
+      "scripts": [
+        "npm run layout:measure -- <route> --baseUrl=<baseUrl>",
+        "npm run layout:diff -- <route>"
+      ],
+      "evidence_artifacts": [
+        "deterministic-design-system/maps/live/*.json",
+        "deterministic-design-system/maps/diff/*.json",
+        "deterministic-design-system/reports/*.verification.md"
+      ],
+      "promotion_gate": "zero critical and zero major geometry diffs"
+    },
+    {
+      "id": "breakpoint",
+      "title": "Breakpoint Bundle",
+      "owner_lane": "systems-qa",
+      "checks": [
+        "desktop limiting case",
+        "tablet limiting case",
+        "mobile limiting case",
+        "horizontal overflow absence"
+      ],
+      "scripts": [
+        "npm run audit:responsive -- --baseUrl=<baseUrl>"
+      ],
+      "evidence_artifacts": [
+        "deterministic-design-system/reports/responsive/responsive.verification.md"
+      ],
+      "promotion_gate": "no horizontal overflow on declared viewport matrix"
+    },
+    {
+      "id": "color-contrast",
+      "title": "Color and Contrast Bundle",
+      "owner_lane": "systems-qa",
+      "checks": [
+        "text/background contrast",
+        "low-emphasis token legibility",
+        "token-role consistency"
+      ],
+      "scripts": [
+        "npm run audit:contrast -- --baseUrl=<baseUrl>"
+      ],
+      "evidence_artifacts": [
+        "deterministic-design-system/reports/contrast/contrast.verification.md",
+        "deterministic-design-system/reports/contrast/contrast.verification.json"
+      ],
+      "promotion_gate": "zero major contrast failures"
+    },
+    {
+      "id": "semantic-seo",
+      "title": "Semantic and SEO Bundle",
+      "owner_lane": "systems-qa",
+      "checks": [
+        "main landmark presence",
+        "route-specific title",
+        "route-specific description",
+        "heading hierarchy discipline"
+      ],
+      "scripts": [
+        "npm run audit:quality -- --baseUrl=<baseUrl>"
+      ],
+      "evidence_artifacts": [
+        "deterministic-design-system/reports/quality/quality.verification.md",
+        "deterministic-design-system/reports/quality/quality.verification.json"
+      ],
+      "promotion_gate": "zero critical and zero major semantic or metadata findings"
+    },
+    {
+      "id": "truth",
+      "title": "Truth Bundle",
+      "owner_lane": "data-truth",
+      "checks": [
+        "packet truth alignment",
+        "route-role truth alignment",
+        "flagship isolation",
+        "product-family kernel truth preservation"
+      ],
+      "scripts": [
+        "node CLAW/scripts/export-ggd-gap.mjs --handoff=<handoff>"
+      ],
+      "evidence_artifacts": [
+        "CLAW/control-plane/runtime/handoffs/*.json",
+        "GGD/gaps/routes/*.json"
+      ],
+      "promotion_gate": "no truth contradiction and no flagship flattening"
+    },
+    {
+      "id": "code-quality",
+      "title": "Code Quality Bundle",
+      "owner_lane": "integration",
+      "checks": [
+        "build integrity",
+        "parser integrity",
+        "kernel simplicity",
+        "measurement-hook preservation"
+      ],
+      "scripts": [
+        "npm run build",
+        "npm run test:parser"
+      ],
+      "evidence_artifacts": [
+        "CLAW/control-plane/reports/*.md"
+      ],
+      "promotion_gate": "build and parser pass with no kernel or measurement-hook regression"
+    }
+  ]
+}

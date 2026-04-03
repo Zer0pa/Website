@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GGD Project Binding",
+  "type": "object",
+  "required": [
+    "version",
+    "project_id",
+    "command_namespace",
+    "binding_file",
+    "project_root",
+    "state_files",
+    "schemas",
+    "scripts",
+    "verification_bundle_index",
+    "augmentation_backlog",
+    "gap_dir",
+    "route_roles",
+    "focus_routes"
+  ],
+  "properties": {
+    "version": { "type": "integer" },
+    "project_id": { "type": "string" },
+    "command_namespace": { "type": "string" },
+    "binding_file": { "type": "string" },
+    "project_root": { "type": "string" },
+    "authoritative_layers": { "type": "object" },
+    "state_files": { "type": "object" },
+    "schemas": { "type": "object" },
+    "scripts": { "type": "object" },
+    "verification_bundle_index": { "type": "string" },
+    "augmentation_backlog": { "type": "string" },
+    "gap_dir": { "type": "string" },
+    "route_roles": { "type": "object" },
+    "focus_routes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "geometry_authority": { "type": "object" }
+  },
+  "additionalProperties": true
+}
