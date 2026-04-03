@@ -5,7 +5,7 @@
   "status": "active",
   "current_focus": [
     "D2",
-    "D4",
+    "D3",
     "D7"
   ],
   "operator_interface": "codex-supervised",
@@ -96,7 +96,7 @@
     {
       "id": "D4",
       "title": "Contrast and legibility refinement",
-      "status": "in_progress",
+      "status": "completed",
       "depends_on": [
         "D2"
       ],

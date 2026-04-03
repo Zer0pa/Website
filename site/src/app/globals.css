@@ -1,4 +1,5 @@
 :root {
+  /* Contrast law: secondary text must clear 4.5:1 on the dark surfaces used by the system. */
   --color-void: #0c0c0c;
   --color-surface: #0a0a0a;
   --color-surface-raised: #111111;
@@ -6,12 +7,12 @@
   --color-border: #1a1a1a;
   --color-border-active: #333333;
   --color-emphasis: #ffffff;
-  --color-text-primary: #8a8a8a;
-  --color-text-secondary: #5a5a5a;
-  --color-text-tertiary: #2f2f2f;
-  --color-ghost: #1a1a1a;
+  --color-text-primary: #9a9a9a;
+  --color-text-secondary: #8a8a8a;
+  --color-text-tertiary: #6a6a6a;
+  --color-ghost: #777777;
   --color-pass: #7fb67f;
-  --color-fail: #b05a55;
+  --color-fail: #d07a75;
   --color-warning: #a98a44;
 
   --font-masthead: var(--font-oswald), 'Oswald', sans-serif;
