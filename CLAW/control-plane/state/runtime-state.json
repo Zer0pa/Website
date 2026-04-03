@@ -4,7 +4,7 @@
   "mode": "hardening",
   "press_go": false,
   "current_milestone": "M1-recursive-autonomy-hardening",
-  "current_phase": "P0-drift-eradication-and-prd-lock",
+  "current_phase": "P1-canonical-homepage-closure",
   "active_wave": "W1",
   "last_updated": "2026-04-03T11:44:49+02:00",
   "control_style": "evaluator-optimizer",
