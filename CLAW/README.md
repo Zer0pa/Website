@@ -23,6 +23,7 @@ Keep long-running website work deterministic, bounded, and recoverable.
 - [`control-plane/runtime-state.schema.json`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/runtime-state.schema.json)
 - [`control-plane/artifact-contract.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/artifact-contract.md)
 - [`control-plane/recursive-improvement.json`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/recursive-improvement.json)
+- [`control-plane/reports/W1-homepage-supervised.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/reports/W1-homepage-supervised.md)
 
 ## V1 Lanes
 

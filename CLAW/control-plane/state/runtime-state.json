@@ -6,7 +6,9 @@
   "current_milestone": "M0-canonical-closure",
   "current_phase": "W1-homepage-supervised",
   "active_wave": "W1",
-  "last_updated": "2026-04-03T09:27:18Z",
+  "last_updated": "2026-04-03T11:33:57+02:00",
+  "control_style": "evaluator-optimizer",
+  "latest_wave_report": "CLAW/control-plane/reports/W1-homepage-supervised.md",
   "lanes": {
     "orchestrator": {
       "status": "active",
@@ -54,6 +56,14 @@
     "layout": "home: 0 critical, 0 major, 7 minor, 5 cosmetic after bounded rollback",
     "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile"
   },
+  "current_scores": {
+    "fidelity": null,
+    "geometry_compliance": null,
+    "responsive_integrity": null,
+    "truth_integrity": null,
+    "accessibility": null,
+    "weighted": null
+  },
   "gates": {
     "docs_written": true,
     "worktrees_aligned": true,
@@ -76,6 +86,28 @@
     "Run systems-qa from the integration branch after the first accepted lane commit.",
     "Rehearse cherry-picks through integration.",
     "Prove one rollback and recovery drill."
+  ],
+  "learning_backlog": [
+    {
+      "id": "W1-home-macro-spacing-regression",
+      "category": "law-gap",
+      "route": "home",
+      "observation": "Reducing global section spacing improved some local geometry but caused downstream macro-layout regression.",
+      "evidence": "Attempt A in CLAW/control-plane/reports/W1-homepage-supervised.md",
+      "proposed_law_change": "Do not alter macro section spacing outside a declared section-position law.",
+      "owner_lane": "homepage-fidelity",
+      "status": "open"
+    },
+    {
+      "id": "W1-home-lane-dependency-closure",
+      "category": "tooling-gap",
+      "route": "home",
+      "observation": "The lane required repo-local dependency installation before autonomous verification could run.",
+      "evidence": "Homepage-fidelity build verification on 2026-04-03",
+      "proposed_law_change": "Treat lane-local dependency closure as required before autonomous verification.",
+      "owner_lane": "systems-qa",
+      "status": "open"
+    }
   ],
   "stop_conditions": [
     "build failure",

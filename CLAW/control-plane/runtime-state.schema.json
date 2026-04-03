@@ -38,6 +38,15 @@
     "active_wave": {
       "type": "string"
     },
+    "control_style": {
+      "type": "string"
+    },
+    "latest_wave_report": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "lanes": {
       "type": "object",
       "additionalProperties": {
@@ -46,6 +55,10 @@
       }
     },
     "latest_audits": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "current_scores": {
       "type": "object",
       "additionalProperties": true
     },
@@ -63,6 +76,13 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "learning_backlog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
       }
     },
     "stop_conditions": {

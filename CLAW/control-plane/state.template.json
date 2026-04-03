@@ -6,6 +6,8 @@
   "current_milestone": "M0-canonical-closure",
   "current_phase": "control-plane-definition",
   "active_wave": "W0",
+  "control_style": "evaluator-optimizer",
+  "latest_wave_report": null,
   "lanes": {
     "orchestrator": {
       "status": "active",
@@ -52,6 +54,14 @@
     "layout": null,
     "responsive": null
   },
+  "current_scores": {
+    "fidelity": null,
+    "geometry_compliance": null,
+    "responsive_integrity": null,
+    "truth_integrity": null,
+    "accessibility": null,
+    "weighted": null
+  },
   "gates": {
     "docs_written": true,
     "worktrees_aligned": true,
@@ -73,6 +83,7 @@
     "Rehearse cherry-picks through integration.",
     "Prove one rollback and recovery drill."
   ],
+  "learning_backlog": [],
   "stop_conditions": [
     "build failure",
     "parser test failure",

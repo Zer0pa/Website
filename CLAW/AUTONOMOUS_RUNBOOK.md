@@ -21,6 +21,8 @@ Canonical files:
 - `CLAW/control-plane/state.template.json`
 - `CLAW/control-plane/runtime-state.schema.json`
 - `CLAW/control-plane/artifact-contract.md`
+- `CLAW/control-plane/recursive-improvement.json`
+- `CLAW/control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md`
 
 ### 2. Supervised Dry Run
 
@@ -32,6 +34,7 @@ Run one full cycle manually:
 4. systems QA runs audits
 5. integration stages only accepted output
 6. orchestrator records outcome and next slice
+7. rejected attempts are converted into explicit learning items
 
 This proves the loop works.
 
@@ -74,6 +77,7 @@ Each active lane:
 - attempts one narrow improvement slice
 - runs only the minimum required verification
 - writes a handoff note
+- records whether the slice was accepted, rejected, or escalated
 
 ### Orchestrator Review: every 45 minutes
 
@@ -157,6 +161,8 @@ Keep the loop small and falsifiable:
 
 If a change is not measurably better, do not keep it because it "looks promising."
 
+Rejected slices should harden the law set before the next attempt.
+
 ## Readiness To Press Go
 
 Say "ready to press go" only when all of the following are true:
@@ -168,3 +174,4 @@ Say "ready to press go" only when all of the following are true:
 - no unrelated repo touches occurred
 - the integration lane can produce clean checkpoints
 - homepage, `/imc`, and product-family lanes all have lawful briefs and QA coverage
+- the loop has already demonstrated regression rejection under supervision

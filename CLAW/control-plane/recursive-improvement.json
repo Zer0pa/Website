@@ -2,6 +2,7 @@
   "version": 1,
   "protocol": "evaluator-optimizer",
   "status": "supervised-local-only",
+  "page_formula": "Page = f(viewport, content_packet, route_role, design_constants)",
   "route_priority": [
     "/",
     "/imc",
@@ -9,12 +10,59 @@
   ],
   "slice_policy": {
     "requires_bounded_goal": true,
+    "requires_single_hypothesis": true,
     "max_files_touched_per_attempt": 3,
     "max_routes_affected_per_attempt": 1,
     "max_attempts_per_slice_before_escalation": 2,
     "preserve_last_good_state": true,
     "reject_on_new_critical_or_major": true,
-    "reject_on_cross_repo_write": true
+    "reject_on_cross_repo_write": true,
+    "reject_on_macro_layout_nudge_without_declared_law": true
+  },
+  "geometry_program": {
+    "base_unit_px": 8,
+    "allowed_spacing_px": [
+      4,
+      8,
+      12,
+      16,
+      24,
+      32,
+      40,
+      48,
+      64,
+      80,
+      96
+    ],
+    "grid_columns": {
+      "desktop": 16,
+      "tablet": 10,
+      "mobile": 6
+    },
+    "gutters_px": {
+      "desktop": 24,
+      "tablet": 24,
+      "mobile": 16
+    },
+    "approved_ratio_families": {
+      "hero_split": [
+        "5:7",
+        "1:1",
+        "7:5"
+      ],
+      "section_split": [
+        "3:5",
+        "2:3",
+        "5:8"
+      ],
+      "media": [
+        "1:1",
+        "4:3",
+        "3:2",
+        "16:10",
+        "16:9"
+      ]
+    }
   },
   "optimizer": {
     "focus_order": [
@@ -41,7 +89,8 @@
   "evaluator": {
     "required_preflight": [
       "capture current diff report",
-      "record target slice and files in handoff"
+      "record target slice and files in handoff",
+      "state the hypothesis being tested"
     ],
     "required_postflight": [
       "npm run build",
@@ -54,14 +103,26 @@
       "major_max": 0,
       "minor_must_not_increase": true
     },
+    "geometry_gate": {
+      "spacing_must_use_declared_tokens": true,
+      "macro_layout_moves_require_declared_law": true,
+      "type_roles_must_use_declared_tokens": true
+    },
     "responsive_gate": {
       "horizontal_overflow_allowed": false
+    },
+    "score_weights": {
+      "fidelity": 0.4,
+      "geometry_compliance": 0.2,
+      "responsive_integrity": 0.15,
+      "truth_integrity": 0.15,
+      "accessibility": 0.1
     }
   },
   "cadence": {
-    "lane_iteration_minutes": 20,
-    "orchestrator_review_minutes": 45,
-    "full_falsification_minutes": 120,
+    "lane_iteration_minutes": 15,
+    "orchestrator_review_minutes": 60,
+    "full_falsification_minutes": 240,
     "integration_checkpoint_hours": 4,
     "recovery_drill_hours": 12,
     "system_health_review_hours": 24
@@ -88,7 +149,18 @@
     "layout has zero critical and zero major",
     "minor count is lower or unchanged with better route fidelity",
     "responsive audit has no horizontal overflow",
+    "geometry tokens remain lawful",
     "handoff artifact is complete"
+  ],
+  "learning_backlog_fields": [
+    "id",
+    "category",
+    "route",
+    "observation",
+    "evidence",
+    "proposed_law_change",
+    "owner_lane",
+    "status"
   ],
   "stop_conditions": [
     "build failure",

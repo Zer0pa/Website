@@ -25,6 +25,7 @@ Run it as an evaluator-optimizer system:
 Canonical machine-readable protocol:
 
 - `CLAW/control-plane/recursive-improvement.json`
+- `CLAW/control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md`
 
 ### Control Roles
 
@@ -184,6 +185,7 @@ Every lane cycle must emit:
 - result
 - regression risk
 - next recommended action
+- learning captured
 
 ## Machine-Readable Config
 
@@ -232,5 +234,6 @@ The system is ready for a safe autonomous local run only when:
 - the state template exists
 - the orchestrator can assign work without improvising scope
 - one supervised cycle completes end-to-end
+- that supervised cycle proves the evaluator can reject a worse candidate and preserve the better one
 - one recovery drill is proven
 - full QA runs complete from the integration lane
