@@ -27,10 +27,11 @@ Canonical files:
 Run one full cycle manually:
 
 1. orchestrator assigns one narrow slice
-2. one implementation lane changes code
-3. systems QA runs audits
-4. integration stages the accepted result
-5. orchestrator records outcome
+2. the lane records the baseline before changing code
+3. one implementation lane changes code
+4. systems QA runs audits
+5. integration stages only accepted output
+6. orchestrator records outcome and next slice
 
 This proves the loop works.
 
@@ -65,7 +66,7 @@ Only after guarded and extended local autonomy pass:
 
 ## Cadence
 
-### Lane Cycle: every 10 minutes
+### Lane Cycle: every 20 minutes
 
 Each active lane:
 
@@ -74,7 +75,7 @@ Each active lane:
 - runs only the minimum required verification
 - writes a handoff note
 
-### Orchestrator Review: every 30 minutes
+### Orchestrator Review: every 45 minutes
 
 The orchestrator:
 
@@ -83,7 +84,7 @@ The orchestrator:
 - updates queue and locks
 - decides `promote`, `revise`, `hold`, or `abandon`
 
-### QA Sweep: every 90 minutes
+### QA Sweep: every 120 minutes
 
 Systems QA runs:
 
@@ -121,6 +122,8 @@ Every lane handoff should contain:
 - target route or subsystem
 - files changed
 - commands run
+- preflight baseline
+- postflight metrics
 - audit result
 - blockers
 - recommendation
@@ -139,8 +142,20 @@ No handoff means no promotion.
 
 - two failed attempts on the same narrow slice -> escalate back to orchestrator
 - any new critical diff -> immediate hold
+- any new major diff -> immediate hold
 - any parser or build failure -> immediate hold
 - any machine-local guardrail breach -> stop autonomy and return to supervised mode
+
+## Recursive Improvement Rule
+
+Keep the loop small and falsifiable:
+
+1. establish the current metric baseline
+2. attempt one bounded change
+3. rerun the evaluator
+4. keep the change only if the evaluator agrees
+
+If a change is not measurably better, do not keep it because it "looks promising."
 
 ## Readiness To Press Go
 

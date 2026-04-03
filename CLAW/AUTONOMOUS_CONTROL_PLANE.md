@@ -15,6 +15,17 @@ It is not scoped to the rest of `/Users/zer0palab`, other GitHub repos, or globa
 
 Use a narrow orchestrated lane system, not a free-for-all swarm.
 
+Run it as an evaluator-optimizer system:
+
+- one bounded slice per lane cycle
+- one measurable baseline before each attempt
+- one evaluator verdict after each attempt
+- one rollback to the last good state if the evaluator rejects the change
+
+Canonical machine-readable protocol:
+
+- `CLAW/control-plane/recursive-improvement.json`
+
 ### Control Roles
 
 - `orchestrator`
@@ -161,12 +172,15 @@ Canonical control files:
 - `CLAW/control-plane/state.template.json`
 - `CLAW/control-plane/runtime-state.schema.json`
 - `CLAW/control-plane/artifact-contract.md`
+- `CLAW/control-plane/recursive-improvement.json`
 
 Every lane cycle must emit:
 
 - goal
 - files touched
 - commands run
+- preflight baseline
+- postflight metrics
 - result
 - regression risk
 - next recommended action

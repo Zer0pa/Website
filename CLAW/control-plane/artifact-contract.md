@@ -8,6 +8,8 @@ Every autonomous lane cycle must emit:
 - task id or bounded goal
 - files changed
 - commands run
+- preflight baseline
+- postflight metrics
 - claimed improvement
 - known risks
 - recommended next action
@@ -23,6 +25,7 @@ Systems QA must emit:
 - parser result
 - layout result
 - responsive result
+- regression delta versus baseline
 - regression summary
 - accept or reject recommendation
 

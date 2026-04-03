@@ -1,12 +1,12 @@
 {
   "version": 1,
   "project": "zer0pa-website",
-  "mode": "architecture-ready",
+  "mode": "supervised-dry-run",
   "press_go": false,
   "current_milestone": "M0-canonical-closure",
-  "current_phase": "supervised-dry-run-prep",
+  "current_phase": "W1-homepage-supervised",
   "active_wave": "W1",
-  "last_updated": "2026-04-03T00:00:00Z",
+  "last_updated": "2026-04-03T09:27:18Z",
   "lanes": {
     "orchestrator": {
       "status": "active",
@@ -14,9 +14,9 @@
       "last_handoff": null
     },
     "homepage-fidelity": {
-      "status": "waiting",
+      "status": "active",
       "last_accepted_commit": null,
-      "last_handoff": null
+      "last_handoff": "CLAW/control-plane/reports/W1-homepage-supervised.md"
     },
     "imc-flagship": {
       "status": "waiting",
@@ -48,10 +48,10 @@
     }
   },
   "latest_audits": {
-    "build": null,
-    "parser": null,
-    "layout": null,
-    "responsive": null
+    "build": "pass: homepage-fidelity site build on 2026-04-03",
+    "parser": "pass: homepage-fidelity parser falsification loop on 2026-04-03",
+    "layout": "home: 0 critical, 0 major, 7 minor, 5 cosmetic after bounded rollback",
+    "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile"
   },
   "gates": {
     "docs_written": true,
@@ -66,10 +66,11 @@
   "blockers": [
     "Press-go criteria are not yet satisfied.",
     "No supervised end-to-end cycle has passed yet.",
+    "Homepage candidate improved modestly but has not been promoted through integration.",
     "No recovery drill has been proven yet."
   ],
   "next_actions": [
-    "Run one full canonical cycle for homepage.",
+    "Run the next homepage slice on flagship vertical alignment and wordmark width.",
     "Run one full canonical cycle for /imc.",
     "Run systems-qa from the integration branch after the first accepted lane commit.",
     "Rehearse cherry-picks through integration.",

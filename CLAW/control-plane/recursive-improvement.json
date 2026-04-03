@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "protocol": "evaluator-optimizer",
+  "status": "supervised-local-only",
+  "route_priority": [
+    "/",
+    "/imc",
+    "/work/[slug]"
+  ],
+  "slice_policy": {
+    "requires_bounded_goal": true,
+    "max_files_touched_per_attempt": 3,
+    "max_routes_affected_per_attempt": 1,
+    "max_attempts_per_slice_before_escalation": 2,
+    "preserve_last_good_state": true,
+    "reject_on_new_critical_or_major": true,
+    "reject_on_cross_repo_write": true
+  },
+  "optimizer": {
+    "focus_order": [
+      "canonical geometry",
+      "typographic closure",
+      "component law extraction",
+      "data truth",
+      "responsive integrity",
+      "performance polish"
+    ],
+    "allowed_actions": [
+      "edit files inside the assigned lane worktree",
+      "run repo-local installs",
+      "run route-scoped audits",
+      "revert the immediately previous unaccepted slice"
+    ],
+    "forbidden_actions": [
+      "edit unrelated repos",
+      "write to main",
+      "push or deploy without a gate",
+      "change global machine state without ops approval"
+    ]
+  },
+  "evaluator": {
+    "required_preflight": [
+      "capture current diff report",
+      "record target slice and files in handoff"
+    ],
+    "required_postflight": [
+      "npm run build",
+      "npm run test:parser",
+      "npm run audit:layout -- <route> --baseUrl=<lane-server>",
+      "npm run audit:responsive -- --baseUrl=<lane-server>"
+    ],
+    "layout_gate": {
+      "critical_max": 0,
+      "major_max": 0,
+      "minor_must_not_increase": true
+    },
+    "responsive_gate": {
+      "horizontal_overflow_allowed": false
+    }
+  },
+  "cadence": {
+    "lane_iteration_minutes": 20,
+    "orchestrator_review_minutes": 45,
+    "full_falsification_minutes": 120,
+    "integration_checkpoint_hours": 4,
+    "recovery_drill_hours": 12,
+    "system_health_review_hours": 24
+  },
+  "metrics": {
+    "primary": [
+      "layout critical count",
+      "layout major count",
+      "layout minor count",
+      "responsive overflow incidents",
+      "build pass rate",
+      "parser pass rate"
+    ],
+    "secondary": [
+      "checkpoint acceptance rate",
+      "failed attempts per slice",
+      "rollback count",
+      "time to non-regressing candidate"
+    ]
+  },
+  "promotion_conditions": [
+    "build passes",
+    "parser passes",
+    "layout has zero critical and zero major",
+    "minor count is lower or unchanged with better route fidelity",
+    "responsive audit has no horizontal overflow",
+    "handoff artifact is complete"
+  ],
+  "stop_conditions": [
+    "build failure",
+    "parser failure",
+    "new critical or major regression",
+    "two failed attempts on the same slice",
+    "cross-repo write detected",
+    "lane scope violation",
+    "data-truth contradiction"
+  ]
+}
