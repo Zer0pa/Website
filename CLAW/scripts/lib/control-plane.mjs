@@ -95,6 +95,14 @@ export function loadControlPlane() {
   };
 }
 
+function readOptionalJson(relativeOrAbsolutePath) {
+  const absolutePath = projectPath(relativeOrAbsolutePath);
+  if (!fs.existsSync(absolutePath)) {
+    return null;
+  }
+  return JSON.parse(fs.readFileSync(absolutePath, 'utf8'));
+}
+
 export function lookupPhase(executionPlan, runtimePhase, overridePhase = null) {
   const requested = phaseToken(overridePhase || runtimePhase || executionPlan.current_phase);
   return executionPlan.phases.find((phase) => phase.id === requested) || null;
@@ -122,6 +130,7 @@ function referencedFiles(control) {
     'CLAW/control-plane/product-kernel/product-family-kernel.json',
     'CLAW/control-plane/product-kernel/flagship-exceptions.imc.json',
     'CLAW/control-plane/product-kernel/packet-binding-rules.json',
+    'CLAW/control-plane/runner-policy.json',
   ].filter(Boolean);
 }
 
@@ -131,6 +140,12 @@ export function validateControlPlane(control, options = {}) {
   const phase = lookupPhase(control.executionPlan, control.runtime.current_phase, options.phase || null);
   const lanesById = laneMap(control.agentLanes);
   const locks = activeLocks();
+  const autonomyState = readOptionalJson('CLAW/services/autonomy/state.json');
+  const runWindowMode = control.runtime.run_window?.mode || null;
+  const hasActiveRunnerWork =
+    Boolean(control.runtime.active_cycle) ||
+    Boolean(control.runtime.queue?.active) ||
+    (control.runtime.active_jobs || []).length > 0;
 
   for (const ref of referencedFiles(control)) {
     if (!fileExists(ref)) {
@@ -195,6 +210,12 @@ export function validateControlPlane(control, options = {}) {
     issues.push(`Unknown active_cadence_profile: ${control.runtime.active_cadence_profile}`);
   }
 
+  if (control.runtime.active_cadence_profile === 'guarded_local_autonomy' && runWindowMode === 'manual-supervised-only') {
+    warnings.push(
+      'Runtime is using guarded_local_autonomy while run_window.mode remains manual-supervised-only.',
+    );
+  }
+
   if (control.runtime.active_cycle?.queue_file && !fileExists(control.runtime.active_cycle.queue_file)) {
     warnings.push(`Runtime references a missing active queue file: ${control.runtime.active_cycle.queue_file}`);
   }
@@ -211,6 +232,40 @@ export function validateControlPlane(control, options = {}) {
     warnings.push(
       `Runtime lock list length (${control.runtime.locks.length}) differs from live lock count (${locks.length}).`,
     );
+  }
+
+  if (autonomyState) {
+    if (typeof control.runtime.runner?.enabled === 'boolean' && control.runtime.runner.enabled !== autonomyState.enabled) {
+      warnings.push(
+        `runtime.runner.enabled (${control.runtime.runner.enabled}) differs from autonomy service enabled (${autonomyState.enabled}).`,
+      );
+    }
+
+    if (control.runtime.active_cycle?.cycle_id && autonomyState.active_cycle && autonomyState.active_cycle !== control.runtime.active_cycle.cycle_id) {
+      warnings.push(
+        `runtime.active_cycle (${control.runtime.active_cycle.cycle_id}) differs from autonomy service active_cycle (${autonomyState.active_cycle}).`,
+      );
+    }
+
+    if (!control.runtime.press_go && autonomyState.enabled && !['guarded-override', 'idle'].includes(autonomyState.mode || 'idle')) {
+      issues.push(
+        `Autonomy service mode (${autonomyState.mode}) is not allowed while press_go is false.`,
+      );
+    }
+
+    if (autonomyState.enabled && hasActiveRunnerWork && !autonomyState.pid) {
+      issues.push(
+        'Autonomy service is enabled with active runner work but no live pid. Restart or clear stale runner state before continuing.',
+      );
+    }
+
+    if (autonomyState.enabled && hasActiveRunnerWork && !autonomyState.started_at) {
+      warnings.push(
+        'Autonomy service is enabled with active runner work but started_at is null.',
+      );
+    }
+  } else if (control.runtime.runner?.enabled || hasActiveRunnerWork) {
+    warnings.push('Autonomy service state is missing while runtime reports active runner state.');
   }
 
   for (const phaseTemplateKey of Object.keys(control.cycleTemplates.phases || {})) {
