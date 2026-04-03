@@ -104,22 +104,28 @@ export function ensureAutonomyDirs() {
   ensureDir(path.dirname(AUTONOMY_STATE_PATH));
 }
 
-export function ensureSharedPacketCacheSeeded() {
+export function ensureSharedPacketCacheSeeded(worktree = null) {
   ensureDir(RUNTIME_TRUTH_CACHE_DIR);
 
-  const rootPacketDir = projectPath('site/.cache/packets');
-  if (!fs.existsSync(rootPacketDir)) {
-    return RUNTIME_TRUTH_CACHE_DIR;
-  }
+  const candidateDirs = [
+    projectPath('site/.cache/packets'),
+    worktree ? path.join(worktree, 'site/.cache/packets') : null,
+  ].filter(Boolean);
 
-  for (const file of fs.readdirSync(rootPacketDir).filter((entry) => entry.endsWith('.json'))) {
-    const sourcePath = path.join(rootPacketDir, file);
-    const targetPath = path.join(RUNTIME_TRUTH_CACHE_DIR, file);
+  for (const sourceDir of candidateDirs) {
+    if (!fs.existsSync(sourceDir)) {
+      continue;
+    }
 
-    const sourceStat = fs.statSync(sourcePath);
-    const targetStat = fs.existsSync(targetPath) ? fs.statSync(targetPath) : null;
-    if (!targetStat || sourceStat.mtimeMs > targetStat.mtimeMs) {
-      fs.copyFileSync(sourcePath, targetPath);
+    for (const file of fs.readdirSync(sourceDir).filter((entry) => entry.endsWith('.json'))) {
+      const sourcePath = path.join(sourceDir, file);
+      const targetPath = path.join(RUNTIME_TRUTH_CACHE_DIR, file);
+
+      const sourceStat = fs.statSync(sourcePath);
+      const targetStat = fs.existsSync(targetPath) ? fs.statSync(targetPath) : null;
+      if (!targetStat || sourceStat.mtimeMs > targetStat.mtimeMs) {
+        fs.copyFileSync(sourcePath, targetPath);
+      }
     }
   }
 
