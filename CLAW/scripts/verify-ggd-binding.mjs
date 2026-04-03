@@ -111,7 +111,8 @@ for (const required of [
   `${binding.external_surface?.skills_dir}/ggd-system-optimize/SKILL.md`,
   `${binding.external_surface?.agents_dir}/ggd-systems-optimizer.md`,
 ]) {
-  if (required && !fs.existsSync(required)) {
+  const resolved = required?.startsWith('/') ? required : projectPath(required);
+  if (required && !fs.existsSync(resolved)) {
     issues.push(`Missing systems-optimizer binding target: ${required}`);
   }
 }

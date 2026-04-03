@@ -229,8 +229,7 @@ export function validateControlPlane(control, options = {}) {
 
   for (const lane of control.agentLanes.lanes) {
     if (!control.runtime.lanes[lane.id]) {
-      issues.push(`Runtime state is missing lane data for ${lane.id}`);
-      continue;
+      warnings.push(`Runtime state is missing lane data for ${lane.id}; it will be seeded on the next materialized cycle or lane settlement.`);
     }
 
     if (!fs.existsSync(lane.worktree)) {
@@ -539,6 +538,15 @@ export function materializeCycle(control, cycle) {
     lanes: cycle.jobs.map((job) => job.lane_id),
       created_at: cycle.created_at,
   };
+  runtime.lanes = runtime.lanes || {};
+  for (const job of cycle.jobs) {
+    runtime.lanes[job.lane_id] = {
+      status: runtime.lanes[job.lane_id]?.status || 'queued',
+      last_accepted_commit: runtime.lanes[job.lane_id]?.last_accepted_commit || null,
+      last_candidate_commit: runtime.lanes[job.lane_id]?.last_candidate_commit || null,
+      last_handoff: runtime.lanes[job.lane_id]?.last_handoff || null,
+    };
+  }
   runtime.queue = {
     active: relativeProjectPath(queuePath),
     history: queueIndex.history,
