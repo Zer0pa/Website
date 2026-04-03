@@ -14,6 +14,7 @@
     "layout:measure": "node --import tsx src/scripts/layout-measure.ts",
     "layout:diff": "node --import tsx src/scripts/layout-diff.ts",
     "audit:layout": "node --import tsx src/scripts/layout-audit.ts",
+    "audit:geometry-law": "node --import tsx src/scripts/geometry-law-audit.ts",
     "audit:quality": "node --import tsx src/scripts/quality-audit.ts",
     "audit:contrast": "node --import tsx src/scripts/contrast-audit.ts",
     "audit:responsive": "node --import tsx src/scripts/responsive-audit.ts",

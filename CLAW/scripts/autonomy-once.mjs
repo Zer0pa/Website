@@ -57,6 +57,14 @@ import {
   writeActiveQueue,
   writeRunnerState,
 } from './lib/autonomy.mjs';
+import {
+  buildGapRecordFromHandoff,
+  evaluateRouteGate,
+  inferRouteFromJob,
+  resolveGapRecords,
+  routeRoleForRoute,
+  writeGapRecord,
+} from './lib/ggd.mjs';
 
 function readArg(prefix, fallback = null) {
   return process.argv.find((arg) => arg.startsWith(prefix))?.slice(prefix.length) || fallback;
@@ -133,6 +141,8 @@ function stderrLooksFatal(stderrText, runnerPolicy) {
 }
 
 function buildBrief(control, queue, job) {
+  const subjectRoute = inferRouteFromJob(job);
+  const ggdGate = subjectRoute ? evaluateRouteGate(job.lane_id, subjectRoute) : null;
   const currentIndex = (queue.jobs || []).findIndex((candidate) => candidate.job_id === job.job_id);
   const previousJobs = (queue.jobs || [])
     .slice(0, Math.max(currentIndex, 0))
@@ -180,6 +190,14 @@ function buildBrief(control, queue, job) {
     shared_truth_cache_dir: RUNTIME_TRUTH_CACHE_DIR,
     flagship_invariants: flagshipInvariants,
     suggested_starting_points: suggestedStartingPoints(job),
+    subject_route: subjectRoute,
+    subject_route_role: subjectRoute ? routeRoleForRoute(subjectRoute) : null,
+    ggd: ggdGate
+      ? {
+          governing_bundle_ids: ggdGate.governing_bundle_ids,
+          blocking_gaps: ggdGate.blocking_gaps,
+        }
+      : null,
     deterministic_rules: [
       'No guessing or probabilistic invention.',
       'Design, layout, color, and hierarchy must remain mathematically defensible.',
@@ -258,6 +276,22 @@ function buildPrompt(control, queue, job, brief, briefFile) {
     `Current phase: ${queue.phase_id} / ${queue.phase_title}`,
     `Lane: ${job.lane_id}`,
     `Objective: ${job.objective}`,
+    ...(brief.subject_route
+      ? [
+          `Subject route: ${brief.subject_route} (${brief.subject_route_role})`,
+          `Governing bundles: ${(brief.ggd?.governing_bundle_ids || []).join(', ') || 'none'}`,
+        ]
+      : []),
+    ...(brief.ggd?.blocking_gaps?.length
+      ? [
+          '',
+          'Active GGD gaps for this route:',
+          ...brief.ggd.blocking_gaps.map(
+            (gap) =>
+              `- ${gap.id} [${gap.kind}] ${gap.summary || 'no summary'} (${gap.severity_counts.critical} critical, ${gap.severity_counts.major} major)`,
+          ),
+        ]
+      : []),
     `Allowed writes: ${job.writes.join(', ')}`,
     '',
     `Audit copy of the brief: ${briefFile}`,
@@ -451,6 +485,95 @@ function finalizeCycle(control, queue) {
     outcome,
     report: reportRelativePath,
     next_phase: next ? phaseLabel(next) : null,
+  };
+}
+
+function applyGgdContractToHandoff(job, handoff, normalizedStatus, handoffRelativePath) {
+  const subjectRoute = inferRouteFromJob(job, handoff);
+  if (!subjectRoute) {
+    return {
+      normalizedStatus,
+      handoff,
+      ggdRoute: null,
+      exportedGapPath: null,
+      resolvedGapIds: [],
+    };
+  }
+
+  const gate = evaluateRouteGate(job.lane_id, subjectRoute);
+
+  let nextStatus = normalizedStatus;
+  let exportedGapPath = null;
+  let resolvedGapIds = [];
+
+  if (job.lane_id === 'integration' && nextStatus === 'accepted' && gate.blocks_acceptance) {
+    const blockingIds = gate.blocking_gaps.map((gap) => gap.id).join(', ');
+    const blocker = `GGD contract blocked integration acceptance for ${subjectRoute}: open route gaps remain (${blockingIds}).`;
+    nextStatus = 'rejected';
+    handoff.summary = `Rejected by GGD contract: ${blockingIds} remain open for ${subjectRoute}.`;
+    handoff.blockers = [...new Set([...(handoff.blockers || []), blocker])];
+    handoff.recommendation = `Do not promote ${subjectRoute} while blocking GGD gaps remain open. Close the route gaps in owner lanes first.`;
+    if (!handoff.audit_result || typeof handoff.audit_result !== 'object') {
+      handoff.audit_result = {
+        summary: handoff.summary,
+        status: 'ggd-route-gate',
+        notes: [blocker],
+        report: null,
+      };
+    } else {
+      handoff.audit_result = {
+        ...handoff.audit_result,
+        summary: handoff.summary,
+        status: 'ggd-route-gate',
+        notes: [...new Set([...(handoff.audit_result.notes || []), blocker])],
+      };
+    }
+    handoff.learning_captured = [
+      ...(handoff.learning_captured || []),
+      'Downstream acceptance must fail closed while the subject route carries open GGD gaps.',
+    ];
+  }
+
+  if (['systems-qa', 'data-truth', 'integration'].includes(job.lane_id)) {
+    if (nextStatus === 'accepted') {
+      const resolved = resolveGapRecords(subjectRoute, {
+        kinds: gate.owned_gap_kinds,
+        resolved_by_handoff: handoffRelativePath,
+        resolved_by_job: handoff.job_id || null,
+        resolution_summary: `Resolved by accepted ${job.lane_id} verification for ${subjectRoute}.`,
+      });
+      if (resolved.length > 0) {
+        resolvedGapIds = resolved.map((gap) => gap.id);
+        handoff.learning_captured = [
+          ...(handoff.learning_captured || []),
+          `Resolved GGD gaps: ${resolvedGapIds.join(', ')}.`,
+        ];
+      }
+    } else if (['rejected', 'escalated'].includes(nextStatus)) {
+      const gap = buildGapRecordFromHandoff(
+        {
+          ...handoff,
+        },
+        {
+          route: subjectRoute,
+          source_handoff: handoffRelativePath,
+        },
+      );
+      const gapPath = writeGapRecord(gap);
+      exportedGapPath = relativeProjectPath(gapPath);
+      handoff.learning_captured = [
+        ...(handoff.learning_captured || []),
+        `Exported GGD gap ${gap.id}.`,
+      ];
+    }
+  }
+
+  return {
+    normalizedStatus: nextStatus,
+    handoff,
+    ggdRoute: subjectRoute,
+    exportedGapPath,
+    resolvedGapIds,
   };
 }
 
@@ -1387,6 +1510,10 @@ async function main() {
   };
 
   const handoffFile = handoffPath(job.job_id);
+  const handoffRelativePath = relativeProjectPath(handoffFile);
+  const ggdOutcome = applyGgdContractToHandoff(job, handoff, normalizedStatus, handoffRelativePath);
+  normalizedStatus = ggdOutcome.normalizedStatus;
+  handoff.status = normalizedStatus;
   writeJson(handoffFile, handoff);
 
   queue = loadActiveQueue(control.runtime);
@@ -1443,10 +1570,13 @@ async function main() {
     job_id: job.job_id,
     lane: job.lane_id,
     status: queueStatus,
-    handoff_file: relativeProjectPath(handoffFile),
+    handoff_file: handoffRelativePath,
     candidate_commit: queueJob.candidate_commit,
     next_job: remaining?.job_id || null,
     violation,
+    ggd_route: ggdOutcome.ggdRoute,
+    ggd_exported_gap: ggdOutcome.exportedGapPath,
+    ggd_resolved_gaps: ggdOutcome.resolvedGapIds,
   };
 
   if (queueStatus !== 'accepted') {

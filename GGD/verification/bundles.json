@@ -6,6 +6,8 @@
       "id": "geometry",
       "title": "Geometry Bundle",
       "owner_lane": "systems-qa",
+      "gap_kind": "geometry-gap",
+      "applies_to_route_roles": ["home", "flagship", "product-family"],
       "checks": [
         "spacing ladder compliance",
         "grid and span compliance",
@@ -14,12 +16,15 @@
       ],
       "scripts": [
         "npm run layout:measure -- <route> --baseUrl=<baseUrl>",
-        "npm run layout:diff -- <route>"
+        "npm run layout:diff -- <route>",
+        "npm run audit:geometry-law -- <route>"
       ],
       "evidence_artifacts": [
         "deterministic-design-system/maps/live/*.json",
         "deterministic-design-system/maps/diff/*.json",
-        "deterministic-design-system/reports/*.verification.md"
+        "deterministic-design-system/reports/*.verification.md",
+        "deterministic-design-system/reports/geometry-laws/*.geometry-law.json",
+        "deterministic-design-system/reports/geometry-laws/*.geometry-law.md"
       ],
       "promotion_gate": "zero critical and zero major geometry diffs"
     },
@@ -27,6 +32,8 @@
       "id": "breakpoint",
       "title": "Breakpoint Bundle",
       "owner_lane": "systems-qa",
+      "gap_kind": "breakpoint-gap",
+      "applies_to_route_roles": ["home", "flagship", "product-family"],
       "checks": [
         "desktop limiting case",
         "tablet limiting case",
@@ -45,6 +52,8 @@
       "id": "color-contrast",
       "title": "Color and Contrast Bundle",
       "owner_lane": "systems-qa",
+      "gap_kind": "contrast-gap",
+      "applies_to_route_roles": ["home", "flagship", "product-family"],
       "checks": [
         "text/background contrast",
         "low-emphasis token legibility",
@@ -63,6 +72,8 @@
       "id": "semantic-seo",
       "title": "Semantic and SEO Bundle",
       "owner_lane": "systems-qa",
+      "gap_kind": "semantic-gap",
+      "applies_to_route_roles": ["home", "flagship", "product-family"],
       "checks": [
         "main landmark presence",
         "route-specific title",
@@ -82,6 +93,8 @@
       "id": "truth",
       "title": "Truth Bundle",
       "owner_lane": "data-truth",
+      "gap_kind": "truth-gap",
+      "applies_to_route_roles": ["home", "flagship", "product-family"],
       "checks": [
         "packet truth alignment",
         "route-role truth alignment",
@@ -101,6 +114,8 @@
       "id": "code-quality",
       "title": "Code Quality Bundle",
       "owner_lane": "integration",
+      "gap_kind": "quality-gap",
+      "applies_to_route_roles": ["home", "flagship", "product-family"],
       "checks": [
         "build integrity",
         "parser integrity",

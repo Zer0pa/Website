@@ -10,6 +10,8 @@ export const GGD_STATE_MD_PATH = projectPath('GGD/STATE.md');
 export const GGD_BUNDLE_INDEX_PATH = projectPath('GGD/verification/bundles.json');
 export const GGD_AUGMENTATION_BACKLOG_PATH = projectPath('GGD/augmentations/augmentation-backlog.json');
 export const GGD_GAP_DIR = projectPath('GGD/gaps/routes');
+const DEFAULT_ROUTE_ROLES = ['home', 'flagship', 'product-family'];
+const CLOSED_GAP_STATUSES = new Set(['resolved', 'closed', 'archived', 'superseded']);
 
 export function ensureDir(absoluteDirPath) {
   fs.mkdirSync(absoluteDirPath, { recursive: true });
@@ -21,6 +23,14 @@ export function readJsonFile(relativeOrAbsolutePath) {
 
 export function readGgdState() {
   return readJson('GGD/state.json');
+}
+
+export function readGgdBinding() {
+  return readJson('GGD/project.binding.json');
+}
+
+export function readBundleIndex() {
+  return readJson('GGD/verification/bundles.json');
 }
 
 export function writeGgdState(state) {
@@ -45,6 +55,32 @@ export function gapPathForRoute(route, kind = 'geometry-gap') {
   return path.join(GGD_GAP_DIR, `${stem}.${kind}.json`);
 }
 
+export function gapIdForRoute(route, kind = 'geometry-gap') {
+  return `${routeFileStem(route)}.${kind}`;
+}
+
+export function inferRouteFromText(value) {
+  const text = String(value || '').trim();
+  if (!text) {
+    return null;
+  }
+
+  const explicit = text.match(/\/(?:imc|work\/[A-Za-z0-9_-]+)/);
+  if (explicit) {
+    return explicit[0];
+  }
+
+  if (/\bhomepage\b|\bhome route\b/i.test(text)) {
+    return '/';
+  }
+
+  if (/\bimc\b/i.test(text)) {
+    return '/imc';
+  }
+
+  return null;
+}
+
 export function parseRouteFromHandoff(handoff) {
   const explicitRoute =
     handoff.route ||
@@ -67,6 +103,42 @@ export function parseRouteFromHandoff(handoff) {
   }
 
   return '/work/unknown';
+}
+
+export function inferRouteFromJob(job, laneResult = null) {
+  const candidates = [
+    laneResult?.route,
+    laneResult?.target,
+    laneResult?.summary,
+    job?.objective,
+    job?.target,
+    ...(job?.acceptance || []),
+  ];
+
+  for (const candidate of candidates) {
+    const route = inferRouteFromText(candidate);
+    if (route) {
+      return route;
+    }
+  }
+
+  const laneId = String(job?.lane_id || '');
+  if (laneId === 'homepage-fidelity') {
+    return '/';
+  }
+  if (laneId === 'imc-flagship') {
+    return '/imc';
+  }
+
+  const phaseId = String(job?.phase_id || job?.phase || '');
+  if (phaseId === 'C1') {
+    return '/';
+  }
+  if (phaseId === 'C2') {
+    return '/imc';
+  }
+
+  return null;
 }
 
 export function severityCountsFromHandoff(handoff) {
@@ -138,6 +210,42 @@ export function routeRoleForRoute(route) {
   return 'unknown';
 }
 
+export function routeMatchesPattern(route, pattern) {
+  if (!pattern) {
+    return false;
+  }
+  if (pattern === 'all') {
+    return true;
+  }
+  if (pattern === route) {
+    return true;
+  }
+  if (pattern === '/work/[slug]' && route.startsWith('/work/')) {
+    return true;
+  }
+  return false;
+}
+
+export function governingBundlesForRoute(route) {
+  const role = routeRoleForRoute(route);
+  return (readBundleIndex().bundles || []).filter((bundle) => {
+    const allowedRoles =
+      Array.isArray(bundle.applies_to_route_roles) && bundle.applies_to_route_roles.length > 0
+        ? bundle.applies_to_route_roles
+        : DEFAULT_ROUTE_ROLES;
+    return allowedRoles.includes('all') || allowedRoles.includes(role);
+  });
+}
+
+export function gapKindsOwnedByLane(laneId) {
+  const bundles = readBundleIndex().bundles || [];
+  return [...new Set(bundles.filter((bundle) => bundle.owner_lane === laneId).map((bundle) => bundle.gap_kind).filter(Boolean))];
+}
+
+export function isGapOpen(gap) {
+  return !CLOSED_GAP_STATUSES.has(String(gap?.status || '').toLowerCase());
+}
+
 export function loadGapRecords() {
   if (!fs.existsSync(GGD_GAP_DIR)) {
     return [];
@@ -148,6 +256,167 @@ export function loadGapRecords() {
     .filter((name) => name.endsWith('.json'))
     .map((name) => readJsonFile(path.join('GGD/gaps/routes', name)))
     .sort((a, b) => String(a.id || '').localeCompare(String(b.id || '')));
+}
+
+export function loadRouteGapRecords(route, options = {}) {
+  const { kinds = null, onlyOpen = false } = options;
+  const allowedKinds = Array.isArray(kinds) ? new Set(kinds) : null;
+  return loadGapRecords().filter((gap) => {
+    if (gap.route !== route) {
+      return false;
+    }
+    if (allowedKinds && !allowedKinds.has(gap.kind)) {
+      return false;
+    }
+    if (onlyOpen && !isGapOpen(gap)) {
+      return false;
+    }
+    return true;
+  });
+}
+
+export function loadBlockingGapRecords(route) {
+  return loadRouteGapRecords(route, { onlyOpen: true });
+}
+
+export function inferGapKindFromHandoff(handoff, laneId) {
+  const ownedKinds = gapKindsOwnedByLane(laneId);
+  if (ownedKinds.length === 1) {
+    return ownedKinds[0];
+  }
+
+  const text = [
+    handoff.summary,
+    handoff.recommendation,
+    ...(handoff.audit_result?.notes || []),
+    ...(handoff.postflight_metrics?.notes || []),
+    ...(handoff.known_risks || []),
+  ]
+    .filter(Boolean)
+    .join('\n')
+    .toLowerCase();
+
+  const heuristics = [
+    { kind: 'breakpoint-gap', patterns: ['horizontal overflow', 'responsive', 'viewport', 'mobile', 'tablet', 'desktop'] },
+    { kind: 'contrast-gap', patterns: ['contrast', 'legibility', 'warning-band', 'luminance'] },
+    { kind: 'semantic-gap', patterns: ['main landmark', 'title', 'description', 'heading hierarchy', 'metadata', 'seo'] },
+    { kind: 'truth-gap', patterns: ['truth contradiction', 'packet truth', 'flagship', 'route-role truth', 'flattening'] },
+    { kind: 'quality-gap', patterns: ['build', 'parser', 'measurement-hook', 'kernel simplicity', 'code quality'] },
+    { kind: 'geometry-gap', patterns: ['layout diff', 'geometry', 'drift', 'spacing', 'grid', 'hero', 'dx=', 'dy=', 'dw=', 'dh='] },
+  ];
+
+  for (const rule of heuristics) {
+    if (ownedKinds.includes(rule.kind) && rule.patterns.some((pattern) => text.includes(pattern))) {
+      return rule.kind;
+    }
+  }
+
+  return ownedKinds[0] || 'geometry-gap';
+}
+
+export function buildGapRecordFromHandoff(handoff, options = {}) {
+  const route = options.route || parseRouteFromHandoff(handoff);
+  const kind = options.kind || inferGapKindFromHandoff(handoff, handoff.lane);
+  const severityCounts = severityCountsFromHandoff(handoff);
+
+  return {
+    version: 1,
+    id: gapIdForRoute(route, kind),
+    route,
+    route_role: routeRoleForRoute(route),
+    kind,
+    status: options.status || 'open',
+    source_handoff: options.source_handoff || handoff.source_handoff || handoff.handoff_file || '',
+    cycle_id: handoff.cycle_id || null,
+    phase_id: handoff.phase || handoff.phase_id || null,
+    lane: handoff.lane || null,
+    hypothesis: handoff.hypothesis || null,
+    summary: handoff.audit_result?.summary || handoff.recommendation || handoff.summary || null,
+    severity_counts: severityCounts,
+    top_drift_surfaces: topDriftSurfacesFromHandoff(handoff),
+    flagship_invariants_intact: Boolean(
+      (handoff.audit_result?.notes || []).some((note) => String(note).includes('IMC flagship invariants remain intact')) ||
+        (handoff.learning_captured || []).some((note) => String(note).toLowerCase().includes('flagship')) ||
+        route !== '/imc',
+    ),
+    responsive_integrity: {
+      horizontal_overflow: (handoff.audit_result?.notes || []).some((note) => String(note).includes('no horizontal overflow')),
+      notes: (handoff.audit_result?.notes || []).filter((note) => String(note).includes('horizontal overflow')),
+    },
+    quality_findings_summary:
+      (handoff.postflight_metrics?.notes || []).find((note) => String(note).includes('audit:quality')) ||
+      (handoff.postflight_metrics?.notes || []).find((note) => /critical|major/i.test(String(note))) ||
+      null,
+    recommendation: handoff.recommendation || null,
+    next_hypothesis: handoff.next_hypothesis || null,
+    rollback_target: handoff.rollback_target || null,
+    evidence_files: [...new Set([...(handoff.files_changed || []), handoff.audit_result?.report || null].filter(Boolean))],
+    learning_captured: handoff.learning_captured || [],
+    commands_run: handoff.commands_run || [],
+    known_risks: handoff.known_risks || [],
+  };
+}
+
+export function writeGapRecord(gap) {
+  const outputPath = gapPathForRoute(gap.route, gap.kind);
+  ensureDir(path.dirname(outputPath));
+  fs.writeFileSync(outputPath, `${JSON.stringify(gap, null, 2)}\n`, 'utf8');
+  return outputPath;
+}
+
+export function resolveGapRecords(route, options = {}) {
+  const { kinds = null, resolved_by_handoff = null, resolved_by_job = null, resolution_summary = null } = options;
+  const allowedKinds = Array.isArray(kinds) && kinds.length > 0 ? new Set(kinds) : null;
+  const updated = [];
+
+  if (!fs.existsSync(GGD_GAP_DIR)) {
+    return updated;
+  }
+
+  for (const fileName of fs.readdirSync(GGD_GAP_DIR).filter((name) => name.endsWith('.json'))) {
+    const relativePath = path.join('GGD/gaps/routes', fileName);
+    const gap = readJsonFile(relativePath);
+    if (gap.route !== route) {
+      continue;
+    }
+    if (allowedKinds && !allowedKinds.has(gap.kind)) {
+      continue;
+    }
+    if (!isGapOpen(gap)) {
+      continue;
+    }
+
+    gap.status = 'resolved';
+    gap.resolved_at = localTimestamp();
+    gap.resolved_by_handoff = resolved_by_handoff;
+    gap.resolved_by_job = resolved_by_job;
+    gap.resolution_summary = resolution_summary || 'Resolved by an accepted verification slice.';
+    writeJson(projectPath(relativePath), gap);
+    updated.push(gap);
+  }
+
+  return updated;
+}
+
+export function evaluateRouteGate(laneId, route) {
+  const routeRole = routeRoleForRoute(route);
+  const bundles = governingBundlesForRoute(route);
+  const blockingGaps = loadBlockingGapRecords(route);
+
+  return {
+    route,
+    route_role: routeRole,
+    governing_bundle_ids: bundles.map((bundle) => bundle.id),
+    owned_gap_kinds: bundles.filter((bundle) => bundle.owner_lane === laneId).map((bundle) => bundle.gap_kind).filter(Boolean),
+    blocking_gaps: blockingGaps.map((gap) => ({
+      id: gap.id,
+      kind: gap.kind,
+      status: gap.status,
+      summary: gap.summary || '',
+      severity_counts: gap.severity_counts || { critical: 0, major: 0, minor: 0, note: 0 },
+    })),
+    blocks_acceptance: laneId === 'integration' && blockingGaps.length > 0,
+  };
 }
 
 export function writeStateMarkdown(state) {

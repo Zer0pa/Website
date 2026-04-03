@@ -4,8 +4,8 @@
 
 - date: `2026-04-03`
 - status: `in_progress`
-- current phase: `Phase 2 - Build the verification catalog and command binding`
-- current plan: `binding-bundles-gaps-sync`
+- current phase: `Phase 3 - Wire runtime route gates and deterministic gap closure`
+- current plan: `runtime-route-gates`
 
 ## Command Binding
 
@@ -37,9 +37,9 @@
 
 ## Open Gaps
 
-- Teach CLAW runtime promotion logic to read GGD gap records before promoting product-family work.
 - Add explicit FT route-gap export once the first FT falsification exists.
-- Bind named GGD verification bundles to executable audit entrypoints in the command surface.
+- Promote the geometry-law audit into the systems-qa lane acceptance recipe.
+- Expose the named bundle entrypoints directly in the ggd-* command surface.
 
 ## Blockers
 

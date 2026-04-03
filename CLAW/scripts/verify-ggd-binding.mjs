@@ -36,6 +36,14 @@ if (!Array.isArray(bundles.bundles) || bundles.bundles.length === 0) {
   issues.push('Verification bundle index is empty.');
 }
 
+if ((bundles.bundles || []).some((bundle) => !bundle.gap_kind)) {
+  issues.push('Every verification bundle must declare a gap_kind.');
+}
+
+if ((bundles.bundles || []).some((bundle) => !Array.isArray(bundle.applies_to_route_roles) || bundle.applies_to_route_roles.length === 0)) {
+  issues.push('Every verification bundle must declare applies_to_route_roles.');
+}
+
 if (state.command_binding?.binding_file !== binding.binding_file) {
   warnings.push('GGD state command binding does not yet match the project binding file.');
 }
