@@ -285,6 +285,22 @@ export function commitReachable(cwd, commit) {
   }
 }
 
+export function commitPatchEquivalent(cwd, commit) {
+  try {
+    const parent = git(['rev-parse', `${commit}^`], cwd);
+    const output = git(['cherry', 'HEAD', parent, commit], cwd).trim();
+    return output.startsWith('- ');
+  } catch {
+    return false;
+  }
+}
+
+export function replayCommitRange(cwd, commit) {
+  const mergeBase = git(['merge-base', 'HEAD', commit], cwd);
+  const output = git(['rev-list', '--reverse', `${mergeBase}..${commit}`], cwd).trim();
+  return output ? output.split('\n').map((line) => line.trim()).filter(Boolean) : [];
+}
+
 export function cherryPickCommit(cwd, commit) {
   try {
     execFileSync('git', ['cherry-pick', '--keep-redundant-commits', commit], {

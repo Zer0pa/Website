@@ -22,6 +22,7 @@ import {
   activeQueueJobs,
   briefPath,
   cherryPickCommit,
+  commitPatchEquivalent,
   commitReachable,
   createHostCommit,
   diffFilesSince,
@@ -41,6 +42,7 @@ import {
   promptSnapshotPath,
   queueJobIsTerminal,
   readRunnerState,
+  replayCommitRange,
   settleQueueAndRuntime,
   stderrLogPath,
   stdoutLogPath,
@@ -579,43 +581,141 @@ function makeStaleJobHandoff(queue, job, reason) {
     audit_result: null,
     known_risks: ['The prior lane invocation exited without settling the queue.'],
     blockers: [reason],
-    recommendation: 'Recover the stale job, repair the runner or lane contract, and rematerialize the phase.',
+    recommendation: 'Recover the stale job, repair the runner or lane contract, and rematerialize the phase automatically.',
     next_hypothesis: null,
     rollback_target: null,
     learning_captured: ['Stale running jobs must be recovered before any new lease starts.'],
   };
 }
 
-function recoverStaleActiveJobs(queue, queuePath, runnerState) {
-  const staleJobs = activeQueueJobs(queue);
-  if (staleJobs.length === 0) {
-    return queue;
-  }
-
-  for (const job of staleJobs) {
-    const handoffFile = handoffPath(job.job_id);
-    writeJson(
-      handoffFile,
-      makeStaleJobHandoff(
-        queue,
-        job,
-        `Recovered stale ${job.status} job before new execution lease: ${job.job_id}`,
-      ),
-    );
-    job.status = 'escalated';
-    job.finished_at = localTimestamp();
-    job.handoff_file = relativeProjectPath(handoffFile);
-  }
-
-  queue.status = 'running';
-  writeActiveQueue(queuePath, queue);
-  runnerState.active_job = null;
-  runnerState.last_error = null;
-  writeRunnerState(runnerState);
-  return queue;
+function makeStaleJobLaneResult(queue, job, reason) {
+  return {
+    cycle_id: queue.cycle_id,
+    job_id: job.job_id,
+    lane: job.lane_id,
+    phase: queue.phase_id,
+    target: job.objective,
+    hypothesis: 'Stale running jobs must be escalated, cleaned up, and rematerialized as a fresh phase attempt.',
+    status: 'escalated',
+    summary: 'The autonomy runner recovered a stale running or leased job before rematerializing the phase.',
+    files_changed: [],
+    commands_run: [],
+    preflight_baseline: { notes: [] },
+    postflight_metrics: { notes: [] },
+    audit_result: null,
+    known_risks: ['The prior lane invocation exited without settling the queue.'],
+    blockers: [reason],
+    recommendation: 'Repair the stale runner path and continue from the rematerialized phase queue.',
+    next_hypothesis: null,
+    rollback_target: null,
+    learning_captured: ['Stale running jobs must be converted into explicit escalations before recursive execution continues.'],
+    commit: null,
+  };
 }
 
-function acceptedUpstreamCommits(queue, job) {
+function writeRecoveryEvent(control, queue, recoveredJobIds) {
+  const eventId = `RECOVER-${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z')}`;
+  const eventPath = controlPath('recoveries', `${eventId}.json`);
+  writeJson(eventPath, {
+    event_id: eventId,
+    cycle_id: queue.cycle_id,
+    reason: 'stale-active-job-rematerialization',
+    released_locks: control.runtime.locks || [],
+    runtime_mutation: `Escalated stale jobs ${recoveredJobIds.join(', ')} and cleared the active cycle before rematerializing ${queue.phase_id}.`,
+    created_at: localTimestamp(),
+  });
+  return relativeProjectPath(eventPath);
+}
+
+function recoverStaleActiveJobs(control, queue, queuePath, runnerState) {
+  const staleJobs = activeQueueJobs(queue);
+  if (staleJobs.length === 0) {
+    return {
+      queue,
+      recovered: false,
+      phaseId: null,
+      recoveredJobIds: [],
+      recoveryEvent: null,
+    };
+  }
+
+  const recoveredAt = localTimestamp();
+  const recoveredJobIds = [];
+  const staleLaneUpdates = [];
+
+  for (const job of staleJobs) {
+    const recoveryReason = `Recovered stale ${job.status} job before new execution lease: ${job.job_id}`;
+    const finalMessageFile = finalMessagePath(job.job_id);
+    const handoffFile = handoffPath(job.job_id);
+    writeJson(finalMessageFile, makeStaleJobLaneResult(queue, job, recoveryReason));
+    writeJson(handoffFile, makeStaleJobHandoff(queue, job, recoveryReason));
+    try {
+      hardReset(job.worktree, gitHead(job.worktree));
+    } catch {}
+    job.status = 'escalated';
+    job.finished_at = recoveredAt;
+    job.final_message = relativeProjectPath(finalMessageFile);
+    job.handoff_file = relativeProjectPath(handoffFile);
+    recoveredJobIds.push(job.job_id);
+    staleLaneUpdates.push({
+      laneId: job.lane_id,
+      handoffFile: relativeProjectPath(handoffFile),
+    });
+  }
+
+  const note = `Recovered stale running or leased jobs and rematerialized ${queue.phase_id}: ${recoveredJobIds.join(', ')}`;
+  queue.status = 'escalated';
+  queue.settled_at = recoveredAt;
+  queue.note = note;
+  writeActiveQueue(queuePath, queue);
+
+  const recoveryEvent = writeRecoveryEvent(control, queue, recoveredJobIds);
+  settleActiveCycle(loadControlPlane(), 'escalated', note);
+
+  updateRuntime((runtime) => {
+    runtime.last_recovery_event = recoveryEvent;
+    runtime.last_updated = recoveredAt;
+    for (const update of staleLaneUpdates) {
+      runtime.lanes[update.laneId] = {
+        ...(runtime.lanes[update.laneId] || {}),
+        status: 'escalated',
+        last_handoff: update.handoffFile,
+      };
+    }
+    runtime.runner = {
+      ...(runtime.runner || {}),
+      enabled: true,
+      mode: 'guarded-override',
+      last_cycle: queue.cycle_id,
+      last_outcome: 'escalated',
+    };
+  });
+
+  runnerState.active_cycle = null;
+  runnerState.active_job = null;
+  runnerState.last_error = null;
+  runnerState.last_result = {
+    cycle_id: queue.cycle_id,
+    job_id: recoveredJobIds[0] || null,
+    lane: staleJobs[0]?.lane_id || null,
+    status: 'escalated',
+    handoff_file: staleLaneUpdates[0]?.handoffFile || null,
+    candidate_commit: null,
+    next_job: null,
+    violation: note,
+    recovery_event: recoveryEvent,
+  };
+  writeRunnerState(runnerState);
+  return {
+    queue: null,
+    recovered: true,
+    phaseId: queue.phase_id,
+    recoveredJobIds,
+    recoveryEvent,
+  };
+}
+
+function acceptedUpstreamJobs(queue, job) {
   const currentIndex = (queue.jobs || []).findIndex((candidate) => candidate.job_id === job.job_id);
   if (currentIndex <= 0) {
     return [];
@@ -623,23 +723,25 @@ function acceptedUpstreamCommits(queue, job) {
 
   return (queue.jobs || [])
     .slice(0, currentIndex)
-    .filter((candidate) => candidate.status === 'accepted' && candidate.candidate_commit)
-    .map((candidate) => candidate.candidate_commit);
+    .filter((candidate) => candidate.status === 'accepted' && candidate.candidate_commit);
 }
 
 function replayAcceptedUpstreamCommits(queue, job) {
-  const commits = acceptedUpstreamCommits(queue, job);
-  if (commits.length === 0) {
+  const upstreamJobs = acceptedUpstreamJobs(queue, job);
+  if (upstreamJobs.length === 0) {
     return [];
   }
 
   const applied = [];
-  for (const commit of commits) {
-    if (commitReachable(job.worktree, commit)) {
-      continue;
+  for (const upstreamJob of upstreamJobs) {
+    const replayRange = replayCommitRange(job.worktree, upstreamJob.candidate_commit);
+    for (const commit of replayRange) {
+      if (commitReachable(job.worktree, commit) || commitPatchEquivalent(job.worktree, commit)) {
+        continue;
+      }
+      cherryPickCommit(job.worktree, commit);
+      applied.push(commit);
     }
-    cherryPickCommit(job.worktree, commit);
-    applied.push(commit);
   }
   return applied;
 }
@@ -727,8 +829,45 @@ async function main() {
   }
 
   const runnerState = readRunnerState();
-  const queuePath = projectPath(control.runtime.active_cycle.queue_file);
-  queue = recoverStaleActiveJobs(queue, queuePath, runnerState);
+  let queuePath = projectPath(control.runtime.active_cycle.queue_file);
+  const staleRecovery = recoverStaleActiveJobs(control, queue, queuePath, runnerState);
+  if (staleRecovery.recovered) {
+    control = materializeIfNeeded(loadControlPlane(), staleRecovery.phaseId || phaseOverride);
+    queue = loadActiveQueue(control.runtime);
+    if (!queue) {
+      throw new Error(`No active queue exists after rematerializing ${staleRecovery.phaseId || phaseOverride || 'the current phase'}.`);
+    }
+    queuePath = projectPath(control.runtime.active_cycle.queue_file);
+  } else {
+    queue = staleRecovery.queue;
+  }
+
+  const activeJobs = activeQueueJobs(queue);
+  if (activeJobs.length > 0) {
+    const activeJob = activeJobs[0];
+    const busyPayload = {
+      cycle_id: queue.cycle_id,
+      job_id: activeJob.job_id,
+      lane: activeJob.lane_id,
+      status: activeJob.status,
+      handoff_file: activeJob.handoff_file || null,
+      candidate_commit: activeJob.candidate_commit || null,
+      next_job: null,
+      violation: `Active job ${activeJob.job_id} remains in ${activeJob.status}; no new lease was started.`,
+    };
+    writeRunnerState({
+      ...readRunnerState(),
+      enabled: true,
+      mode: 'guarded-override',
+      last_tick_at: localTimestamp(),
+      last_result: busyPayload,
+      active_cycle: queue.cycle_id,
+      active_job: activeJob.job_id,
+      last_error: null,
+    });
+    console.log(JSON.stringify(busyPayload, null, 2));
+    return;
+  }
 
   const job = nextRunnableJob(queue);
   if (!job) {
