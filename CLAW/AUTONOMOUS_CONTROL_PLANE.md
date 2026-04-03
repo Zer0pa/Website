@@ -26,6 +26,7 @@ Canonical machine-readable protocol:
 
 - `CLAW/control-plane/recursive-improvement.json`
 - `CLAW/control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md`
+- `CLAW/PRD_24_7_LOCAL_AUTONOMY.md`
 
 ### Control Roles
 
@@ -237,3 +238,4 @@ The system is ready for a safe autonomous local run only when:
 - that supervised cycle proves the evaluator can reject a worse candidate and preserve the better one
 - one recovery drill is proven
 - full QA runs complete from the integration lane
+- the phase gates in `CLAW/PRD_24_7_LOCAL_AUTONOMY.md` are satisfied

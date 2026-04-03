@@ -23,6 +23,7 @@ Canonical files:
 - `CLAW/control-plane/artifact-contract.md`
 - `CLAW/control-plane/recursive-improvement.json`
 - `CLAW/control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md`
+- `CLAW/PRD_24_7_LOCAL_AUTONOMY.md`
 
 ### 2. Supervised Dry Run
 

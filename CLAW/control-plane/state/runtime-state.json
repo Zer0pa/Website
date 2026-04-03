@@ -1,18 +1,19 @@
 {
   "version": 1,
   "project": "zer0pa-website",
-  "mode": "supervised-dry-run",
+  "mode": "hardening",
   "press_go": false,
-  "current_milestone": "M0-canonical-closure",
-  "current_phase": "W1-homepage-supervised",
+  "current_milestone": "M1-recursive-autonomy-hardening",
+  "current_phase": "P0-drift-eradication-and-prd-lock",
   "active_wave": "W1",
-  "last_updated": "2026-04-03T11:33:57+02:00",
+  "last_updated": "2026-04-03T11:44:49+02:00",
   "control_style": "evaluator-optimizer",
   "latest_wave_report": "CLAW/control-plane/reports/W1-homepage-supervised.md",
+  "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "lanes": {
     "orchestrator": {
       "status": "active",
-      "last_accepted_commit": "274dfb7",
+      "last_accepted_commit": "8cbfdf9",
       "last_handoff": null
     },
     "homepage-fidelity": {
@@ -72,20 +73,26 @@
     "extended_local_autonomy_passed": false,
     "recovery_drill_passed": false,
     "integration_qa_passed": false,
-    "cross_repo_writes_detected": false
+    "cross_repo_writes_detected": false,
+    "p0_drift_eradicated": true,
+    "p1_homepage_canonical": false,
+    "p2_imc_canonical": false,
+    "p3_product_kernel_ready": false,
+    "p4_recovery_hardened": false
   },
   "blockers": [
     "Press-go criteria are not yet satisfied.",
-    "No supervised end-to-end cycle has passed yet.",
-    "Homepage candidate improved modestly but has not been promoted through integration.",
+    "Homepage canonical closure is not yet complete.",
+    "IMC canonical closure has not yet started.",
+    "No accepted candidate has been replayed through integration.",
     "No recovery drill has been proven yet."
   ],
   "next_actions": [
     "Run the next homepage slice on flagship vertical alignment and wordmark width.",
-    "Run one full canonical cycle for /imc.",
-    "Run systems-qa from the integration branch after the first accepted lane commit.",
-    "Rehearse cherry-picks through integration.",
-    "Prove one rollback and recovery drill."
+    "Run one full supervised IMC cycle.",
+    "Replay the first accepted homepage candidate through integration.",
+    "Exercise recovery drills R1-R6 from the PRD.",
+    "Keep press_go false until phases P1-P6 pass."
   ],
   "learning_backlog": [
     {

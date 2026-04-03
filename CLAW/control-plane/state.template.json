@@ -3,11 +3,12 @@
   "project": "zer0pa-website",
   "mode": "control-plane-setup",
   "press_go": false,
-  "current_milestone": "M0-canonical-closure",
-  "current_phase": "control-plane-definition",
+  "current_milestone": "M1-recursive-autonomy-hardening",
+  "current_phase": "P0-drift-eradication-and-prd-lock",
   "active_wave": "W0",
   "control_style": "evaluator-optimizer",
   "latest_wave_report": null,
+  "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "lanes": {
     "orchestrator": {
       "status": "active",
@@ -70,18 +71,24 @@
     "extended_local_autonomy_passed": false,
     "recovery_drill_passed": false,
     "integration_qa_passed": false,
-    "cross_repo_writes_detected": false
+    "cross_repo_writes_detected": false,
+    "p0_drift_eradicated": false,
+    "p1_homepage_canonical": false,
+    "p2_imc_canonical": false,
+    "p3_product_kernel_ready": false,
+    "p4_recovery_hardened": false
   },
   "blockers": [
     "Press-go criteria are not yet satisfied.",
-    "No supervised end-to-end cycle has passed yet."
+    "No supervised end-to-end cycle has passed yet.",
+    "24/7 hardening phases are not yet complete."
   ],
   "next_actions": [
-    "Run one full canonical cycle for homepage.",
+    "Complete P0 drift eradication and PRD lock.",
+    "Run the next supervised homepage slice.",
     "Run one full canonical cycle for /imc.",
-    "Run systems-qa from the integration branch after the first accepted lane commit.",
-    "Rehearse cherry-picks through integration.",
-    "Prove one rollback and recovery drill."
+    "Exercise integration replay for the first accepted lane candidate.",
+    "Prove the recovery drill matrix."
   ],
   "learning_backlog": [],
   "stop_conditions": [

@@ -196,11 +196,11 @@ No handoff means no promotion.
 
 ## Cadence
 
-Use the slower cadence below on this Intel Mac:
+Use the slower cadence below on this Intel Mac. `cadence.json` is authoritative when a prose doc drifts.
 
-- lane iteration: every 15 to 20 minutes
-- orchestrator review: every 45 to 60 minutes
-- full falsification sweep: every 120 to 240 minutes
+- lane iteration: every 20 minutes
+- orchestrator review: every 45 minutes
+- full falsification sweep: every 120 minutes
 - integration checkpoint review: every 4 hours
 - recovery drill: every 12 hours during supervised rollout
 - system health review: every 24 hours
