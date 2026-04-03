@@ -1,0 +1,108 @@
+{
+  "page": "home",
+  "route": "/",
+  "viewport": {
+    "width": 1024,
+    "height": 2080
+  },
+  "elements": [
+    {
+      "id": "home.header",
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 34,
+      "tolerance": 4
+    },
+    {
+      "id": "home.header.logo",
+      "x": 20,
+      "y": 8,
+      "width": 80,
+      "height": 18,
+      "tolerance": 20
+    },
+    {
+      "id": "home.header.nav",
+      "x": 118,
+      "y": 8,
+      "width": 240,
+      "height": 16,
+      "tolerance": 32
+    },
+    {
+      "id": "home.hero.statusbar",
+      "x": 20,
+      "y": 34,
+      "width": 984,
+      "height": 26,
+      "tolerance": 8
+    },
+    {
+      "id": "home.hero.heading",
+      "x": 20,
+      "y": 68,
+      "width": 590,
+      "height": 292,
+      "tolerance": 28,
+      "color": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "home.hero.body",
+      "x": 20,
+      "y": 374,
+      "width": 320,
+      "height": 72,
+      "tolerance": 24
+    },
+    {
+      "id": "home.hero.cta",
+      "x": 388,
+      "y": 370,
+      "width": 172,
+      "height": 36,
+      "tolerance": 18,
+      "backgroundColor": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "home.hero.telemetry",
+      "x": 716,
+      "y": 292,
+      "width": 256,
+      "height": 82,
+      "tolerance": 30
+    },
+    {
+      "id": "home.flagship.media",
+      "x": 20,
+      "y": 486,
+      "width": 322,
+      "height": 262,
+      "tolerance": 28
+    },
+    {
+      "id": "home.flagship.summary",
+      "x": 344,
+      "y": 486,
+      "width": 660,
+      "height": 262,
+      "tolerance": 32
+    },
+    {
+      "id": "home.index.grid",
+      "x": 20,
+      "y": 912,
+      "width": 984,
+      "height": 250,
+      "tolerance": 36
+    },
+    {
+      "id": "home.proof.logic",
+      "x": 20,
+      "y": 1292,
+      "width": 984,
+      "height": 452,
+      "tolerance": 48
+    }
+  ]
+}

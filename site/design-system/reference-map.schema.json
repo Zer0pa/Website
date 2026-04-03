@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zer0pa.local/design-system/reference-map.schema.json",
+  "title": "ReferenceMap",
+  "type": "object",
+  "required": [
+    "pageId",
+    "referenceViewport",
+    "elements"
+  ],
+  "properties": {
+    "pageId": {
+      "type": "string"
+    },
+    "referenceViewport": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "elements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "geometry"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": [
+              "shell",
+              "component",
+              "content-frame",
+              "measurement-anchor",
+              "visual"
+            ]
+          },
+          "geometry": {
+            "type": "object",
+            "required": ["x", "y", "width", "height", "unit"],
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "width": { "type": "number" },
+              "height": { "type": "number" },
+              "unit": {
+                "type": "string",
+                "enum": ["px", "vw", "vh", "%"]
+              }
+            },
+            "additionalProperties": false
+          },
+          "typography": {
+            "type": "object",
+            "properties": {
+              "fontRole": {
+                "type": "string",
+                "enum": ["masthead", "ui", "label", "body", "metric"]
+              },
+              "fontSize": { "type": "number" },
+              "lineHeight": { "type": "number" },
+              "letterSpacing": { "type": "number" }
+            },
+            "additionalProperties": false
+          },
+          "colorRole": {
+            "type": "string",
+            "enum": [
+              "page-bg",
+              "panel-bg",
+              "media-bg",
+              "border",
+              "text-primary",
+              "text-secondary",
+              "text-emphasis",
+              "ghost",
+              "pass",
+              "fail",
+              "warning"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

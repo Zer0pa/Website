@@ -1,0 +1,234 @@
+{
+  "laneIdentifier": "ZPE-Neuro",
+  "laneTitle": "ZPE-Neuro",
+  "tagline": "ZPE-Neuro is the inner repository for the Wave-1 neural signal package, the current curated proof corpus, and the release-surface documentation for the Neuro workstream. It is a private staged repo, not a tagged public release.",
+  "whatThisIs": [
+    "ZPE-Neuro is the inner repository for the Wave-1 neural signal package, the current curated proof corpus, and the release-surface documentation for the Neuro workstream. It is a private staged repo, not a tagged public release.",
+    "The current scope lock is a narrower extracellular lane. The strongest honest repo claim is not broad neural generality; it is a truthful Python package surface plus a bounded evidence surface anchored on DANDI 000034, a counted IBL second-target PASS under bounded refinement, explicit AJILE12 out-of-family handling, and unresolved blind-clone/commercialization gates."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro",
+  "authorityState": {
+    "status": "SUPPORTED",
+    "timestamp": "2026-03-21",
+    "summary": "Snapshot date: 2026-03-21.",
+    "sourceFile": "proofs/manifests/CURRENT_AUTHORITY_PACKET.md"
+  },
+  "headlineMetrics": [
+    {
+      "label": "Authority snapshot date",
+      "valueRaw": "2026-03-21",
+      "sourceFile": "README.md",
+      "numericValue": 2026,
+      "unit": ""
+    }
+  ],
+  "provedNow": [
+    "IBL second-target PASS under bounded refinement, explicit AJILE12",
+    "Canonical GitHub repo: https://github.com/Zer0pa/ZPE-Neuro for authorized readers. Clone surface for authorized readers: git clone https://github.com/Zer0pa/ZPE-Neuro.git .",
+    "PASS in the current bounded local evidence packet after the March 21 IBL refinement. This does not upgrade blind-clone status or broader release claims.",
+    "PASS for the packaged . , .[gate] , .[public] , and .[proof] surfaces that are actually declared for clean install/import. IBL chunked-waveform tooling and Allen parity remain operator-only."
+  ],
+  "explicitNonClaims": [
+    "no blind-clone verification has been completed from this repo",
+    "no public-release readiness is implied",
+    "note whether you used the declared packaged surface or an operator-only path",
+    "not blind-clone closed",
+    "not a public-release verdict",
+    "No. The current bounded local IBL refinement packet gives a counted second extracellular target PASS within scope. Blind-clone verification, public release, and commercialization remain open.",
+    "no public release is declared by this changelog entry"
+  ],
+  "openRisks": [],
+  "modalityStatus": [
+    {
+      "modalityName": "Gate status",
+      "rawStatus": "OPEN for blind-clone and public-release gates. PASS for the current clean packaged baseline and the tracked release-alignment gate slice.",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Counted breadth verdict",
+      "rawStatus": "PASS in the current bounded local evidence packet after the March 21 IBL refinement. This does not upgrade blind-clone status or broader release claims.",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Blind-clone verification status",
+      "rawStatus": "OPEN",
+      "verdict": "INCONCLUSIVE"
+    },
+    {
+      "modalityName": "Commercialization status",
+      "rawStatus": "OPEN . Allen parity and commercialization closure remain unresolved.",
+      "verdict": "INCONCLUSIVE"
+    },
+    {
+      "modalityName": "Core package build/import",
+      "rawStatus": "PASS",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Repo-local tests",
+      "rawStatus": "PASS on the current shipped unit slice",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Synthetic gate baseline",
+      "rawStatus": "PASS for sequential Gate C and Gate D replay in the current clean packaged gate stack",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Public replay import surface",
+      "rawStatus": "PASS for the declared .[proof] import stack",
+      "verdict": "FAIL"
+    },
+    {
+      "modalityName": "Release automation",
+      "rawStatus": "PASS for static verification coverage",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Blind-clone authority pack",
+      "rawStatus": "OPEN",
+      "verdict": "INCONCLUSIVE"
+    },
+    {
+      "modalityName": "Public release",
+      "rawStatus": "OPEN",
+      "verdict": "INCONCLUSIVE"
+    },
+    {
+      "modalityName": "Commercialization closure",
+      "rawStatus": "OPEN",
+      "verdict": "INCONCLUSIVE"
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "proofs/selected_artifacts/2026-03-21_zpe_neuro_release_alignment/",
+      "path": "selected_artifacts/2026-03-21_zpe_neuro_release_alignment/README.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/selected_artifacts/2026-03-21_zpe_neuro_release_alignment/README.md",
+      "description": "proofs/selected_artifacts/2026-03-21_zpe_neuro_release_alignment/"
+    },
+    {
+      "label": "proofs/selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/",
+      "path": "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/README.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/README.md",
+      "description": "proofs/selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/"
+    },
+    {
+      "label": "DANDI anchor eval",
+      "path": "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_eval_dandi_000034_mouse412804_ecephys.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_eval_dandi_000034_mouse412804_ecephys.json",
+      "description": "DANDI anchor eval"
+    },
+    {
+      "label": "IBL waveform eval",
+      "path": "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_ibl_waveform_eval.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_ibl_waveform_eval.json",
+      "description": "IBL waveform eval"
+    },
+    {
+      "label": "public_corpus_summary.json",
+      "path": "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_summary.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_summary.json",
+      "description": "public_corpus_summary.json"
+    },
+    {
+      "label": "docs/ARCHITECTURE.md",
+      "path": "docs/ARCHITECTURE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "label": "PUBLIC_AUDIT_LIMITS.md",
+      "path": "PUBLIC_AUDIT_LIMITS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/PUBLIC_AUDIT_LIMITS.md",
+      "description": "PUBLIC_AUDIT_LIMITS.md"
+    },
+    {
+      "label": "proofs/manifests/CURRENT_AUTHORITY_PACKET.md",
+      "path": "proofs/manifests/CURRENT_AUTHORITY_PACKET.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Neuro/blob/main/proofs/manifests/CURRENT_AUTHORITY_PACKET.md",
+      "description": "proofs/manifests/CURRENT_AUTHORITY_PACKET.md"
+    }
+  ],
+  "repoShape": [
+    {
+      "path": "../../README.md",
+      "description": "README.md"
+    },
+    {
+      "path": "../selected_artifacts/2026-03-21_zpe_neuro_release_alignment/README.md",
+      "description": "proofs/selected_artifacts/2026-03-21_zpe_neuro_release_alignment/"
+    },
+    {
+      "path": "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/README.md",
+      "description": "proofs/selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/"
+    },
+    {
+      "path": "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_eval_dandi_000034_mouse412804_ecephys.json",
+      "description": "DANDI anchor eval"
+    },
+    {
+      "path": "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_ibl_waveform_eval.json",
+      "description": "IBL waveform eval"
+    },
+    {
+      "path": "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_summary.json",
+      "description": "public_corpus_summary.json"
+    },
+    {
+      "path": "../../RELEASING.md",
+      "description": "RELEASING.md"
+    },
+    {
+      "path": "../../docs/LEGAL_BOUNDARIES.md",
+      "description": "docs/LEGAL_BOUNDARIES.md"
+    },
+    {
+      "path": "../../runbooks/README.md",
+      "description": "runbooks/README.md"
+    },
+    {
+      "path": "../../docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "../../PUBLIC_AUDIT_LIMITS.md",
+      "description": "PUBLIC_AUDIT_LIMITS.md"
+    },
+    {
+      "path": "../CHANGELOG.md",
+      "description": "CHANGELOG.md"
+    },
+    {
+      "path": "../runbooks/README.md",
+      "description": "runbooks/README.md"
+    }
+  ],
+  "verificationPath": [
+    "selected_artifacts/2026-03-21_zpe_neuro_release_alignment/README.md",
+    "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/README.md",
+    "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_eval_dandi_000034_mouse412804_ecephys.json",
+    "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_ibl_waveform_eval.json",
+    "selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_summary.json",
+    "docs/ARCHITECTURE.md",
+    "PUBLIC_AUDIT_LIMITS.md",
+    "proofs/manifests/CURRENT_AUTHORITY_PACKET.md",
+    "../../README.md",
+    "../selected_artifacts/2026-03-21_zpe_neuro_release_alignment/README.md",
+    "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/README.md",
+    "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_eval_dandi_000034_mouse412804_ecephys.json",
+    "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_ibl_waveform_eval.json",
+    "../selected_artifacts/2026-03-21_zpe_neuro_ibl_refinement/public_corpus_summary.json",
+    "../../RELEASING.md",
+    "../../docs/LEGAL_BOUNDARIES.md",
+    "../../runbooks/README.md",
+    "../../docs/ARCHITECTURE.md",
+    "../../PUBLIC_AUDIT_LIMITS.md",
+    "../CHANGELOG.md",
+    "../runbooks/README.md"
+  ],
+  "parserWarnings": [],
+  "confidenceScore": 100,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:19.480Z"
+}

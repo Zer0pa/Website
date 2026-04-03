@@ -1,0 +1,34 @@
+{
+  "laneIdentifier": "ZPE-Prosody",
+  "laneTitle": "ZPE-Prosody",
+  "tagline": "The base wheel ships only the src/zpe_prosody package.",
+  "whatThisIs": [
+    "Optional install surfaces:",
+    "Technical release truth:",
+    "The base wheel ships only the src/zpe_prosody package.",
+    "scripts/ remains a repo-local operational harness, not an installed CLI surface."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-Prosody",
+  "authorityState": {
+    "status": "BLOCKED",
+    "timestamp": "",
+    "summary": "Current repo stage: PRIVATE_STAGING.",
+    "sourceFile": "proofs/FINAL_STATUS.md"
+  },
+  "headlineMetrics": [],
+  "provedNow": [],
+  "explicitNonClaims": [],
+  "openRisks": [],
+  "modalityStatus": [],
+  "proofAnchors": [],
+  "repoShape": [],
+  "verificationPath": [],
+  "parserWarnings": [
+    "No metrics found",
+    "No proof anchors found",
+    "No repo shape hints found"
+  ],
+  "confidenceScore": 50,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:15.283Z"
+}

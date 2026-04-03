@@ -1,0 +1,310 @@
+{
+  "laneIdentifier": "ZPE-FT",
+  "laneTitle": "ZPE-FT",
+  "tagline": "ZPE-FT is a deterministic financial time-series codec and pattern-search workstream. The repo exposes an installable Python package, an optional repo-local Rust helper, retained proof bundles for controlled Wave-1 codec claims, and explicit blocker artifacts for the still-open enterprise benchmark.",
+  "whatThisIs": [
+    "ZPE-FT is a deterministic financial time-series codec and pattern-search workstream. The repo exposes an installable Python package, an optional repo-local Rust helper, retained proof bundles for controlled Wave-1 codec claims, and explicit blocker artifacts for the still-open enterprise benchmark."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-FT",
+  "authorityState": {
+    "status": "SUPPORTED",
+    "timestamp": "2026-03-21",
+    "summary": "As of 2026-03-21, the current source-available repo surface contains:.",
+    "sourceFile": "proofs/FINAL_STATUS.md"
+  },
+  "headlineMetrics": [],
+  "provedNow": [
+    "ZPE-FT is a deterministic financial time-series codec and pattern-search",
+    "The promoted OHLCV, tick, fidelity, query-latency, and SQLite roundtrip claims stay bounded to this carried bundle.",
+    "The repo can be cloned and verified, but the release gate remains open.",
+    "SQLite supported ; Timescale INCONCLUSIVE",
+    "pass on the open-access enterprise benchmark."
+  ],
+  "explicitNonClaims": [
+    "does not close the enterprise benchmark.",
+    "No. This is the live source-available repo for the workstream, but the release gate is still open. The package path is real and the proof surfaces are real, yet the repo remains NOT_PUBLIC_READY until the governing benchmark blocker is closed.",
+    "No. The gate is still blocked because 33 named corpus exports plus the auditable query catalog and truth labels are still missing. Until those inputs exist and a clean freeze/replay closes, the benchmark status cannot change.",
+    "No. It proves the repo-native acquisition, freeze, and refresh path on a bounded sample. It is explicitly not the closing enterprise benchmark.",
+    "No. SQLite roundtrip is supported. Timescale equivalence remains INCONCLUSIVE .",
+    "No. Older path-bearing runbooks and historical leftovers are retained only as lineage or operator-local context. Current front-door instructions live in the root README.md , docs/AUDITOR_PLAYBOOK.md , docs/ARCHITECTURE.md , and the repo-relative scripts they cite.",
+    "no public release is declared here"
+  ],
+  "openRisks": [
+    "open-access enterprise benchmark status: proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json"
+  ],
+  "modalityStatus": [
+    {
+      "modalityName": "Package / install",
+      "rawStatus": "SUPPORTED",
+      "verdict": "PASS",
+      "notes": "Anchored by the March 21 operations logs under proofs/artifacts/operations/ ."
+    },
+    {
+      "modalityName": "OHLCV compression",
+      "rawStatus": "SUPPORTED",
+      "verdict": "PASS",
+      "notes": "Bounded to proofs/artifacts/2026-02-21_ft_wave1_final/ft_ohlcv_benchmark.json ."
+    },
+    {
+      "modalityName": "Tick compression",
+      "rawStatus": "SUPPORTED",
+      "verdict": "PASS",
+      "notes": "Bounded to proofs/artifacts/2026-02-21_ft_wave1_final/ft_tick_benchmark.json ."
+    },
+    {
+      "modalityName": "Pattern search",
+      "rawStatus": "SUPPORTED",
+      "verdict": "PASS",
+      "notes": "Bounded to the controlled bundle; the delayed-feed smoke remains NEEDS_LABELS ."
+    },
+    {
+      "modalityName": "Query latency",
+      "rawStatus": "SUPPORTED",
+      "verdict": "PASS",
+      "notes": "Current retained evidence is local-bundle truth, not a broad DB displacement claim."
+    },
+    {
+      "modalityName": "Enterprise benchmark",
+      "rawStatus": "BLOCKED",
+      "verdict": "FAIL",
+      "notes": "The governing blocker lives at proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json ."
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "CONSOLIDATED_PROOF_REPORT.md",
+      "path": "CONSOLIDATED_PROOF_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-FT/blob/main/CONSOLIDATED_PROOF_REPORT.md",
+      "description": "CONSOLIDATED_PROOF_REPORT.md"
+    },
+    {
+      "label": "reruns/2026-03-19_alpaca_demo_smoke/real_market_corpus_manifest.json",
+      "path": "reruns/2026-03-19_alpaca_demo_smoke/real_market_corpus_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-FT/blob/main/reruns/2026-03-19_alpaca_demo_smoke/real_market_corpus_manifest.json",
+      "description": "reruns/2026-03-19_alpaca_demo_smoke/real_market_corpus_manifest.json"
+    },
+    {
+      "label": "reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "path": "reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-FT/blob/main/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "description": "reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json"
+    },
+    {
+      "label": "proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "path": "proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-FT/blob/main/proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "description": "proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json"
+    },
+    {
+      "label": "docs/AUDITOR_PLAYBOOK.md",
+      "path": "docs/AUDITOR_PLAYBOOK.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-FT/blob/main/docs/AUDITOR_PLAYBOOK.md",
+      "description": "docs/AUDITOR_PLAYBOOK.md"
+    },
+    {
+      "label": "docs/ARCHITECTURE.md",
+      "path": "docs/ARCHITECTURE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-FT/blob/main/docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "label": "proofs/runbooks/ZER0PA_REPO_DOCS_PLAYBOOK_CANONICAL_2026-03-21.md",
+      "path": "proofs/runbooks/ZER0PA_REPO_DOCS_PLAYBOOK_CANONICAL_2026-03-21.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-FT/blob/main/proofs/runbooks/ZER0PA_REPO_DOCS_PLAYBOOK_CANONICAL_2026-03-21.md",
+      "description": "proofs/runbooks/ZER0PA_REPO_DOCS_PLAYBOOK_CANONICAL_2026-03-21.md"
+    }
+  ],
+  "repoShape": [
+    {
+      "path": "artifacts/operations/20260321T202948Z_build.log",
+      "description": "20260321T202948Z_build.log"
+    },
+    {
+      "path": "artifacts/operations/20260321T202948Z_clean_install_verify.log",
+      "description": "20260321T202948Z_clean_install_verify.log"
+    },
+    {
+      "path": "artifacts/operations/20260321T202948Z_pytest_alignment.log",
+      "description": "20260321T202948Z_pytest_alignment.log"
+    },
+    {
+      "path": "CONSOLIDATED_PROOF_REPORT.md",
+      "description": "CONSOLIDATED_PROOF_REPORT.md"
+    },
+    {
+      "path": "artifacts/2026-02-21_ft_wave1_final/",
+      "description": "artifacts/2026-02-21_ft_wave1_final/"
+    },
+    {
+      "path": "reruns/2026-03-19_alpaca_demo_smoke/real_market_corpus_manifest.json",
+      "description": "reruns/2026-03-19_alpaca_demo_smoke/real_market_corpus_manifest.json"
+    },
+    {
+      "path": "reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "description": "reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json"
+    },
+    {
+      "path": "../RELEASING.md",
+      "description": "../RELEASING.md"
+    },
+    {
+      "path": "mailto:architects@zer0pa.ai",
+      "description": "architects@zer0pa.ai"
+    },
+    {
+      "path": "README.md",
+      "description": "README.md"
+    },
+    {
+      "path": "LICENSE",
+      "description": "LICENSE"
+    },
+    {
+      "path": "proofs/artifacts/operations/20260321T202948Z_build.log",
+      "description": "20260321T202948Z_build.log"
+    },
+    {
+      "path": "proofs/artifacts/operations/20260321T202948Z_clean_install_verify.log",
+      "description": "20260321T202948Z_clean_install_verify.log"
+    },
+    {
+      "path": "../README.md",
+      "description": "../README.md"
+    },
+    {
+      "path": "../LICENSE",
+      "description": "../LICENSE"
+    },
+    {
+      "path": "../python/zpe_finance/",
+      "description": "../python/zpe_finance/"
+    },
+    {
+      "path": "../core/",
+      "description": "../core/"
+    },
+    {
+      "path": "specs/ZPFIN_SPEC.md",
+      "description": "specs/ZPFIN_SPEC.md"
+    },
+    {
+      "path": "examples/",
+      "description": "examples/"
+    },
+    {
+      "path": "../pyproject.toml",
+      "description": "../pyproject.toml"
+    },
+    {
+      "path": "../scripts/run_wave1.py",
+      "description": "../scripts/run_wave1.py"
+    },
+    {
+      "path": "../scripts/fetch_alpaca_corpus.py",
+      "description": "../scripts/fetch_alpaca_corpus.py"
+    },
+    {
+      "path": "../scripts/freeze_real_market_corpus.py",
+      "description": "../scripts/freeze_real_market_corpus.py"
+    },
+    {
+      "path": "../scripts/run_real_market_refresh.py",
+      "description": "../scripts/run_real_market_refresh.py"
+    },
+    {
+      "path": "../proofs/artifacts/2026-02-21_ft_wave1_final/",
+      "description": "../proofs/artifacts/2026-02-21_ft_wave1_final/"
+    },
+    {
+      "path": "../proofs/reruns/2026-03-19_alpaca_demo_smoke/",
+      "description": "../proofs/reruns/2026-03-19_alpaca_demo_smoke/"
+    },
+    {
+      "path": "../proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+      "description": "../proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json"
+    },
+    {
+      "path": "../proofs/artifacts/operations/20260321T202948Z_build.log",
+      "description": "../proofs/artifacts/operations/20260321T202948Z_build.log"
+    },
+    {
+      "path": "../proofs/artifacts/operations/20260321T202948Z_clean_install_verify.log",
+      "description": "../proofs/artifacts/operations/20260321T202948Z_clean_install_verify.log"
+    },
+    {
+      "path": "../proofs/artifacts/operations/20260321T202948Z_pytest_alignment.log",
+      "description": "../proofs/artifacts/operations/20260321T202948Z_pytest_alignment.log"
+    },
+    {
+      "path": "docs/DOC_REGISTRY.md",
+      "description": "docs/DOC_REGISTRY.md"
+    },
+    {
+      "path": "docs/SUPPORT.md",
+      "description": "docs/SUPPORT.md"
+    },
+    {
+      "path": "GOVERNANCE.md",
+      "description": "GOVERNANCE.md"
+    },
+    {
+      "path": "RELEASING.md",
+      "description": "RELEASING.md"
+    },
+    {
+      "path": "CITATION.cff",
+      "description": "CITATION.cff"
+    },
+    {
+      "path": "proofs/runbooks/ZER0PA_REPO_DOCS_PLAYBOOK_CANONICAL_2026-03-21.md",
+      "description": "proofs/runbooks/ZER0PA_REPO_DOCS_PLAYBOOK_CANONICAL_2026-03-21.md"
+    }
+  ],
+  "verificationPath": [
+    "CONSOLIDATED_PROOF_REPORT.md",
+    "reruns/2026-03-19_alpaca_demo_smoke/real_market_corpus_manifest.json",
+    "reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+    "proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+    "docs/AUDITOR_PLAYBOOK.md",
+    "docs/ARCHITECTURE.md",
+    "proofs/runbooks/ZER0PA_REPO_DOCS_PLAYBOOK_CANONICAL_2026-03-21.md",
+    "artifacts/operations/20260321T202948Z_build.log",
+    "artifacts/operations/20260321T202948Z_clean_install_verify.log",
+    "artifacts/operations/20260321T202948Z_pytest_alignment.log",
+    "artifacts/2026-02-21_ft_wave1_final/",
+    "../RELEASING.md",
+    "mailto:architects@zer0pa.ai",
+    "README.md",
+    "LICENSE",
+    "proofs/artifacts/operations/20260321T202948Z_build.log",
+    "proofs/artifacts/operations/20260321T202948Z_clean_install_verify.log",
+    "../README.md",
+    "../LICENSE",
+    "../python/zpe_finance/",
+    "../core/",
+    "specs/ZPFIN_SPEC.md",
+    "examples/",
+    "../pyproject.toml",
+    "../scripts/run_wave1.py",
+    "../scripts/fetch_alpaca_corpus.py",
+    "../scripts/freeze_real_market_corpus.py",
+    "../scripts/run_real_market_refresh.py",
+    "../proofs/artifacts/2026-02-21_ft_wave1_final/",
+    "../proofs/reruns/2026-03-19_alpaca_demo_smoke/",
+    "../proofs/reruns/2026-03-21_phase06_contract_freeze_attempt_v3/missing_inputs_packet.json",
+    "../proofs/artifacts/operations/20260321T202948Z_build.log",
+    "../proofs/artifacts/operations/20260321T202948Z_clean_install_verify.log",
+    "../proofs/artifacts/operations/20260321T202948Z_pytest_alignment.log",
+    "docs/DOC_REGISTRY.md",
+    "docs/SUPPORT.md",
+    "GOVERNANCE.md",
+    "RELEASING.md",
+    "CITATION.cff"
+  ],
+  "parserWarnings": [
+    "No metrics found"
+  ],
+  "confidenceScore": 95,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:26.374Z"
+}

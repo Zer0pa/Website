@@ -1,0 +1,163 @@
+{
+  "page": "imc",
+  "route": "/imc",
+  "comparedAt": "2026-04-03T07:51:39.997Z",
+  "diffs": [
+    {
+      "id": "imc.page",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 26,
+      "dw": 0,
+      "dh": 0,
+      "distance": 26,
+      "notes": []
+    },
+    {
+      "id": "imc.hero.title",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 2,
+      "dw": 37.31,
+      "dh": 26.39,
+      "distance": 37.31,
+      "notes": [
+        "w>30"
+      ]
+    },
+    {
+      "id": "imc.hero.meta",
+      "severity": "minor",
+      "dx": 48,
+      "dy": 2,
+      "dw": 28,
+      "dh": 35.47,
+      "distance": 48,
+      "notes": [
+        "x>18"
+      ]
+    },
+    {
+      "id": "imc.hero.identity",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 32.39,
+      "dw": 0,
+      "dh": 32.02,
+      "distance": 32.39,
+      "notes": [
+        "y>18"
+      ]
+    },
+    {
+      "id": "imc.hero.authority",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 28.39,
+      "dw": 0,
+      "dh": 27.53,
+      "distance": 28.39,
+      "notes": [
+        "y>18"
+      ]
+    },
+    {
+      "id": "imc.metric.row",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 4.86,
+      "dw": 0,
+      "dh": 0,
+      "distance": 4.86,
+      "notes": []
+    },
+    {
+      "id": "imc.proof.assertions",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 2.14,
+      "dw": 0,
+      "dh": 14.05,
+      "distance": 14.05,
+      "notes": []
+    },
+    {
+      "id": "imc.nonclaims",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 2.14,
+      "dw": 0,
+      "dh": 14.05,
+      "distance": 14.05,
+      "notes": []
+    },
+    {
+      "id": "imc.modality.snapshot",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 2.09,
+      "dw": 0,
+      "dh": 15.61,
+      "distance": 15.61,
+      "notes": []
+    },
+    {
+      "id": "imc.evidence.routes",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 26.48,
+      "dw": 0,
+      "dh": 16.98,
+      "distance": 26.48,
+      "notes": [
+        "y>22"
+      ]
+    },
+    {
+      "id": "imc.repo.shape",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 26.48,
+      "dw": 0,
+      "dh": 16.98,
+      "distance": 26.48,
+      "notes": [
+        "y>22"
+      ]
+    },
+    {
+      "id": "imc.proof.terminal",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 21.5,
+      "dw": 0,
+      "dh": 4.36,
+      "distance": 21.5,
+      "notes": [
+        "y>18"
+      ]
+    },
+    {
+      "id": "imc.related.lanes",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 7.86,
+      "dw": 0,
+      "dh": 15.39,
+      "distance": 15.39,
+      "notes": []
+    },
+    {
+      "id": "imc.cta.band",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 37.25,
+      "dw": 0,
+      "dh": 23.02,
+      "distance": 37.25,
+      "notes": [
+        "y>22"
+      ]
+    }
+  ]
+}

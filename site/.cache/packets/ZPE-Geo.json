@@ -1,0 +1,461 @@
+{
+  "laneIdentifier": "ZPE-Geo",
+  "laneTitle": "Historical Context Only",
+  "tagline": "ZPE Geo is the Git-backed workstream repo for deterministic geospatial trajectory compression, fidelity checks, maneuver search, and H3 roundtrip validation.",
+  "whatThisIs": [
+    "ZPE Geo is the Git-backed workstream repo for deterministic geospatial trajectory compression, fidelity checks, maneuver search, and H3 roundtrip validation.",
+    "This repo is the live GitHub surface for the Geo workstream's package code, proof custody, and documentation. It is not a release-ready repo, and the repo-local install path is a sanity check rather than a release validation claim.",
+    "Quickest outsider orientation:",
+    "proofs/FINAL_STATUS.md PUBLIC_AUDIT_LIMITS.md AUDITOR_PLAYBOOK.md code/README.md"
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-Geo",
+  "authorityState": {
+    "status": "BLOCKED",
+    "timestamp": "2026-03-21",
+    "summary": "Current repo verdict: NOT_RELEASE_READY.",
+    "sourceFile": "proofs/FINAL_STATUS.md"
+  },
+  "headlineMetrics": [
+    {
+      "label": "Current green claims",
+      "valueRaw": "GEO-C003, GEO-C005, GEO-C006, GEO-C007, and GEO-C008 remain PASS on the March 21 operator surface",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 3,
+      "unit": ""
+    }
+  ],
+  "provedNow": [
+    "ZPE Geo is the Git-backed workstream repo for deterministic geospatial trajectory compression, fidelity checks, maneuver search, and H3 roundtrip validation.",
+    "This repo is the live GitHub surface for the Geo workstream's package code, proof custody, and documentation. It is not a release-ready repo, and the repo-local install path is a sanity check rather than a release validation claim."
+  ],
+  "explicitNonClaims": [
+    "This release gate does not treat outside-repo operator material as part of the release surface unless it has been copied back into the repo or explicitly declared out of scope."
+  ],
+  "openRisks": [],
+  "modalityStatus": [
+    {
+      "modalityName": "Current green claims",
+      "rawStatus": "GEO-C003, GEO-C005, GEO-C006, GEO-C007, and GEO-C008 remain PASS on the March 21 operator surface",
+      "verdict": "PASS",
+      "notes": "artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json"
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "path": "artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "description": "artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json"
+    },
+    {
+      "label": "artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "path": "artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "description": "artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json"
+    },
+    {
+      "label": "artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "path": "artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "description": "artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md"
+    },
+    {
+      "label": "CONSOLIDATED_PROOF_REPORT.md",
+      "path": "CONSOLIDATED_PROOF_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/CONSOLIDATED_PROOF_REPORT.md",
+      "description": "CONSOLIDATED_PROOF_REPORT.md"
+    },
+    {
+      "label": "proofs/FINAL_STATUS.md",
+      "path": "proofs/FINAL_STATUS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/FINAL_STATUS.md",
+      "description": "proofs/FINAL_STATUS.md"
+    },
+    {
+      "label": "proofs/artifacts/2026-03-21_operator_status/README.md",
+      "path": "proofs/artifacts/2026-03-21_operator_status/README.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-03-21_operator_status/README.md",
+      "description": "proofs/artifacts/2026-03-21_operator_status/README.md"
+    },
+    {
+      "label": "PUBLIC_AUDIT_LIMITS.md",
+      "path": "PUBLIC_AUDIT_LIMITS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/PUBLIC_AUDIT_LIMITS.md",
+      "description": "PUBLIC_AUDIT_LIMITS.md"
+    },
+    {
+      "label": "docs/ARCHITECTURE.md",
+      "path": "docs/ARCHITECTURE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "label": "proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "path": "proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "description": "proofs/CONSOLIDATED_PROOF_REPORT.md"
+    },
+    {
+      "label": "AUDITOR_PLAYBOOK.md",
+      "path": "AUDITOR_PLAYBOOK.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/AUDITOR_PLAYBOOK.md",
+      "description": "AUDITOR_PLAYBOOK.md"
+    },
+    {
+      "label": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "path": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "description": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "path": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "description": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/claim_status_delta.md",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/claim_status_delta.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/claim_status_delta.md",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/claim_status_delta.md"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_benchmark.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_benchmark.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_benchmark.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_benchmark.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_benchmark.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_benchmark.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_benchmark.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_benchmark.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_fidelity.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_fidelity.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_fidelity.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_fidelity.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_fidelity.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_fidelity.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_fidelity.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_fidelity.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_query_latency_benchmark.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_query_latency_benchmark.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_query_latency_benchmark.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_query_latency_benchmark.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_stream_latency.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_stream_latency.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_stream_latency.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_stream_latency.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_h3_roundtrip_results.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_h3_roundtrip_results.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_h3_roundtrip_results.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_h3_roundtrip_results.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_geo_wave1/residual_risk_register.md",
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/residual_risk_register.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-02-20_zpe_geo_wave1/residual_risk_register.md",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/residual_risk_register.md"
+    },
+    {
+      "label": "../proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "path": "proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Geo/blob/main/proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "description": "../proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md"
+    }
+  ],
+  "repoShape": [
+    {
+      "path": "artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "description": "artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json"
+    },
+    {
+      "path": "artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "description": "artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json"
+    },
+    {
+      "path": "artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "description": "artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md"
+    },
+    {
+      "path": "artifacts/2026-02-20_zpe_geo_wave1/",
+      "description": "artifacts/2026-02-20_zpe_geo_wave1/"
+    },
+    {
+      "path": "CONSOLIDATED_PROOF_REPORT.md",
+      "description": "CONSOLIDATED_PROOF_REPORT.md"
+    },
+    {
+      "path": "proofs/FINAL_STATUS.md",
+      "description": "proofs/FINAL_STATUS.md"
+    },
+    {
+      "path": "proofs/artifacts/2026-03-21_operator_status/",
+      "description": "proofs/artifacts/2026-03-21_operator_status/"
+    },
+    {
+      "path": "proofs/artifacts/2026-03-21_operator_status/README.md",
+      "description": "proofs/artifacts/2026-03-21_operator_status/README.md"
+    },
+    {
+      "path": "PUBLIC_AUDIT_LIMITS.md",
+      "description": "PUBLIC_AUDIT_LIMITS.md"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "code/README.md",
+      "description": "code/README.md"
+    },
+    {
+      "path": "proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "description": "proofs/CONSOLIDATED_PROOF_REPORT.md"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/"
+    },
+    {
+      "path": "AUDITOR_PLAYBOOK.md",
+      "description": "AUDITOR_PLAYBOOK.md"
+    },
+    {
+      "path": "docs/CANONICAL_DOC_REGISTRY.md",
+      "description": "docs/CANONICAL_DOC_REGISTRY.md"
+    },
+    {
+      "path": "docs/FAQ.md",
+      "description": "docs/FAQ.md"
+    },
+    {
+      "path": "docs/SUPPORT.md",
+      "description": "docs/SUPPORT.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "description": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "description": "CONTRIBUTING.md"
+    },
+    {
+      "path": "SECURITY.md",
+      "description": "SECURITY.md"
+    },
+    {
+      "path": "README.md",
+      "description": "README.md"
+    },
+    {
+      "path": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+      "description": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+      "description": "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/claim_status_delta.md",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/claim_status_delta.md"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_benchmark.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_benchmark.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_benchmark.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_benchmark.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_fidelity.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_fidelity.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_fidelity.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_fidelity.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_query_latency_benchmark.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_query_latency_benchmark.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_stream_latency.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_stream_latency.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_h3_roundtrip_results.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_h3_roundtrip_results.json"
+    },
+    {
+      "path": "proofs/artifacts/2026-02-20_zpe_geo_wave1/residual_risk_register.md",
+      "description": "proofs/artifacts/2026-02-20_zpe_geo_wave1/residual_risk_register.md"
+    },
+    {
+      "path": "docs/README.md",
+      "description": "docs/README.md"
+    },
+    {
+      "path": "proofs/artifacts/2026-03-21_docs_owner_pass/pytest_code_tests.log",
+      "description": "proofs/artifacts/2026-03-21_docs_owner_pass/pytest_code_tests.log"
+    },
+    {
+      "path": "CITATION.cff",
+      "description": "CITATION.cff"
+    },
+    {
+      "path": "../code/",
+      "description": "../code/"
+    },
+    {
+      "path": "../proofs/artifacts/2026-02-20_zpe_geo_wave1/",
+      "description": "../proofs/artifacts/2026-02-20_zpe_geo_wave1/"
+    },
+    {
+      "path": "../proofs/artifacts/2026-03-21_operator_status/",
+      "description": "../proofs/artifacts/2026-03-21_operator_status/"
+    },
+    {
+      "path": "../README.md",
+      "description": "../README.md"
+    },
+    {
+      "path": "../proofs/FINAL_STATUS.md",
+      "description": "../proofs/FINAL_STATUS.md"
+    },
+    {
+      "path": "../code/zpe_geo/",
+      "description": "../code/zpe_geo/"
+    },
+    {
+      "path": "../code/scripts/",
+      "description": "../code/scripts/"
+    },
+    {
+      "path": "../code/tests/",
+      "description": "../code/tests/"
+    },
+    {
+      "path": "../code/fixtures/",
+      "description": "../code/fixtures/"
+    },
+    {
+      "path": "../docs/",
+      "description": "../docs/"
+    },
+    {
+      "path": "../proofs/",
+      "description": "../proofs/"
+    },
+    {
+      "path": "../proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/",
+      "description": "../proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/"
+    },
+    {
+      "path": "../proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "description": "../proofs/CONSOLIDATED_PROOF_REPORT.md"
+    },
+    {
+      "path": "../proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+      "description": "../proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md"
+    },
+    {
+      "path": "../code/README.md",
+      "description": "../code/README.md"
+    },
+    {
+      "path": "../PUBLIC_AUDIT_LIMITS.md",
+      "description": "../PUBLIC_AUDIT_LIMITS.md"
+    },
+    {
+      "path": "../AUDITOR_PLAYBOOK.md",
+      "description": "../AUDITOR_PLAYBOOK.md"
+    },
+    {
+      "path": "LEGAL_BOUNDARIES.md",
+      "description": "LEGAL_BOUNDARIES.md"
+    },
+    {
+      "path": "SUPPORT.md",
+      "description": "SUPPORT.md"
+    },
+    {
+      "path": "../SECURITY.md",
+      "description": "../SECURITY.md"
+    }
+  ],
+  "verificationPath": [
+    "artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+    "artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+    "artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+    "CONSOLIDATED_PROOF_REPORT.md",
+    "proofs/FINAL_STATUS.md",
+    "proofs/artifacts/2026-03-21_operator_status/README.md",
+    "PUBLIC_AUDIT_LIMITS.md",
+    "docs/ARCHITECTURE.md",
+    "proofs/CONSOLIDATED_PROOF_REPORT.md",
+    "AUDITOR_PLAYBOOK.md",
+    "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/handoff_manifest.json",
+    "proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/max_claim_resource_map.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/claim_status_delta.md",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_benchmark.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_benchmark.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_av_fidelity.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_ais_fidelity.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_query_latency_benchmark.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_stream_latency.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/geo_h3_roundtrip_results.json",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/residual_risk_register.md",
+    "proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+    "artifacts/2026-02-20_zpe_geo_wave1/",
+    "proofs/artifacts/2026-03-21_operator_status/",
+    "code/README.md",
+    "proofs/artifacts/2026-02-20_zpe_geo_wave1/",
+    "docs/CANONICAL_DOC_REGISTRY.md",
+    "docs/FAQ.md",
+    "docs/SUPPORT.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "README.md",
+    "docs/README.md",
+    "proofs/artifacts/2026-03-21_docs_owner_pass/pytest_code_tests.log",
+    "CITATION.cff",
+    "../code/",
+    "../proofs/artifacts/2026-02-20_zpe_geo_wave1/",
+    "../proofs/artifacts/2026-03-21_operator_status/",
+    "../README.md",
+    "../proofs/FINAL_STATUS.md",
+    "../code/zpe_geo/",
+    "../code/scripts/",
+    "../code/tests/",
+    "../code/fixtures/",
+    "../docs/",
+    "../proofs/",
+    "../proofs/artifacts/2026-03-21_operator_status/phase0311_runpod/",
+    "../proofs/CONSOLIDATED_PROOF_REPORT.md",
+    "../proofs/artifacts/2026-03-21_operator_status/release_alignment/TECHNICAL_ALIGNMENT_REPORT.md",
+    "../code/README.md",
+    "../PUBLIC_AUDIT_LIMITS.md",
+    "../AUDITOR_PLAYBOOK.md",
+    "LEGAL_BOUNDARIES.md",
+    "SUPPORT.md",
+    "../SECURITY.md"
+  ],
+  "parserWarnings": [],
+  "confidenceScore": 100,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:23.574Z"
+}

@@ -1,0 +1,219 @@
+{
+  "laneIdentifier": "ZPE-XR",
+  "laneTitle": "ZPE-XR",
+  "tagline": "ZPE-XR is the canonical Zer0pa XR workstream for a deterministic hand-pose transport codec and evaluation harness. This repository is the governing public-facing surface for the XR package candidate: it exposes the code, the package boundary, the staged evidence, and the current non-claims. It is buildable and inspectable, but it is not a public-release pass narrative.",
+  "whatThisIs": [
+    "ZPE-XR is the canonical Zer0pa XR workstream for a deterministic hand-pose transport codec and evaluation harness. This repository is the governing public-facing surface for the XR package candidate: it exposes the code, the package boundary, the staged evidence, and the current non-claims. It is buildable and inspectable, but it is not a public-release pass narrative."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-XR",
+  "authorityState": {
+    "status": "BLOCKED",
+    "timestamp": "2026-03-21",
+    "summary": "Phase 5 ContactPose multi-sequence: mean compression 56.",
+    "sourceFile": "proofs/FINAL_STATUS.md"
+  },
+  "headlineMetrics": [
+    {
+      "label": "Phase 4 ContactPose single-sequence",
+      "valueRaw": "compression 56.144x, MPJPE 0.478 mm, latency 0.025 ms, loss error 0.399%.",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 56.144,
+      "unit": "x"
+    },
+    {
+      "label": "Package mechanics",
+      "valueRaw": "Rust backend, twine check PASS, version 0.3.0.",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 0.3,
+      "unit": ""
+    },
+    {
+      "label": "Primary benchmark authority",
+      "valueRaw": "Phase 5 ContactPose multi-sequence run",
+      "sourceFile": "README.md",
+      "numericValue": 5,
+      "unit": "ContactPose"
+    },
+    {
+      "label": "Package mechanics",
+      "valueRaw": "Version 0.3.0 , Rust-backed build, wheel path validated, twine check PASS",
+      "sourceFile": "README.md",
+      "numericValue": 0.3,
+      "unit": ""
+    },
+    {
+      "label": "Compression vs raw",
+      "valueRaw": "56.144x",
+      "sourceFile": "README.md",
+      "numericValue": 56.144,
+      "unit": "x"
+    },
+    {
+      "label": "MPJPE",
+      "valueRaw": "0.479 mm",
+      "sourceFile": "README.md",
+      "numericValue": 0.479,
+      "unit": "mm"
+    },
+    {
+      "label": "Encode+decode latency",
+      "valueRaw": "0.026 ms",
+      "sourceFile": "README.md",
+      "numericValue": 0.026,
+      "unit": "ms"
+    },
+    {
+      "label": "Pose error at 10% loss",
+      "valueRaw": "0.399%",
+      "sourceFile": "README.md",
+      "numericValue": 0.399,
+      "unit": "%"
+    },
+    {
+      "label": "Modern comparator gate",
+      "valueRaw": "0/5",
+      "sourceFile": "README.md",
+      "numericValue": 0,
+      "unit": "/"
+    },
+    {
+      "label": "Public release",
+      "valueRaw": "Modern comparator gate failed ( 0/5 ).",
+      "sourceFile": "README.md",
+      "numericValue": 0,
+      "unit": "/"
+    }
+  ],
+  "provedNow": [
+    "Phase 5 ContactPose multi-sequence: mean compression 56.144x, mean MPJPE 0.479 mm, mean latency 0.026 ms, mean loss error 0.399%, modern comparator passes 0/5. Anchor: proofs/artifacts/2026-03-21_zpe_xr_phase5_multi_sequence_161900Z/phase5_multi_sequence_benchmark.json.",
+    "Phase 4 ContactPose single-sequence: compression 56.144x, MPJPE 0.478 mm, latency 0.025 ms, loss error 0.399%. Anchor: proofs/artifacts/2026-03-21_zpe_xr_phase4_runpod_contactpose_124835Z/phase4_contactpose_benchmark.json.",
+    "Phase 4 cold-start audit: PASS, Comet logging disabled (key null). Anchor: proofs/artifacts/2026-03-21_zpe_xr_phase4_cold_start/phase4_cold_start_audit.json.",
+    "Package mechanics: Rust backend, twine check PASS, version 0.3.0. Anchor: release_readiness.json.",
+    "outward-safe workload: ContactPose PASS",
+    "package candidate: PASS",
+    "cold-start trust: PASS",
+    "A deterministic XR codec and evaluation harness for two-hand joint streams, packaging, and proof-surface adjudication.",
+    "Version 0.3.0 , Rust-backed build, wheel path validated, twine check PASS",
+    "PASS, local-only logging posture retained",
+    "mean compression 56.144x, mean MPJPE 0.479 mm, mean latency 0.026 ms, mean loss error 0.399%"
+  ],
+  "explicitNonClaims": [
+    "Not provided today:",
+    "no PyPI release",
+    "no public-release verdict",
+    "no runtime-closure pass narrative",
+    "No manual feature flags are required for the recommended public audit path:",
+    "No telemetry keys are required for that path:",
+    "No. The supported acquisition surface is the repo itself: https://github.com/Zer0pa/ZPE-XR.git .",
+    "No. XR-C007 remains PAUSED_EXTERNAL .",
+    "No. ContactPose is the outward-safe benchmark lane, not the exact named PRD corpus.",
+    "No. Photon remains a secondary open comparator row."
+  ],
+  "openRisks": [
+    "XR-C007 remains PAUSED_EXTERNAL due to device/editor/license constraints.",
+    "carried forward runtime PAUSED_EXTERNAL status, ContactPose readiness, and explicit public-release blockers"
+  ],
+  "modalityStatus": [
+    {
+      "modalityName": "outward-safe workload",
+      "rawStatus": "ContactPose PASS",
+      "verdict": "PASS",
+      "notes": "Current Verdict"
+    },
+    {
+      "modalityName": "package candidate",
+      "rawStatus": "PASS",
+      "verdict": "PASS",
+      "notes": "Current Verdict"
+    },
+    {
+      "modalityName": "cold-start trust",
+      "rawStatus": "PASS",
+      "verdict": "PASS",
+      "notes": "Current Verdict"
+    },
+    {
+      "modalityName": "outward channel",
+      "rawStatus": "PRIVATE_ONLY",
+      "verdict": "INCONCLUSIVE",
+      "notes": "Current Verdict"
+    },
+    {
+      "modalityName": "public release readiness",
+      "rawStatus": "NOT_READY_FOR_PUBLIC_RELEASE",
+      "verdict": "FAIL",
+      "notes": "Current Verdict"
+    },
+    {
+      "modalityName": "Release verdict",
+      "rawStatus": "PRIVATE_ONLY , NOT_READY_FOR_PUBLIC_RELEASE",
+      "verdict": "FAIL",
+      "notes": "proofs/RELEASE_READINESS_REPORT.md"
+    },
+    {
+      "modalityName": "Package mechanics",
+      "rawStatus": "Version 0.3.0 , Rust-backed build, wheel path validated, twine check PASS",
+      "verdict": "PASS",
+      "notes": "release_readiness.json"
+    },
+    {
+      "modalityName": "Cold-start audit",
+      "rawStatus": "PASS, local-only logging posture retained",
+      "verdict": "PASS",
+      "notes": "proofs/artifacts/2026-03-21_zpe_xr_phase4_cold_start/phase4_cold_start_audit.json"
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "proofs/artifacts/2026-03-21_zpe_xr_phase5_multi_sequence_161900Z/phase5_multi_sequence_benchmark.json",
+      "path": "proofs/artifacts/2026-03-21_zpe_xr_phase5_multi_sequence_161900Z/phase5_multi_sequence_benchmark.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-XR/blob/main/proofs/artifacts/2026-03-21_zpe_xr_phase5_multi_sequence_161900Z/phase5_multi_sequence_benchmark.json",
+      "description": "proofs/artifacts/2026-03-21_zpe_xr_phase5_multi_sequence_161900Z/phase5_multi_sequence_benchmark.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-03-21_zpe_xr_phase4_runpod_contactpose_124835Z/phase4_contactpose_benchmark.json",
+      "path": "proofs/artifacts/2026-03-21_zpe_xr_phase4_runpod_contactpose_124835Z/phase4_contactpose_benchmark.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-XR/blob/main/proofs/artifacts/2026-03-21_zpe_xr_phase4_runpod_contactpose_124835Z/phase4_contactpose_benchmark.json",
+      "description": "proofs/artifacts/2026-03-21_zpe_xr_phase4_runpod_contactpose_124835Z/phase4_contactpose_benchmark.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-03-21_zpe_xr_phase4_cold_start/phase4_cold_start_audit.json",
+      "path": "proofs/artifacts/2026-03-21_zpe_xr_phase4_cold_start/phase4_cold_start_audit.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-XR/blob/main/proofs/artifacts/2026-03-21_zpe_xr_phase4_cold_start/phase4_cold_start_audit.json",
+      "description": "proofs/artifacts/2026-03-21_zpe_xr_phase4_cold_start/phase4_cold_start_audit.json"
+    },
+    {
+      "label": "docs/ARCHITECTURE.md",
+      "path": "docs/ARCHITECTURE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-XR/blob/main/docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "label": "proofs/FINAL_STATUS.md",
+      "path": "proofs/FINAL_STATUS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-XR/blob/main/proofs/FINAL_STATUS.md",
+      "description": "proofs/FINAL_STATUS.md"
+    },
+    {
+      "label": "proofs/RELEASE_READINESS_REPORT.md",
+      "path": "proofs/RELEASE_READINESS_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-XR/blob/main/proofs/RELEASE_READINESS_REPORT.md",
+      "description": "proofs/RELEASE_READINESS_REPORT.md"
+    }
+  ],
+  "repoShape": [],
+  "verificationPath": [
+    "proofs/artifacts/2026-03-21_zpe_xr_phase5_multi_sequence_161900Z/phase5_multi_sequence_benchmark.json",
+    "proofs/artifacts/2026-03-21_zpe_xr_phase4_runpod_contactpose_124835Z/phase4_contactpose_benchmark.json",
+    "proofs/artifacts/2026-03-21_zpe_xr_phase4_cold_start/phase4_cold_start_audit.json",
+    "docs/ARCHITECTURE.md",
+    "proofs/FINAL_STATUS.md",
+    "proofs/RELEASE_READINESS_REPORT.md"
+  ],
+  "parserWarnings": [
+    "No repo shape hints found"
+  ],
+  "confidenceScore": 100,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:13.473Z"
+}

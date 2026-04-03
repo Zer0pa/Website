@@ -1,0 +1,134 @@
+{
+  "laneIdentifier": "ZPE-Mocap",
+  "laneTitle": "ZPE-Mocap",
+  "tagline": "ZPE-Mocap is Zero-Point Encoding's motion-capture compression and retrieval sector. This repo contains a deterministic Python reference implementation plus an imported synthetic-corpus proof bundle dated 2026-02-20. Every public claim below is limited to that synthetic evidence. No Blender runtime pass, no CMU commercialization-safe closure, and no clean-clone verification are claimed here.",
+  "whatThisIs": [
+    "ZPE-Mocap is Zero-Point Encoding's motion-capture compression and retrieval sector. This repo contains a deterministic Python reference implementation plus an imported synthetic-corpus proof bundle dated 2026-02-20. Every public claim below is limited to that synthetic evidence. No Blender runtime pass, no CMU commercialization-safe closure, and no clean-clone verification are claimed here."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap",
+  "authorityState": {
+    "status": "BLOCKED",
+    "timestamp": "2026-02-20",
+    "summary": "Backend truth backend=python Python reference implementation; no compiled runtime authority is claimed here.",
+    "sourceFile": "README.md"
+  },
+  "headlineMetrics": [
+    {
+      "label": "zpmoc_mean_cr",
+      "valueRaw": "85.1893 ",
+      "sourceFile": "README.md",
+      "numericValue": 85.1893,
+      "unit": ""
+    },
+    {
+      "label": "zpmoc_mean_cr",
+      "valueRaw": "85.1893",
+      "sourceFile": "README.md",
+      "numericValue": 85.1893,
+      "unit": ""
+    },
+    {
+      "label": "mpjpe_mean_mm",
+      "valueRaw": "1.1901",
+      "sourceFile": "README.md",
+      "numericValue": 1.1901,
+      "unit": ""
+    },
+    {
+      "label": "query_latency_p95_ms",
+      "valueRaw": "43.4239",
+      "sourceFile": "README.md",
+      "numericValue": 43.4239,
+      "unit": ""
+    }
+  ],
+  "provedNow": [
+    "ZPE-Mocap is Zero-Point Encoding's motion-capture compression and retrieval sector. This repo contains a deterministic Python reference implementation plus an imported synthetic-corpus proof bundle dated 2026-02-20. Every public claim below is limited to that synthetic evidence. No Blender runtime pass, no CMU commercialization-safe closure, and no clean-clone verification are claimed here.",
+    "A deterministic mocap compression and retrieval reference stack backed by a synthetic corpus with preserved proof lineage.",
+    "Synthetic-corpus compression ratio, joint-angle fidelity, positional fidelity, search ranking, and query-latency metrics in the wave1 bundle.",
+    "zpmoc_mean_cr=85.1893 , mpjpe_mean_mm=1.1901 , query_latency_p95_ms=43.4239",
+    "Synthetic-corpus mean compression ratio from the wave1 benchmark artifact.",
+    "mpjpe_mean_mm=1.1901",
+    "query_latency_p95_ms=43.4239",
+    "Synthetic query latency p95 from the wave1 benchmark.",
+    "The reference implementation is documented as deterministic on the shipped synthetic corpus."
+  ],
+  "explicitNonClaims": [
+    "No throughput benchmark is promoted. The only performance numbers currently promoted are synthetic-corpus compression and query-latency metrics from the wave1 bundle.",
+    "No public ML workbook is promoted for ZPE-Mocap at this time. All promoted evidence remains in the local wave1 proof bundle under proofs/artifacts/2026-02-20_zpe_mocap_wave1/ .",
+    "No public ML workbook has been published for this repo; evidence is local to the wave1 bundle.",
+    "No. The promoted metrics in the README are synthetic-corpus results from the 2026-02-20 wave1 bundle. CMU real-corpus gates have not been run in this repo.",
+    "Not yet. Blender runtime proof remains unpromoted and is explicitly treated as a gap in the current docs.",
+    "No. This remains a staging repo whose promoted authority is bounded to the current synthetic bundle and explicit non-claims.",
+    "No. Docs can clarify truth and improve auditability, but they cannot replace missing CMU, Blender, or clean-clone evidence."
+  ],
+  "openRisks": [],
+  "modalityStatus": [],
+  "proofAnchors": [
+    {
+      "label": "proofs/artifacts/.../mocap_blender_roundtrip.json",
+      "path": "proofs/artifacts/.../mocap_blender_roundtrip.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/proofs/artifacts/.../mocap_blender_roundtrip.json",
+      "description": "proofs/artifacts/.../mocap_blender_roundtrip.json"
+    },
+    {
+      "label": "docs/ARCHITECTURE.md",
+      "path": "docs/ARCHITECTURE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "label": "proofs/README.md",
+      "path": "proofs/README.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/proofs/README.md",
+      "description": "proofs/README.md"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_compression_benchmark.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_compression_benchmark.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_compression_benchmark.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_compression_benchmark.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_search_eval.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_search_eval.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_search_eval.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_search_eval.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/acl_direct_comparator_table.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/acl_direct_comparator_table.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/proofs/artifacts/2026-02-20_zpe_mocap_wave1/acl_direct_comparator_table.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/acl_direct_comparator_table.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/integration_readiness_contract.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/integration_readiness_contract.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/proofs/artifacts/2026-02-20_zpe_mocap_wave1/integration_readiness_contract.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/integration_readiness_contract.json"
+    },
+    {
+      "label": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_blender_roundtrip.json",
+      "path": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_blender_roundtrip.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Mocap/blob/main/proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_blender_roundtrip.json",
+      "description": "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_blender_roundtrip.json"
+    }
+  ],
+  "repoShape": [],
+  "verificationPath": [
+    "proofs/artifacts/.../mocap_blender_roundtrip.json",
+    "docs/ARCHITECTURE.md",
+    "proofs/README.md",
+    "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_compression_benchmark.json",
+    "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_search_eval.json",
+    "proofs/artifacts/2026-02-20_zpe_mocap_wave1/acl_direct_comparator_table.json",
+    "proofs/artifacts/2026-02-20_zpe_mocap_wave1/integration_readiness_contract.json",
+    "proofs/artifacts/2026-02-20_zpe_mocap_wave1/mocap_blender_roundtrip.json"
+  ],
+  "parserWarnings": [
+    "No repo shape hints found"
+  ],
+  "confidenceScore": 90,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:21.744Z"
+}

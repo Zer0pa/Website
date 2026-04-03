@@ -1,0 +1,122 @@
+{
+  "page": "imc",
+  "route": "/imc",
+  "viewport": {
+    "width": 1024,
+    "height": 1850
+  },
+  "elements": [
+    {
+      "id": "imc.page",
+      "x": 20,
+      "y": 34,
+      "width": 984,
+      "height": 1600,
+      "tolerance": 120
+    },
+    {
+      "id": "imc.hero.title",
+      "x": 20,
+      "y": 58,
+      "width": 260,
+      "height": 86,
+      "tolerance": 30
+    },
+    {
+      "id": "imc.hero.meta",
+      "x": 736,
+      "y": 58,
+      "width": 248,
+      "height": 72,
+      "tolerance": 36
+    },
+    {
+      "id": "imc.hero.identity",
+      "x": 20,
+      "y": 186,
+      "width": 520,
+      "height": 128,
+      "tolerance": 40
+    },
+    {
+      "id": "imc.hero.authority",
+      "x": 596,
+      "y": 182,
+      "width": 388,
+      "height": 132,
+      "tolerance": 40
+    },
+    {
+      "id": "imc.metric.row",
+      "x": 20,
+      "y": 346,
+      "width": 984,
+      "height": 88,
+      "tolerance": 24
+    },
+    {
+      "id": "imc.proof.assertions",
+      "x": 20,
+      "y": 480,
+      "width": 470,
+      "height": 164,
+      "tolerance": 48
+    },
+    {
+      "id": "imc.nonclaims",
+      "x": 514,
+      "y": 480,
+      "width": 490,
+      "height": 164,
+      "tolerance": 48
+    },
+    {
+      "id": "imc.modality.snapshot",
+      "x": 20,
+      "y": 688,
+      "width": 984,
+      "height": 128,
+      "tolerance": 32
+    },
+    {
+      "id": "imc.evidence.routes",
+      "x": 20,
+      "y": 872,
+      "width": 472,
+      "height": 286,
+      "tolerance": 50
+    },
+    {
+      "id": "imc.repo.shape",
+      "x": 512,
+      "y": 872,
+      "width": 492,
+      "height": 286,
+      "tolerance": 50
+    },
+    {
+      "id": "imc.proof.terminal",
+      "x": 20,
+      "y": 1208,
+      "width": 984,
+      "height": 144,
+      "tolerance": 24
+    },
+    {
+      "id": "imc.related.lanes",
+      "x": 20,
+      "y": 1424,
+      "width": 984,
+      "height": 128,
+      "tolerance": 32
+    },
+    {
+      "id": "imc.cta.band",
+      "x": 20,
+      "y": 1590,
+      "width": 984,
+      "height": 212,
+      "tolerance": 44
+    }
+  ]
+}

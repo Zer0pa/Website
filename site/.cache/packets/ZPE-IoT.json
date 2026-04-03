@@ -1,0 +1,371 @@
+{
+  "laneIdentifier": "ZPE-IoT",
+  "laneTitle": "ZPE-IoT",
+  "tagline": "Deterministic sensor compression and chemosense packetization for IoT time-series.",
+  "whatThisIs": [
+    "Deterministic sensor compression and chemosense packetization for IoT time-series.",
+    "ZPE-IoT is a private-stage sensor compression SDK for 1D IoT time-series. The canonical implementation surface is the Rust core in core/, exposed through the nested Python distribution in python/ and a repo-local PyO3 native build in python/native/.",
+    "This front door promotes only the March 21, 2026 repo-local authority surface. It does not claim public package availability, universal compressor dominance, or runtime coupling to ZPE-IMC.",
+    "Managed preflight is the build/install/release gate, strict DT is the destructive-test gate, and E1 is the promoted real-public benchmark tier."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-IoT",
+  "authorityState": {
+    "status": "STAGED",
+    "timestamp": "2026-03-21",
+    "summary": "private staging: engineering verification passed for private-stage use.",
+    "sourceFile": "proofs/FINAL_STATUS.md"
+  },
+  "headlineMetrics": [
+    {
+      "label": "Managed preflight",
+      "valueRaw": "17 PASS / 0 FAIL / 1 DEFERRED",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 17,
+      "unit": "PASS"
+    },
+    {
+      "label": "Strict DT",
+      "valueRaw": "27/27 PASS",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 27,
+      "unit": "/"
+    },
+    {
+      "label": "E1 real-public benchmark",
+      "valueRaw": "10/11 wins, 17.16x mean CR",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 10,
+      "unit": "/"
+    },
+    {
+      "label": "Native wheel cold install",
+      "valueRaw": "PASS on local arm64 macOS path",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 64,
+      "unit": "macOS"
+    },
+    {
+      "label": "Fresh install smoke",
+      "valueRaw": "PASS on local arm64 macOS cold install",
+      "sourceFile": "README.md",
+      "numericValue": 64,
+      "unit": "macOS"
+    },
+    {
+      "label": "Benchmark authority",
+      "valueRaw": "E1, 10/11 wins, 17.16x mean CR",
+      "sourceFile": "README.md",
+      "numericValue": 1,
+      "unit": ""
+    },
+    {
+      "label": "Active E1 benchmark",
+      "valueRaw": "10/11 wins, 17.16x mean CR",
+      "sourceFile": "AUDITOR_PLAYBOOK.md",
+      "numericValue": 10,
+      "unit": "/"
+    },
+    {
+      "label": "Promoted benchmark verdict (PT-6)",
+      "valueRaw": "PASS (10/11 wins)",
+      "sourceFile": "docs/BENCHMARKS.md",
+      "numericValue": 10,
+      "unit": "/"
+    },
+    {
+      "label": "Mean CR",
+      "valueRaw": "17.163613932777356x",
+      "sourceFile": "docs/BENCHMARKS.md",
+      "numericValue": 17.163613932777356,
+      "unit": "x"
+    }
+  ],
+  "provedNow": [],
+  "explicitNonClaims": [
+    "No. The repo is still a private-stage GitHub repo. Public PyPI and crates.io publication remain deferred by policy.",
+    "No. ZPE-IoT is a bounded-lossy codec. It is not suitable for strict lossless reconstruction requirements.",
+    "No. The promoted benchmark surface still contains a competitor win and a blocked dataset. Use BENCHMARKS.md for the exact current scoreline instead of treating this FAQ as the live benchmark ledger.",
+    "No public multi-platform claim is made. The currently evidenced native install path is the local arm64 macOS wheel. The workflow for broader wheel targets exists, but that is not the same as a published multi-platform release.",
+    "normalized the repo front door for private GitHub staging"
+  ],
+  "openRisks": [],
+  "modalityStatus": [
+    {
+      "modalityName": "Technical alignment",
+      "rawStatus": "PASS",
+      "verdict": "PASS",
+      "notes": "Technical alignment proof"
+    },
+    {
+      "modalityName": "Managed preflight",
+      "rawStatus": "17 PASS / 0 FAIL / 1 DEFERRED",
+      "verdict": "DEGRADED",
+      "notes": "Preflight report"
+    },
+    {
+      "modalityName": "Strict DT",
+      "rawStatus": "27/27 PASS",
+      "verdict": "PASS",
+      "notes": "DT report"
+    },
+    {
+      "modalityName": "E1 real-public benchmark",
+      "rawStatus": "10/11 wins, 17.16x mean CR",
+      "verdict": "INCONCLUSIVE",
+      "notes": "E1 summary"
+    },
+    {
+      "modalityName": "Native wheel cold install",
+      "rawStatus": "PASS on local arm64 macOS path",
+      "verdict": "PASS",
+      "notes": "Cold-install smoke"
+    },
+    {
+      "modalityName": "Fresh install smoke",
+      "rawStatus": "PASS on local arm64 macOS cold install",
+      "verdict": "PASS",
+      "notes": "Cold-install smoke"
+    },
+    {
+      "modalityName": "Benchmark authority",
+      "rawStatus": "E1, 10/11 wins, 17.16x mean CR",
+      "verdict": "INCONCLUSIVE",
+      "notes": "E1 summary"
+    },
+    {
+      "modalityName": "Known real blockers",
+      "rawStatus": "none",
+      "verdict": "INCONCLUSIVE",
+      "notes": "Technical alignment proof"
+    },
+    {
+      "modalityName": "Publication posture",
+      "rawStatus": "tag/index publication and outreach deferred pending explicit owner approval",
+      "verdict": "FAIL",
+      "notes": "Preflight report"
+    },
+    {
+      "modalityName": "Active E1 benchmark",
+      "rawStatus": "10/11 wins, 17.16x mean CR",
+      "verdict": "INCONCLUSIVE"
+    },
+    {
+      "modalityName": "Local arm64 native wheel smoke",
+      "rawStatus": "PASS",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Publication",
+      "rawStatus": "Deferred by policy",
+      "verdict": "FAIL"
+    },
+    {
+      "modalityName": "Public package publication",
+      "rawStatus": "DEFERRED BY POLICY",
+      "verdict": "FAIL"
+    },
+    {
+      "modalityName": "Promoted benchmark verdict (PT-6)",
+      "rawStatus": "PASS (10/11 wins)",
+      "verdict": "PASS"
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "Technical alignment proof",
+      "path": "artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+      "description": "Technical alignment proof"
+    },
+    {
+      "label": "Preflight report",
+      "path": "validation/results/release_preflight_report_20260321T205127.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/validation/results/release_preflight_report_20260321T205127.json",
+      "description": "Preflight report"
+    },
+    {
+      "label": "Bundle manifest",
+      "path": "release/RC_20260321T225526/bundle_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/release/RC_20260321T225526/bundle_manifest.json",
+      "description": "Bundle manifest"
+    },
+    {
+      "label": "validation/results/IOT_WAVE1_RELEASE_READINESS_REPORT.md",
+      "path": "validation/results/IOT_WAVE1_RELEASE_READINESS_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/validation/results/IOT_WAVE1_RELEASE_READINESS_REPORT.md",
+      "description": "validation/results/IOT_WAVE1_RELEASE_READINESS_REPORT.md"
+    },
+    {
+      "label": "../AUDITOR_PLAYBOOK.md",
+      "path": "AUDITOR_PLAYBOOK.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/AUDITOR_PLAYBOOK.md",
+      "description": "../AUDITOR_PLAYBOOK.md"
+    },
+    {
+      "label": "../docs/BENCHMARKS.md",
+      "path": "docs/BENCHMARKS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/docs/BENCHMARKS.md",
+      "description": "../docs/BENCHMARKS.md"
+    },
+    {
+      "label": "proofs/FINAL_STATUS.md",
+      "path": "proofs/FINAL_STATUS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/proofs/FINAL_STATUS.md",
+      "description": "proofs/FINAL_STATUS.md"
+    },
+    {
+      "label": "FINAL_STATUS.md",
+      "path": "FINAL_STATUS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/FINAL_STATUS.md",
+      "description": "Release Readiness Report"
+    },
+    {
+      "label": "Proofs",
+      "path": "proofs/PROOF_INDEX.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/proofs/PROOF_INDEX.md",
+      "description": "Proofs"
+    },
+    {
+      "label": "Technical alignment proof",
+      "path": "proofs/artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/proofs/artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+      "description": "Technical alignment proof"
+    },
+    {
+      "label": "Native wheel verification",
+      "path": "proofs/artifacts/PHASE7_NATIVE_WHEEL_VERIFICATION_20260321.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/proofs/artifacts/PHASE7_NATIVE_WHEEL_VERIFICATION_20260321.md",
+      "description": "Native wheel verification"
+    },
+    {
+      "label": "docs/ARCHITECTURE.md",
+      "path": "docs/ARCHITECTURE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "label": "docs/family/IOT_IMC_ALIGNMENT_REPORT.md",
+      "path": "docs/family/IOT_IMC_ALIGNMENT_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IoT/blob/main/docs/family/IOT_IMC_ALIGNMENT_REPORT.md",
+      "description": "docs/family/IOT_IMC_ALIGNMENT_REPORT.md"
+    }
+  ],
+  "repoShape": [
+    {
+      "path": "artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+      "description": "Technical alignment proof"
+    },
+    {
+      "path": "../validation/results/release_preflight_report_20260321T205127.json",
+      "description": "Preflight report"
+    },
+    {
+      "path": "../validation/results/dt_results_20260321T225304.json",
+      "description": "DT report"
+    },
+    {
+      "path": "../validation/results/bench_summary_E1_real_public_20260321T225305.json",
+      "description": "E1 summary"
+    },
+    {
+      "path": "../validation/results/fresh_env_smoke_20260321T205515/smoke.log",
+      "description": "Cold-install smoke"
+    },
+    {
+      "path": "../release/RC_20260321T225526/bundle_manifest.json",
+      "description": "Bundle manifest"
+    },
+    {
+      "path": "docs/README.md",
+      "description": "Docs"
+    },
+    {
+      "path": "proofs/PROOF_INDEX.md",
+      "description": "Proofs"
+    },
+    {
+      "path": "docs/API.md",
+      "description": "API"
+    },
+    {
+      "path": "docs/BENCHMARKS.md",
+      "description": "Benchmarks"
+    },
+    {
+      "path": "docs/RELEASE_CHECKLIST.md",
+      "description": "Release"
+    },
+    {
+      "path": "AUDITOR_PLAYBOOK.md",
+      "description": "Audit"
+    },
+    {
+      "path": "proofs/FINAL_STATUS.md",
+      "description": "Final status"
+    },
+    {
+      "path": "CITATION.cff",
+      "description": "Citation"
+    },
+    {
+      "path": "proofs/artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+      "description": "Technical alignment proof"
+    },
+    {
+      "path": "proofs/artifacts/PHASE7_NATIVE_WHEEL_VERIFICATION_20260321.md",
+      "description": "Native wheel verification"
+    },
+    {
+      "path": "validation/results/release_preflight_report_20260321T205127.json",
+      "description": "Preflight report"
+    },
+    {
+      "path": "validation/results/dt_results_20260321T225304.json",
+      "description": "DT report"
+    },
+    {
+      "path": "validation/results/fresh_env_smoke_20260321T205515/smoke.log",
+      "description": "Cold-install smoke"
+    },
+    {
+      "path": "validation/results/bench_summary_E1_real_public_20260321T225305.json",
+      "description": "E1 summary"
+    },
+    {
+      "path": "SUPPORT.md",
+      "description": "SUPPORT.md"
+    }
+  ],
+  "verificationPath": [
+    "artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+    "validation/results/release_preflight_report_20260321T205127.json",
+    "release/RC_20260321T225526/bundle_manifest.json",
+    "validation/results/IOT_WAVE1_RELEASE_READINESS_REPORT.md",
+    "AUDITOR_PLAYBOOK.md",
+    "docs/BENCHMARKS.md",
+    "proofs/FINAL_STATUS.md",
+    "FINAL_STATUS.md",
+    "proofs/PROOF_INDEX.md",
+    "proofs/artifacts/REPO_TECHNICAL_ALIGNMENT_20260321.md",
+    "proofs/artifacts/PHASE7_NATIVE_WHEEL_VERIFICATION_20260321.md",
+    "docs/ARCHITECTURE.md",
+    "docs/family/IOT_IMC_ALIGNMENT_REPORT.md",
+    "../validation/results/release_preflight_report_20260321T205127.json",
+    "../validation/results/dt_results_20260321T225304.json",
+    "../validation/results/bench_summary_E1_real_public_20260321T225305.json",
+    "../validation/results/fresh_env_smoke_20260321T205515/smoke.log",
+    "../release/RC_20260321T225526/bundle_manifest.json",
+    "docs/README.md",
+    "docs/API.md",
+    "docs/RELEASE_CHECKLIST.md",
+    "CITATION.cff",
+    "validation/results/dt_results_20260321T225304.json",
+    "validation/results/fresh_env_smoke_20260321T205515/smoke.log",
+    "validation/results/bench_summary_E1_real_public_20260321T225305.json",
+    "SUPPORT.md"
+  ],
+  "parserWarnings": [],
+  "confidenceScore": 95,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:29.066Z"
+}

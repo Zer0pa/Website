@@ -1,0 +1,144 @@
+{
+  "page": "home",
+  "route": "/",
+  "comparedAt": "2026-04-03T07:51:34.025Z",
+  "diffs": [
+    {
+      "id": "home.header",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "distance": 0,
+      "notes": []
+    },
+    {
+      "id": "home.header.logo",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 2,
+      "dw": 47.64,
+      "dh": 5,
+      "distance": 47.64,
+      "notes": [
+        "w>20"
+      ]
+    },
+    {
+      "id": "home.header.nav",
+      "severity": "cosmetic",
+      "dx": 2,
+      "dy": 3.84,
+      "dw": 0,
+      "dh": 6.7,
+      "distance": 6.7,
+      "notes": []
+    },
+    {
+      "id": "home.hero.statusbar",
+      "severity": "cosmetic",
+      "dx": 0,
+      "dy": 0,
+      "dw": 0,
+      "dh": 0,
+      "distance": 0,
+      "notes": []
+    },
+    {
+      "id": "home.hero.heading",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 5,
+      "dw": 0,
+      "dh": 51.19,
+      "distance": 51.19,
+      "notes": [
+        "h>28"
+      ]
+    },
+    {
+      "id": "home.hero.body",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 2.19,
+      "dw": 0,
+      "dh": 28.36,
+      "distance": 28.36,
+      "notes": [
+        "h>24"
+      ]
+    },
+    {
+      "id": "home.hero.cta",
+      "severity": "cosmetic",
+      "dx": 4,
+      "dy": 1.81,
+      "dw": 8,
+      "dh": 0,
+      "distance": 8,
+      "notes": []
+    },
+    {
+      "id": "home.hero.telemetry",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 19,
+      "dw": 32,
+      "dh": 33.47,
+      "distance": 33.47,
+      "notes": [
+        "w>30",
+        "h>30"
+      ]
+    },
+    {
+      "id": "home.flagship.media",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 39.84,
+      "dw": 2,
+      "dh": 0,
+      "distance": 39.84,
+      "notes": [
+        "y>18"
+      ]
+    },
+    {
+      "id": "home.flagship.summary",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 39.84,
+      "dw": 0,
+      "dh": 0,
+      "distance": 39.84,
+      "notes": [
+        "y>18"
+      ]
+    },
+    {
+      "id": "home.index.grid",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 31.16,
+      "dw": 0,
+      "dh": 34.31,
+      "distance": 34.31,
+      "notes": [
+        "y>20"
+      ]
+    },
+    {
+      "id": "home.proof.logic",
+      "severity": "minor",
+      "dx": 0,
+      "dy": 33.84,
+      "dw": 0,
+      "dh": 7.69,
+      "distance": 33.84,
+      "notes": [
+        "y>24"
+      ]
+    }
+  ]
+}

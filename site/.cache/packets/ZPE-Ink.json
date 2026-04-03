@@ -1,0 +1,128 @@
+{
+  "laneIdentifier": "ZPE-Ink",
+  "laneTitle": "ZPE-Ink",
+  "tagline": "Deterministic digital-ink codec centered on the .zpink packet format. This repo is a private staging snapshot with a current proof subset and rerun surface. It is not release-ready.",
+  "whatThisIs": [
+    "Deterministic digital-ink codec centered on the .zpink packet format. This repo is a private staging snapshot with a current proof subset and rerun surface. It is not release-ready.",
+    "Status in plain language:",
+    "What this is: a staged .zpink codec with a Python install surface and repo-local bindings.",
+    "Proven: structured-tier compression exceeds 5x vs raw float32 and cross-runtime parity logs pass locally."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-Ink",
+  "authorityState": {
+    "status": "BLOCKED",
+    "timestamp": "",
+    "summary": "Deterministic digital-ink codec centered on the.",
+    "sourceFile": "README.md"
+  },
+  "headlineMetrics": [],
+  "provedNow": [],
+  "explicitNonClaims": [
+    "Blocked: sovereign release surface is FAIL and blind-clone verification is INCONCLUSIVE .",
+    "Notes:",
+    "no public release action until the sovereign release surface is PASS on the exact commit under consideration",
+    "No. The current sovereign verdict is INCONCLUSIVE and the release surface remains FAIL .",
+    "Not on the frozen structured-tier overall ratio. Brotli’s structured-tier ratio ( 6.8256x ) exceeds ZPE-Ink ( 5.5902x ). Candidate branches may exceed Brotli but are not promoted while fidelity losses remain.",
+    "No. The latest blind-clone verdict is INCONCLUSIVE because an optional resource probe failed. A rerun is required to update this status."
+  ],
+  "openRisks": [
+    "Blocked: sovereign release surface is FAIL and blind-clone verification is INCONCLUSIVE .",
+    "Release blockers:",
+    "Constraints and technical debt:"
+  ],
+  "modalityStatus": [
+    {
+      "modalityName": "PyO3 binding (code/bindings/python_native)",
+      "rawStatus": "SOURCE-VERIFIED",
+      "verdict": "PASS",
+      "notes": "proofs/logs/20260321_technical_alignment_cargo_python_native.txt"
+    },
+    {
+      "modalityName": "WASM binding (code/bindings/wasm)",
+      "rawStatus": "SOURCE-VERIFIED",
+      "verdict": "PASS",
+      "notes": "proofs/logs/20260321_technical_alignment_cargo_wasm.txt"
+    },
+    {
+      "modalityName": "proofs/reruns/phase3_external/external_boundary_manifest.json",
+      "rawStatus": "External corpus boundary",
+      "verdict": "INCONCLUSIVE",
+      "notes": "UNIPEN FAIL , Calliar PASS"
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "proofs/reruns/contradiction_resolution_local/contradiction_resolution_manifest.json",
+      "path": "proofs/reruns/contradiction_resolution_local/contradiction_resolution_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/reruns/contradiction_resolution_local/contradiction_resolution_manifest.json",
+      "description": "proofs/reruns/contradiction_resolution_local/contradiction_resolution_manifest.json"
+    },
+    {
+      "label": "proofs/INK_WAVE1_RELEASE_READINESS_REPORT.md",
+      "path": "proofs/INK_WAVE1_RELEASE_READINESS_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/INK_WAVE1_RELEASE_READINESS_REPORT.md",
+      "description": "proofs/INK_WAVE1_RELEASE_READINESS_REPORT.md"
+    },
+    {
+      "label": "proofs/logs/20260321_technical_alignment_pytest.txt",
+      "path": "proofs/logs/20260321_technical_alignment_pytest.txt",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/logs/20260321_technical_alignment_pytest.txt",
+      "description": "proofs/logs/20260321_technical_alignment_pytest.txt"
+    },
+    {
+      "label": "proofs/logs/20260321_technical_alignment_wheel_install.txt",
+      "path": "proofs/logs/20260321_technical_alignment_wheel_install.txt",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/logs/20260321_technical_alignment_wheel_install.txt",
+      "description": "proofs/logs/20260321_technical_alignment_wheel_install.txt"
+    },
+    {
+      "label": "proofs/reruns/benchmark_freeze_local/claim_scope_map.json",
+      "path": "proofs/reruns/benchmark_freeze_local/claim_scope_map.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/reruns/benchmark_freeze_local/claim_scope_map.json",
+      "description": "proofs/reruns/benchmark_freeze_local/claim_scope_map.json"
+    },
+    {
+      "label": "proofs/logs/20260321_technical_alignment_binding_contracts.json",
+      "path": "proofs/logs/20260321_technical_alignment_binding_contracts.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/logs/20260321_technical_alignment_binding_contracts.json",
+      "description": "proofs/logs/20260321_technical_alignment_binding_contracts.json"
+    },
+    {
+      "label": "proofs/logs/20260321_technical_alignment_cross_runtime.json",
+      "path": "proofs/logs/20260321_technical_alignment_cross_runtime.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/logs/20260321_technical_alignment_cross_runtime.json",
+      "description": "proofs/logs/20260321_technical_alignment_cross_runtime.json"
+    },
+    {
+      "label": "proofs/reruns/phase3_external/external_boundary_manifest.json",
+      "path": "proofs/reruns/phase3_external/external_boundary_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/reruns/phase3_external/external_boundary_manifest.json",
+      "description": "proofs/reruns/phase3_external/external_boundary_manifest.json"
+    },
+    {
+      "label": "proofs/reruns/phase3_external/blind_clone_verdict.json",
+      "path": "proofs/reruns/phase3_external/blind_clone_verdict.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Ink/blob/main/proofs/reruns/phase3_external/blind_clone_verdict.json",
+      "description": "proofs/reruns/phase3_external/blind_clone_verdict.json"
+    }
+  ],
+  "repoShape": [],
+  "verificationPath": [
+    "proofs/reruns/contradiction_resolution_local/contradiction_resolution_manifest.json",
+    "proofs/INK_WAVE1_RELEASE_READINESS_REPORT.md",
+    "proofs/logs/20260321_technical_alignment_pytest.txt",
+    "proofs/logs/20260321_technical_alignment_wheel_install.txt",
+    "proofs/reruns/benchmark_freeze_local/claim_scope_map.json",
+    "proofs/logs/20260321_technical_alignment_binding_contracts.json",
+    "proofs/logs/20260321_technical_alignment_cross_runtime.json",
+    "proofs/reruns/phase3_external/external_boundary_manifest.json",
+    "proofs/reruns/phase3_external/blind_clone_verdict.json"
+  ],
+  "parserWarnings": [
+    "No metrics found",
+    "No repo shape hints found"
+  ],
+  "confidenceScore": 80,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:28.360Z"
+}

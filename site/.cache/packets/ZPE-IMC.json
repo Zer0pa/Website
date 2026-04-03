@@ -1,0 +1,169 @@
+{
+  "laneIdentifier": "ZPE-IMC",
+  "laneTitle": "ZPE-IMC",
+  "tagline": "ZPE-IMC is the Wave-1 integration and dispatch layer for Zero-Point Encoding. It is a deterministic, CPU-native transport system that carries ten user-facing modalities through a single 20-bit transport word — no neural network, no training loop, and no GPU. Those ten modalities are routed through eight lane families: TEXT_EMOJI , DIAGRAM_IMAGE , MUSIC , VOICE , MENTAL , TOUCH , SMELL , and TASTE .",
+  "whatThisIs": [
+    "ZPE-IMC is the Wave-1 integration and dispatch layer for Zero-Point Encoding. It is a deterministic, CPU-native transport system that carries ten user-facing modalities through a single 20-bit transport word — no neural network, no training loop, and no GPU. Those ten modalities are routed through eight lane families: TEXT_EMOJI , DIAGRAM_IMAGE , MUSIC , VOICE , MENTAL , TOUCH , SMELL , and TASTE .",
+    "The core claim is transport integrity across mixed modalities. This README is the current authority snapshot ahead of the first tagged public release. Use it for first-contact comprehension, verification, and routing into the proof corpus."
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-IMC",
+  "authorityState": {
+    "status": "SUPPORTED",
+    "timestamp": "2026-03-07",
+    "summary": "Backend truth backend=rust , compiled_extension=1 , fallback_used=0 Authority path is the compiled native extension, not a Python fallback.",
+    "sourceFile": "README.md"
+  },
+  "headlineMetrics": [
+    {
+      "label": "operator",
+      "valueRaw": "170 passed ; public snapshot: 169 passed, 1 skipped",
+      "sourceFile": "README.md",
+      "numericValue": 170,
+      "unit": "passed"
+    }
+  ],
+  "provedNow": [
+    "ZPE-IMC is the Wave-1 integration and dispatch layer for Zero-Point Encoding. It is a deterministic, CPU-native transport system that carries ten user-facing modalities through a single 20-bit transport word — no neural network, no training loop, and no GPU. Those ten modalities are routed through eight lane families: TEXT_EMOJI , DIAGRAM_IMAGE , MUSIC , VOICE , MENTAL , TOUCH , SMELL , and TASTE .",
+    "A deterministic, unified multimodal transport system with real modality integration — not a tokenizer-first framing, and not a set of separate codec demos.",
+    "The March 7, 2026 Rust-backed saturated run is the accepted operator authority: IMC-Canonical-20260307T131330Z with 170 passed in the full operator lane and benchmark_run_id=A4-BENCH-20260307T131414Z ; the public snapshot rerun truth is 169 passed, 1 skipped .",
+    "Four things: native backend truth ( backend=rust , compiled_extension=1 , fallback_used=0 ), deterministic byte-identical replay, integrated coverage across all ten user-facing modalities, and current throughput authority of 276798.7185 imc_stream_words/sec .",
+    "backend=rust , compiled_extension=1 , fallback_used=0",
+    "canonical_total_words_per_sec=276798.7185 , throughput_encode_words_per_sec=94104.7837 , throughput_decode_words_per_sec=296145.6735 [Comet]",
+    "operator: 170 passed ; public snapshot: 169 passed, 1 skipped",
+    "All README throughput numbers use transport words, not natural-language words per second.",
+    "The primary authority surface. The system carries all ten modalities through a single deterministic transport layer.",
+    "Current operator truth is the later March 7 accepted run:",
+    "tests_passed=170",
+    "throughput_encode_words_per_sec=94104.7837",
+    "throughput_decode_words_per_sec=296145.6735",
+    "tests_passed=169",
+    "All throughput numbers are imc_stream_words/sec, not natural-language words/sec."
+  ],
+  "explicitNonClaims": [
+    "No manual feature flags are required for the recommended public audit path in AUDITOR_PLAYBOOK.md .",
+    "No manual telemetry keys are required for the public audit path:",
+    "Not primarily. ZPE is a transport substrate — its job is deterministic, collision-free routing of heterogeneous modalities through a shared fixed-width envelope. Compression ratios are reported for some lanes (touch raw:549, ZPE:87 is a significant size reduction) but the primary claim is codec integrity: deterministic roundtrip, adversarial robustness, and verified external baselines. Size efficiency is a consequence of the encoding, not the objective. The diagram/image lane explicitly does not claim universal bitrate dominance — fidelity and determinism are the verified properties.",
+    "No. CPU-only is the verified baseline for all IMC Wave-1 core lanes. GPU acceleration is tracked for sector workstreams (Video, XR, Prosody, Bio Wearable) in their respective repositories. No IMC Wave-1 gate result requires GPU.",
+    "No. The mental lane is a codec-integrity lane. D612 encodes abstract spatial/cognitive structure — topology classes like COBWEB, LATTICE, SPIRAL, TUNNEL — as directional primitive sequences. It is a deterministic codec approximation, not a biological neural equivalence claim. The scope is explicit: codec integrity only. No perceptual, cognitive, or clinical equivalence is claimed or implied. The same scope discipline applies to all extended modality lanes — smell, taste, and touch are codec-proxy representations, not receptor-level reconstructions.",
+    "No. ZPE-IMC is released under the Zer0pa Source-Available License v6.0 (SAL v6.0), which is not an OSI-approved open-source license. It is source-available with a delayed open-source conversion: each version converts automatically to Apache 2.0 five years after its first public release. Until then: free for individuals, researchers, open-source projects, and organisations with annual gross revenue at or under USD 100M. A Commercial License is required above that threshold or for any Hosted or Managed Service deployment. Historical release chronology is retained in CHANGELOG.md and CITATION.cff . It is not current clone/install guidance for the repo front door.",
+    "Non-license publication/locator hedges were removed from outward release-facing docs and citation surfaces"
+  ],
+  "openRisks": [
+    "Karl Popper's falsifiability principle holds that a scientific claim is only meaningful if it can in principle be disproven. This repo operationalises it as governance: every core claim must survive an active disproof attempt, not just a happy-path test. Negative results are retained as first-class artifacts. Claims without evidence are marked UNKNOWN , not omitted. The Open Risks section in the README is not an embarrassment — it is evidence of rigour. Serious readers distinguish between projects that hide failures and projects that document them."
+  ],
+  "modalityStatus": [
+    {
+      "modalityName": "TEXT_EMOJI",
+      "rawStatus": "GREEN",
+      "verdict": "PASS",
+      "notes": "300/300 external baseline round-trip valid; determinism 5/5 ; hop 6/6 ; encoded_words=101,999 for chars=94,999 ."
+    },
+    {
+      "modalityName": "DIAGRAM_IMAGE",
+      "rawStatus": "GREEN",
+      "verdict": "PASS",
+      "notes": "16/16 pytest pass; mean path-distance 0.44-0.79 ."
+    },
+    {
+      "modalityName": "MUSIC",
+      "rawStatus": "GREEN",
+      "verdict": "PASS",
+      "notes": "7/7 fixtures pass; events=4 ; packed_words=34 ; multi-tempo limitation remains visible."
+    },
+    {
+      "modalityName": "VOICE",
+      "rawStatus": "GREEN",
+      "verdict": "PASS",
+      "notes": "4/4 fixtures pass; parity_all_pass=true ; determinism_all_same=true ; not a speech-understanding or speaker-equivalence claim."
+    },
+    {
+      "modalityName": "MENTAL",
+      "rawStatus": "GREEN",
+      "verdict": "PASS",
+      "notes": "28/28 pytest pass; IMC parity gate pass; no mind-reading or clinical-equivalence claim."
+    },
+    {
+      "modalityName": "TOUCH",
+      "rawStatus": "GREEN",
+      "verdict": "PASS",
+      "notes": "20/20 pytest pass; IMC parity gate pass; raw 549 bytes to ZPE 87 bytes."
+    },
+    {
+      "modalityName": "SMELL",
+      "rawStatus": "GREEN",
+      "verdict": "PASS",
+      "notes": "116 comparator cases; active subset deterministic; public authority is Q-103 = READY_WITH_LICENSE_BOUNDARY ."
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "code/benchmarks/artifacts/BENCHMARK_REPORT.md",
+      "path": "code/benchmarks/artifacts/BENCHMARK_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/code/benchmarks/artifacts/BENCHMARK_REPORT.md",
+      "description": "code/benchmarks/artifacts/BENCHMARK_REPORT.md"
+    },
+    {
+      "label": "docs/ARCHITECTURE.md",
+      "path": "docs/ARCHITECTURE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/docs/ARCHITECTURE.md",
+      "description": "docs/ARCHITECTURE.md"
+    },
+    {
+      "label": "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_run_of_record_manifest.json",
+      "path": "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_run_of_record_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_run_of_record_manifest.json",
+      "description": "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_run_of_record_manifest.json"
+    },
+    {
+      "label": "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_comet_run.txt",
+      "path": "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_comet_run.txt",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_comet_run.txt",
+      "description": "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_comet_run.txt"
+    },
+    {
+      "label": "proofs/logs/phase6_run_of_record_manifest.json",
+      "path": "proofs/logs/phase6_run_of_record_manifest.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/proofs/logs/phase6_run_of_record_manifest.json",
+      "description": "proofs/logs/phase6_run_of_record_manifest.json"
+    },
+    {
+      "label": "proofs/logs/phase6_comet_run.txt",
+      "path": "proofs/logs/phase6_comet_run.txt",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/proofs/logs/phase6_comet_run.txt",
+      "description": "proofs/logs/phase6_comet_run.txt"
+    },
+    {
+      "label": "proofs/reruns/IMC-Canonical-<UTC timestamp>/benchmarks/BENCHMARK_REPORT.md",
+      "path": "proofs/reruns/IMC-Canonical-<UTC timestamp>/benchmarks/BENCHMARK_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/proofs/reruns/IMC-Canonical-<UTC timestamp>/benchmarks/BENCHMARK_REPORT.md",
+      "description": "proofs/reruns/IMC-Canonical-<UTC timestamp>/benchmarks/BENCHMARK_REPORT.md"
+    },
+    {
+      "label": "proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "path": "proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-IMC/blob/main/proofs/CONSOLIDATED_PROOF_REPORT.md",
+      "description": "proofs/CONSOLIDATED_PROOF_REPORT.md"
+    }
+  ],
+  "repoShape": [
+    {
+      "path": "mailto:architects@zer0pa.ai",
+      "description": "architects@zer0pa.ai"
+    }
+  ],
+  "verificationPath": [
+    "code/benchmarks/artifacts/BENCHMARK_REPORT.md",
+    "docs/ARCHITECTURE.md",
+    "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_run_of_record_manifest.json",
+    "proofs/reruns/IMC-Canonical-<UTC timestamp>/phase6_comet_run.txt",
+    "proofs/logs/phase6_run_of_record_manifest.json",
+    "proofs/logs/phase6_comet_run.txt",
+    "proofs/reruns/IMC-Canonical-<UTC timestamp>/benchmarks/BENCHMARK_REPORT.md",
+    "proofs/CONSOLIDATED_PROOF_REPORT.md",
+    "mailto:architects@zer0pa.ai"
+  ],
+  "parserWarnings": [],
+  "confidenceScore": 100,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:11.656Z"
+}

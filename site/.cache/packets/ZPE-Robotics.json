@@ -1,0 +1,179 @@
+{
+  "laneIdentifier": "ZPE-Robotics",
+  "laneTitle": "ZPE-Robotics",
+  "tagline": "ZPE-Robotics is the public repository for the zpe-motion-kernel package. The current public artifact is a standalone Python package for frozen wire-v1 motion transport, replay, search, and audit workflows. The repo and package are public, but the governing engineering surface remains blocker-state and is not a full robotics-platform release.",
+  "whatThisIs": [
+    "ZPE-Robotics is the public repository for the zpe-motion-kernel package.",
+    "The current public artifact is a standalone Python package for frozen",
+    "wire-v1 motion transport, replay, search, and audit workflows. The repo and",
+    "package are public, but the governing engineering surface remains blocker-state"
+  ],
+  "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics",
+  "authorityState": {
+    "status": "BLOCKED",
+    "timestamp": "",
+    "summary": "This file is a historical release-candidate summary pointer.",
+    "sourceFile": "proofs/FINAL_STATUS.md"
+  },
+  "headlineMetrics": [
+    {
+      "label": "Governing blockers",
+      "valueRaw": "B3 fails, red-team attacks 3 and 5 fail, robotics Rust ABI is not wired in",
+      "sourceFile": "proofs/FINAL_STATUS.md",
+      "numericValue": 3,
+      "unit": "fails"
+    },
+    {
+      "label": "Benchmark gates",
+      "valueRaw": "B1, B2, B4, and B5 pass; B3 fails",
+      "sourceFile": "README.md",
+      "numericValue": 1,
+      "unit": ""
+    },
+    {
+      "label": "Real-data benchmark",
+      "valueRaw": "187.1345x on lerobot/columbia_cairlab_pusht_real",
+      "sourceFile": "README.md",
+      "numericValue": 187.1345,
+      "unit": "x"
+    },
+    {
+      "label": "Red-team",
+      "valueRaw": "attacks 1, 2, and 6 withstand; 4 partially withstands; 3 and 5 fail; 7 remains open",
+      "sourceFile": "README.md",
+      "numericValue": 1,
+      "unit": ""
+    }
+  ],
+  "provedNow": [],
+  "explicitNonClaims": [
+    "No IMC runtime import is introduced by this repo.",
+    "No. Engineering remains incomplete. Benchmark gate B3 fails, red-team attacks 3 and 5 fail, attack 4 only partially withstands, and the robotics .zpbot path is not routed through a current ZPE-IMC Rust ABI.",
+    "No. IMC is the documentation and release-hygiene reference model for this repo. It is not a current runtime dependency, and no robotics .zpbot Rust ABI is wired into this package today.",
+    "No. They are lineage only. Keep them for provenance, not for current status.",
+    "normalized current runbooks to repo-local proof paths"
+  ],
+  "openRisks": [],
+  "modalityStatus": [
+    {
+      "modalityName": "Repo formation",
+      "rawStatus": "complete for private staging",
+      "verdict": "INCONCLUSIVE"
+    },
+    {
+      "modalityName": "Governing blockers",
+      "rawStatus": "B3 fails, red-team attacks 3 and 5 fail, robotics Rust ABI is not wired in",
+      "verdict": "FAIL"
+    },
+    {
+      "modalityName": "Benchmark gates",
+      "rawStatus": "B1, B2, B4, and B5 pass; B3 fails",
+      "verdict": "FAIL"
+    },
+    {
+      "modalityName": "Red-team",
+      "rawStatus": "attacks 1, 2, and 6 withstand; 4 partially withstands; 3 and 5 fail; 7 remains open",
+      "verdict": "FAIL"
+    },
+    {
+      "modalityName": "Searchability",
+      "rawStatus": "supported without decode on the benchmark surface",
+      "verdict": "PASS"
+    },
+    {
+      "modalityName": "Release-ready verdict",
+      "rawStatus": "not authorized; public visibility does not erase blockers",
+      "verdict": "INCONCLUSIVE"
+    }
+  ],
+  "proofAnchors": [
+    {
+      "label": "proofs/ENGINEERING_BLOCKERS.md",
+      "path": "proofs/ENGINEERING_BLOCKERS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/ENGINEERING_BLOCKERS.md",
+      "description": "proofs/ENGINEERING_BLOCKERS.md"
+    },
+    {
+      "label": "proofs/enterprise_benchmark/GATE_VERDICTS.json",
+      "path": "proofs/enterprise_benchmark/GATE_VERDICTS.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/enterprise_benchmark/GATE_VERDICTS.json",
+      "description": "proofs/enterprise_benchmark/GATE_VERDICTS.json"
+    },
+    {
+      "label": "proofs/red_team/red_team_report.json",
+      "path": "proofs/red_team/red_team_report.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/red_team/red_team_report.json",
+      "description": "proofs/red_team/red_team_report.json"
+    },
+    {
+      "label": "proofs/runbooks/TECHNICAL_RELEASE_SURFACE.md",
+      "path": "proofs/runbooks/TECHNICAL_RELEASE_SURFACE.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/runbooks/TECHNICAL_RELEASE_SURFACE.md",
+      "description": "proofs/runbooks/TECHNICAL_RELEASE_SURFACE.md"
+    },
+    {
+      "label": "proofs/artifacts/historical/README.md",
+      "path": "proofs/artifacts/historical/README.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/artifacts/historical/README.md",
+      "description": "proofs/artifacts/historical/README.md"
+    },
+    {
+      "label": "proofs/imc_audit/imc_architecture_audit.json",
+      "path": "proofs/imc_audit/imc_architecture_audit.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/imc_audit/imc_architecture_audit.json",
+      "description": "proofs/imc_audit/imc_architecture_audit.json"
+    },
+    {
+      "label": "docs/AUDITOR_PLAYBOOK.md",
+      "path": "docs/AUDITOR_PLAYBOOK.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/docs/AUDITOR_PLAYBOOK.md",
+      "description": "docs/AUDITOR_PLAYBOOK.md"
+    },
+    {
+      "label": "proofs/enterprise_benchmark/benchmark_result.json",
+      "path": "proofs/enterprise_benchmark/benchmark_result.json",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/enterprise_benchmark/benchmark_result.json",
+      "description": "proofs/enterprise_benchmark/benchmark_result.json"
+    },
+    {
+      "label": "proofs/runbooks/TRUSTED_PUBLISHING_OPERATOR_STEPS.md",
+      "path": "proofs/runbooks/TRUSTED_PUBLISHING_OPERATOR_STEPS.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/runbooks/TRUSTED_PUBLISHING_OPERATOR_STEPS.md",
+      "description": "proofs/runbooks/TRUSTED_PUBLISHING_OPERATOR_STEPS.md"
+    },
+    {
+      "label": "proofs/artifacts/operations/20260321T203557Z_technical_alignment_verification.md",
+      "path": "proofs/artifacts/operations/20260321T203557Z_technical_alignment_verification.md",
+      "repoUrl": "https://github.com/Zer0pa/ZPE-Robotics/blob/main/proofs/artifacts/operations/20260321T203557Z_technical_alignment_verification.md",
+      "description": "proofs/artifacts/operations/20260321T203557Z_technical_alignment_verification.md"
+    }
+  ],
+  "repoShape": [
+    {
+      "path": "./pyproject.toml",
+      "description": "./pyproject.toml"
+    },
+    {
+      "path": "./LICENSE",
+      "description": "./LICENSE"
+    }
+  ],
+  "verificationPath": [
+    "proofs/ENGINEERING_BLOCKERS.md",
+    "proofs/enterprise_benchmark/GATE_VERDICTS.json",
+    "proofs/red_team/red_team_report.json",
+    "proofs/runbooks/TECHNICAL_RELEASE_SURFACE.md",
+    "proofs/artifacts/historical/README.md",
+    "proofs/imc_audit/imc_architecture_audit.json",
+    "docs/AUDITOR_PLAYBOOK.md",
+    "proofs/enterprise_benchmark/benchmark_result.json",
+    "proofs/runbooks/TRUSTED_PUBLISHING_OPERATOR_STEPS.md",
+    "proofs/artifacts/operations/20260321T203557Z_technical_alignment_verification.md",
+    "./pyproject.toml",
+    "./LICENSE"
+  ],
+  "parserWarnings": [],
+  "confidenceScore": 90,
+  "commitSha": "",
+  "syncedAt": "2026-03-27T17:27:17.334Z"
+}
