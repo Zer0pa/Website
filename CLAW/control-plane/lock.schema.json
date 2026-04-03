@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Lock",
+  "type": "object",
+  "required": [
+    "lock_id",
+    "resource",
+    "owner_lane",
+    "status",
+    "acquired_at"
+  ],
+  "properties": {
+    "lock_id": { "type": "string" },
+    "resource": { "type": "string" },
+    "owner_lane": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["held", "released", "stale"]
+    },
+    "acquired_at": { "type": "string" },
+    "expires_at": {
+      "type": ["string", "null"]
+    },
+    "recovery_action": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": false
+}

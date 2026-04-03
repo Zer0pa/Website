@@ -9,7 +9,7 @@ Verify that the site is visually correct, truth-correct, route-complete, and lau
 Run:
 
 ```bash
-cd "/Users/Zer0pa/Zer0pa Website/site"
+cd "/Users/zer0palab/Zer0pa Website/Website-main/site"
 npm run ingest
 npm run test:parser
 npm run build

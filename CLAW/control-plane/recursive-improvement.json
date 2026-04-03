@@ -119,14 +119,7 @@
       "accessibility": 0.1
     }
   },
-  "cadence": {
-    "lane_iteration_minutes": 15,
-    "orchestrator_review_minutes": 60,
-    "full_falsification_minutes": 240,
-    "integration_checkpoint_hours": 4,
-    "recovery_drill_hours": 12,
-    "system_health_review_hours": 24
-  },
+  "cadence_source": "CLAW/control-plane/cadence.json",
   "metrics": {
     "primary": [
       "layout critical count",

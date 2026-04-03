@@ -51,6 +51,23 @@ The control plane depends on these deterministic artifacts:
 - `deterministic-design-system/maps/diff/**`
 - `deterministic-design-system/reports/**`
 
+Canonical control-plane stores:
+
+- `CLAW/control-plane/handoffs/**`
+- `CLAW/control-plane/checkpoints/**`
+- `CLAW/control-plane/logs/**`
+- `CLAW/control-plane/locks/**`
+- `CLAW/control-plane/queue/**`
+- `CLAW/control-plane/press-go.manifest.json`
+
+Canonical schemas:
+
+- `CLAW/control-plane/handoff.schema.json`
+- `CLAW/control-plane/checkpoint.schema.json`
+- `CLAW/control-plane/qa-verdict.schema.json`
+- `CLAW/control-plane/lock.schema.json`
+- `CLAW/control-plane/state-machine.json`
+
 ## Press-Go Evidence Bundle
 
 The minimum bundle required before unattended launch is:
@@ -63,3 +80,4 @@ The minimum bundle required before unattended launch is:
 - one accepted integration checkpoint
 - one successful full QA bundle
 - one recorded recovery drill
+- one current `press-go.manifest.json`

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Lane Handoff",
+  "type": "object",
+  "required": [
+    "lane",
+    "phase",
+    "target",
+    "status",
+    "files_changed",
+    "commands_run",
+    "preflight_baseline",
+    "postflight_metrics",
+    "recommendation",
+    "learning_captured"
+  ],
+  "properties": {
+    "lane": { "type": "string" },
+    "phase": { "type": "string" },
+    "target": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "rejected", "hold", "escalated"]
+    },
+    "files_changed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "commands_run": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "preflight_baseline": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "postflight_metrics": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "audit_result": {
+      "type": ["object", "string", "null"]
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommendation": { "type": "string" },
+    "learning_captured": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Integration Checkpoint",
+  "type": "object",
+  "required": [
+    "checkpoint_id",
+    "phase",
+    "source_commits",
+    "rollback_point",
+    "qa_verdict",
+    "status",
+    "created_at"
+  ],
+  "properties": {
+    "checkpoint_id": { "type": "string" },
+    "phase": { "type": "string" },
+    "source_commits": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "rollback_point": { "type": "string" },
+    "qa_verdict": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "rejected", "superseded"]
+    },
+    "created_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

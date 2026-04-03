@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "status": "not-ready",
+  "press_go_allowed": false,
+  "required_evidence": {
+    "authoritative_prd": "CLAW/PRD_24_7_LOCAL_AUTONOMY.md",
+    "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
+    "supervised_run": null,
+    "integration_checkpoint": null,
+    "full_qa_bundle": null,
+    "recovery_drill_bundle": null,
+    "guarded_local_autonomy_bundle": null,
+    "extended_local_autonomy_bundle": null,
+    "runtime_state": "CLAW/control-plane/state/runtime-state.json"
+  }
+}

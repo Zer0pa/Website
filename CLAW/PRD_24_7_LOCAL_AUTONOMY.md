@@ -56,7 +56,7 @@ Enable safe 24/7 unattended local autonomy on this Intel Mac such that:
 
 ## Target System
 
-The target system is a bounded evaluator-optimizer architecture with seven operating lanes:
+The target system is a bounded evaluator-optimizer architecture with eight operating lanes:
 
 - `orchestrator`
 - `homepage-fidelity`

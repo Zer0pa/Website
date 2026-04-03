@@ -53,6 +53,12 @@
         "null"
       ]
     },
+    "evidence_manifest": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "lanes": {
       "type": "object",
       "additionalProperties": {

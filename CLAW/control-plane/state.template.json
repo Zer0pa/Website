@@ -9,6 +9,7 @@
   "control_style": "evaluator-optimizer",
   "latest_wave_report": null,
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
+  "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "lanes": {
     "orchestrator": {
       "status": "active",

@@ -74,7 +74,7 @@ Use `CLAW/control-plane/cadence.json` as the authoritative cadence map.
 
 The timings below describe the supervised dry-run posture, not the unattended posture.
 
-### Lane Cycle: every 20 minutes
+### Lane Cycle
 
 Each active lane:
 
@@ -84,7 +84,7 @@ Each active lane:
 - writes a handoff note
 - records whether the slice was accepted, rejected, or escalated
 
-### Orchestrator Review: every 45 minutes
+### Orchestrator Review
 
 The orchestrator:
 
@@ -93,7 +93,7 @@ The orchestrator:
 - updates queue and locks
 - decides `promote`, `revise`, `hold`, or `abandon`
 
-### QA Sweep: every 120 minutes
+### QA Sweep
 
 Systems QA runs:
 
@@ -104,7 +104,7 @@ Systems QA runs:
 
 on the integration lane or the currently nominated candidate lane.
 
-### Product-Family Sweep: every 4 hours
+### Product-Family Sweep
 
 The product-family lanes:
 
@@ -113,7 +113,7 @@ The product-family lanes:
 - inspect lane-specific exceptions
 - flag where generic rules still break flagship quality
 
-### Stability Sweep: every 24 hours
+### Stability Sweep
 
 The orchestrator:
 

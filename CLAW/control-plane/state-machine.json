@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "states": [
+    "planned",
+    "active",
+    "evaluated",
+    "accepted",
+    "rejected",
+    "escalated",
+    "checkpointed",
+    "abandoned"
+  ],
+  "transitions": [
+    {
+      "from": "planned",
+      "to": "active",
+      "actor": "orchestrator",
+      "required_artifacts": ["brief", "lock-allocation"]
+    },
+    {
+      "from": "active",
+      "to": "evaluated",
+      "actor": "lane-owner",
+      "required_artifacts": ["handoff", "audit-bundle"]
+    },
+    {
+      "from": "evaluated",
+      "to": "accepted",
+      "actor": "systems-qa",
+      "required_artifacts": ["qa-verdict"]
+    },
+    {
+      "from": "evaluated",
+      "to": "rejected",
+      "actor": "systems-qa",
+      "required_artifacts": ["qa-verdict", "learning-item"]
+    },
+    {
+      "from": "evaluated",
+      "to": "escalated",
+      "actor": "orchestrator",
+      "required_artifacts": ["handoff", "learning-item"]
+    },
+    {
+      "from": "accepted",
+      "to": "checkpointed",
+      "actor": "integration",
+      "required_artifacts": ["checkpoint", "full-qa-bundle"]
+    },
+    {
+      "from": "rejected",
+      "to": "planned",
+      "actor": "orchestrator",
+      "required_artifacts": ["revised-brief"]
+    },
+    {
+      "from": "escalated",
+      "to": "planned",
+      "actor": "orchestrator",
+      "required_artifacts": ["reframed-brief"]
+    }
+  ]
+}

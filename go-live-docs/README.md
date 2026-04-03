@@ -4,13 +4,13 @@ This folder is the canonical execution pack from the current in-progress site to
 
 Read in this order:
 
-1. [INVESTIGATION_MEMO.md](/Users/Zer0pa/Zer0pa%20Website/go-live-docs/INVESTIGATION_MEMO.md)
-2. [GO_LIVE_PRD.md](/Users/Zer0pa/Zer0pa%20Website/go-live-docs/GO_LIVE_PRD.md)
-3. [PRD_REVIEW.md](/Users/Zer0pa/Zer0pa%20Website/go-live-docs/PRD_REVIEW.md)
-4. [RUNBOOK_DATA_AND_CONTENT.md](/Users/Zer0pa/Zer0pa%20Website/go-live-docs/RUNBOOK_DATA_AND_CONTENT.md)
-5. [RUNBOOK_PAGE_IMPLEMENTATION.md](/Users/Zer0pa/Zer0pa%20Website/go-live-docs/RUNBOOK_PAGE_IMPLEMENTATION.md)
-6. [RUNBOOK_QA_AND_ACCEPTANCE.md](/Users/Zer0pa/Zer0pa%20Website/go-live-docs/RUNBOOK_QA_AND_ACCEPTANCE.md)
-7. [RUNBOOK_LAUNCH_AND_OPERATIONS.md](/Users/Zer0pa/Zer0pa%20Website/go-live-docs/RUNBOOK_LAUNCH_AND_OPERATIONS.md)
+1. [INVESTIGATION_MEMO.md](/Users/zer0palab/Zer0pa%20Website/Website-main/go-live-docs/INVESTIGATION_MEMO.md)
+2. [GO_LIVE_PRD.md](/Users/zer0palab/Zer0pa%20Website/Website-main/go-live-docs/GO_LIVE_PRD.md)
+3. [PRD_REVIEW.md](/Users/zer0palab/Zer0pa%20Website/Website-main/go-live-docs/PRD_REVIEW.md)
+4. [RUNBOOK_DATA_AND_CONTENT.md](/Users/zer0palab/Zer0pa%20Website/Website-main/go-live-docs/RUNBOOK_DATA_AND_CONTENT.md)
+5. [RUNBOOK_PAGE_IMPLEMENTATION.md](/Users/zer0palab/Zer0pa%20Website/Website-main/go-live-docs/RUNBOOK_PAGE_IMPLEMENTATION.md)
+6. [RUNBOOK_QA_AND_ACCEPTANCE.md](/Users/zer0palab/Zer0pa%20Website/Website-main/go-live-docs/RUNBOOK_QA_AND_ACCEPTANCE.md)
+7. [RUNBOOK_LAUNCH_AND_OPERATIONS.md](/Users/zer0palab/Zer0pa%20Website/Website-main/go-live-docs/RUNBOOK_LAUNCH_AND_OPERATIONS.md)
 
 These are the only authoritative go-live docs in this folder.
 

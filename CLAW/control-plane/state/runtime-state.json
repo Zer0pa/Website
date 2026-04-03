@@ -6,10 +6,11 @@
   "current_milestone": "M1-recursive-autonomy-hardening",
   "current_phase": "P1-canonical-homepage-closure",
   "active_wave": "W1",
-  "last_updated": "2026-04-03T11:44:49+02:00",
+  "last_updated": "2026-04-03T11:56:14+02:00",
   "control_style": "evaluator-optimizer",
   "latest_wave_report": "CLAW/control-plane/reports/W1-homepage-supervised.md",
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
+  "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "lanes": {
     "orchestrator": {
       "status": "active",
