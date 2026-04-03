@@ -43,6 +43,7 @@ import {
   queueJobIsTerminal,
   readRunnerState,
   replayCommitRange,
+  resolveCodexBin,
   settleQueueAndRuntime,
   stderrLogPath,
   stdoutLogPath,
@@ -414,6 +415,7 @@ function spawnCodexForJob(job, prompt) {
   const stderrPath = stderrLogPath(job.job_id);
   const gitAdminDir = gitAbsolutePath(job.worktree, '--git-dir');
   const gitCommonDir = gitAbsolutePath(job.worktree, '--git-common-dir');
+  const codexBin = resolveCodexBin();
   const stdoutStream = fs.createWriteStream(stdoutPath, { flags: 'w' });
   const stderrStream = fs.createWriteStream(stderrPath, { flags: 'w' });
 
@@ -440,7 +442,7 @@ function spawnCodexForJob(job, prompt) {
     '--color',
     'never',
   ];
-  const commandText = ['codex', ...args.map((arg) => quoteShellArg(arg))].join(' ');
+  const commandText = [codexBin, ...args.map((arg) => quoteShellArg(arg))].join(' ');
 
   return new Promise((resolve) => {
     let finished = false;
@@ -454,7 +456,7 @@ function spawnCodexForJob(job, prompt) {
       resolve(payload);
     };
 
-    const child = spawn('codex', args, {
+    const child = spawn(codexBin, args, {
       cwd: job.worktree,
       env: process.env,
       stdio: ['pipe', 'pipe', 'pipe'],

@@ -24,6 +24,12 @@ export const RUNTIME_HANDOFFS_DIR = controlPath('runtime', 'handoffs');
 export const RUNTIME_LOGS_DIR = controlPath('runtime', 'logs');
 export const CONTROL_LOGS_DIR = controlPath('logs');
 export const LANE_RESULT_SCHEMA = projectPath('CLAW/control-plane/lane-exec-result.schema.json');
+const CODEX_BIN_FALLBACKS = [
+  process.env.CODEX_BIN || '',
+  '/Applications/Codex.app/Contents/Resources/codex',
+  '/usr/local/bin/codex',
+  '/opt/homebrew/bin/codex',
+].filter(Boolean);
 
 export function ensureAutonomyDirs() {
   ensureDir(RUNTIME_ROOT);
@@ -152,6 +158,27 @@ export function activeQueueJobs(queue) {
 
 export function promptSnapshotPath(jobId) {
   return path.join(RUNTIME_LOGS_DIR, `${jobId}.prompt.md`);
+}
+
+export function resolveCodexBin() {
+  for (const candidate of CODEX_BIN_FALLBACKS) {
+    if (candidate && fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+
+  try {
+    const discovered = execFileSync('which', ['codex'], {
+      cwd: projectPath('.'),
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    if (discovered && fs.existsSync(discovered)) {
+      return discovered;
+    }
+  } catch {}
+
+  throw new Error('Unable to locate the Codex CLI binary for autonomous lane execution.');
 }
 
 export function stdoutLogPath(jobId) {
