@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "lane_id": "systems-optimizer",
+  "mode": "bounded-ratchet",
+  "policy": {
+    "keep_only_if_better": true,
+    "require_fixed_writable_scope": true,
+    "require_fixed_eval_bundle": true,
+    "default_writable_scope": [
+      "CLAW/scripts/**",
+      "CLAW/control-plane/**/*.json",
+      "CLAW/control-plane/**/*.md",
+      "CLAW/control-plane/**/*.schema.json",
+      "CLAW/PRD*.md",
+      "GGD/**",
+      ".agents/skills/get-geometry-done/**",
+      "AGENTS.md"
+    ],
+    "forbidden_without_explicit_override": [
+      "site/src/app/**",
+      "site/src/components/**",
+      "site/src/lib/data/**",
+      "site/src/lib/product-kernel/**"
+    ]
+  },
+  "active_hypothesis": null,
+  "last_kept_change": null,
+  "last_rejected_change": null,
+  "accepted_count": 0,
+  "rejected_count": 0,
+  "last_updated": "2026-04-04T00:00:00Z"
+}

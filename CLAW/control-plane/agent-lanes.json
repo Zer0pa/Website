@@ -21,7 +21,8 @@
       "semantic-seo-auditor",
       "responsive-architect",
       "contrast-auditor",
-      "augmentation-planner"
+      "augmentation-planner",
+      "systems-optimizer"
     ]
   },
   "allowed_path_prefixes": [
@@ -118,6 +119,26 @@
         "CLAW/**"
       ],
       "role": "verification, regression, and rejection"
+    },
+    {
+      "id": "systems-optimizer",
+      "branch": "codex/systems-optimizer",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/systems-optimizer",
+      "reasoning": "xhigh",
+      "lane_class": "system",
+      "replayable": false,
+      "control_plane_only": true,
+      "writes": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/**/*.json",
+        "CLAW/control-plane/**/*.md",
+        "CLAW/control-plane/**/*.schema.json",
+        "CLAW/PRD*.md",
+        "GGD/**",
+        ".agents/skills/get-geometry-done/**",
+        "AGENTS.md"
+      ],
+      "role": "bounded evaluator-optimizer hardening of the GGD and CLAW machine"
     },
     {
       "id": "integration",

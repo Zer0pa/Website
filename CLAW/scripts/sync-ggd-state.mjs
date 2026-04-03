@@ -9,6 +9,8 @@ const binding = readJson('GGD/project.binding.json');
 const bundles = readJson('GGD/verification/bundles.json');
 const augmentationBacklog = readJson('GGD/augmentations/augmentation-backlog.json').items || [];
 const gapRecords = loadGapRecords();
+const systemsOptimizerState = readJson(binding.system_optimizer?.state || 'CLAW/control-plane/system-optimizer/state.json');
+const systemsOptimizerBacklog = readJson(binding.system_optimizer?.backlog || 'CLAW/control-plane/system-optimizer/backlog.json');
 const xrGate = evaluateRouteGate('integration', '/work/xr');
 const ftGate = evaluateRouteGate('integration', '/work/ft');
 
@@ -49,11 +51,20 @@ state.position.progress_percent = 68;
 state.command_binding = {
   command_namespace: binding.command_namespace,
   binding_file: binding.binding_file,
+  command_surface: binding.command_surface,
   verification_bundle_index: binding.verification_bundle_index,
   gap_dir: binding.gap_dir,
   sync_script: binding.scripts.sync_state,
   export_gap_script: binding.scripts.export_gap,
   verify_binding_script: binding.scripts.verify_binding,
+  source_root: binding.external_surface?.source_root || null,
+  skills_dir: binding.external_surface?.skills_dir || null,
+  agents_dir: binding.external_surface?.agents_dir || null,
+  command_catalog: binding.external_surface?.command_catalog || null,
+  agent_catalog: binding.external_surface?.agent_catalog || null,
+  function_catalog: binding.external_surface?.function_catalog || null,
+  equation_engine: binding.external_surface?.equation_engine || null,
+  example_lawset: binding.external_surface?.example_lawset || null,
 };
 state.route_status = routeStatus;
 state.verification_bundle_index = {
@@ -75,11 +86,24 @@ state.pending_todos = [
   'Resume XR closure under the stronger geometry-law contract.',
   'Add explicit FT route-gap export once the first FT falsification exists.',
   'Expose the named bundle entrypoints directly in the ggd-* command surface.',
+  'Convert recurring XR/product-family rejections into accepted system-level ratchets or explicitly discarded hypotheses.',
+  'Keep the systems-optimizer backlog current and measurable.',
 ];
 state.blockers = [
   ...(xrGate.blocking_gaps.length > 0 ? ['XR remains blocked by an open deterministic geometry gap.'] : []),
   ...(runtime.press_go ? [] : ['Press-go remains false until supervised and guarded autonomy proofs are complete.']),
 ];
+state.system_optimizer = {
+  command: binding.system_optimizer?.optimizer_command || 'ggd-system-optimize',
+  agent: binding.system_optimizer?.optimizer_agent || 'ggd-systems-optimizer',
+  state_file: binding.system_optimizer?.state || null,
+  backlog_file: binding.system_optimizer?.backlog || null,
+  evaluation_script: binding.system_optimizer?.evaluation_script || null,
+  backlog_count: (systemsOptimizerBacklog.items || []).length,
+  active_hypothesis: systemsOptimizerState.active_hypothesis || null,
+  last_kept_change: systemsOptimizerState.last_kept_change || null,
+  keep_only_if_better: Boolean(systemsOptimizerState.policy?.keep_only_if_better),
+};
 
 writeGgdState(state);
 writeStateMarkdown(state);

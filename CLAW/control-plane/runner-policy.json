@@ -58,6 +58,16 @@
         ["npm run audit:layout", "npm run layout:measure"],
         ["npm run audit:layout", "npm run layout:diff"]
       ],
+      "systems-optimizer": [
+        ["npm run claw:validate"],
+        ["npm run claw:test:contracts"],
+        ["npm run claw:test:systems-optimizer"],
+        ["npm run claw:health"],
+        ["node ../CLAW/scripts/verify-ggd-binding.mjs"],
+        [
+          "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+        ]
+      ],
       "integration": [
         ["npm run build"],
         ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"],

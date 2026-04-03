@@ -31,6 +31,10 @@ for (const lane of control.lanes || []) {
     issues.push(`Lane ${lane.id} is missing the audit:geometry-law package script.`);
   }
 
+  if (lane.id === 'systems-optimizer' && !pkg.scripts?.['claw:test:systems-optimizer']) {
+    issues.push('Lane systems-optimizer is missing the claw:test:systems-optimizer package script.');
+  }
+
   if (!fs.existsSync(auditScriptPath)) {
     issues.push(`Lane ${lane.id} is missing site/src/scripts/geometry-law-audit.ts.`);
   }

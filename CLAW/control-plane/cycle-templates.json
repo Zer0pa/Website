@@ -56,6 +56,20 @@
       "materialize_by_default": false,
       "lanes": [
         {
+          "lane_id": "systems-optimizer",
+          "objective": "Run one bounded system-improvement ratchet against the GGD and CLAW machine, converting recurring XR and autonomy failures into stricter laws, tighter prompts, better evaluators, or safer runner behavior without touching route implementation files.",
+          "deliverables": [
+            "system hypothesis card",
+            "keep-discard ratchet verdict",
+            "system learning item"
+          ],
+          "acceptance": [
+            "writable scope stayed inside declared system paths",
+            "system eval bundle is clean after the slice",
+            "the change is either measurably better and kept or truthfully rejected with learning captured"
+          ]
+        },
+        {
           "lane_id": "data-truth",
           "objective": "Audit the XR packet and GitHub truth surfaces that feed the first generic proof page.",
           "deliverables": [
@@ -123,6 +137,20 @@
       "materialize_by_default": false,
       "lanes": [
         {
+          "lane_id": "systems-optimizer",
+          "objective": "Run one bounded system-improvement ratchet aimed at making generic-route replication safer, more equation-governed, and less sensitive to undeclared variants before FT proof work advances.",
+          "deliverables": [
+            "replication-system hypothesis card",
+            "ratchet verdict",
+            "system learning item"
+          ],
+          "acceptance": [
+            "writable scope stayed inside declared system paths",
+            "system eval bundle is clean after the slice",
+            "the change is either measurably better and kept or truthfully rejected with learning captured"
+          ]
+        },
+        {
           "lane_id": "data-truth",
           "objective": "Audit FT packet sufficiency and route bindings before replication promotion.",
           "deliverables": [
@@ -188,6 +216,20 @@
       "profile": "supervised_dry_run",
       "materialize_by_default": false,
       "lanes": [
+        {
+          "lane_id": "systems-optimizer",
+          "objective": "Harden the overnight recursive machine itself by improving evaluator-optimizer cadence, system metrics, recovery hooks, and command-surface clarity without widening writable scope into route implementation.",
+          "deliverables": [
+            "overnight-hardening hypothesis card",
+            "ratchet verdict",
+            "system learning item"
+          ],
+          "acceptance": [
+            "writable scope stayed inside declared system paths",
+            "system eval bundle is clean after the slice",
+            "the change is either measurably better and kept or truthfully rejected with learning captured"
+          ]
+        },
         {
           "lane_id": "orchestrator",
           "objective": "Verify that the recursive machine is operating on stable laws rather than moving targets.",

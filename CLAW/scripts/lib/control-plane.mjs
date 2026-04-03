@@ -70,6 +70,31 @@ export function cycleStamp(date = new Date()) {
   return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
 }
 
+export function runWindowModeForProfile(profile, fallback = 'manual-supervised-only') {
+  if (profile === 'guarded_local_autonomy') {
+    return 'guarded-local-autonomy';
+  }
+
+  if (profile === 'extended_local_autonomy') {
+    return 'extended-local-autonomy';
+  }
+
+  if (profile === 'supervised_dry_run') {
+    return 'manual-supervised-only';
+  }
+
+  return fallback;
+}
+
+export function syncRuntimeCadence(runtime, profile) {
+  runtime.active_cadence_profile = profile;
+  runtime.run_window = {
+    ...(runtime.run_window || {}),
+    mode: runWindowModeForProfile(profile, runtime.run_window?.mode || 'manual-supervised-only'),
+  };
+  return runtime;
+}
+
 export function cycleIdForPhase(phaseId, date = new Date()) {
   return `${phaseId}-${cycleStamp(date)}`;
 }
@@ -103,6 +128,41 @@ function readOptionalJson(relativeOrAbsolutePath) {
   return JSON.parse(fs.readFileSync(absolutePath, 'utf8'));
 }
 
+function readOpenRouteGaps() {
+  const gapDir = projectPath('GGD/gaps/routes');
+  if (!fs.existsSync(gapDir)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(gapDir)
+    .filter((name) => name.endsWith('.json'))
+    .map((name) => readOptionalJson(path.join('GGD/gaps/routes', name)))
+    .filter(Boolean)
+    .filter((gap) => !['resolved', 'closed', 'archived', 'superseded'].includes(String(gap.status || '').toLowerCase()));
+}
+
+function parseRecordedTimestamp(value) {
+  if (!value) {
+    return null;
+  }
+
+  const direct = Date.parse(String(value));
+  if (Number.isFinite(direct)) {
+    return direct;
+  }
+
+  const compactMatch = String(value).match(/(\d{8}T\d{6})Z/);
+  if (!compactMatch) {
+    return null;
+  }
+
+  const compact = compactMatch[1];
+  const iso = `${compact.slice(0, 4)}-${compact.slice(4, 6)}-${compact.slice(6, 8)}T${compact.slice(9, 11)}:${compact.slice(11, 13)}:${compact.slice(13, 15)}Z`;
+  const parsed = Date.parse(iso);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 export function lookupPhase(executionPlan, runtimePhase, overridePhase = null) {
   const requested = phaseToken(overridePhase || runtimePhase || executionPlan.current_phase);
   return executionPlan.phases.find((phase) => phase.id === requested) || null;
@@ -126,6 +186,10 @@ function referencedFiles(control) {
     'CLAW/control-plane/audit-bundle.schema.json',
     'CLAW/control-plane/learning-item.schema.json',
     'CLAW/control-plane/recovery-event.schema.json',
+    'CLAW/control-plane/system-optimizer/state.json',
+    'CLAW/control-plane/system-optimizer/backlog.json',
+    'CLAW/scripts/verify-systems-optimizer.mjs',
+    'CLAW/PRD_SYSTEMS_OPTIMIZER.md',
     'CLAW/control-plane/product-kernel/design-constants.json',
     'CLAW/control-plane/product-kernel/product-family-kernel.json',
     'CLAW/control-plane/product-kernel/flagship-exceptions.imc.json',
@@ -141,6 +205,8 @@ export function validateControlPlane(control, options = {}) {
   const lanesById = laneMap(control.agentLanes);
   const locks = activeLocks();
   const autonomyState = readOptionalJson('CLAW/services/autonomy/state.json');
+  const checkpointState = readOptionalJson(control.runtime.hardening_artifacts?.checkpoint_pointer || 'CLAW/control-plane/checkpoints/current.json');
+  const openRouteGaps = readOpenRouteGaps();
   const runWindowMode = control.runtime.run_window?.mode || null;
   const hasActiveRunnerWork =
     Boolean(control.runtime.active_cycle) ||
@@ -203,6 +269,24 @@ export function validateControlPlane(control, options = {}) {
     issues.push('press_go is true while blockers remain in runtime state.');
   }
 
+  const checkpointUpdatedAt = parseRecordedTimestamp(checkpointState?.updated_at);
+  const staleCheckpointGaps = openRouteGaps.filter((gap) => {
+    const gapTimestamp = parseRecordedTimestamp(gap.invalidated_at || gap.updated_at || gap.cycle_id || gap.source_handoff || null);
+    return !checkpointUpdatedAt || !gapTimestamp || gapTimestamp >= checkpointUpdatedAt;
+  });
+
+  if (control.runtime.gates?.integration_qa_passed && staleCheckpointGaps.length > 0) {
+    issues.push(
+      `integration_qa_passed is true while open GGD route gaps remain: ${staleCheckpointGaps.map((gap) => gap.id).join(', ')}.`,
+    );
+  }
+
+  if (checkpointState?.status === 'accepted' && staleCheckpointGaps.length > 0) {
+    issues.push(
+      `Current checkpoint ${checkpointState.checkpoint_id || 'unknown'} is stale while newer or unresolved GGD route gaps remain: ${staleCheckpointGaps.map((gap) => gap.id).join(', ')}.`,
+    );
+  }
+
   if (
     control.runtime.active_cadence_profile &&
     !Object.prototype.hasOwnProperty.call(control.cadence.profiles || {}, control.runtime.active_cadence_profile)
@@ -210,9 +294,14 @@ export function validateControlPlane(control, options = {}) {
     issues.push(`Unknown active_cadence_profile: ${control.runtime.active_cadence_profile}`);
   }
 
-  if (control.runtime.active_cadence_profile === 'guarded_local_autonomy' && runWindowMode === 'manual-supervised-only') {
+  const expectedRunWindowMode = runWindowModeForProfile(
+    control.runtime.active_cadence_profile,
+    runWindowMode || 'manual-supervised-only',
+  );
+
+  if (control.runtime.active_cadence_profile && runWindowMode && expectedRunWindowMode !== runWindowMode) {
     warnings.push(
-      'Runtime is using guarded_local_autonomy while run_window.mode remains manual-supervised-only.',
+      `Runtime cadence profile ${control.runtime.active_cadence_profile} expects run_window.mode ${expectedRunWindowMode}, found ${runWindowMode}.`,
     );
   }
 
@@ -333,6 +422,9 @@ export function buildCyclePlan(control, options = {}) {
         worktree: lane.worktree,
         role: lane.role,
         reasoning: lane.reasoning,
+        lane_class: lane.lane_class || 'route',
+        replayable: lane.replayable !== false,
+        control_plane_only: Boolean(lane.control_plane_only),
         writes: lane.writes,
         objective: laneTemplate.objective,
         deliverables: laneTemplate.deliverables || [],
@@ -459,7 +551,7 @@ export function materializeCycle(control, cycle) {
   }));
   runtime.locks = [];
   runtime.heartbeat_at = cycle.created_at;
-  runtime.active_cadence_profile = cycle.profile;
+  syncRuntimeCadence(runtime, cycle.profile);
   runtime.last_updated = cycle.created_at;
   writeJson(runtimePath, runtime);
 

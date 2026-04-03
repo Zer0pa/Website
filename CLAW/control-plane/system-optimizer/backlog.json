@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "sysopt.xr-gap-ratchet",
+      "status": "seeded",
+      "priority": "high",
+      "hypothesis": "Repeated XR rejection can be reduced by translating recurring findings into stricter system prompts, better gap export, and narrower route-family evaluators before further route edits.",
+      "writable_scope": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/**/*.json",
+        "CLAW/control-plane/**/*.md",
+        "CLAW/PRD*.md",
+        "GGD/**"
+      ],
+      "evaluation_bundle": [
+        "npm run claw:validate",
+        "npm run claw:test:contracts",
+        "npm run claw:test:systems-optimizer",
+        "npm run claw:health"
+      ]
+    },
+    {
+      "id": "sysopt.equation-law-expansion",
+      "status": "seeded",
+      "priority": "high",
+      "hypothesis": "The machine becomes more deterministic if more route-independent law checks are pushed into equation-backed scripts instead of prose doctrine.",
+      "writable_scope": [
+        "GGD/**",
+        "CLAW/scripts/**",
+        "CLAW/control-plane/**/*.json",
+        "CLAW/control-plane/**/*.md",
+        "CLAW/PRD*.md"
+      ],
+      "evaluation_bundle": [
+        "node ../CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "npm run claw:test:systems-optimizer"
+      ]
+    },
+    {
+      "id": "sysopt.runner-stability-ratchet",
+      "status": "seeded",
+      "priority": "medium",
+      "hypothesis": "The overnight loop becomes safer if runner recovery, queue invalidation, and stale-cycle handling are measured and hardened as first-class system experiments.",
+      "writable_scope": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/**/*.json",
+        "CLAW/control-plane/**/*.md",
+        "CLAW/PRD*.md",
+        "GGD/**"
+      ],
+      "evaluation_bundle": [
+        "npm run claw:validate",
+        "npm run claw:test:systems-optimizer",
+        "npm run claw:health"
+      ]
+    }
+  ]
+}

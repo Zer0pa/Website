@@ -20,6 +20,7 @@ Read [references/geometry-program.md](./references/geometry-program.md) before m
 2. Read the system adaptation contract when changing the engineering system itself:
    - `CLAW/PRD_GPD_GEOMETRY_ADAPTATION.md`
    - `CLAW/control-plane/plans/gpd-geometry-adaptation.json`
+   - `GGD/commands.json`
 3. Read the legacy geometry doctrine only for continuity or comparison:
    - `CLAW/GET_GEOMETRY_DONE_PROGRAM.md`
 4. Freeze truth surfaces before styling:
@@ -41,6 +42,31 @@ Read [references/geometry-program.md](./references/geometry-program.md) before m
    - run responsive audit
    - reject success if critical or major diffs remain
    - reject success if the result violates `GGD/CONVENTIONS.md`
+
+## Installed GGD Surface
+
+Use the installed GGD commands when they materially help:
+
+- `$ggd-help`
+- `$ggd-new-project`
+- `$ggd-map-research`
+- `$ggd-derive-equation`
+- `$ggd-dimensional-analysis`
+- `$ggd-limiting-cases`
+- `$ggd-parameter-sweep`
+- `$ggd-sensitivity-analysis`
+- `$ggd-system-optimize`
+- `$ggd-verify-work`
+- `$ggd-validate-conventions`
+- `$ggd-debug`
+
+Equation engine:
+
+```bash
+python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py functions
+python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py eval --expr 'col_width(960, 16, 24)'
+python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json
+```
 
 ## Hard Rules
 
@@ -73,6 +99,7 @@ Use specialist lanes when the task is large:
 - `fidelity-reviewer`: screenshot and DOM diff review
 - `falsification`: audit runs, severity review, regression checks
 - `convention-coordinator`: validates that geometry work still matches the GGD lock
+- `systems-optimizer`: improves the GGD and CLAW machine itself through bounded keep-or-discard ratchets
 
 ## Verification Commands
 

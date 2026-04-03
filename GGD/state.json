@@ -60,7 +60,7 @@
     "current_plan": "lane-contract-propagation",
     "total_plans_in_phase": 3,
     "status": "in_progress",
-    "last_activity": "2026-04-03T20:48:51Z",
+    "last_activity": "2026-04-03T23:30:06Z",
     "last_activity_desc": "Established the horizon program, promoted geometry-law evidence into lane contracts, and began contract propagation into active worktrees.",
     "progress_percent": 68
   },
@@ -86,7 +86,9 @@
     "Run contract-readiness verification after worktree propagation.",
     "Resume XR closure under the stronger geometry-law contract.",
     "Add explicit FT route-gap export once the first FT falsification exists.",
-    "Expose the named bundle entrypoints directly in the ggd-* command surface."
+    "Expose the named bundle entrypoints directly in the ggd-* command surface.",
+    "Convert recurring XR/product-family rejections into accepted system-level ratchets or explicitly discarded hypotheses.",
+    "Keep the systems-optimizer backlog current and measurable."
   ],
   "blockers": [
     "XR remains blocked by an open deterministic geometry gap.",
@@ -102,11 +104,20 @@
   "command_binding": {
     "command_namespace": "ggd",
     "binding_file": "GGD/project.binding.json",
+    "command_surface": "GGD/commands.json",
     "verification_bundle_index": "GGD/verification/bundles.json",
     "gap_dir": "GGD/gaps/routes",
     "sync_script": "CLAW/scripts/sync-ggd-state.mjs",
     "export_gap_script": "CLAW/scripts/export-ggd-gap.mjs",
-    "verify_binding_script": "CLAW/scripts/verify-ggd-binding.mjs"
+    "verify_binding_script": "CLAW/scripts/verify-ggd-binding.mjs",
+    "source_root": "/Users/zer0palab/Get-Geometry-Done",
+    "skills_dir": "/Users/zer0palab/.codex/skills",
+    "agents_dir": "/Users/zer0palab/.codex/agents",
+    "command_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/command-catalog.json",
+    "agent_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/agent-catalog.json",
+    "function_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/function-catalog.md",
+    "equation_engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
+    "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
   },
   "route_status": {
     "/": {
@@ -122,7 +133,7 @@
     "/work/xr": {
       "role": "product-family",
       "status": "blocked",
-      "summary": "Rejected: fresh XR falsification still fails the phase acceptance rule with `14` critical layout diffs; IMC flagship invariants remain intact and XR responsive overflow is clear."
+      "summary": "`/work/xr` remains blocked. Layout and geometry-law acceptance both fail, while responsive overflow and contrast stay clean."
     },
     "/work/ft": {
       "role": "product-family",
@@ -144,16 +155,28 @@
   },
   "gap_records": [
     {
-      "id": "work-xr.geometry-gap",
+      "id": "work-xr.breakpoint-gap",
       "route": "/work/xr",
       "status": "open",
       "severity_counts": {
-        "critical": 14,
+        "critical": 0,
         "major": 0,
         "minor": 0,
         "note": 0
       },
-      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T165341Z-03.json"
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T211939Z-03.json"
+    },
+    {
+      "id": "work-xr.geometry-gap",
+      "route": "/work/xr",
+      "status": "open",
+      "severity_counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T215331Z-03.json"
     }
   ],
   "augmentation_backlog": [
@@ -276,5 +299,16 @@
       "owner_lane": "integration",
       "priority": "medium"
     }
-  ]
+  ],
+  "system_optimizer": {
+    "command": "ggd-system-optimize",
+    "agent": "ggd-systems-optimizer",
+    "state_file": "CLAW/control-plane/system-optimizer/state.json",
+    "backlog_file": "CLAW/control-plane/system-optimizer/backlog.json",
+    "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs",
+    "backlog_count": 3,
+    "active_hypothesis": null,
+    "last_kept_change": null,
+    "keep_only_if_better": true
+  }
 }

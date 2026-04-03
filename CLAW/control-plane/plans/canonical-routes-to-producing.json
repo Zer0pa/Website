@@ -77,6 +77,7 @@
         "C3"
       ],
       "streams": [
+        "systems-optimizer",
         "product-family",
         "data-truth",
         "systems-qa",
@@ -100,6 +101,7 @@
         "C4"
       ],
       "streams": [
+        "systems-optimizer",
         "product-family",
         "data-truth",
         "systems-qa",
@@ -123,6 +125,7 @@
         "C5"
       ],
       "streams": [
+        "systems-optimizer",
         "orchestrator",
         "systems-qa",
         "integration"

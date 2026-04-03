@@ -15,6 +15,7 @@ import {
   readJson,
   releaseLaneLock,
   relativeProjectPath,
+  syncRuntimeCadence,
   settleActiveCycle,
   validateControlPlane,
   writeJson,
@@ -61,6 +62,7 @@ import {
   buildGapRecordFromHandoff,
   evaluateRouteGate,
   inferRouteFromJob,
+  readGeometryLawVerdict,
   resolveGapRecords,
   routeRoleForRoute,
   writeGapRecord,
@@ -81,6 +83,34 @@ function updateRuntime(mutator) {
   mutator(next);
   writeJson(runtimePath, next);
   return next;
+}
+
+function uniqueValues(values) {
+  return [...new Set((values || []).filter(Boolean))];
+}
+
+function markCurrentCheckpointStale(route, reason, gapIds = []) {
+  const checkpointRelativePath = 'CLAW/control-plane/checkpoints/current.json';
+  const checkpointPath = projectPath(checkpointRelativePath);
+  if (!fs.existsSync(checkpointPath)) {
+    return null;
+  }
+
+  const checkpoint = JSON.parse(fs.readFileSync(checkpointPath, 'utf8'));
+  checkpoint.status = 'stale';
+  checkpoint.invalidated_at = localTimestamp();
+  checkpoint.stale_reason = reason;
+  checkpoint.stale_routes = uniqueValues([...(checkpoint.stale_routes || []), route]);
+  checkpoint.open_gap_ids = uniqueValues([...(checkpoint.open_gap_ids || []), ...gapIds]);
+  writeJson(checkpointPath, checkpoint);
+
+  return {
+    path: checkpointRelativePath,
+    checkpoint_id: checkpoint.checkpoint_id || null,
+    reason,
+    route,
+    gap_ids: gapIds,
+  };
 }
 
 function readTextTail(filePath, maxChars = 4000) {
@@ -143,6 +173,14 @@ function stderrLooksFatal(stderrText, runnerPolicy) {
 function buildBrief(control, queue, job) {
   const subjectRoute = inferRouteFromJob(job);
   const ggdGate = subjectRoute ? evaluateRouteGate(job.lane_id, subjectRoute) : null;
+  const systemOptimizerState =
+    job.lane_id === 'systems-optimizer'
+      ? readJson('CLAW/control-plane/system-optimizer/state.json')
+      : null;
+  const systemOptimizerBacklog =
+    job.lane_id === 'systems-optimizer'
+      ? readJson('CLAW/control-plane/system-optimizer/backlog.json')
+      : null;
   const currentIndex = (queue.jobs || []).findIndex((candidate) => candidate.job_id === job.job_id);
   const previousJobs = (queue.jobs || [])
     .slice(0, Math.max(currentIndex, 0))
@@ -207,8 +245,28 @@ function buildBrief(control, queue, job) {
       'Do not push, deploy, or touch other repositories.',
       'Generic route work may not flatten or delete flagship-only IMC behavior.',
       'The shared truth cache is authoritative for packet reads during autonomous execution.',
+      ...(job.lane_id === 'systems-optimizer'
+        ? [
+            'Define a fixed writable scope and fixed evaluation bundle before editing the system.',
+            'Keep the change only if the machine gets measurably better; otherwise reject it and record the learning.',
+            'Do not touch route implementation files from the systems-optimizer lane.',
+          ]
+        : []),
     ],
     upstream: previousJobs,
+    systems_optimizer:
+      job.lane_id === 'systems-optimizer'
+        ? {
+            state_file: 'CLAW/control-plane/system-optimizer/state.json',
+            backlog_file: 'CLAW/control-plane/system-optimizer/backlog.json',
+            active_hypothesis: systemOptimizerState?.active_hypothesis || null,
+            policy: systemOptimizerState?.policy || null,
+            backlog_items: systemOptimizerBacklog?.items || [],
+            equation_engine: '/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py',
+            command: 'ggd-system-optimize',
+            agent: 'ggd-systems-optimizer',
+          }
+        : null,
     runtime_focus: {
       current_phase: control.runtime.current_phase,
       current_milestone: control.runtime.current_milestone,
@@ -242,6 +300,13 @@ function suggestedStartingPoints(job) {
       'site/src/lib/layout/specs.ts',
       'site/src/scripts/layout-diff.ts',
       'site/src/scripts/responsive-audit.ts',
+    ],
+    'systems-optimizer': [
+      'CLAW/control-plane/system-optimizer/state.json',
+      'CLAW/control-plane/system-optimizer/backlog.json',
+      'CLAW/PRD_SYSTEMS_OPTIMIZER.md',
+      'GGD/commands.json',
+      'GGD/project.binding.json',
     ],
     integration: [
       'site/**',
@@ -310,10 +375,12 @@ function buildPrompt(control, queue, job, brief, briefFile) {
     '- keep the slice minimal and test-backed',
     '- do not use shell commands to print narration or status updates',
     '- when a file path contains brackets or wildcard-like characters, wrap it in single quotes when using shell commands',
-    '- do not try to load external skills from ~/.codex/skills unless the brief explicitly requires one',
+    '- external skills are normally unnecessary, but the installed GGD surface under ~/.codex/skills is allowed when it materially helps with geometry, equation, or verification work',
     '- do not read AGENTS.md, SKILL.md, geometry-program.md, or broad PRD/governance files unless the brief lacks a specific fact you need',
     '- start with the suggested starting points from the brief and read at most 6 repo files before either editing or returning a structured non-acceptance',
     '- if targeted inspection shows the slice cannot honestly advance, return a structured non-acceptance quickly instead of continuing to explore',
+    '- installed GGD command surfaces available to you include $ggd-help, $ggd-derive-equation, $ggd-dimensional-analysis, $ggd-limiting-cases, $ggd-verify-work, $ggd-validate-conventions, and $ggd-debug',
+    '- the executable equation surface is python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py',
     '',
     'Final response requirements:',
     '- respond with JSON only, matching the provided output schema',
@@ -373,6 +440,13 @@ function laneExecutionRecipe(job) {
       '- Export route-gap truthfully when the route remains blocked, and close route gaps truthfully only when the evidence is actually clean.',
       '- Reject regressions instead of explaining them away.',
       '- Prefer report artifacts over code edits unless the audit harness itself is broken.',
+    ],
+    'systems-optimizer': [
+      '- Read `CLAW/PRD_SYSTEMS_OPTIMIZER.md`, `CLAW/control-plane/system-optimizer/state.json`, and `CLAW/control-plane/system-optimizer/backlog.json` first.',
+      '- Use the installed `$ggd-system-optimize` command semantics and the GGD equation engine before inventing a control-plane change pattern.',
+      '- Define exactly one system hypothesis, exactly one writable scope, and exactly one evaluation bundle before editing.',
+      '- Do not touch route implementation files. Improve laws, prompts, validators, command surfaces, cadence, or recovery behavior only.',
+      '- Keep the slice only if the machine gets measurably better and the eval bundle is green. Otherwise reject it, record the learning, and leave the route lanes alone.',
     ],
     integration: [
       '- Replay only the accepted candidate into the integration lane.',
@@ -501,6 +575,8 @@ function applyGgdContractToHandoff(job, handoff, normalizedStatus, handoffRelati
       ggdRoute: null,
       exportedGapPath: null,
       resolvedGapIds: [],
+      geometryVerdict: null,
+      checkpointInvalidation: null,
     };
   }
 
@@ -509,13 +585,63 @@ function applyGgdContractToHandoff(job, handoff, normalizedStatus, handoffRelati
   let nextStatus = normalizedStatus;
   let exportedGapPath = null;
   let resolvedGapIds = [];
+  let geometryVerdict = null;
+  let checkpointInvalidation = null;
+  let gapKindOverride = null;
+  let suppressGapExport = false;
+
+  if (['systems-qa', 'integration'].includes(job.lane_id) && nextStatus === 'accepted') {
+    geometryVerdict = readGeometryLawVerdict(subjectRoute);
+    if (geometryVerdict.blocking) {
+      nextStatus = 'rejected';
+      gapKindOverride = 'geometry-gap';
+      const blocker = `Geometry-law gate blocked ${job.lane_id} acceptance for ${subjectRoute}: ${geometryVerdict.summary}`;
+      handoff.summary = `Rejected by geometry-law gate for ${subjectRoute}.`;
+      handoff.blockers = uniqueValues([...(handoff.blockers || []), blocker]);
+      handoff.recommendation = `Do not promote ${subjectRoute} until the geometry-law verdict passes with zero critical and zero major findings.`;
+      if (!handoff.audit_result || typeof handoff.audit_result !== 'object') {
+        handoff.audit_result = {
+          summary: handoff.summary,
+          status: 'geometry-law-gate',
+          notes: [blocker],
+          report: geometryVerdict.report,
+          counts: geometryVerdict.counts,
+        };
+      } else {
+        handoff.audit_result = {
+          ...handoff.audit_result,
+          summary: handoff.summary,
+          status: 'geometry-law-gate',
+          notes: uniqueValues([...(handoff.audit_result.notes || []), blocker]),
+          report: geometryVerdict.report || handoff.audit_result.report || null,
+          counts: geometryVerdict.counts,
+        };
+      }
+      handoff.learning_captured = uniqueValues([
+        ...(handoff.learning_captured || []),
+        'Geometry-law JSON is a first-class promotion gate for systems-qa and integration.',
+      ]);
+      if (job.lane_id === 'integration') {
+        suppressGapExport = gate.blocking_gaps.some((gap) => gap.kind === 'geometry-gap');
+      }
+      checkpointInvalidation = {
+        route: subjectRoute,
+        reason: `Current integration checkpoint is stale for ${subjectRoute}: ${geometryVerdict.summary}`,
+        gapIds: uniqueValues([
+          ...gate.blocking_gaps.filter((gap) => gap.kind === 'geometry-gap').map((gap) => gap.id),
+          !suppressGapExport ? `pending:${subjectRoute}:geometry-gap` : null,
+        ]),
+      };
+    }
+  }
 
   if (job.lane_id === 'integration' && nextStatus === 'accepted' && gate.blocks_acceptance) {
     const blockingIds = gate.blocking_gaps.map((gap) => gap.id).join(', ');
     const blocker = `GGD contract blocked integration acceptance for ${subjectRoute}: open route gaps remain (${blockingIds}).`;
     nextStatus = 'rejected';
+    suppressGapExport = true;
     handoff.summary = `Rejected by GGD contract: ${blockingIds} remain open for ${subjectRoute}.`;
-    handoff.blockers = [...new Set([...(handoff.blockers || []), blocker])];
+    handoff.blockers = uniqueValues([...(handoff.blockers || []), blocker]);
     handoff.recommendation = `Do not promote ${subjectRoute} while blocking GGD gaps remain open. Close the route gaps in owner lanes first.`;
     if (!handoff.audit_result || typeof handoff.audit_result !== 'object') {
       handoff.audit_result = {
@@ -532,10 +658,15 @@ function applyGgdContractToHandoff(job, handoff, normalizedStatus, handoffRelati
         notes: [...new Set([...(handoff.audit_result.notes || []), blocker])],
       };
     }
-    handoff.learning_captured = [
+    handoff.learning_captured = uniqueValues([
       ...(handoff.learning_captured || []),
       'Downstream acceptance must fail closed while the subject route carries open GGD gaps.',
-    ];
+    ]);
+    checkpointInvalidation = {
+      route: subjectRoute,
+      reason: `Current integration checkpoint is stale for ${subjectRoute}: blocking GGD gaps remain open (${blockingIds}).`,
+      gapIds: gate.blocking_gaps.map((gap) => gap.id),
+    };
   }
 
   if (['systems-qa', 'data-truth', 'integration'].includes(job.lane_id)) {
@@ -548,28 +679,43 @@ function applyGgdContractToHandoff(job, handoff, normalizedStatus, handoffRelati
       });
       if (resolved.length > 0) {
         resolvedGapIds = resolved.map((gap) => gap.id);
-        handoff.learning_captured = [
+        handoff.learning_captured = uniqueValues([
           ...(handoff.learning_captured || []),
           `Resolved GGD gaps: ${resolvedGapIds.join(', ')}.`,
-        ];
+        ]);
       }
-    } else if (['rejected', 'escalated'].includes(nextStatus)) {
+    } else if (['rejected', 'escalated'].includes(nextStatus) && !suppressGapExport) {
       const gap = buildGapRecordFromHandoff(
         {
           ...handoff,
         },
         {
           route: subjectRoute,
+          kind: gapKindOverride || undefined,
           source_handoff: handoffRelativePath,
         },
       );
       const gapPath = writeGapRecord(gap);
       exportedGapPath = relativeProjectPath(gapPath);
-      handoff.learning_captured = [
+      handoff.learning_captured = uniqueValues([
         ...(handoff.learning_captured || []),
         `Exported GGD gap ${gap.id}.`,
-      ];
+      ]);
+      if (checkpointInvalidation && checkpointInvalidation.gapIds.includes(`pending:${subjectRoute}:geometry-gap`)) {
+        checkpointInvalidation.gapIds = uniqueValues([
+          ...checkpointInvalidation.gapIds.filter((gapId) => !gapId.startsWith('pending:')),
+          gap.id,
+        ]);
+      }
     }
+  }
+
+  if (!checkpointInvalidation && ['systems-qa', 'integration'].includes(job.lane_id) && ['rejected', 'escalated'].includes(nextStatus)) {
+    checkpointInvalidation = {
+      route: subjectRoute,
+      reason: `Current integration checkpoint is stale for ${subjectRoute}: ${job.lane_id} settled ${nextStatus}.`,
+      gapIds: gate.blocking_gaps.map((gap) => gap.id),
+    };
   }
 
   return {
@@ -578,6 +724,8 @@ function applyGgdContractToHandoff(job, handoff, normalizedStatus, handoffRelati
     ggdRoute: subjectRoute,
     exportedGapPath,
     resolvedGapIds,
+    geometryVerdict,
+    checkpointInvalidation,
   };
 }
 
@@ -1095,7 +1243,7 @@ function acceptedUpstreamJobs(queue, job) {
   if (dependencyLaneIds.length > 0) {
     return dependencyLaneIds
       .map((laneId) => (queue.jobs || []).find((candidate) => candidate.lane_id === laneId))
-      .filter((candidate) => candidate && candidate.status === 'accepted' && candidate.candidate_commit);
+      .filter((candidate) => candidate && candidate.replayable !== false && candidate.status === 'accepted' && candidate.candidate_commit);
   }
 
   const currentIndex = (queue.jobs || []).findIndex((candidate) => candidate.job_id === job.job_id);
@@ -1105,7 +1253,7 @@ function acceptedUpstreamJobs(queue, job) {
 
   return (queue.jobs || [])
     .slice(0, currentIndex)
-    .filter((candidate) => candidate.status === 'accepted' && candidate.candidate_commit);
+    .filter((candidate) => candidate.replayable !== false && candidate.status === 'accepted' && candidate.candidate_commit);
 }
 
 function replayAcceptedUpstreamCommits(queue, job) {
@@ -1519,6 +1667,13 @@ async function main() {
   normalizedStatus = ggdOutcome.normalizedStatus;
   handoff.status = normalizedStatus;
   writeJson(handoffFile, handoff);
+  const checkpointInvalidation = ggdOutcome.checkpointInvalidation
+    ? markCurrentCheckpointStale(
+        ggdOutcome.checkpointInvalidation.route,
+        ggdOutcome.checkpointInvalidation.reason,
+        ggdOutcome.checkpointInvalidation.gapIds || [],
+      )
+    : null;
 
   queue = loadActiveQueue(control.runtime);
   const queueJob = (queue.jobs || []).find((candidate) => candidate.job_id === job.job_id);
@@ -1562,7 +1717,20 @@ async function main() {
       last_lane: job.lane_id,
     };
     runtime.operator_authorized_local_runner = true;
-    runtime.active_cadence_profile = 'guarded_local_autonomy';
+    syncRuntimeCadence(runtime, 'guarded_local_autonomy');
+    if (checkpointInvalidation) {
+      runtime.gates = {
+        ...(runtime.gates || {}),
+        integration_qa_passed: false,
+      };
+      runtime.current_checkpoint = null;
+      runtime.last_stale_checkpoint = checkpointInvalidation.path;
+      runtime.blockers = uniqueValues([...(runtime.blockers || []), checkpointInvalidation.reason]);
+      runtime.next_actions = uniqueValues([
+        `Rebuild the integration checkpoint only after closing blocking gaps for ${checkpointInvalidation.route}.`,
+        ...(runtime.next_actions || []),
+      ]);
+    }
   });
 
   const refreshedControl = loadControlPlane();
@@ -1581,6 +1749,8 @@ async function main() {
     ggd_route: ggdOutcome.ggdRoute,
     ggd_exported_gap: ggdOutcome.exportedGapPath,
     ggd_resolved_gaps: ggdOutcome.resolvedGapIds,
+    geometry_law_verdict: ggdOutcome.geometryVerdict,
+    checkpoint_invalidated: checkpointInvalidation,
   };
 
   if (queueStatus !== 'accepted') {

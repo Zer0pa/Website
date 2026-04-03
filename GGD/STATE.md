@@ -18,12 +18,13 @@
 
 - `/`: canonical — homepage accepted through canonical closure
 - `/imc`: canonical — flagship IMC accepted through canonical closure
-- `/work/xr`: blocked — Rejected: fresh XR falsification still fails the phase acceptance rule with `14` critical layout diffs; IMC flagship invariants remain intact and XR responsive overflow is clear.
+- `/work/xr`: blocked — `/work/xr` remains blocked. Layout and geometry-law acceptance both fail, while responsive overflow and contrast stay clean.
 - `/work/ft`: pending-proof — FT replication proof still pending
 
 ## Active Gaps
 
-- `work-xr.geometry-gap`: /work/xr — open (14 critical, 0 major)
+- `work-xr.breakpoint-gap`: /work/xr — open (0 critical, 0 major)
+- `work-xr.geometry-gap`: /work/xr — open (0 critical, 0 major)
 
 ## Augmentation Backlog
 
@@ -42,6 +43,8 @@
 - Resume XR closure under the stronger geometry-law contract.
 - Add explicit FT route-gap export once the first FT falsification exists.
 - Expose the named bundle entrypoints directly in the ggd-* command surface.
+- Convert recurring XR/product-family rejections into accepted system-level ratchets or explicitly discarded hypotheses.
+- Keep the systems-optimizer backlog current and measurable.
 
 ## Blockers
 

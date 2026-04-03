@@ -24,11 +24,30 @@
   "scripts": {
     "sync_state": "CLAW/scripts/sync-ggd-state.mjs",
     "export_gap": "CLAW/scripts/export-ggd-gap.mjs",
-    "verify_binding": "CLAW/scripts/verify-ggd-binding.mjs"
+    "verify_binding": "CLAW/scripts/verify-ggd-binding.mjs",
+    "verify_system_optimizer": "CLAW/scripts/verify-systems-optimizer.mjs"
+  },
+  "command_surface": "GGD/commands.json",
+  "external_surface": {
+    "source_root": "/Users/zer0palab/Get-Geometry-Done",
+    "skills_dir": "/Users/zer0palab/.codex/skills",
+    "agents_dir": "/Users/zer0palab/.codex/agents",
+    "command_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/command-catalog.json",
+    "agent_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/agent-catalog.json",
+    "function_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/function-catalog.md",
+    "equation_engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
+    "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
   },
   "verification_bundle_index": "GGD/verification/bundles.json",
   "augmentation_backlog": "GGD/augmentations/augmentation-backlog.json",
   "gap_dir": "GGD/gaps/routes",
+  "system_optimizer": {
+    "state": "CLAW/control-plane/system-optimizer/state.json",
+    "backlog": "CLAW/control-plane/system-optimizer/backlog.json",
+    "optimizer_command": "ggd-system-optimize",
+    "optimizer_agent": "ggd-systems-optimizer",
+    "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs"
+  },
   "route_roles": {
     "/": "home",
     "/imc": "flagship",
