@@ -59,6 +59,18 @@
         "null"
       ]
     },
+    "execution_prd": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "execution_plan": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "lanes": {
       "type": "object",
       "additionalProperties": {

@@ -10,6 +10,8 @@
   "latest_wave_report": null,
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
+  "execution_prd": null,
+  "execution_plan": null,
   "lanes": {
     "orchestrator": {
       "status": "active",

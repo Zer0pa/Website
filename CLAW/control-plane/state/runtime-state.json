@@ -6,11 +6,13 @@
   "current_milestone": "M1-recursive-autonomy-hardening",
   "current_phase": "P1-canonical-homepage-closure",
   "active_wave": "W1",
-  "last_updated": "2026-04-03T11:56:14+02:00",
+  "last_updated": "2026-04-03T12:10:18+02:00",
   "control_style": "evaluator-optimizer",
   "latest_wave_report": "CLAW/control-plane/reports/W1-homepage-supervised.md",
   "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
+  "execution_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
+  "execution_plan": "CLAW/control-plane/plans/canonical-routes-to-producing.json",
   "lanes": {
     "orchestrator": {
       "status": "active",
@@ -89,11 +91,11 @@
     "No recovery drill has been proven yet."
   ],
   "next_actions": [
-    "Run the next homepage slice on flagship vertical alignment and wordmark width.",
-    "Run one full supervised IMC cycle.",
-    "Replay the first accepted homepage candidate through integration.",
-    "Exercise recovery drills R1-R6 from the PRD.",
-    "Keep press_go false until phases P1-P6 pass."
+    "Execute C1 homepage canonical closure until two consecutive non-regressing passes exist.",
+    "Execute C2 flagship IMC closure.",
+    "Lock the product-family kernel for generic authority pages.",
+    "Close /work/xr as the first generic proof page and /work/ft as the replication proof page.",
+    "Keep press_go false until the canonical-routes-to-producing program is complete."
   ],
   "learning_backlog": [
     {

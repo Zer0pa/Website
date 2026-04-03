@@ -22,8 +22,9 @@ Keep long-running website work deterministic, bounded, and recoverable.
 3. [`AUTONOMOUS_CONTROL_PLANE.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/AUTONOMOUS_CONTROL_PLANE.md)
 4. [`AUTONOMOUS_RUNBOOK.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/AUTONOMOUS_RUNBOOK.md)
 5. [`PRD_24_7_LOCAL_AUTONOMY.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/PRD_24_7_LOCAL_AUTONOMY.md)
-6. [`control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md)
-7. [`RUNBOOK_PERPETUAL_OPERATION.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/RUNBOOK_PERPETUAL_OPERATION.md)
+6. [`PRD_CANONICAL_ROUTES_TO_PRODUCING.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md)
+7. [`control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/RECURSIVE_SELF_IMPROVEMENT_PROTOCOL.md)
+8. [`RUNBOOK_PERPETUAL_OPERATION.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/RUNBOOK_PERPETUAL_OPERATION.md)
 
 ## Machine-Readable Inputs
 
@@ -34,6 +35,7 @@ Keep long-running website work deterministic, bounded, and recoverable.
 - [`control-plane/artifact-contract.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/artifact-contract.md)
 - [`control-plane/recursive-improvement.json`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/recursive-improvement.json)
 - [`control-plane/plans/24x7-hardening-plan.json`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/plans/24x7-hardening-plan.json)
+- [`control-plane/plans/canonical-routes-to-producing.json`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/plans/canonical-routes-to-producing.json)
 - [`control-plane/state-machine.json`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/state-machine.json)
 - [`control-plane/press-go.manifest.json`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/press-go.manifest.json)
 - [`control-plane/reports/W1-homepage-supervised.md`](/Users/zer0palab/Zer0pa%20Website/Website-main/CLAW/control-plane/reports/W1-homepage-supervised.md)

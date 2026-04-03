@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "program": "canonical-routes-to-producing",
+  "authoritative_prd": "CLAW/PRD_CANONICAL_ROUTES_TO_PRODUCING.md",
+  "status": "active",
+  "current_phase": "C1-homepage-canonical-closure",
+  "routes": {
+    "homepage": "/",
+    "flagship": "/imc",
+    "generic_proof_1": "/work/xr",
+    "generic_proof_2": "/work/ft"
+  },
+  "phases": [
+    {
+      "id": "C1",
+      "title": "Homepage canonical closure",
+      "status": "in_progress",
+      "streams": [
+        "homepage-fidelity",
+        "systems-qa",
+        "integration"
+      ],
+      "exit_gates": [
+        "Two consecutive non-regressing homepage passes.",
+        "Zero critical diffs.",
+        "Zero major diffs.",
+        "No more than three minor diffs.",
+        "Homepage candidate replayed through integration."
+      ]
+    },
+    {
+      "id": "C2",
+      "title": "Flagship IMC canonical closure",
+      "status": "pending",
+      "depends_on": [
+        "C1"
+      ],
+      "streams": [
+        "imc-flagship",
+        "systems-qa",
+        "integration"
+      ],
+      "exit_gates": [
+        "Two consecutive non-regressing IMC passes.",
+        "Zero critical diffs.",
+        "Zero major diffs.",
+        "No more than three minor diffs.",
+        "Flagship exceptions documented as laws."
+      ]
+    },
+    {
+      "id": "C3",
+      "title": "Product kernel lock",
+      "status": "pending",
+      "depends_on": [
+        "C1",
+        "C2"
+      ],
+      "streams": [
+        "product-family-kernel",
+        "data-truth",
+        "systems-qa"
+      ],
+      "exit_gates": [
+        "Kernel law artifact exists.",
+        "Packet binding rules are explicit.",
+        "Flagship exceptions are separated from family law."
+      ]
+    },
+    {
+      "id": "C4",
+      "title": "First generic product proof",
+      "status": "pending",
+      "depends_on": [
+        "C3"
+      ],
+      "streams": [
+        "product-family",
+        "data-truth",
+        "systems-qa",
+        "integration"
+      ],
+      "target_route": "/work/xr",
+      "exit_gates": [
+        "XR renders from packet truth without bespoke hacks.",
+        "Zero critical diffs.",
+        "Zero major diffs.",
+        "No more than three minor diffs.",
+        "XR candidate replayed through integration."
+      ]
+    },
+    {
+      "id": "C5",
+      "title": "Second replication proof",
+      "status": "pending",
+      "depends_on": [
+        "C4"
+      ],
+      "streams": [
+        "product-family",
+        "data-truth",
+        "systems-qa",
+        "integration"
+      ],
+      "target_route": "/work/ft",
+      "exit_gates": [
+        "FT is produced from the same kernel.",
+        "Zero critical diffs.",
+        "Zero major diffs.",
+        "No undeclared bespoke route hacks.",
+        "Replication delta is explainable by content or declared variants."
+      ]
+    },
+    {
+      "id": "C6",
+      "title": "Producing readiness",
+      "status": "pending",
+      "depends_on": [
+        "C5"
+      ],
+      "streams": [
+        "orchestrator",
+        "systems-qa",
+        "integration"
+      ],
+      "exit_gates": [
+        "Homepage, IMC, XR, and FT have accepted checkpoints.",
+        "Kernel and exception boundaries are explicit.",
+        "Recovery evidence is current.",
+        "Automation would operate on stable laws."
+      ]
+    }
+  ]
+}
