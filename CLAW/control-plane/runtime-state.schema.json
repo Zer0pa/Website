@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Website-main Autonomous Control State",
+  "type": "object",
+  "required": [
+    "version",
+    "project",
+    "mode",
+    "press_go",
+    "current_milestone",
+    "current_phase",
+    "active_wave",
+    "lanes",
+    "latest_audits",
+    "blockers",
+    "next_actions",
+    "stop_conditions"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "project": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "press_go": {
+      "type": "boolean"
+    },
+    "current_milestone": {
+      "type": "string"
+    },
+    "current_phase": {
+      "type": "string"
+    },
+    "active_wave": {
+      "type": "string"
+    },
+    "lanes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "latest_audits": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stop_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

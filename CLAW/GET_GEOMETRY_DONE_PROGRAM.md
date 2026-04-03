@@ -107,7 +107,7 @@ Long-running operation is governed by:
 
 - `CLAW/AUTONOMOUS_CONTROL_PLANE.md`
 - `CLAW/AUTONOMOUS_RUNBOOK.md`
-- `CLAW/AUTONOMOUS_STATE_TEMPLATE.json`
+- `CLAW/control-plane/state.template.json`
 - `CLAW/control-plane/`
 
 ## Artifact Contract

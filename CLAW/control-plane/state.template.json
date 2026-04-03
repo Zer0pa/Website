@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "project": "zer0pa-website",
+  "mode": "control-plane-setup",
+  "press_go": false,
+  "current_milestone": "M0-canonical-closure",
+  "current_phase": "control-plane-definition",
+  "active_wave": "W0",
+  "lanes": {
+    "orchestrator": {
+      "status": "active",
+      "last_accepted_commit": "7ef102d",
+      "last_handoff": null
+    },
+    "homepage-fidelity": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "imc-flagship": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "product-family-kernel": {
+      "status": "blocked",
+      "reason": "Wait for homepage and /imc canonical laws."
+    },
+    "product-family": {
+      "status": "blocked",
+      "reason": "Wait for product-family kernel to become lawful."
+    },
+    "data-truth": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "systems-qa": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "integration": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    }
+  },
+  "latest_audits": {
+    "build": null,
+    "parser": null,
+    "layout": null,
+    "responsive": null
+  },
+  "blockers": [
+    "Press-go criteria are not yet satisfied."
+  ],
+  "next_actions": [
+    "Run one full canonical cycle for homepage.",
+    "Run one full canonical cycle for /imc.",
+    "Run systems-qa from integration or control branch.",
+    "Rehearse cherry-picks through integration.",
+    "Prove one supervised dry run before unattended execution."
+  ],
+  "stop_conditions": [
+    "build failure",
+    "parser test failure",
+    "critical or major audit regression",
+    "lane scope violation",
+    "data-truth contradiction"
+  ]
+}
