@@ -21,9 +21,15 @@ Each systems-optimizer slice must follow one loop:
 Default allowed scope:
 
 - `CLAW/scripts/**`
-- `CLAW/control-plane/**/*.json`
-- `CLAW/control-plane/**/*.md`
-- `CLAW/control-plane/**/*.schema.json`
+- `CLAW/control-plane/*.json`
+- `CLAW/control-plane/*.md`
+- `CLAW/control-plane/*.schema.json`
+- `CLAW/control-plane/plans/**`
+- `CLAW/control-plane/patterns/**`
+- `CLAW/control-plane/continuations/**`
+- `CLAW/control-plane/product-kernel/**`
+- `CLAW/control-plane/system-optimizer/**`
+- `CLAW/control-plane/reports/**`
 - `CLAW/PRD*.md`
 - `GGD/**`
 - `.agents/skills/get-geometry-done/**`
@@ -31,6 +37,12 @@ Default allowed scope:
 
 Forbidden without an explicit broader contract:
 
+- `CLAW/control-plane/queue/**`
+- `CLAW/control-plane/runtime/**`
+- `CLAW/control-plane/locks/**`
+- `CLAW/control-plane/checkpoints/**`
+- `CLAW/control-plane/state/runtime-state.json`
+- `CLAW/services/autonomy/state.json`
 - `site/src/app/**`
 - `site/src/components/**`
 - `site/src/lib/data/**`

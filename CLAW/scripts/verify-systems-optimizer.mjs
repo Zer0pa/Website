@@ -36,6 +36,21 @@ for (const writePattern of ['CLAW/scripts/**', 'GGD/**']) {
   }
 }
 
+for (const forbiddenPattern of [
+  'CLAW/control-plane/queue/**',
+  'CLAW/control-plane/runtime/**',
+  'CLAW/control-plane/locks/**',
+  'CLAW/control-plane/checkpoints/**',
+  'CLAW/control-plane/state/runtime-state.json',
+  'CLAW/services/autonomy/state.json',
+  'site/**',
+  'deterministic-design-system/**',
+]) {
+  if (optimizerLane?.writes?.includes(forbiddenPattern)) {
+    issues.push(`systems-optimizer lane must not write ${forbiddenPattern}`);
+  }
+}
+
 for (const phaseId of ['C4', 'C5', 'C6']) {
   const template = cycleTemplates.phases?.[phaseId];
   if (!template?.lanes?.some((lane) => lane.lane_id === 'systems-optimizer')) {

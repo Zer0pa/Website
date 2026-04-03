@@ -1554,7 +1554,7 @@ async function main() {
     laneResult = JSON.parse(fs.readFileSync(execResult.outputPath, 'utf8'));
   } else if (!laneResult && execResult.code !== 0) {
     laneResult =
-      salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
+      (job.lane_id === 'systems-optimizer' ? null : salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy)) ||
       syntheticLaneResult(
         queue,
         job,
@@ -1564,7 +1564,7 @@ async function main() {
       );
   } else if (!laneResult && !fs.existsSync(execResult.outputPath)) {
     laneResult =
-      salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
+      (job.lane_id === 'systems-optimizer' ? null : salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy)) ||
       syntheticLaneResult(
         queue,
         job,
