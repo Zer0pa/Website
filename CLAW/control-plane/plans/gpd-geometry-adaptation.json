@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "program": "gpd-geometry-adaptation",
+  "status": "active",
+  "current_phase": "G1-port-deterministic-law",
+  "phases": [
+    {
+      "id": "G0",
+      "title": "Bootstrap GGD",
+      "status": "completed",
+      "depends_on": [],
+      "tasks": [
+        "instantiate GGD project artifacts",
+        "lock the initial geometry conventions",
+        "capture current route blockers in human and machine state"
+      ],
+      "exit_gates": [
+        "GGD/PROJECT.md exists",
+        "GGD/CONVENTIONS.md exists",
+        "GGD/ROADMAP.md exists",
+        "GGD/STATE.md and GGD/state.json agree"
+      ]
+    },
+    {
+      "id": "G1",
+      "title": "Port deterministic law into contracts",
+      "status": "in_progress",
+      "depends_on": [
+        "G0"
+      ],
+      "tasks": [
+        "formalize spacing, grid, typography, color, breakpoint, semantic, and code-quality conventions",
+        "define acceptance tests for home, flagship, and product-family routes",
+        "record forbidden moves and route-role invariants"
+      ],
+      "exit_gates": [
+        "route-role laws are explicit",
+        "design constants are explicit",
+        "forbidden moves are explicit"
+      ]
+    },
+    {
+      "id": "G2",
+      "title": "Port verification bundles",
+      "status": "pending",
+      "depends_on": [
+        "G1"
+      ],
+      "tasks": [
+        "define named verification bundles",
+        "map current audits into those bundles",
+        "ensure every failure produces a gap record"
+      ],
+      "exit_gates": [
+        "geometry bundle defined",
+        "responsive bundle defined",
+        "semantic and SEO bundle defined",
+        "code-quality bundle defined"
+      ]
+    },
+    {
+      "id": "G3",
+      "title": "Port command and agent surfaces",
+      "status": "pending",
+      "depends_on": [
+        "G2"
+      ],
+      "tasks": [
+        "define GGD command surface",
+        "align geometry skill and claw prompts to GGD artifacts",
+        "map claw lanes to GGD agent families"
+      ],
+      "exit_gates": [
+        "skill points at GGD",
+        "AGENTS.md points at GGD",
+        "agent families are named and scoped"
+      ]
+    },
+    {
+      "id": "G4",
+      "title": "Migrate active route work",
+      "status": "pending",
+      "depends_on": [
+        "G3"
+      ],
+      "tasks": [
+        "record homepage and IMC closure evidence in GGD",
+        "record XR and FT failures as explicit route gaps",
+        "prevent route work outside the GGD contract"
+      ],
+      "exit_gates": [
+        "current route truth lives in GGD state",
+        "XR and FT gap records exist"
+      ]
+    },
+    {
+      "id": "G5",
+      "title": "Resume autonomy under GGD",
+      "status": "pending",
+      "depends_on": [
+        "G4"
+      ],
+      "tasks": [
+        "bind CLAW execution against GGD contract artifacts",
+        "run supervised route closure",
+        "prove rejectable recursive improvement under the GGD rules"
+      ],
+      "exit_gates": [
+        "supervised cycle passes under GGD contract",
+        "route failures become explicit GGD gaps",
+        "press_go remains truthful"
+      ]
+    }
+  ]
+}

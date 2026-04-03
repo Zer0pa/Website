@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "project_reference": {
+    "project_md_updated": "2026-04-03",
+    "core_research_question": "How do we turn the Zer0pa website into a deterministic geometry program whose layout, typography, color, semantic hierarchy, packet truth, and code quality are governed by explicit laws and falsified continuously until canonical closure is reached?",
+    "current_focus": "Bootstrap a literal GPD-derived geometry contract layer in GGD/ and use it to replace the softer doctrine that currently sits beside the CLAW control plane."
+  },
+  "project_contract": {
+    "program_id": "ggd-zer0pa-website-v1",
+    "route_roles": [
+      "home",
+      "flagship",
+      "product-family"
+    ],
+    "decisive_outputs": [
+      "canonical routes with zero critical and zero major geometry failures",
+      "a convention lock that prevents creative drift",
+      "verification bundles that cover geometry, truth, semantic, SEO, contrast, and code quality",
+      "a product-family kernel proven on more than one repo-backed page",
+      "an autonomy layer that can recurse without degrading quality"
+    ],
+    "authoritative_artifacts": [
+      "GGD/PROJECT.md",
+      "GGD/CONVENTIONS.md",
+      "GGD/REQUIREMENTS.md",
+      "GGD/ROADMAP.md",
+      "GGD/STATE.md",
+      "GGD/VERIFICATION.md",
+      "CLAW/PRD_GPD_GEOMETRY_ADAPTATION.md"
+    ],
+    "constants": {
+      "base_unit_px": 8,
+      "half_unit_px": 4,
+      "desktop_columns": 16,
+      "tablet_columns": 10,
+      "mobile_columns": 6,
+      "desktop_gutter_px": 24,
+      "tablet_gutter_px": 24,
+      "mobile_gutter_px": 16,
+      "type_ratio_desktop": 1.2,
+      "type_ratio_mobile": 1.125
+    },
+    "viewport_matrix": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
+    "forbidden_moves": [
+      "creative restyling without law backing",
+      "route-specific hacks inside the shared product kernel",
+      "flattening IMC flagship behavior into generic route logic",
+      "bypassing packet truth to hide weak data",
+      "declaring autonomy readiness while route failures are still unmodeled"
+    ]
+  },
+  "position": {
+    "current_phase": "1",
+    "current_phase_name": "Port deterministic law into contracts",
+    "total_phases": 8,
+    "current_plan": "contract-port-and-law-lock",
+    "total_plans_in_phase": 3,
+    "status": "in_progress",
+    "last_activity": "2026-04-03T18:00:00Z",
+    "last_activity_desc": "Instantiated GGD artifacts and rewired the repo geometry skill and AGENTS contract to the new GGD layer.",
+    "progress_percent": 25
+  },
+  "open_questions": [
+    "Which GGD command surface should be wired first into the Codex execution layer?",
+    "Should GGD state become the direct upstream input for CLAW runtime-state promotion decisions?",
+    "Which existing audits should be reclassified into named GGD verification bundles first?"
+  ],
+  "decisions": [
+    {
+      "phase": "0",
+      "summary": "Adapt GPD more literally as GGD instead of keeping only GPD-inspired prose doctrine.",
+      "rationale": "The current system copied evaluator-optimizer behavior but not enough of the stronger GPD structure: state, conventions, protocol catalog, and verification contract."
+    },
+    {
+      "phase": "0",
+      "summary": "Keep CLAW as the autonomy layer and install GGD as the deterministic contract layer.",
+      "rationale": "Runner orchestration and design contract are separate responsibilities and should remain separate."
+    }
+  ],
+  "pending_todos": [
+    "Port current route failures into GGD-native gap records.",
+    "Bind verification bundles to concrete scripts and reports.",
+    "Teach CLAW runtime promotion logic to read from GGD state and gap records."
+  ],
+  "blockers": [
+    "GGD command and verification surfaces are defined but not yet wired into the active CLAW loops.",
+    "XR remains a real unresolved geometry failure outside the new GGD gap layer."
+  ],
+  "session": {
+    "last_date": "2026-04-03",
+    "hostname": "zer0palab",
+    "platform": "macOS",
+    "stopped_at": null,
+    "resume_file": "CLAW/PRD_GPD_GEOMETRY_ADAPTATION.md"
+  }
+}

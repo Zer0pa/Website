@@ -11,28 +11,36 @@ Read [references/geometry-program.md](./references/geometry-program.md) before m
 
 ## Workflow
 
-1. Read the active design contract:
-   - `ANTIGRAVITY_DESIGN_HANDOVER.md`
-   - `DETERMINISTIC_LAYOUT_SYSTEM_PRD.md`
+1. Read the active GGD contract:
+   - `GGD/PROJECT.md`
+   - `GGD/CONVENTIONS.md`
+   - `GGD/ROADMAP.md`
+   - `GGD/STATE.md`
+   - `GGD/VERIFICATION.md`
+2. Read the system adaptation contract when changing the engineering system itself:
+   - `CLAW/PRD_GPD_GEOMETRY_ADAPTATION.md`
+   - `CLAW/control-plane/plans/gpd-geometry-adaptation.json`
+3. Read the legacy geometry doctrine only for continuity or comparison:
    - `CLAW/GET_GEOMETRY_DONE_PROGRAM.md`
-2. Freeze truth surfaces before styling:
+4. Freeze truth surfaces before styling:
    - preserve parser, packet, lane, and GitHub truth unless they are provably broken
    - do not invent marketing copy to hide weak data
-3. Express the target page as math:
+5. Express the target page as math:
    - geometry: positions, widths, heights, aspect ratios, gutters, shell widths
    - typography: baseline sizes, modular scale, line boxes, tracking, line count
    - color: token coordinates, luminance, contrast, foreground/background pairs
    - behavior: breakpoint rules, overflow constraints, route invariants
-4. Implement with stable measurement hooks:
+6. Implement with stable measurement hooks:
    - add or preserve `data-spec` on measured elements
    - keep reference specs in `site/src/lib/layout/specs.ts`
    - keep measurement and diff logic in `site/src/scripts/layout-measure.ts` and `site/src/scripts/layout-diff.ts`
-5. Falsify every pass:
+7. Falsify every pass:
    - run `npm run build`
    - run `npm run test:parser`
    - run layout audit
    - run responsive audit
    - reject success if critical or major diffs remain
+   - reject success if the result violates `GGD/CONVENTIONS.md`
 
 ## Hard Rules
 
@@ -40,6 +48,7 @@ Read [references/geometry-program.md](./references/geometry-program.md) before m
 - Use one base spacing unit and express spacing as multiples of it.
 - Use a declared type scale instead of one-off font sizes.
 - Treat color as a measured system, not a taste decision.
+- Treat `GGD/CONVENTIONS.md` as a convention lock, not a suggestion.
 - Preserve flagship distinction for `/imc`; do not flatten it into generic lane treatment.
 - Keep `/work/[slug]` deterministic and repo-driven.
 - Do not broaden scope to the full site family until `/` and `/imc` are closed tightly enough.
@@ -63,6 +72,7 @@ Use specialist lanes when the task is large:
 - `data-truth`: repo ingestion, packet normalization, route wiring
 - `fidelity-reviewer`: screenshot and DOM diff review
 - `falsification`: audit runs, severity review, regression checks
+- `convention-coordinator`: validates that geometry work still matches the GGD lock
 
 ## Verification Commands
 
