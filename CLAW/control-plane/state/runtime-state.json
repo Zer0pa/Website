@@ -1,15 +1,16 @@
 {
   "version": 1,
   "project": "zer0pa-website",
-  "mode": "control-plane-setup",
+  "mode": "architecture-ready",
   "press_go": false,
   "current_milestone": "M0-canonical-closure",
-  "current_phase": "control-plane-definition",
-  "active_wave": "W0",
+  "current_phase": "supervised-dry-run-prep",
+  "active_wave": "W1",
+  "last_updated": "2026-04-03T00:00:00Z",
   "lanes": {
     "orchestrator": {
       "status": "active",
-      "last_accepted_commit": "7ef102d",
+      "last_accepted_commit": "274dfb7",
       "last_handoff": null
     },
     "homepage-fidelity": {
@@ -64,7 +65,8 @@
   },
   "blockers": [
     "Press-go criteria are not yet satisfied.",
-    "No supervised end-to-end cycle has passed yet."
+    "No supervised end-to-end cycle has passed yet.",
+    "No recovery drill has been proven yet."
   ],
   "next_actions": [
     "Run one full canonical cycle for homepage.",

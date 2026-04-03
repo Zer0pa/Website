@@ -14,6 +14,14 @@ What must exist:
 
 No perpetual execution yet.
 
+Canonical files:
+
+- `CLAW/control-plane/agent-lanes.json`
+- `CLAW/control-plane/cadence.json`
+- `CLAW/control-plane/state.template.json`
+- `CLAW/control-plane/runtime-state.schema.json`
+- `CLAW/control-plane/artifact-contract.md`
+
 ### 2. Supervised Dry Run
 
 Run one full cycle manually:
