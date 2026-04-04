@@ -113,6 +113,7 @@ const ACTIVE_HYPOTHESIS_MIRRORED_FIELDS = [
   'closed_fail_rule',
   'evidence_commands',
 ];
+const SEEDED_BACKLOG_HYPOTHESIS_MIRRORED_FIELDS = [...ACTIVE_HYPOTHESIS_MIRRORED_FIELDS];
 const RESOLVED_BACKLOG_HYPOTHESIS_MIRRORED_FIELDS = [...ACTIVE_HYPOTHESIS_MIRRORED_FIELDS, 'learning_item'];
 const TERMINAL_HYPOTHESIS_MIRRORED_FIELDS = [...ACTIVE_HYPOTHESIS_MIRRORED_FIELDS, 'learning_item', 'recorded_at'];
 const RUNNER_STABILITY_ALLOWED_FOCUS = ['recovery', 'queue-invalidation', 'stale-cycle'];
@@ -811,6 +812,75 @@ function validateResolvedBacklogHypothesisCardAlignment(card, label, learningEnt
   }
 }
 
+function validateSeededBacklogHypothesisCardAlignment(card, label, options = {}) {
+  const {
+    allowedScope = REQUIRED_SYSTEMS_OPTIMIZER_WRITES,
+    forbiddenScope = REQUIRED_SYSTEMS_OPTIMIZER_FORBIDDEN_SCOPE,
+  } = options;
+
+  if (!card || typeof card !== 'object' || Array.isArray(card)) {
+    return;
+  }
+
+  if (typeof card.id !== 'string' || card.id.trim().length === 0) {
+    return;
+  }
+
+  if (card.status !== 'seeded') {
+    return;
+  }
+
+  const relativePath = hypothesisCardPath(card.id);
+  if (!fs.existsSync(projectPath(relativePath))) {
+    issues.push(`${label} must resolve to hypothesis card ${relativePath}.`);
+    return;
+  }
+
+  let hypothesisCard = null;
+  try {
+    hypothesisCard = readJson(relativePath);
+  } catch (error) {
+    issues.push(`${label} hypothesis card could not be read: ${error.message}`);
+    return;
+  }
+
+  validateRatchetCard(hypothesisCard, `${label} hypothesis card`, {
+    requireScopeLocalPromotionBundle: true,
+    allowedScope,
+    forbiddenScope,
+  });
+
+  if (hypothesisCard.id !== card.id) {
+    issues.push(`${label} hypothesis card id must equal ${card.id}; found ${hypothesisCard.id}.`);
+  }
+
+  if (hypothesisCard.status !== 'seeded') {
+    issues.push(`${label} hypothesis card status must equal seeded; found ${hypothesisCard.status}.`);
+  }
+
+  if (hypothesisCard.lane_id !== 'systems-optimizer') {
+    issues.push(`${label} hypothesis card lane_id must equal systems-optimizer.`);
+  }
+
+  if (typeof hypothesisCard.recorded_at !== 'string' || hypothesisCard.recorded_at.trim().length === 0) {
+    issues.push(`${label} hypothesis card is missing required field: recorded_at.`);
+  }
+
+  for (const field of SEEDED_BACKLOG_HYPOTHESIS_MIRRORED_FIELDS) {
+    const backlogHasField = hasOwnField(card, field);
+    const hypothesisHasField = hasOwnField(hypothesisCard, field);
+
+    if (backlogHasField !== hypothesisHasField) {
+      issues.push(`${label}.${field} presence must match hypothesis card ${card.id}.`);
+      continue;
+    }
+
+    if (backlogHasField && !comparableValuesMatch(card[field], hypothesisCard[field])) {
+      issues.push(`${label}.${field} must exactly match hypothesis card ${card.id}.`);
+    }
+  }
+}
+
 const binding = readJson('GGD/project.binding.json');
 const commandSurface = readJson('GGD/commands.json');
 const agentLanes = readJson('CLAW/control-plane/agent-lanes.json');
@@ -938,6 +1008,15 @@ for (const item of backlogItems) {
   if (isRunnerStabilityRatchet(item)) {
     validateRunnerStabilityContract(item, `Backlog item ${item.id || '<unknown>'}`);
   }
+
+  validateSeededBacklogHypothesisCardAlignment(
+    item,
+    `systems-optimizer backlog item ${item.id || '<unknown>'}`,
+    {
+      allowedScope: configuredAllowedScope,
+      forbiddenScope: configuredForbiddenScope,
+    },
+  );
 }
 
 if (!optimizerState.policy?.keep_only_if_better) {
@@ -1014,6 +1093,10 @@ if (!optimizerState.policy?.require_terminal_hypothesis_card_alignment) {
 
 if (!optimizerState.policy?.require_resolved_backlog_hypothesis_card_alignment) {
   issues.push('systems-optimizer state must require resolved backlog hypothesis card alignment.');
+}
+
+if (!optimizerState.policy?.require_seeded_backlog_hypothesis_card_alignment) {
+  issues.push('systems-optimizer state must require seeded backlog hypothesis card alignment.');
 }
 
 for (const writePattern of REQUIRED_SYSTEMS_OPTIMIZER_WRITES) {
@@ -1292,6 +1375,7 @@ console.log(
         rejected_change_backlog_alignment_required: true,
         terminal_hypothesis_card_alignment_required: true,
         resolved_backlog_hypothesis_card_alignment_required: true,
+        seeded_backlog_hypothesis_card_alignment_required: true,
         runner_self_verify_required: true,
         runner_stability_contract_required: true,
         runner_replayable_evidence_script_required: true,
