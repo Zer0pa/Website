@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs';
+import path from 'node:path';
 
 import { projectPath, readJson } from './lib/control-plane.mjs';
 
@@ -160,6 +161,30 @@ function scopePatternAllowed(pattern, allowlist) {
   return allowlist.some((allowPattern) => globToRegex(allowPattern).test(pattern));
 }
 
+function validateNormalizedRelativeScopePattern(pattern, label) {
+  if (typeof pattern !== 'string' || pattern.trim().length === 0) {
+    return;
+  }
+
+  if (path.posix.isAbsolute(pattern)) {
+    issues.push(`${label}=${pattern} must stay repo-relative and may not start with /.`);
+  }
+
+  if (pattern.includes('\\')) {
+    issues.push(`${label}=${pattern} must use forward-slash repo paths, not backslash separators.`);
+  }
+
+  if (pattern.includes('//')) {
+    issues.push(`${label}=${pattern} must stay normalized and may not contain duplicate slash separators.`);
+  }
+
+  for (const segment of pattern.split('/')) {
+    if (segment === '.' || segment === '..') {
+      issues.push(`${label}=${pattern} must stay normalized and may not contain dot-segment traversal (${segment}).`);
+    }
+  }
+}
+
 function validateWritableScopePatterns(patterns, label, allowlist, forbiddenList) {
   if (!Array.isArray(patterns) || patterns.length === 0) {
     return;
@@ -170,6 +195,8 @@ function validateWritableScopePatterns(patterns, label, allowlist, forbiddenList
       issues.push(`${label}[${index}] must be a non-empty string scope pattern.`);
       continue;
     }
+
+    validateNormalizedRelativeScopePattern(pattern, `${label}[${index}]`);
 
     if (!scopePatternAllowed(pattern, allowlist)) {
       issues.push(
@@ -1072,6 +1099,10 @@ if (!optimizerState.policy?.require_writable_scope_allowlist) {
   issues.push('systems-optimizer state must require writable scope allowlist enforcement.');
 }
 
+if (!optimizerState.policy?.require_normalized_relative_writable_scope) {
+  issues.push('systems-optimizer state must require normalized relative writable_scope enforcement.');
+}
+
 if (!optimizerState.policy?.require_exact_xr_evaluator_focus) {
   issues.push('systems-optimizer state must require exact XR evaluator focus.');
 }
@@ -1388,6 +1419,7 @@ console.log(
         resolved_backlog_learning_item_required: true,
         learning_item_alignment_required: true,
         writable_scope_allowlist_required: true,
+        normalized_relative_writable_scope_required: true,
       },
     },
     null,

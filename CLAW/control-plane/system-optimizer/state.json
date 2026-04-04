@@ -16,6 +16,7 @@
     "require_learning_item_alignment": true,
     "require_scope_local_salvage_order": true,
     "require_writable_scope_allowlist": true,
+    "require_normalized_relative_writable_scope": true,
     "require_exact_xr_evaluator_focus": true,
     "require_active_hypothesis_backlog_alignment": true,
     "require_active_hypothesis_card_alignment": true,
@@ -54,8 +55,8 @@
   },
   "active_hypothesis": null,
   "last_kept_change": {
-    "id": "sysopt.kept-history-promotion-bundle-lock",
-    "hypothesis": "Systems-optimizer history becomes safer if every kept backlog card and kept hypothesis-card artifact must retain the exact five-command scope-local promotion bundle, not just seeded cards and the latest kept pointer.",
+    "id": "sysopt.normalized-relative-writable-scope-lock",
+    "hypothesis": "Systems-optimizer ratchets become safer if every writable_scope entry must stay normalized and repo-relative, so dot-segment or separator escapes cannot masquerade as allowlisted control-plane paths.",
     "writable_scope": [
       "CLAW/scripts/**",
       "CLAW/control-plane/system-optimizer/**",
@@ -68,10 +69,10 @@
       "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
       "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
     ],
-    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only exact-checked the scope-local promotion bundle for seeded cards and `state.last_kept_change`, so older kept backlog items or their replayable hypothesis cards could drift to wider evaluation bundles and still verify clean. After the ratchet, the verifier rejects any kept backlog item or kept hypothesis-card artifact whose `evaluation_bundle` differs from the exact five-command scope-local promotion bundle, while the fixed scope-local promotion bundle stays green.",
-    "keep_rule": "Keep only if every kept systems-optimizer backlog card and kept hypothesis-card artifact must use the exact five-command scope-local promotion bundle and the fixed evaluation bundle passes without touching route implementation paths.",
-    "learning_item": "Historical kept systems-optimizer cards must preserve the exact promotion bundle, or replayable history can silently widen the proof surface after promotion.",
-    "recorded_at": "2026-04-04T12:59:50Z"
+    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` matched raw writable_scope globs against the allowlist, so malformed entries like `CLAW/scripts/../control-plane/runtime/**` or `CLAW/scripts/../../site/src/app/**` could still inherit the allowed `CLAW/scripts/**` prefix and verify clean. After the ratchet, the verifier rejects any writable_scope entry that contains dot-segment traversal, duplicate slash separators, a leading slash, or backslash separators, while the fixed scope-local promotion bundle stays green.",
+    "keep_rule": "Keep only if the verifier fails non-normalized writable_scope entries that try to escape through dot segments or separator drift and the fixed evaluation bundle passes without touching route implementation paths.",
+    "learning_item": "Systems-optimizer writable_scope entries must stay normalized repo-relative patterns; raw allowlist matching alone can hide dot-segment escapes into runtime or route surfaces.",
+    "recorded_at": "2026-04-04T13:16:50Z"
   },
   "last_rejected_change": {
     "id": "sysopt.runner-policy-self-verify",
@@ -96,9 +97,14 @@
     "learning_item": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
     "recorded_at": "2026-04-04T00:06:21Z"
   },
-  "accepted_count": 27,
+  "accepted_count": 28,
   "rejected_count": 1,
   "learning_log": [
+    {
+      "id": "sysopt.normalized-relative-writable-scope-lock",
+      "learning": "Systems-optimizer writable_scope entries must stay normalized repo-relative patterns; raw allowlist matching alone can hide dot-segment escapes into runtime or route surfaces.",
+      "recorded_at": "2026-04-04T13:16:50Z"
+    },
     {
       "id": "sysopt.kept-history-promotion-bundle-lock",
       "learning": "Historical kept systems-optimizer cards must preserve the exact promotion bundle, or replayable history can silently widen the proof surface after promotion.",
@@ -240,5 +246,5 @@
       "recorded_at": "2026-04-04T10:31:09Z"
     }
   ],
-  "last_updated": "2026-04-04T12:59:50Z"
+  "last_updated": "2026-04-04T13:16:50Z"
 }
