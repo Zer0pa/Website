@@ -1,0 +1,22 @@
+{
+  "id": "sysopt.exact-scope-local-promotion-bundle",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer promotable cards become more deterministic if their scope-local evaluation_bundle must match the exact five-command promotion bundle in the declared order, rather than merely including those commands as a superset.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` treated the scope-local promotion bundle as an inclusion check, so a seeded or kept card could append extra commands, duplicate required commands, or reorder the bundle and still verify clean. After the ratchet, the verifier rejects any promotable systems-optimizer card whose `evaluation_bundle` differs in order, length, or membership from the exact five-command scope-local promotion bundle, while the declared promotion bundle remains green on the current state.",
+  "keep_rule": "Keep only if seeded and kept systems-optimizer cards must use the exact five-command scope-local promotion bundle with no extras or duplicates and the fixed promotion bundle passes without touching route implementation paths.",
+  "learning_item": "Scope-local promotion bundles must stay exact for promotable systems-optimizer cards; superset or reordered bundles silently widen the proof surface beyond the bounded slice.",
+  "recorded_at": "2026-04-04T05:18:01Z"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "sysopt.terminal-hypothesis-card-alignment-lock",
+  "cycle_id": "C4-20260404T053931Z",
+  "job_id": "C4-20260404T053931Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if terminal state entries must resolve to matching hypothesis-card artifacts, so the machine cannot keep or reject a ratchet in state without a replayable card file.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` still reported clean even though `state.last_kept_change.id` pointed to `sysopt.rejected-change-backlog-alignment-lock` and `CLAW/control-plane/system-optimizer/hypotheses/sysopt.rejected-change-backlog-alignment-lock.json` did not exist. After the ratchet, the verifier rejects any non-null `last_kept_change` or `last_rejected_change` that lacks a matching hypothesis card or drifts from it across the bounded contract fields, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if terminal systems-optimizer state must resolve to matching hypothesis-card artifacts and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Terminal systems-optimizer verdicts need replayable hypothesis-card artifacts; state/backlog alignment alone still leaves recovery and reporting blind if the card file is missing.",
+  "recorded_at": "2026-04-04T05:43:22Z"
+}

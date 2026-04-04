@@ -10,6 +10,7 @@ export const GGD_STATE_MD_PATH = projectPath('GGD/STATE.md');
 export const GGD_BUNDLE_INDEX_PATH = projectPath('GGD/verification/bundles.json');
 export const GGD_AUGMENTATION_BACKLOG_PATH = projectPath('GGD/augmentations/augmentation-backlog.json');
 export const GGD_GAP_DIR = projectPath('GGD/gaps/routes');
+export const GEOMETRY_LAW_REPORT_DIR = projectPath('deterministic-design-system/reports/geometry-laws');
 const DEFAULT_ROUTE_ROLES = ['home', 'flagship', 'product-family'];
 const CLOSED_GAP_STATUSES = new Set(['resolved', 'closed', 'archived', 'superseded']);
 
@@ -50,6 +51,13 @@ export function routeFileStem(route) {
   return routeTokenFromValue(route).replace(/[\/\[\]]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+export function routeReportStem(route) {
+  if (route === '/') {
+    return 'home';
+  }
+  return routeFileStem(route);
+}
+
 export function gapPathForRoute(route, kind = 'geometry-gap') {
   const stem = routeFileStem(route);
   return path.join(GGD_GAP_DIR, `${stem}.${kind}.json`);
@@ -57,6 +65,76 @@ export function gapPathForRoute(route, kind = 'geometry-gap') {
 
 export function gapIdForRoute(route, kind = 'geometry-gap') {
   return `${routeFileStem(route)}.${kind}`;
+}
+
+export function geometryLawReportPathForRoute(route) {
+  return path.join(GEOMETRY_LAW_REPORT_DIR, `${routeReportStem(route)}.geometry-law.json`);
+}
+
+function severityCountsFromGeometryReport(report) {
+  if (report?.counts && typeof report.counts === 'object') {
+    return {
+      critical: Number(report.counts.critical || 0),
+      major: Number(report.counts.major || 0),
+      minor: Number(report.counts.minor || 0),
+      note: Number(report.counts.note || 0),
+    };
+  }
+
+  const counts = { critical: 0, major: 0, minor: 0, note: 0 };
+  for (const finding of report?.findings || []) {
+    const severity = String(finding?.severity || 'note').toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(counts, severity)) {
+      counts[severity] += 1;
+    } else {
+      counts.note += 1;
+    }
+  }
+  return counts;
+}
+
+export function readGeometryLawVerdict(route) {
+  const absoluteReportPath = geometryLawReportPathForRoute(route);
+  const relativeReportPath = relativeProjectPath(absoluteReportPath);
+
+  if (!fs.existsSync(absoluteReportPath)) {
+    return {
+      route,
+      status: 'missing',
+      counts: { critical: 0, major: 0, minor: 0, note: 0 },
+      audited_at: null,
+      report: relativeReportPath,
+      summary: `Missing geometry-law report for ${route}.`,
+      blocking: true,
+    };
+  }
+
+  const report = JSON.parse(fs.readFileSync(absoluteReportPath, 'utf8'));
+  const counts = severityCountsFromGeometryReport(report);
+  if (report.route && report.route !== route) {
+    return {
+      route,
+      status: 'route-mismatch',
+      counts,
+      audited_at: report.auditedAt || null,
+      report: relativeReportPath,
+      summary: `Geometry-law report route mismatch: expected ${route}, found ${report.route}.`,
+      blocking: true,
+    };
+  }
+
+  const blocking = counts.critical > 0 || counts.major > 0;
+  return {
+    route,
+    status: blocking ? 'fail' : 'pass',
+    counts,
+    audited_at: report.auditedAt || null,
+    report: relativeReportPath,
+    summary: blocking
+      ? `Geometry-law report for ${route} has ${counts.critical} critical and ${counts.major} major findings.`
+      : `Geometry-law report for ${route} passes with zero critical and zero major findings.`,
+    blocking,
+  };
 }
 
 export function inferRouteFromText(value) {
@@ -162,25 +240,122 @@ export function severityCountsFromHandoff(handoff) {
     ...(handoff.postflight_metrics?.notes || []),
   ];
 
-  const joined = notes.join('\n');
-  const match = joined.match(/`(\d+)` critical.*?`(\d+)` major.*?`(\d+)` minor/i);
-  if (match) {
+  const parseCountsFromText = (text) => {
+    const match = String(text).match(/(?:`)?(\d+)(?:`)?\s+critical[\s\S]*?(?:`)?(\d+)(?:`)?\s+major[\s\S]*?(?:`)?(\d+)(?:`)?\s+minor/i);
+    if (!match) {
+      return null;
+    }
     return {
       critical: Number(match[1] || 0),
       major: Number(match[2] || 0),
       minor: Number(match[3] || 0),
       note: 0,
     };
+  };
+
+  const route = parseRouteFromHandoff(handoff);
+  const routeSpecificNote = notes.find((note) => route && String(note).includes(route) && /critical/i.test(String(note)) && /major/i.test(String(note)) && /minor/i.test(String(note)));
+  const routeSpecificCounts = routeSpecificNote ? parseCountsFromText(routeSpecificNote) : null;
+  if (routeSpecificCounts) {
+    return routeSpecificCounts;
+  }
+
+  const layoutCounts = parseCountsFromText(notes.find((note) => /layout diff/i.test(String(note))) || '');
+  if (layoutCounts) {
+    return layoutCounts;
+  }
+
+  const countMatches = notes
+    .map((note) => parseCountsFromText(note))
+    .filter(Boolean)
+    .sort((left, right) =>
+      Number(right.critical || 0) - Number(left.critical || 0) ||
+      Number(right.major || 0) - Number(left.major || 0) ||
+      Number(right.minor || 0) - Number(left.minor || 0),
+    );
+  if (countMatches.length > 0) {
+    return countMatches[0];
   }
 
   return { critical: 0, major: 0, minor: 0, note: 0 };
+}
+
+function existingEvidenceFilesFromHandoff(handoff) {
+  return [...new Set([...(handoff.evidence_files || []), ...(handoff.files_changed || []), handoff.audit_result?.report || null].filter(Boolean))];
+}
+
+function evidenceJsonPathForRoute(handoff, route, matcher) {
+  const routeStem = routeReportStem(route);
+  const explicitMatch = existingEvidenceFilesFromHandoff(handoff).find((filePath) => matcher(filePath, routeStem));
+  if (!explicitMatch) {
+    return null;
+  }
+  const absolutePath = projectPath(explicitMatch);
+  return fs.existsSync(absolutePath) ? absolutePath : null;
+}
+
+function topDiffIdsFromEvidence(handoff, route) {
+  const diffPath = evidenceJsonPathForRoute(
+    handoff,
+    route,
+    (filePath, routeStem) => filePath.endsWith(`${routeStem}.diff.json`) && filePath.includes('/maps/diff/'),
+  );
+  if (!diffPath) {
+    return [];
+  }
+
+  try {
+    const report = JSON.parse(fs.readFileSync(diffPath, 'utf8'));
+    return [...new Set(
+      (report.diffs || [])
+        .filter((diff) => diff && diff.id && diff.id !== 'work.lane.page')
+        .sort((left, right) => Number(right.distance || 0) - Number(left.distance || 0))
+        .slice(0, 8)
+        .map((diff) => String(diff.id).trim())
+        .filter(Boolean),
+    )];
+  } catch {
+    return [];
+  }
+}
+
+function topGeometryEntriesFromEvidence(handoff, route) {
+  const geometryPath = evidenceJsonPathForRoute(
+    handoff,
+    route,
+    (filePath, routeStem) => filePath.endsWith(`${routeStem}.geometry-law.json`) && filePath.includes('/reports/geometry-laws/'),
+  );
+  if (!geometryPath) {
+    return [];
+  }
+
+  try {
+    const report = JSON.parse(fs.readFileSync(geometryPath, 'utf8'));
+    const rankedFindings = [...(report.findings || [])].sort((left, right) => {
+      const rank = { critical: 3, major: 2, minor: 1, note: 0 };
+      const severityDelta = (rank[String(right.severity || 'note').toLowerCase()] || 0) - (rank[String(left.severity || 'note').toLowerCase()] || 0);
+      if (severityDelta !== 0) {
+        return severityDelta;
+      }
+      return Number(right.delta || 0) - Number(left.delta || 0);
+    });
+    return [...new Set(
+      rankedFindings
+        .slice(0, 8)
+        .flatMap((finding) => (finding.entries || []).map((entry) => String(entry).trim()))
+        .filter(Boolean),
+    )];
+  } catch {
+    return [];
+  }
 }
 
 export function topDriftSurfacesFromHandoff(handoff) {
   const notes = handoff.audit_result?.notes || [];
   const top = notes.find((note) => String(note).includes('Largest'));
   if (!top) {
-    return [];
+    const route = parseRouteFromHandoff(handoff);
+    return [...new Set([...topDiffIdsFromEvidence(handoff, route), ...topGeometryEntriesFromEvidence(handoff, route)])];
   }
   const segment = String(top).includes(':')
     ? String(top).split(':').slice(1).join(':')
@@ -195,6 +370,12 @@ export function topDriftSurfacesFromHandoff(handoff) {
         .trim(),
     )
     .filter(Boolean);
+}
+
+function gapHasMeasuredEvidence(gap) {
+  const counts = gap?.severity_counts || {};
+  const hasSeverity = ['critical', 'major', 'minor', 'note'].some((level) => Number(counts[level] || 0) > 0);
+  return hasSeverity || (gap?.top_drift_surfaces || []).length > 0 || (gap?.evidence_files || []).length > 0;
 }
 
 export function routeRoleForRoute(route) {
@@ -318,8 +499,7 @@ export function buildGapRecordFromHandoff(handoff, options = {}) {
   const route = options.route || parseRouteFromHandoff(handoff);
   const kind = options.kind || inferGapKindFromHandoff(handoff, handoff.lane);
   const severityCounts = severityCountsFromHandoff(handoff);
-
-  return {
+  const gap = {
     version: 1,
     id: gapIdForRoute(route, kind),
     route,
@@ -355,6 +535,28 @@ export function buildGapRecordFromHandoff(handoff, options = {}) {
     commands_run: handoff.commands_run || [],
     known_risks: handoff.known_risks || [],
   };
+
+  const existingGapPath = gapPathForRoute(route, kind);
+  if (fs.existsSync(existingGapPath)) {
+    try {
+      const existingGap = JSON.parse(fs.readFileSync(existingGapPath, 'utf8'));
+      if (!gapHasMeasuredEvidence(gap) && gapHasMeasuredEvidence(existingGap)) {
+        gap.severity_counts = existingGap.severity_counts || gap.severity_counts;
+        gap.top_drift_surfaces = existingGap.top_drift_surfaces || gap.top_drift_surfaces;
+        gap.quality_findings_summary = existingGap.quality_findings_summary || gap.quality_findings_summary;
+        gap.evidence_files = [...new Set([...(existingGap.evidence_files || []), ...(gap.evidence_files || [])])];
+        gap.learning_captured = [
+          ...new Set([
+            ...(gap.learning_captured || []),
+            `Preserved prior measured ${kind} evidence because this handoff did not produce fresh structured drift data.`,
+          ]),
+        ];
+        gap.preserved_measured_evidence_from = existingGap.source_handoff || null;
+      }
+    } catch {}
+  }
+
+  return gap;
 }
 
 export function writeGapRecord(gap) {

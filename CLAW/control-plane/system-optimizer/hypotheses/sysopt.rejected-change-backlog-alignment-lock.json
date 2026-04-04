@@ -1,0 +1,22 @@
+{
+  "id": "sysopt.rejected-change-backlog-alignment-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if `state.last_rejected_change` must stay backlog-linked and contract-identical to the rejected ratchet card, rather than only preserving the learning text.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, a synthetic falsification that drifted `state.last_rejected_change.keep_rule` away from backlog truth still verified clean because `node CLAW/scripts/verify-systems-optimizer.mjs` only checked `learning_item` alignment for rejected history. After the ratchet, the verifier rejects any `last_rejected_change` whose bounded contract fields or `learning_item` drift from the rejected backlog card, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if `state.last_rejected_change` must stay backlog-linked and contract-identical to one rejected backlog card and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Rejected systems-optimizer ratchets must mirror backlog contract fields in state, or recovery can carry stale failure history that no longer matches the ratchet actually rejected.",
+  "recorded_at": "2026-04-04T05:30:57Z"
+}

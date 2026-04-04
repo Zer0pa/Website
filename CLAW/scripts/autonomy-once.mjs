@@ -2,7 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import {
   acquireLaneLock,
   buildCyclePlan,
@@ -35,6 +35,7 @@ import {
   ensureSharedPacketCacheSeeded,
   finalMessagePath,
   gitAbsolutePath,
+  gitDirtyFiles,
   gitHead,
   handoffPath,
   hardReset,
@@ -137,6 +138,17 @@ function quoteShellArg(value) {
 function positiveInteger(value, fallback) {
   const parsed = Number.parseInt(String(value ?? ''), 10);
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+}
+
+function resolvedExecutionPolicyForJob(executionPolicy, job) {
+  const basePolicy = { ...(executionPolicy || {}) };
+  const laneOverrides =
+    executionPolicy?.lane_overrides ||
+    executionPolicy?.lane_execution_overrides ||
+    executionPolicy?.per_lane ||
+    {};
+  const override = laneOverrides?.[job.lane_id];
+  return override && typeof override === 'object' ? { ...basePolicy, ...override } : basePolicy;
 }
 
 function normalizeCommandText(value) {
@@ -277,6 +289,88 @@ function buildBrief(control, queue, job) {
   };
 }
 
+function scopedDirtyFiles(cwd, scopedFiles = []) {
+  const scope = new Set((scopedFiles || []).filter(Boolean));
+  if (scope.size === 0) {
+    return [];
+  }
+
+  return gitDirtyFiles(cwd).filter((filePath) => scope.has(filePath));
+}
+
+function promoteSystemsOptimizerCommit(job, laneResult) {
+  if (job.lane_id !== 'systems-optimizer' || laneResult.status !== 'accepted' || !laneResult.commit) {
+    return null;
+  }
+
+  const rootCwd = projectPath('.');
+  const eligibleFiles = uniqueValues((laneResult.files_changed || []).filter((filePath) => matchesAllowedPath(filePath, job.writes)));
+  if (eligibleFiles.length === 0) {
+    return {
+      status: 'skipped',
+      reason: 'no-eligible-files',
+      source_commit: laneResult.commit,
+      promoted_commit: null,
+      files: [],
+    };
+  }
+
+  if (commitReachable(rootCwd, laneResult.commit) || commitPatchEquivalent(rootCwd, laneResult.commit)) {
+    return {
+      status: 'skipped',
+      reason: 'already-promoted',
+      source_commit: laneResult.commit,
+      promoted_commit: null,
+      files: eligibleFiles,
+    };
+  }
+
+  const overlappingDirtyFiles = scopedDirtyFiles(rootCwd, eligibleFiles);
+  if (overlappingDirtyFiles.length > 0) {
+    throw new Error(
+      `Root control plane has local drift on systems-optimizer promotion paths: ${overlappingDirtyFiles.join(', ')}`,
+    );
+  }
+
+  const patch = execFileSync('git', ['show', '--binary', '--format=', laneResult.commit, '--', ...eligibleFiles], {
+    cwd: rootCwd,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    maxBuffer: 20 * 1024 * 1024,
+  });
+  if (!patch.trim()) {
+    return {
+      status: 'skipped',
+      reason: 'empty-patch',
+      source_commit: laneResult.commit,
+      promoted_commit: null,
+      files: eligibleFiles,
+    };
+  }
+
+  execFileSync('git', ['apply', '--3way', '--whitespace=nowarn'], {
+    cwd: rootCwd,
+    input: patch,
+    encoding: 'utf8',
+    stdio: ['pipe', 'pipe', 'pipe'],
+    maxBuffer: 20 * 1024 * 1024,
+  });
+
+  const promotedCommit = createHostCommit(
+    rootCwd,
+    eligibleFiles,
+    `claw(systems-optimizer): promote ${laneResult.target} [${String(laneResult.commit).slice(0, 12)}]`,
+  );
+
+  return {
+    status: 'promoted',
+    reason: null,
+    source_commit: laneResult.commit,
+    promoted_commit: promotedCommit,
+    files: eligibleFiles,
+  };
+}
+
 function suggestedStartingPoints(job) {
   const defaults = job.writes.slice(0, 5);
   const byLane = {
@@ -381,6 +475,9 @@ function buildPrompt(control, queue, job, brief, briefFile) {
     '- if targeted inspection shows the slice cannot honestly advance, return a structured non-acceptance quickly instead of continuing to explore',
     '- installed GGD command surfaces available to you include $ggd-help, $ggd-derive-equation, $ggd-dimensional-analysis, $ggd-limiting-cases, $ggd-verify-work, $ggd-validate-conventions, and $ggd-debug',
     '- the executable equation surface is python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py',
+    ...(job.lane_id === 'systems-optimizer'
+      ? ['- accepted systems-optimizer commits are promoted back into the root control plane automatically, so your changed file list must stay exact and replayable']
+      : []),
     '',
     'Final response requirements:',
     '- respond with JSON only, matching the provided output schema',
@@ -822,10 +919,11 @@ function spawnCodexForJob(job, prompt, executionPolicy = {}) {
   const stdoutStream = fs.createWriteStream(stdoutPath, { flags: 'w' });
   const stderrStream = fs.createWriteStream(stderrPath, { flags: 'w' });
   const startedAt = Date.now();
-  const maxRuntimeMs = positiveInteger(executionPolicy.max_lane_runtime_seconds, 900) * 1000;
-  const maxIdleMs = positiveInteger(executionPolicy.max_lane_quiet_seconds, 180) * 1000;
-  const monitorIntervalMs = Math.max(1000, positiveInteger(executionPolicy.monitor_interval_seconds, 5) * 1000);
-  const killGraceMs = positiveInteger(executionPolicy.kill_grace_seconds, 5) * 1000;
+  const laneExecutionPolicy = resolvedExecutionPolicyForJob(executionPolicy, job);
+  const maxRuntimeMs = positiveInteger(laneExecutionPolicy.max_lane_runtime_seconds, 900) * 1000;
+  const maxIdleMs = positiveInteger(laneExecutionPolicy.max_lane_quiet_seconds, 180) * 1000;
+  const monitorIntervalMs = Math.max(1000, positiveInteger(laneExecutionPolicy.monitor_interval_seconds, 5) * 1000);
+  const killGraceMs = positiveInteger(laneExecutionPolicy.kill_grace_seconds, 5) * 1000;
 
   const args = [
     'exec',
@@ -837,7 +935,7 @@ function spawnCodexForJob(job, prompt, executionPolicy = {}) {
     '-c',
     `model_reasoning_effort="${job.reasoning || 'high'}"`,
     '--sandbox',
-    executionPolicy.sandbox || 'workspace-write',
+    laneExecutionPolicy.sandbox || 'workspace-write',
     '--add-dir',
     gitAdminDir,
     '--add-dir',
@@ -1554,7 +1652,7 @@ async function main() {
     laneResult = JSON.parse(fs.readFileSync(execResult.outputPath, 'utf8'));
   } else if (!laneResult && execResult.code !== 0) {
     laneResult =
-      (job.lane_id === 'systems-optimizer' ? null : salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy)) ||
+      salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
       syntheticLaneResult(
         queue,
         job,
@@ -1564,7 +1662,7 @@ async function main() {
       );
   } else if (!laneResult && !fs.existsSync(execResult.outputPath)) {
     laneResult =
-      (job.lane_id === 'systems-optimizer' ? null : salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy)) ||
+      salvageLaneResultFromLogs(queue, job, worktreeHead, execResult, diff, runnerPolicy) ||
       syntheticLaneResult(
         queue,
         job,
@@ -1596,6 +1694,7 @@ async function main() {
   let dirtyAfterRun = diff.dirty.length > 0;
   let hostCommit = null;
   let hostCommitError = null;
+  let systemsOptimizerPromotion = null;
 
   let normalizedStatus = laneResult.status;
   let violation = null;
@@ -1638,6 +1737,15 @@ async function main() {
 
   if (!hostCommit && !laneResult.commit && replayedCommits.length > 0) {
     hardReset(job.worktree, preReplayHead);
+  }
+
+  if (!violation && normalizedStatus === 'accepted' && job.lane_id === 'systems-optimizer' && laneResult.commit) {
+    try {
+      systemsOptimizerPromotion = promoteSystemsOptimizerCommit(job, laneResult);
+    } catch (error) {
+      violation = `Systems-optimizer root promotion failed: ${error instanceof Error ? error.message : String(error)}`;
+      normalizedStatus = 'escalated';
+    }
   }
 
   const handoff = {
@@ -1709,6 +1817,12 @@ async function main() {
       status: queueStatus === 'accepted' ? 'active' : queueStatus,
       last_candidate_commit: violation ? worktreeHead : laneResult.commit,
       last_handoff: relativeProjectPath(handoffFile),
+      ...(systemsOptimizerPromotion?.status === 'promoted'
+        ? {
+            last_promoted_commit: systemsOptimizerPromotion.promoted_commit,
+            last_promoted_source_commit: systemsOptimizerPromotion.source_commit,
+          }
+        : {}),
     };
     runtime.runner = {
       ...(runtime.runner || {}),
@@ -1746,6 +1860,7 @@ async function main() {
     candidate_commit: queueJob.candidate_commit,
     next_job: remaining?.job_id || null,
     violation,
+    systems_optimizer_promotion: systemsOptimizerPromotion,
     ggd_route: ggdOutcome.ggdRoute,
     ggd_exported_gap: ggdOutcome.exportedGapPath,
     ggd_resolved_gaps: ggdOutcome.resolvedGapIds,

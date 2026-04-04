@@ -6,6 +6,22 @@
     "keep_only_if_better": true,
     "require_fixed_writable_scope": true,
     "require_fixed_eval_bundle": true,
+    "require_scope_local_promotion_bundle": true,
+    "require_exact_scope_local_promotion_bundle": true,
+    "require_runner_stability_contract": true,
+    "require_runner_replayable_evidence_script": true,
+    "require_runner_evidence_command_boundary": true,
+    "require_runner_observability_after_replayable_evidence": true,
+    "require_runner_singleton_command_groups": true,
+    "require_learning_item_alignment": true,
+    "require_scope_local_salvage_order": true,
+    "require_writable_scope_allowlist": true,
+    "require_exact_xr_evaluator_focus": true,
+    "require_active_hypothesis_backlog_alignment": true,
+    "require_active_hypothesis_card_alignment": true,
+    "require_rejected_change_backlog_alignment": true,
+    "require_terminal_hypothesis_card_alignment": true,
+    "require_resolved_backlog_hypothesis_card_alignment": true,
     "default_writable_scope": [
       "CLAW/scripts/**",
       "CLAW/control-plane/*.json",
@@ -36,9 +52,182 @@
     ]
   },
   "active_hypothesis": null,
-  "last_kept_change": null,
-  "last_rejected_change": null,
-  "accepted_count": 0,
-  "rejected_count": 0,
-  "last_updated": "2026-04-04T00:00:00Z"
+  "last_kept_change": {
+    "id": "sysopt.resolved-backlog-hypothesis-card-alignment-lock",
+    "hypothesis": "Systems-optimizer history becomes safer if every kept or rejected backlog card must resolve to a matching hypothesis-card artifact, so replay, reporting, and learning retention do not depend only on the latest terminal state pointers.",
+    "writable_scope": [
+      "CLAW/scripts/**",
+      "CLAW/control-plane/system-optimizer/**",
+      "CLAW/PRD*.md"
+    ],
+    "evaluation_bundle": [
+      "node CLAW/scripts/verify-systems-optimizer.mjs",
+      "node CLAW/scripts/verify-ggd-binding.mjs",
+      "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+      "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+      "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+    ],
+    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only required replayable hypothesis-card artifacts for `state.last_kept_change` and `state.last_rejected_change`, so 12 kept/rejected backlog items still had no `CLAW/control-plane/system-optimizer/hypotheses/<id>.json` file and the verifier reported clean. After the ratchet, the verifier rejects any kept or rejected backlog item that lacks a matching hypothesis card artifact or drifts from it across the bounded contract fields and `learning_item`, while `recorded_at` stays aligned to `learning_log` and the fixed scope-local promotion bundle stays green.",
+    "keep_rule": "Keep only if every resolved systems-optimizer backlog card must retain a matching replayable hypothesis-card artifact and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+    "learning_item": "Resolved systems-optimizer history must keep replayable hypothesis-card artifacts for every kept/rejected card; terminal pointers alone leave older ratchets unverifiable.",
+    "recorded_at": "2026-04-04T10:01:35Z"
+  },
+  "last_rejected_change": {
+    "id": "sysopt.runner-policy-self-verify",
+    "hypothesis": "Systems-optimizer salvage becomes safer if the runner is forced to execute the systems-optimizer self-verifier before a ratchet is considered replayable or recoverable.",
+    "writable_scope": [
+      "CLAW/scripts/**",
+      "CLAW/control-plane/*.json",
+      "CLAW/control-plane/system-optimizer/**",
+      "CLAW/PRD*.md"
+    ],
+    "evaluation_bundle": [
+      "node CLAW/scripts/run-site-script.mjs claw:validate",
+      "node CLAW/scripts/run-site-script.mjs claw:test:contracts",
+      "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+      "node CLAW/scripts/run-site-script.mjs claw:health",
+      "node CLAW/scripts/verify-ggd-binding.mjs",
+      "node CLAW/scripts/verify-systems-optimizer.mjs",
+      "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+    ],
+    "measurement": "Before the ratchet, the systems-optimizer salvage command groups could pass without ever running `node CLAW/scripts/verify-systems-optimizer.mjs`, so backlog/state contract drift could survive recovery. After the ratchet, the verifier fails if runner-policy omits that command and the fixed bundle stays green.",
+    "keep_rule": "Keep only if runner-policy declares the self-verifier as a required systems-optimizer command, the stricter verifier enforces it, and the fixed evaluation bundle passes without touching route implementation paths.",
+    "learning_item": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
+    "recorded_at": "2026-04-04T00:06:21Z"
+  },
+  "accepted_count": 25,
+  "rejected_count": 1,
+  "learning_log": [
+    {
+      "id": "sysopt.active-hypothesis-card-alignment-lock",
+      "learning": "Active systems-optimizer slices need replayable seeded hypothesis-card artifacts; backlog alignment alone leaves interrupted recovery exposed to missing or drifted card files.",
+      "recorded_at": "2026-04-04T05:58:55Z"
+    },
+    {
+      "id": "sysopt.terminal-hypothesis-card-alignment-lock",
+      "learning": "Terminal systems-optimizer verdicts need replayable hypothesis-card artifacts; state/backlog alignment alone still leaves recovery and reporting blind if the card file is missing.",
+      "recorded_at": "2026-04-04T05:43:22Z"
+    },
+    {
+      "id": "sysopt.rejected-change-backlog-alignment-lock",
+      "learning": "Rejected systems-optimizer ratchets must mirror backlog contract fields in state, or recovery can carry stale failure history that no longer matches the ratchet actually rejected.",
+      "recorded_at": "2026-04-04T05:30:57Z"
+    },
+    {
+      "id": "sysopt.exact-scope-local-promotion-bundle",
+      "learning": "Scope-local promotion bundles must stay exact for promotable systems-optimizer cards; superset or reordered bundles silently widen the proof surface beyond the bounded slice.",
+      "recorded_at": "2026-04-04T05:18:01Z"
+    },
+    {
+      "id": "sysopt.runner-stability-evidence-boundary-lock",
+      "learning": "Runner-stability evidence commands must stay inside an explicit root-relative runner boundary; arbitrary shell steps inside `evidence_commands` weaken replayability and closed-fail recovery proof.",
+      "recorded_at": "2026-04-04T04:51:08Z"
+    },
+    {
+      "id": "sysopt.active-hypothesis-backlog-alignment-lock",
+      "learning": "Non-null active_hypothesis must stay backlog-linked and contract-identical to one seeded card, or interrupted systems-optimizer recovery can resume with silent scope or proof drift.",
+      "recorded_at": "2026-04-04T05:36:00Z"
+    },
+    {
+      "id": "sysopt.runner-singleton-command-groups",
+      "learning": "Systems-optimizer salvage commands must retain exact singleton group boundaries; flatten-equivalent merged groups weaken required proofs into alternatives.",
+      "recorded_at": "2026-04-04T05:02:11Z"
+    },
+    {
+      "id": "sysopt.runner-observability-tail-lock",
+      "learning": "Runner-stability observability must trail replayable runner evidence; `claw:health` can summarize recovery state but cannot lead the proof surface.",
+      "recorded_at": "2026-04-04T04:12:32Z"
+    },
+    {
+      "id": "sysopt.runner-replayable-evidence-lock",
+      "learning": "Runner-stability evidence must include at least one replayable runner script command; `claw:health` alone is observability, not recovery proof.",
+      "recorded_at": "2026-04-04T03:50:16Z"
+    },
+    {
+      "id": "sysopt.xr-evaluator-focus-exact-lock",
+      "learning": "XR systems-optimizer ratchets must use the exact evaluator focus contract; allowing extra or duplicate focus surfaces reintroduces vague route-neutral drift.",
+      "recorded_at": "2026-04-04T03:27:24Z"
+    },
+    {
+      "id": "sysopt.writable-scope-allowlist-lock",
+      "learning": "Systems-optimizer writable_scope must stay on the explicit control-plane allowlist; recursive control-plane globs are too broad because they can silently reach runtime and recovery state.",
+      "recorded_at": "2026-04-04T10:45:00Z"
+    },
+    {
+      "id": "sysopt.xr-gap-severity-baseline-lock",
+      "learning": "XR systems-optimizer ratchets must pin the current severity baseline from the authoritative gap artifact, or route-neutral work can optimize against stale failure magnitude.",
+      "recorded_at": "2026-04-04T02:56:05Z"
+    },
+    {
+      "id": "sysopt.runner-scope-local-salvage-order",
+      "learning": "Systems-optimizer salvage must front-load the full scope-local promotion bundle before `claw:validate` or `claw:health`, or stale integration truth can preempt local contract drift and GGD law checks.",
+      "recorded_at": "2026-04-04T02:41:08Z"
+    },
+    {
+      "id": "sysopt.learning-item-alignment-lock",
+      "learning": "Resolved systems-optimizer backlog cards must retain the exact learning_item logged in state and learning_log, or recovery can replay one ratchet with split lessons across surfaces.",
+      "recorded_at": "2026-04-04T02:24:53Z"
+    },
+    {
+      "id": "sysopt.state-backlog-link-lock",
+      "learning": "Systems-optimizer state must link back to unique backlog ids, verdict counts, and retained learning entries, or recovery can treat stale ratchet history as valid.",
+      "recorded_at": "2026-04-04T02:10:37Z"
+    },
+    {
+      "id": "sysopt.xr-first-broken-law-binding",
+      "learning": "XR systems-optimizer ratchets must bind to one named broken law from the authoritative gap surface list, or evaluator tightening still leaves route-neutral work too vague to falsify.",
+      "recorded_at": "2026-04-04T01:57:22Z"
+    },
+    {
+      "id": "sysopt.xr-backlog-contract-ratchet",
+      "learning": "XR systems-optimizer ratchets must fail closed at backlog time; if the authoritative gap binding is optional before execution, route lanes can inherit vague XR work orders.",
+      "recorded_at": "2026-04-04T01:32:45Z"
+    },
+    {
+      "id": "sysopt.runner-stability-ratchet",
+      "learning": "Runner-stability ratchets must reduce to one named failure surface with an explicit closed-fail rule and replayable evidence commands; multi-surface runner hardening language is too vague to promote.",
+      "recorded_at": "2026-04-04T01:14:32Z"
+    },
+    {
+      "id": "sysopt.runner-policy-self-verify-scope-local",
+      "learning": "Systems-optimizer recovery must self-verify its own state and backlog contract before replay or salvage, and that safety check has to promote through the scope-local bundle rather than stale-truth-sensitive global health gates.",
+      "recorded_at": "2026-04-04T01:03:10Z"
+    },
+    {
+      "id": "sysopt.xr-gap-ratchet",
+      "learning": "Recurring XR ratchets must cite the authoritative `work-xr.geometry-gap` artifact and fixed evaluator focus, or the machine keeps optimizing around vague route-family language instead of the first broken law.",
+      "recorded_at": "2026-04-04T00:49:56Z"
+    },
+    {
+      "id": "sysopt.scope-local-promotion-bundle",
+      "learning": "Systems-optimizer promotion bundles must stay scope-local; global health commands belong to runner observability, not keep-discard criteria for control-plane-only ratchets.",
+      "recorded_at": "2026-04-04T00:38:01Z"
+    },
+    {
+      "id": "sysopt.equation-law-expansion",
+      "learning": "Any systems-optimizer slice that can mutate `GGD/**` must carry both binding verification and executable equation-law checks in its fixed evaluation bundle, or the machine can drift its truth layer without proving law integrity.",
+      "recorded_at": "2026-04-04T09:20:00Z"
+    },
+    {
+      "id": "sysopt.runner-policy-self-verify",
+      "learning": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
+      "recorded_at": "2026-04-04T00:06:21Z"
+    },
+    {
+      "id": "sysopt.ratchet-contract-hardening",
+      "learning": "Optimizer ratchets need explicit measurement and keep rules in backlog plus a retained learning_item in state, or repeated XR/autonomy failures remain under-specified.",
+      "recorded_at": "2026-04-04T08:30:00Z"
+    },
+    {
+      "id": "sysopt.root-exec-eval-wrapper",
+      "learning": "Systems-optimizer bundles must be executable from the lane worktree root; otherwise autonomy and salvage loops fail for packaging reasons before they reach the real control-plane checks.",
+      "recorded_at": "2026-04-03T23:46:09Z"
+    },
+    {
+      "id": "sysopt.resolved-backlog-hypothesis-card-alignment-lock",
+      "learning": "Resolved systems-optimizer history must keep replayable hypothesis-card artifacts for every kept/rejected card; terminal pointers alone leave older ratchets unverifiable.",
+      "recorded_at": "2026-04-04T10:01:35Z"
+    }
+  ],
+  "last_updated": "2026-04-04T10:01:35Z"
 }

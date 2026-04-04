@@ -1,0 +1,23 @@
+{
+  "id": "sysopt.state-backlog-link-lock",
+  "cycle_id": "C4-20260404T020735Z",
+  "job_id": "C4-20260404T020735Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if the verifier fails when state counters, last verdict pointers, or retained learnings drift away from backlog truth.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only checked local card structure, so duplicate backlog ids, accepted or rejected count drift, missing last-kept or last-rejected backlog linkage, or retained learning drift could pass as clean systems-optimizer state. After the ratchet, the verifier rejects those state-to-backlog mismatches and the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier fails duplicate or drifting systems-optimizer backlog and state linkages while the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Systems-optimizer state must link back to unique backlog ids, verdict counts, and retained learning entries, or recovery can treat stale ratchet history as valid.",
+  "recorded_at": "2026-04-04T02:10:37Z"
+}

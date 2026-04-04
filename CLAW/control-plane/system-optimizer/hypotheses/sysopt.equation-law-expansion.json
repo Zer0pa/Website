@@ -1,0 +1,23 @@
+{
+  "id": "sysopt.equation-law-expansion",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "The machine becomes more deterministic if any systems-optimizer ratchet that can mutate `GGD/**` must prove both binding integrity and equation-law execution inside its fixed evaluation bundle.",
+  "writable_scope": [
+    "GGD/**",
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, systems-optimizer cards with `GGD/**` in writable_scope were allowed to omit both `node CLAW/scripts/verify-ggd-binding.mjs` and the equation-engine lawset check, so a GGD-mutating slice could promote without proving binding integrity or executable law execution. After the ratchet, the verifier rejects that omission and the fixed evaluation bundle stays green.",
+  "keep_rule": "Keep only if `CLAW/scripts/verify-systems-optimizer.mjs` fails any future GGD-mutating card that omits either required command and the fixed evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Any systems-optimizer slice that can mutate `GGD/**` must carry both binding verification and executable equation-law checks in its fixed evaluation bundle, or the machine can drift its truth layer without proving law integrity.",
+  "recorded_at": "2026-04-04T09:20:00Z"
+}

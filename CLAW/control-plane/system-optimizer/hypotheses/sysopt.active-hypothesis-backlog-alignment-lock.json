@@ -1,0 +1,22 @@
+{
+  "id": "sysopt.active-hypothesis-backlog-alignment-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if a non-null state.active_hypothesis must resolve to one seeded backlog card and retain the exact bounded contract fields, so interrupted ratchets cannot resume with silent scope or proof drift.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only checked that a non-null `state.active_hypothesis` looked like a structurally valid card, so recovery could resume from an active slice whose `hypothesis`, `measurement`, `keep_rule`, `writable_scope`, `evaluation_bundle`, or XR/runner-specific fields had drifted away from backlog truth. After the ratchet, the verifier rejects any non-null `active_hypothesis` that does not resolve to exactly one seeded backlog item with an identical bounded contract, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if a non-null `state.active_hypothesis` must stay backlog-linked and contract-identical to one seeded backlog card and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Non-null active_hypothesis must stay backlog-linked and contract-identical to one seeded card, or interrupted systems-optimizer recovery can resume with silent scope or proof drift.",
+  "recorded_at": "2026-04-04T05:36:00Z"
+}

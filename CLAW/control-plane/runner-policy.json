@@ -9,6 +9,16 @@
     "monitor_interval_seconds": 5,
     "max_lane_runtime_seconds": 900,
     "max_lane_quiet_seconds": 180,
+    "lane_overrides": {
+      "systems-qa": {
+        "max_lane_runtime_seconds": 1800,
+        "max_lane_quiet_seconds": 360
+      },
+      "integration": {
+        "max_lane_runtime_seconds": 1200,
+        "max_lane_quiet_seconds": 300
+      }
+    },
     "allow_stalled_result_salvage": true,
     "use_search": false,
     "sandbox": "danger-full-access",
@@ -59,14 +69,15 @@
         ["npm run audit:layout", "npm run layout:diff"]
       ],
       "systems-optimizer": [
-        ["npm run claw:validate"],
-        ["npm run claw:test:contracts"],
-        ["npm run claw:test:systems-optimizer"],
-        ["npm run claw:health"],
-        ["node ../CLAW/scripts/verify-ggd-binding.mjs"],
+        ["node CLAW/scripts/verify-systems-optimizer.mjs"],
+        ["node CLAW/scripts/verify-ggd-binding.mjs"],
         [
           "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
-        ]
+        ],
+        ["node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer"],
+        ["node CLAW/scripts/run-site-script.mjs claw:test:contracts"],
+        ["node CLAW/scripts/run-site-script.mjs claw:validate"],
+        ["node CLAW/scripts/run-site-script.mjs claw:health"]
       ],
       "integration": [
         ["npm run build"],

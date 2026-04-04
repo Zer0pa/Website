@@ -1,0 +1,23 @@
+{
+  "id": "sysopt.writable-scope-allowlist-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer ratchets become safer if every writable_scope is forced onto the explicit control-plane allowlist and rejected when it uses recursive `CLAW/control-plane/**/*` globs that can escape into runtime, queue, lock, or checkpoint surfaces.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/*.json",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, systems-optimizer policy, lane writes, and backlog cards could still use recursive `CLAW/control-plane/**/*.json` or `/**/*.md` patterns, which are broader than the lane brief and can silently authorize runtime, queue, lock, or checkpoint writes. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any lane, policy, or ratchet card whose writable_scope escapes the explicit allowlist or intersects a forbidden control-plane surface, and the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier fails out-of-scope writable_scope entries while the lane contract, systems-optimizer state, and fixed scope-local evaluation bundle remain clean without touching route implementation paths.",
+  "learning_item": "Systems-optimizer writable_scope must stay on the explicit control-plane allowlist; recursive control-plane globs are too broad because they can silently reach runtime and recovery state.",
+  "recorded_at": "2026-04-04T10:45:00Z"
+}

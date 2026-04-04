@@ -1,0 +1,31 @@
+{
+  "id": "sysopt.runner-stability-evidence-boundary-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Stale-cycle runner hardening becomes safer if runner-stability cards can prove recovery only with an explicit root-relative evidence-command boundary instead of mixed arbitrary shell steps.",
+  "runner_focus": "stale-cycle",
+  "failure_mode": "A stale-cycle card can currently include arbitrary non-runner commands inside evidence_commands as long as one replayable runner script exists, so the proof trail is not fully bounded or replayable.",
+  "closed_fail_rule": "Keep the slice only if runner-stability cards fail verification unless every evidence command stays inside the explicit root-relative runner boundary and any `claw:health` observability remains trailing.",
+  "evidence_commands": [
+    "node CLAW/scripts/recover-cycle.mjs --max-age-minutes=0",
+    "node CLAW/scripts/run-recovery-drill.mjs --scenario=stale-lock",
+    "node CLAW/scripts/run-site-script.mjs claw:health"
+  ],
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only required `sysopt.runner-stability-*` cards to include at least one replayable runner script and optional trailing `claw:health`, so arbitrary non-runner commands could still hide inside `evidence_commands` and weaken replayability. After the ratchet, the verifier rejects any runner-stability card whose `evidence_commands` contain anything other than root-relative `node CLAW/scripts/recover-cycle.mjs ...`, `node CLAW/scripts/run-recovery-drill.mjs ...`, and optional trailing `node CLAW/scripts/run-site-script.mjs claw:health`, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if runner-stability evidence commands are limited to the explicit root-relative runner boundary plus optional trailing health observability and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "verdict": "kept",
+  "learning_item": "Runner-stability evidence commands must stay inside an explicit root-relative runner boundary; arbitrary shell steps inside `evidence_commands` weaken replayability and closed-fail recovery proof.",
+  "recorded_at": "2026-04-04T04:51:08Z"
+}

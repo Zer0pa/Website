@@ -1,0 +1,21 @@
+{
+  "id": "sysopt.learning-item-alignment-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if resolved backlog cards must retain the exact same learning_item as state verdict pointers and the retained learning_log.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` could pass even if a kept or rejected backlog item omitted `learning_item` entirely or drifted from `state.last_kept_change`, `state.last_rejected_change`, or `learning_log`, so recovery could treat one ratchet as multiple conflicting lessons. After the ratchet, the verifier fails resolved backlog cards missing `learning_item` or carrying a text mismatch against the state verdict pointers or retained learning log, and the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier rejects resolved backlog cards with missing or drifting learning_item text while the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Resolved systems-optimizer backlog cards must retain the exact learning_item logged in state and learning_log, or recovery can replay one ratchet with split lessons across surfaces.",
+  "recorded_at": "2026-04-04T02:24:53Z"
+}

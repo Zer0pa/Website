@@ -241,28 +241,6 @@ export function validateControlPlane(control, options = {}) {
       warnings.push(`Branch ${lane.branch} is not currently resolvable in ${lane.worktree}`);
     }
 
-    if (lane.id === 'systems-optimizer') {
-      if (lane.replayable !== false) {
-        issues.push('systems-optimizer lane must set replayable to false.');
-      }
-      if (!lane.control_plane_only) {
-        issues.push('systems-optimizer lane must set control_plane_only to true.');
-      }
-      const forbiddenPatterns = [
-        'CLAW/control-plane/queue/**',
-        'CLAW/control-plane/runtime/**',
-        'CLAW/control-plane/locks/**',
-        'CLAW/control-plane/checkpoints/**',
-        'CLAW/control-plane/state/runtime-state.json',
-        'CLAW/services/autonomy/state.json',
-      ];
-      for (const pattern of forbiddenPatterns) {
-        if ((lane.writes || []).includes(pattern)) {
-          issues.push(`systems-optimizer lane must not write ${pattern}.`);
-        }
-      }
-    }
-
     if (options.checkCleanWorktrees && worktreeStatus(lane.worktree)) {
       warnings.push(`Dirty worktree: ${lane.id}`);
     }

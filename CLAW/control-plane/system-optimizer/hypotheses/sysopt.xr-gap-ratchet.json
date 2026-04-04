@@ -1,0 +1,36 @@
+{
+  "id": "sysopt.xr-gap-ratchet",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Repeated XR rejection can be reduced by forcing XR-targeting systems-optimizer cards to bind to the authoritative `/work/xr` geometry-gap artifact and an explicit evaluator focus before further route edits.",
+  "target_route": "/work/xr",
+  "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+  "first_broken_law": "work.lane.hero.authority",
+  "severity_baseline": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "evaluator_focus": [
+    "layout-diff",
+    "quality",
+    "flagship-invariants"
+  ],
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `sysopt.xr-gap-ratchet` could stay vague about which authoritative XR gap and evaluator surfaces it was hardening, so recurring `/work/xr` failures could promote without binding to `work-xr.geometry-gap`. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any `sysopt.xr-*` card that omits the fixed `/work/xr` gap binding or the required evaluator focus, and the fixed promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier enforces the `/work/xr` gap binding plus `layout-diff`, `quality`, and `flagship-invariants` evaluator focus for `sysopt.xr-*` cards, and the fixed evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Recurring XR ratchets must cite the authoritative `work-xr.geometry-gap` artifact and fixed evaluator focus, or the machine keeps optimizing around vague route-family language instead of the first broken law.",
+  "recorded_at": "2026-04-04T00:49:56Z"
+}

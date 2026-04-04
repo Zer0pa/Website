@@ -1,0 +1,20 @@
+{
+  "id": "sysopt.ratchet-contract-hardening",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "The systems-optimizer machine becomes more deterministic if every ratchet declares an explicit measurement and keep rule, and accepted slices must record one learning item in state.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/*.json",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/verify-systems-optimizer.mjs"
+  ],
+  "measurement": "The systems-optimizer verifier must fail if backlog items omit measurement or keep_rule fields, or if kept changes omit a recorded learning item.",
+  "keep_rule": "Keep only if the fixed bundle stays clean after the stricter verifier and state/backlog ratchet card are added.",
+  "learning_item": "Optimizer ratchets need explicit measurement and keep rules in backlog plus a retained learning_item in state, or repeated XR/autonomy failures remain under-specified.",
+  "recorded_at": "2026-04-04T08:30:00Z"
+}

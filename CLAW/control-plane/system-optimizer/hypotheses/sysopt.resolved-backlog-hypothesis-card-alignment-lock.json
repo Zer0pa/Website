@@ -1,0 +1,24 @@
+{
+  "id": "sysopt.resolved-backlog-hypothesis-card-alignment-lock",
+  "cycle_id": "C4-20260404T095719Z",
+  "job_id": "C4-20260404T095719Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer history becomes safer if every kept or rejected backlog card must resolve to a matching hypothesis-card artifact, so replay, reporting, and learning retention do not depend only on the latest terminal state pointers.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only required replayable hypothesis-card artifacts for `state.last_kept_change` and `state.last_rejected_change`, so 12 kept/rejected backlog items still had no `CLAW/control-plane/system-optimizer/hypotheses/<id>.json` file and the verifier reported clean. After the ratchet, the verifier rejects any kept or rejected backlog item that lacks a matching hypothesis card artifact or drifts from it across the bounded contract fields and `learning_item`, while `recorded_at` stays aligned to `learning_log` and the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if every resolved systems-optimizer backlog card must retain a matching replayable hypothesis-card artifact and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Resolved systems-optimizer history must keep replayable hypothesis-card artifacts for every kept/rejected card; terminal pointers alone leave older ratchets unverifiable.",
+  "recorded_at": "2026-04-04T10:01:35Z"
+}

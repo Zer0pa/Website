@@ -1,0 +1,24 @@
+{
+  "id": "sysopt.scope-local-promotion-bundle",
+  "cycle_id": "C4-20260404T003428Z",
+  "job_id": "C4-20260404T003428Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer ratchets become more promotable and deterministic if control-plane-only slices must use a scope-local promotion bundle and cannot treat stale-truth-sensitive global health commands as keep-discard gates.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, seeded systems-optimizer cards still used `node CLAW/scripts/run-site-script.mjs claw:validate` and `node CLAW/scripts/run-site-script.mjs claw:health` as promotion gates, so stale route or runtime truth outside the writable slice could block an otherwise bounded control-plane ratchet. After the ratchet, the verifier rejects seeded cards that omit the scope-local promotion bundle or include those global health commands, and the fixed bundle stays green.",
+  "keep_rule": "Keep only if `CLAW/scripts/verify-systems-optimizer.mjs` rejects future seeded cards that lack the scope-local promotion bundle or reintroduce `claw:validate` or `claw:health`, and the fixed evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Systems-optimizer promotion bundles must stay scope-local; global health commands belong to runner observability, not keep-discard criteria for control-plane-only ratchets.",
+  "recorded_at": "2026-04-04T00:38:01Z"
+}

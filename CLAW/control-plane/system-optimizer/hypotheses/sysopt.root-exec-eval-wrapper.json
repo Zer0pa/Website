@@ -1,0 +1,21 @@
+{
+  "id": "sysopt.root-exec-eval-wrapper",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer slices become more deterministic if claw evaluation commands are root-executable from the lane worktree and bare `npm run claw:*` forms are rejected before runner use.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/*.json",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+  ],
+  "measurement": "Before the ratchet, `npm run claw:test:systems-optimizer` failed from the lane worktree with ENOENT because the worktree root has no package.json. After the ratchet, the root wrapper executes site scripts and the stricter verifier rejects regression to bare root-level npm claw commands in systems-optimizer backlog and runner-policy surfaces.",
+  "keep_rule": "Keep only if systems-optimizer claw commands are rewritten to the root wrapper, the verifier stays clean, and the fixed evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Systems-optimizer bundles must be executable from the lane worktree root; otherwise autonomy and salvage loops fail for packaging reasons before they reach the real control-plane checks.",
+  "recorded_at": "2026-04-03T23:46:09Z"
+}

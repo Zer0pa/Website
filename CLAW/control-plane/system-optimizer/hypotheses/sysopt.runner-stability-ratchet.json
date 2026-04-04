@@ -1,0 +1,32 @@
+{
+  "id": "sysopt.runner-stability-ratchet",
+  "cycle_id": "C4-20260404T011103Z",
+  "job_id": "C4-20260404T011103Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "The overnight loop becomes more deterministic if runner-stability ratchets must target exactly one recovery, queue-invalidation, or stale-cycle failure surface and prove a closed-fail rule with replayable evidence commands.",
+  "runner_focus": "stale-cycle",
+  "failure_mode": "A runner hardening card can currently span recovery, queue invalidation, and stale-cycle handling at once, so stale-cycle safety improvements remain under-specified and cannot be falsified lane-by-lane.",
+  "closed_fail_rule": "Keep the slice only if runner-stability cards fail verification unless they bind to one explicit failure surface and declare replayable runner evidence commands.",
+  "evidence_commands": [
+    "node CLAW/scripts/recover-cycle.mjs --max-age-minutes=0",
+    "node CLAW/scripts/run-recovery-drill.mjs --scenario=stale-lock",
+    "node CLAW/scripts/run-site-script.mjs claw:health"
+  ],
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `sysopt.runner-stability-ratchet` could span recovery, queue invalidation, and stale-cycle handling in one vague card with no explicit failure boundary or replayable evidence commands. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any `sysopt.runner-stability-*` card that omits a singular `runner_focus`, `failure_mode`, `closed_fail_rule`, or runner evidence commands, and the retained card is narrowed to `stale-cycle` while the scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier rejects vague runner-stability cards lacking one explicit focus plus evidence commands and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Runner-stability ratchets must reduce to one named failure surface with an explicit closed-fail rule and replayable evidence commands; multi-surface runner hardening language is too vague to promote.",
+  "recorded_at": "2026-04-04T01:14:32Z"
+}
