@@ -1,0 +1,22 @@
+{
+  "id": "sysopt.hypothesis-card-inventory-alignment-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if every hypothesis-card artifact in `CLAW/control-plane/system-optimizer/hypotheses/` must resolve to exactly one backlog card with the same id and status, so orphaned or filename-drifted replay artifacts cannot survive outside backlog truth.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` still reported clean after a controlled orphan baseline card `CLAW/control-plane/system-optimizer/hypotheses/sysopt.orphan-inventory-baseline.json` was added with no matching backlog item, so replayable artifact inventory could drift outside backlog truth. After the ratchet, the verifier rejects orphan or filename/id-drifted hypothesis cards in `CLAW/control-plane/system-optimizer/hypotheses/` while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if every systems-optimizer hypothesis-card artifact must resolve to exactly one backlog item with the same id and status and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
+  "recorded_at": "2026-04-04T20:33:38Z"
+}

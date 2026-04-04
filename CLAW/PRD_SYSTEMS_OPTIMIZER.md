@@ -95,6 +95,7 @@ Additional fixed rule:
 - if `CLAW/control-plane/system-optimizer/state.json.last_kept_change` or `last_rejected_change` is non-null, each must also resolve to `CLAW/control-plane/system-optimizer/hypotheses/<id>.json` and preserve the exact bounded contract fields, `learning_item`, and `recorded_at`, so terminal recovery and reporting never point at a ratchet with no replayable card artifact
 - any kept or rejected systems-optimizer backlog card must also resolve to `CLAW/control-plane/system-optimizer/hypotheses/<id>.json` and preserve the exact bounded contract fields plus `learning_item`, while `recorded_at` stays aligned to the retained learning log, so historical ratchets remain replayable beyond the latest terminal state pointers
 - any kept systems-optimizer backlog card and its hypothesis-card artifact must retain the exact five-command scope-local promotion bundle in the declared order with no extras or duplicates, so historical replay cannot silently widen the proof surface after promotion
+- every systems-optimizer hypothesis-card artifact in `CLAW/control-plane/system-optimizer/hypotheses/` must resolve back to exactly one backlog card with the same `id` and `status`, so orphaned or filename-drifted replay artifacts cannot survive outside backlog truth
 
 Optional when directly relevant:
 
@@ -122,6 +123,7 @@ A system slice may be kept only when:
 - any non-null terminal kept or rejected state entry remains hypothesis-card-linked and contract-identical to `CLAW/control-plane/system-optimizer/hypotheses/<id>.json`, so the machine cannot report a final verdict whose ratchet card artifact is missing
 - every kept or rejected backlog item remains hypothesis-card-linked and contract-identical to `CLAW/control-plane/system-optimizer/hypotheses/<id>.json`, with `recorded_at` preserved through the retained learning log, so historical ratchets stay replayable instead of depending only on the latest terminal state pointers
 - every kept systems-optimizer backlog item and kept hypothesis-card artifact retains the exact five-command scope-local promotion bundle, so promotable proof surfaces cannot drift wider in historical records than they were at keep time
+- every systems-optimizer hypothesis-card artifact remains backlog-linked with matching `id` and `status`, so replayable history cannot accumulate orphan or filename-drifted card files outside the verified inventory
 
 ## Initial Backlog Themes
 

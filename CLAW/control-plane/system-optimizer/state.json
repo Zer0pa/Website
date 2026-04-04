@@ -24,6 +24,7 @@
     "require_terminal_hypothesis_card_alignment": true,
     "require_resolved_backlog_hypothesis_card_alignment": true,
     "require_seeded_backlog_hypothesis_card_alignment": true,
+    "require_hypothesis_inventory_alignment": true,
     "default_writable_scope": [
       "CLAW/scripts/**",
       "CLAW/control-plane/*.json",
@@ -55,8 +56,8 @@
   },
   "active_hypothesis": null,
   "last_kept_change": {
-    "id": "sysopt.normalized-relative-writable-scope-lock",
-    "hypothesis": "Systems-optimizer ratchets become safer if every writable_scope entry must stay normalized and repo-relative, so dot-segment or separator escapes cannot masquerade as allowlisted control-plane paths.",
+    "id": "sysopt.hypothesis-card-inventory-alignment-lock",
+    "hypothesis": "Systems-optimizer recovery becomes safer if every hypothesis-card artifact in `CLAW/control-plane/system-optimizer/hypotheses/` must resolve to exactly one backlog card with the same id and status, so orphaned or filename-drifted replay artifacts cannot survive outside backlog truth.",
     "writable_scope": [
       "CLAW/scripts/**",
       "CLAW/control-plane/system-optimizer/**",
@@ -69,10 +70,10 @@
       "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
       "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
     ],
-    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` matched raw writable_scope globs against the allowlist, so malformed entries like `CLAW/scripts/../control-plane/runtime/**` or `CLAW/scripts/../../site/src/app/**` could still inherit the allowed `CLAW/scripts/**` prefix and verify clean. After the ratchet, the verifier rejects any writable_scope entry that contains dot-segment traversal, duplicate slash separators, a leading slash, or backslash separators, while the fixed scope-local promotion bundle stays green.",
-    "keep_rule": "Keep only if the verifier fails non-normalized writable_scope entries that try to escape through dot segments or separator drift and the fixed evaluation bundle passes without touching route implementation paths.",
-    "learning_item": "Systems-optimizer writable_scope entries must stay normalized repo-relative patterns; raw allowlist matching alone can hide dot-segment escapes into runtime or route surfaces.",
-    "recorded_at": "2026-04-04T13:16:50Z"
+    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` still reported clean after a controlled orphan baseline card `CLAW/control-plane/system-optimizer/hypotheses/sysopt.orphan-inventory-baseline.json` was added with no matching backlog item, so replayable artifact inventory could drift outside backlog truth. After the ratchet, the verifier rejects orphan or filename/id-drifted hypothesis cards in `CLAW/control-plane/system-optimizer/hypotheses/` while the fixed scope-local promotion bundle stays green.",
+    "keep_rule": "Keep only if every systems-optimizer hypothesis-card artifact must resolve to exactly one backlog item with the same id and status and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+    "learning_item": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
+    "recorded_at": "2026-04-04T20:33:38Z"
   },
   "last_rejected_change": {
     "id": "sysopt.runner-policy-self-verify",
@@ -97,9 +98,14 @@
     "learning_item": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
     "recorded_at": "2026-04-04T00:06:21Z"
   },
-  "accepted_count": 28,
+  "accepted_count": 29,
   "rejected_count": 1,
   "learning_log": [
+    {
+      "id": "sysopt.hypothesis-card-inventory-alignment-lock",
+      "learning": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
+      "recorded_at": "2026-04-04T20:33:38Z"
+    },
     {
       "id": "sysopt.normalized-relative-writable-scope-lock",
       "learning": "Systems-optimizer writable_scope entries must stay normalized repo-relative patterns; raw allowlist matching alone can hide dot-segment escapes into runtime or route surfaces.",
@@ -246,5 +252,5 @@
       "recorded_at": "2026-04-04T10:31:09Z"
     }
   ],
-  "last_updated": "2026-04-04T13:16:50Z"
+  "last_updated": "2026-04-04T20:33:38Z"
 }

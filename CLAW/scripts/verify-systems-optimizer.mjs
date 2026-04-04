@@ -98,6 +98,7 @@ const XR_TARGET_GAP = 'GGD/gaps/routes/work-xr.geometry-gap.json';
 const XR_REQUIRED_EVALUATOR_FOCUS = ['layout-diff', 'quality', 'flagship-invariants'];
 const XR_SEVERITY_LEVELS = ['critical', 'major', 'minor', 'note'];
 const SYSTEMS_OPTIMIZER_HYPOTHESES_DIR = 'CLAW/control-plane/system-optimizer/hypotheses';
+const SYSTEMS_OPTIMIZER_CARD_ALLOWED_STATUSES = ['seeded', 'kept', 'rejected'];
 const ACTIVE_HYPOTHESIS_MIRRORED_FIELDS = [
   'hypothesis',
   'measurement',
@@ -262,6 +263,22 @@ function validateResolvedBacklogLearningItem(card, label) {
   if (readLearningItem(card).length === 0) {
     issues.push(`${label} with status ${card.status} must declare learning_item.`);
   }
+}
+
+function validateSystemsOptimizerCardStatus(status, label) {
+  if (typeof status !== 'string' || status.trim().length === 0) {
+    issues.push(`${label} must declare status.`);
+    return false;
+  }
+
+  if (!SYSTEMS_OPTIMIZER_CARD_ALLOWED_STATUSES.includes(status)) {
+    issues.push(
+      `${label}.status must be one of ${SYSTEMS_OPTIMIZER_CARD_ALLOWED_STATUSES.join(', ')}; found ${status}.`,
+    );
+    return false;
+  }
+
+  return true;
 }
 
 function normalizeComparableValue(value) {
@@ -909,6 +926,34 @@ function validateSeededBacklogHypothesisCardAlignment(card, label, options = {})
   }
 }
 
+function readHypothesisInventory(relativeDir) {
+  const absoluteDir = projectPath(relativeDir);
+  if (!fs.existsSync(absoluteDir)) {
+    issues.push(`Missing systems-optimizer hypothesis inventory directory: ${relativeDir}`);
+    return [];
+  }
+
+  return fs
+    .readdirSync(absoluteDir)
+    .filter((name) => name.endsWith('.json'))
+    .sort()
+    .map((fileName) => {
+      const relativePath = path.posix.join(relativeDir, fileName);
+      try {
+        return {
+          fileName,
+          relativePath,
+          fileStem: path.basename(fileName, '.json'),
+          card: readJson(relativePath),
+        };
+      } catch (error) {
+        issues.push(`systems-optimizer hypothesis inventory ${relativePath} could not be read: ${error.message}`);
+        return null;
+      }
+    })
+    .filter(Boolean);
+}
+
 const binding = readJson('GGD/project.binding.json');
 const commandSurface = readJson('GGD/commands.json');
 const agentLanes = readJson('CLAW/control-plane/agent-lanes.json');
@@ -921,6 +966,7 @@ const optimizerState = readJson(optimizerStatePath);
 const optimizerBacklog = readJson(optimizerBacklogPath);
 const backlogItems = Array.isArray(optimizerBacklog.items) ? optimizerBacklog.items : [];
 const backlogIndex = buildItemIndex(backlogItems, 'systems-optimizer backlog');
+const hypothesisInventory = readHypothesisInventory(SYSTEMS_OPTIMIZER_HYPOTHESES_DIR);
 const learningLog = Array.isArray(optimizerState.learning_log) ? optimizerState.learning_log : [];
 const learningIndex = buildItemIndex(learningLog, 'systems-optimizer learning_log');
 const configuredAllowedScope = Array.isArray(optimizerState.policy?.default_writable_scope)
@@ -996,6 +1042,7 @@ for (const item of backlogItems) {
   if (!item.id || !item.hypothesis) {
     issues.push('Each systems-optimizer backlog item must have an id and hypothesis.');
   }
+  validateSystemsOptimizerCardStatus(item.status, `Backlog item ${item.id || '<unknown>'}`);
   if (!Array.isArray(item.writable_scope) || item.writable_scope.length === 0) {
     issues.push(`Backlog item ${item.id || '<unknown>'} is missing writable_scope.`);
   }
@@ -1045,6 +1092,53 @@ for (const item of backlogItems) {
       forbiddenScope: configuredForbiddenScope,
     },
   );
+}
+
+const seenHypothesisInventoryIds = new Map();
+for (const entry of hypothesisInventory) {
+  const { relativePath, fileStem, card } = entry;
+  if (!card || typeof card !== 'object' || Array.isArray(card)) {
+    issues.push(`systems-optimizer hypothesis inventory ${relativePath} must contain an object card.`);
+    continue;
+  }
+
+  if (typeof card.id !== 'string' || card.id.trim().length === 0) {
+    issues.push(`systems-optimizer hypothesis inventory ${relativePath} is missing required field: id.`);
+    continue;
+  }
+
+  if (fileStem !== card.id) {
+    issues.push(`systems-optimizer hypothesis inventory ${relativePath} filename must match card id ${card.id}.`);
+  }
+
+  validateSystemsOptimizerCardStatus(card.status, `systems-optimizer hypothesis inventory ${relativePath}`);
+
+  if (card.lane_id !== 'systems-optimizer') {
+    issues.push(`systems-optimizer hypothesis inventory ${relativePath} lane_id must equal systems-optimizer.`);
+  }
+
+  const priorPath = seenHypothesisInventoryIds.get(card.id);
+  if (priorPath) {
+    issues.push(
+      `systems-optimizer hypothesis inventory contains duplicate id ${card.id} across ${priorPath} and ${relativePath}.`,
+    );
+  } else {
+    seenHypothesisInventoryIds.set(card.id, relativePath);
+  }
+
+  const backlogItem = backlogIndex.byId.get(card.id);
+  if (!backlogItem) {
+    issues.push(
+      `systems-optimizer hypothesis inventory ${relativePath} must resolve to exactly one backlog item with id ${card.id}.`,
+    );
+    continue;
+  }
+
+  if (card.status !== backlogItem.status) {
+    issues.push(
+      `systems-optimizer hypothesis inventory ${relativePath} status must match backlog item ${card.id} (${backlogItem.status}).`,
+    );
+  }
 }
 
 if (!optimizerState.policy?.keep_only_if_better) {
@@ -1129,6 +1223,10 @@ if (!optimizerState.policy?.require_resolved_backlog_hypothesis_card_alignment) 
 
 if (!optimizerState.policy?.require_seeded_backlog_hypothesis_card_alignment) {
   issues.push('systems-optimizer state must require seeded backlog hypothesis card alignment.');
+}
+
+if (!optimizerState.policy?.require_hypothesis_inventory_alignment) {
+  issues.push('systems-optimizer state must require hypothesis-card inventory alignment.');
 }
 
 for (const writePattern of REQUIRED_SYSTEMS_OPTIMIZER_WRITES) {
@@ -1408,6 +1506,7 @@ console.log(
         terminal_hypothesis_card_alignment_required: true,
         resolved_backlog_hypothesis_card_alignment_required: true,
         seeded_backlog_hypothesis_card_alignment_required: true,
+        hypothesis_inventory_alignment_required: true,
         runner_self_verify_required: true,
         runner_stability_contract_required: true,
         runner_replayable_evidence_script_required: true,
