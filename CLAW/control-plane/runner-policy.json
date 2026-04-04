@@ -10,6 +10,10 @@
     "max_lane_runtime_seconds": 900,
     "max_lane_quiet_seconds": 180,
     "lane_overrides": {
+      "data-truth": {
+        "max_lane_runtime_seconds": 1800,
+        "max_lane_quiet_seconds": 480
+      },
       "systems-qa": {
         "max_lane_runtime_seconds": 1800,
         "max_lane_quiet_seconds": 360

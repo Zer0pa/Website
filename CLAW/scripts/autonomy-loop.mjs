@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
-import { localTimestamp, projectPath } from './lib/control-plane.mjs';
+import { gitHead, localTimestamp, projectPath } from './lib/control-plane.mjs';
 import {
   AUTONOMY_SERVICE_LABEL,
   readRunnerPolicy,
@@ -47,6 +47,14 @@ function resolveLoopIntervals() {
 
 const onceScript = projectPath('CLAW/scripts/autonomy-once.mjs');
 
+function currentCodeHead() {
+  try {
+    return gitHead(projectPath('.'));
+  } catch {
+    return null;
+  }
+}
+
 function nextSleepSeconds() {
   const intervals = resolveLoopIntervals();
   const state = readRunnerState();
@@ -55,16 +63,19 @@ function nextSleepSeconds() {
 
 async function main() {
   const state = readRunnerState();
+  let loadedCodeHead = currentCodeHead();
   state.enabled = true;
   state.mode = 'guarded-override';
   state.service_label = AUTONOMY_SERVICE_LABEL;
   state.pid = process.pid;
   state.started_at = state.started_at || localTimestamp();
   state.last_error = null;
+  state.code_head = loadedCodeHead;
   writeRunnerState(state);
   updateRuntimeRunnerState({
     enabled: true,
     mode: 'guarded-override',
+    code_head: loadedCodeHead,
   });
 
   while (true) {
@@ -98,6 +109,29 @@ async function main() {
         enabled: true,
         mode: failed.mode || 'guarded-override',
       });
+    }
+
+    const latestCodeHead = currentCodeHead();
+    if (latestCodeHead && loadedCodeHead && latestCodeHead !== loadedCodeHead) {
+      const reloading = readRunnerState();
+      reloading.last_tick_at = localTimestamp();
+      reloading.pid = null;
+      reloading.code_head = latestCodeHead;
+      reloading.last_result = {
+        ...(reloading.last_result || {}),
+        runner_reload: {
+          reason: 'control-plane-head-changed',
+          previous_code_head: loadedCodeHead,
+          next_code_head: latestCodeHead,
+        },
+      };
+      writeRunnerState(reloading);
+      updateRuntimeRunnerState({
+        enabled: true,
+        mode: 'guarded-override',
+        code_head: latestCodeHead,
+      });
+      break;
     }
 
     await sleep(nextSleepSeconds() * 1000);
