@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
-import { gitHead, localTimestamp, projectPath } from './lib/control-plane.mjs';
+import { localTimestamp, projectPath } from './lib/control-plane.mjs';
 import {
   AUTONOMY_SERVICE_LABEL,
+  gitHead,
   readRunnerPolicy,
   readRunnerState,
   updateRuntimeRunnerState,
