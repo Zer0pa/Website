@@ -768,6 +768,7 @@ function validateResolvedBacklogHypothesisCardAlignment(card, label, learningEnt
 
   validateRatchetCard(hypothesisCard, `${label} hypothesis card`, {
     requireLearning: true,
+    requireScopeLocalPromotionBundle: card.status === 'kept',
     allowedScope,
     forbiddenScope,
   });
@@ -986,7 +987,7 @@ for (const item of backlogItems) {
   if (Array.isArray(item.evaluation_bundle)) {
     validateCommandList(item.evaluation_bundle, `Backlog item ${item.id || '<unknown>'}.evaluation_bundle`);
 
-    if (item.status === 'seeded') {
+    if (item.status === 'seeded' || item.status === 'kept') {
       validateScopeLocalPromotionBundle(item.evaluation_bundle, `Backlog item ${item.id || '<unknown>'}.evaluation_bundle`);
     }
   }

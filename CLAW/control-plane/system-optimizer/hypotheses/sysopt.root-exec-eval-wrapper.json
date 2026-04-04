@@ -9,10 +9,11 @@
     "CLAW/PRD*.md"
   ],
   "evaluation_bundle": [
-    "node CLAW/scripts/run-site-script.mjs claw:test:contracts",
-    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
     "node CLAW/scripts/verify-ggd-binding.mjs",
-    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
   ],
   "measurement": "Before the ratchet, `npm run claw:test:systems-optimizer` failed from the lane worktree with ENOENT because the worktree root has no package.json. After the ratchet, the root wrapper executes site scripts and the stricter verifier rejects regression to bare root-level npm claw commands in systems-optimizer backlog and runner-policy surfaces.",
   "keep_rule": "Keep only if systems-optimizer claw commands are rewritten to the root wrapper, the verifier stays clean, and the fixed evaluation bundle passes without touching route implementation paths.",

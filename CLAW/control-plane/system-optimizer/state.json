@@ -54,8 +54,8 @@
   },
   "active_hypothesis": null,
   "last_kept_change": {
-    "id": "sysopt.seeded-backlog-hypothesis-card-alignment-lock",
-    "hypothesis": "Systems-optimizer recovery becomes safer if every seeded backlog card must resolve to a matching seeded hypothesis-card artifact, so queued slices cannot drift before activation or resume from backlog-only state.",
+    "id": "sysopt.kept-history-promotion-bundle-lock",
+    "hypothesis": "Systems-optimizer history becomes safer if every kept backlog card and kept hypothesis-card artifact must retain the exact five-command scope-local promotion bundle, not just seeded cards and the latest kept pointer.",
     "writable_scope": [
       "CLAW/scripts/**",
       "CLAW/control-plane/system-optimizer/**",
@@ -68,10 +68,10 @@
       "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
       "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
     ],
-    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` enforced replayable hypothesis-card artifacts for active and resolved systems-optimizer cards only, so a backlog item in status `seeded` could still verify clean without `CLAW/control-plane/system-optimizer/hypotheses/<id>.json` or with drifted contract fields. After the ratchet, the verifier rejects any seeded backlog item that lacks a matching seeded hypothesis card artifact or drifts from it across the bounded contract fields, while the fixed scope-local promotion bundle stays green.",
-    "keep_rule": "Keep only if every seeded systems-optimizer backlog card must resolve to a matching seeded hypothesis-card artifact and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
-    "learning_item": "Seeded systems-optimizer backlog items need replayable hypothesis-card artifacts before activation; otherwise queued recovery work can drift before state.active_hypothesis is populated.",
-    "recorded_at": "2026-04-04T10:31:09Z"
+    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only exact-checked the scope-local promotion bundle for seeded cards and `state.last_kept_change`, so older kept backlog items or their replayable hypothesis cards could drift to wider evaluation bundles and still verify clean. After the ratchet, the verifier rejects any kept backlog item or kept hypothesis-card artifact whose `evaluation_bundle` differs from the exact five-command scope-local promotion bundle, while the fixed scope-local promotion bundle stays green.",
+    "keep_rule": "Keep only if every kept systems-optimizer backlog card and kept hypothesis-card artifact must use the exact five-command scope-local promotion bundle and the fixed evaluation bundle passes without touching route implementation paths.",
+    "learning_item": "Historical kept systems-optimizer cards must preserve the exact promotion bundle, or replayable history can silently widen the proof surface after promotion.",
+    "recorded_at": "2026-04-04T12:59:50Z"
   },
   "last_rejected_change": {
     "id": "sysopt.runner-policy-self-verify",
@@ -96,9 +96,14 @@
     "learning_item": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
     "recorded_at": "2026-04-04T00:06:21Z"
   },
-  "accepted_count": 26,
+  "accepted_count": 27,
   "rejected_count": 1,
   "learning_log": [
+    {
+      "id": "sysopt.kept-history-promotion-bundle-lock",
+      "learning": "Historical kept systems-optimizer cards must preserve the exact promotion bundle, or replayable history can silently widen the proof surface after promotion.",
+      "recorded_at": "2026-04-04T12:59:50Z"
+    },
     {
       "id": "sysopt.active-hypothesis-card-alignment-lock",
       "learning": "Active systems-optimizer slices need replayable seeded hypothesis-card artifacts; backlog alignment alone leaves interrupted recovery exposed to missing or drifted card files.",
@@ -235,5 +240,5 @@
       "recorded_at": "2026-04-04T10:31:09Z"
     }
   ],
-  "last_updated": "2026-04-04T10:31:09Z"
+  "last_updated": "2026-04-04T12:59:50Z"
 }

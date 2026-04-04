@@ -9,9 +9,11 @@
     "CLAW/PRD*.md"
   ],
   "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
     "node CLAW/scripts/verify-ggd-binding.mjs",
     "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
-    "node CLAW/scripts/verify-systems-optimizer.mjs"
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
   ],
   "measurement": "The systems-optimizer verifier must fail if backlog items omit measurement or keep_rule fields, or if kept changes omit a recorded learning item.",
   "keep_rule": "Keep only if the fixed bundle stays clean after the stricter verifier and state/backlog ratchet card are added.",
