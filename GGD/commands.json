@@ -9,6 +9,7 @@
   "function_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/function-catalog.md",
   "equation_engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
   "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+  "local_lawset_index": "GGD/equations/lawsets.json",
   "recommended_commands": {
     "bootstrap": [
       "ggd-help",

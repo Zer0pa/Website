@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "route": "/work/ft",
+  "route_role": "product-family",
+  "generated_at": "2026-04-05T21:24:56.153Z",
+  "source_gaps": [
+    "work-ft.breakpoint-gap",
+    "work-ft.geometry-gap"
+  ],
+  "lawsets_evaluated": [
+    "product-family.desktop.shell",
+    "typography.scale",
+    "color.contrast"
+  ],
+  "severity_summary": {
+    "critical": 15,
+    "major": 6,
+    "minor": 4
+  },
+  "fixes": [
+    {
+      "property": "--ggd-product-family-desktop-shell-u",
+      "target_value": "8px",
+      "constraint_id": "product_family.proof_gap.multiple_of_u",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.proof_gap.multiple_of_u: u multiple_of \"u\""
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-viewport-width",
+      "target_value": "1024px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant viewport_width from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-page-pad",
+      "target_value": "20px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant page_pad from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-page-shell",
+      "target_value": "984px",
+      "constraint_id": "product_family.shell.from_viewport",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.shell.from_viewport: page_shell approx_eq \"page_shell\""
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-cols",
+      "target_value": "16",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant cols from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-gutter",
+      "target_value": "24px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant gutter from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-proof-left-x",
+      "target_value": "20px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant proof_left_x from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-proof-left-width",
+      "target_value": "470px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant proof_left_width from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-proof-right-x",
+      "target_value": "514px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant proof_right_x from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-proof-right-width",
+      "target_value": "490px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant proof_right_width from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-evidence-left-x",
+      "target_value": "20px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant evidence_left_x from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-evidence-left-width",
+      "target_value": "472px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant evidence_left_width from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-evidence-right-x",
+      "target_value": "512px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant evidence_right_x from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-evidence-right-width",
+      "target_value": "492px",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constant evidence_right_width from product-family.desktop.shell"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-cta-band-width",
+      "target_value": "984px",
+      "constraint_id": "product_family.cta_band.matches_shell",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.cta_band.matches_shell: cta_band_width approx_eq \"page_shell\""
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-shell-from-viewport",
+      "target_value": "984px",
+      "constraint_id": "product_family.shell.from_viewport",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.shell.from_viewport: shell_from_viewport approx_eq \"page_shell\""
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-col-w",
+      "target_value": "39px",
+      "constraint_id": "product_family.col_width.range",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.col_width.range: col_w between [38,40]"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-proof-gap",
+      "target_value": "24px",
+      "constraint_id": "product_family.proof_gap.multiple_of_u",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.proof_gap.multiple_of_u: proof_gap multiple_of \"u\""
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-proof-span",
+      "target_value": "984",
+      "constraint_id": "product_family.proof_span.matches_shell",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.proof_span.matches_shell: proof_span approx_eq \"page_shell\""
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-evidence-gap",
+      "target_value": "20px",
+      "constraint_id": "product_family.evidence_gap.multiple_of_h",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.evidence_gap.multiple_of_h: evidence_gap multiple_of 4"
+    },
+    {
+      "property": "--ggd-product-family-desktop-shell-evidence-span",
+      "target_value": "984",
+      "constraint_id": "product_family.evidence_span.matches_shell",
+      "severity": "CRITICAL",
+      "lawset_source": "product-family.desktop.shell",
+      "description": "Constraint product_family.evidence_span.matches_shell: evidence_span approx_eq \"page_shell\""
+    },
+    {
+      "property": "--ggd-typography-scale-body-base",
+      "target_value": "16",
+      "constraint_id": "typography.body_base.eq",
+      "severity": "CRITICAL",
+      "lawset_source": "typography.scale",
+      "description": "Constraint typography.body_base.eq: body_base eq 16"
+    },
+    {
+      "property": "--ggd-typography-scale-desktop-ratio",
+      "target_value": "1.2",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "typography.scale",
+      "description": "Constant desktop_ratio from typography.scale"
+    },
+    {
+      "property": "--ggd-typography-scale-mobile-ratio",
+      "target_value": "1.125",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "typography.scale",
+      "description": "Constant mobile_ratio from typography.scale"
+    },
+    {
+      "property": "--ggd-typography-scale-display",
+      "target_value": "39.81",
+      "constraint_id": "typography.display.range",
+      "severity": "CRITICAL",
+      "lawset_source": "typography.scale",
+      "description": "Constraint typography.display.range: display between [39,41]"
+    },
+    {
+      "property": "--ggd-typography-scale-section-title",
+      "target_value": "27.65",
+      "constraint_id": "typography.section_title.range",
+      "severity": "CRITICAL",
+      "lawset_source": "typography.scale",
+      "description": "Constraint typography.section_title.range: section_title between [27,28]"
+    },
+    {
+      "property": "--ggd-typography-scale-eyebrow",
+      "target_value": "13.33px",
+      "constraint_id": "typography.eyebrow.range",
+      "severity": "CRITICAL",
+      "lawset_source": "typography.scale",
+      "description": "Constraint typography.eyebrow.range: eyebrow between [13,14]"
+    },
+    {
+      "property": "--ggd-typography-scale-mobile-display",
+      "target_value": "28.83",
+      "constraint_id": "typography.mobile_display.range",
+      "severity": "CRITICAL",
+      "lawset_source": "typography.scale",
+      "description": "Constraint typography.mobile_display.range: mobile_display between [28,29.5]"
+    },
+    {
+      "property": "--ggd-color-contrast-surface",
+      "target_value": "#0a0a0a",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constant surface from color.contrast"
+    },
+    {
+      "property": "--ggd-color-contrast-surface-raised",
+      "target_value": "#111111",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constant surface_raised from color.contrast"
+    },
+    {
+      "property": "--ggd-color-contrast-text-primary",
+      "target_value": "#9a9a9a",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constant text_primary from color.contrast"
+    },
+    {
+      "property": "--ggd-color-contrast-text-secondary",
+      "target_value": "#8a8a8a",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constant text_secondary from color.contrast"
+    },
+    {
+      "property": "--ggd-color-contrast-emphasis",
+      "target_value": "#ffffff",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constant emphasis from color.contrast"
+    },
+    {
+      "property": "--ggd-color-contrast-warning",
+      "target_value": "#a98a44",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constant warning from color.contrast"
+    },
+    {
+      "property": "--ggd-color-contrast-fail",
+      "target_value": "#d07a75",
+      "constraint_id": null,
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constant fail from color.contrast"
+    },
+    {
+      "property": "--ggd-color-contrast-text-primary-on-surface",
+      "target_value": "7.035755833248598",
+      "constraint_id": "color.text_primary_on_surface.gte_4_5",
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constraint color.text_primary_on_surface.gte_4_5: text_primary_on_surface gte 4.5"
+    },
+    {
+      "property": "--ggd-color-contrast-text-secondary-on-surface",
+      "target_value": "5.734902363545709",
+      "constraint_id": "color.text_secondary_on_surface.gte_4_5",
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constraint color.text_secondary_on_surface.gte_4_5: text_secondary_on_surface gte 4.5"
+    },
+    {
+      "property": "--ggd-color-contrast-emphasis-on-surface",
+      "target_value": "19.79814571052481",
+      "constraint_id": "color.emphasis_on_surface.gte_12",
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constraint color.emphasis_on_surface.gte_12: emphasis_on_surface gte 12"
+    },
+    {
+      "property": "--ggd-color-contrast-warning-on-surface",
+      "target_value": "6.039250728260599",
+      "constraint_id": "color.warning_on_surface.gte_4_5",
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constraint color.warning_on_surface.gte_4_5: warning_on_surface gte 4.5"
+    },
+    {
+      "property": "--ggd-color-contrast-fail-on-surface",
+      "target_value": "6.337917845910562",
+      "constraint_id": "color.fail_on_surface.gte_4_5",
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constraint color.fail_on_surface.gte_4_5: fail_on_surface gte 4.5"
+    },
+    {
+      "property": "--ggd-color-contrast-surface-delta",
+      "target_value": "1.0484606149207252",
+      "constraint_id": "color.surface_delta.range",
+      "severity": "CRITICAL",
+      "lawset_source": "color.contrast",
+      "description": "Constraint color.surface_delta.range: surface_delta between [1,1.2]"
+    }
+  ],
+  "token_targets": {
+    "--ggd-product-family-desktop-shell-u": "8px",
+    "--ggd-product-family-desktop-shell-viewport-width": "1024px",
+    "--ggd-product-family-desktop-shell-page-pad": "20px",
+    "--ggd-product-family-desktop-shell-page-shell": "984px",
+    "--ggd-product-family-desktop-shell-cols": "16",
+    "--ggd-product-family-desktop-shell-gutter": "24px",
+    "--ggd-product-family-desktop-shell-proof-left-x": "20px",
+    "--ggd-product-family-desktop-shell-proof-left-width": "470px",
+    "--ggd-product-family-desktop-shell-proof-right-x": "514px",
+    "--ggd-product-family-desktop-shell-proof-right-width": "490px",
+    "--ggd-product-family-desktop-shell-evidence-left-x": "20px",
+    "--ggd-product-family-desktop-shell-evidence-left-width": "472px",
+    "--ggd-product-family-desktop-shell-evidence-right-x": "512px",
+    "--ggd-product-family-desktop-shell-evidence-right-width": "492px",
+    "--ggd-product-family-desktop-shell-cta-band-width": "984px",
+    "--ggd-product-family-desktop-shell-shell-from-viewport": "984px",
+    "--ggd-product-family-desktop-shell-col-w": "39px",
+    "--ggd-product-family-desktop-shell-proof-gap": "24px",
+    "--ggd-product-family-desktop-shell-proof-span": "984",
+    "--ggd-product-family-desktop-shell-evidence-gap": "20px",
+    "--ggd-product-family-desktop-shell-evidence-span": "984",
+    "--ggd-typography-scale-body-base": "16",
+    "--ggd-typography-scale-desktop-ratio": "1.2",
+    "--ggd-typography-scale-mobile-ratio": "1.125",
+    "--ggd-typography-scale-display": "39.81",
+    "--ggd-typography-scale-section-title": "27.65",
+    "--ggd-typography-scale-eyebrow": "13.33px",
+    "--ggd-typography-scale-mobile-display": "28.83",
+    "--ggd-color-contrast-surface": "#0a0a0a",
+    "--ggd-color-contrast-surface-raised": "#111111",
+    "--ggd-color-contrast-text-primary": "#9a9a9a",
+    "--ggd-color-contrast-text-secondary": "#8a8a8a",
+    "--ggd-color-contrast-emphasis": "#ffffff",
+    "--ggd-color-contrast-warning": "#a98a44",
+    "--ggd-color-contrast-fail": "#d07a75",
+    "--ggd-color-contrast-text-primary-on-surface": "7.035755833248598",
+    "--ggd-color-contrast-text-secondary-on-surface": "5.734902363545709",
+    "--ggd-color-contrast-emphasis-on-surface": "19.79814571052481",
+    "--ggd-color-contrast-warning-on-surface": "6.039250728260599",
+    "--ggd-color-contrast-fail-on-surface": "6.337917845910562",
+    "--ggd-color-contrast-surface-delta": "1.0484606149207252"
+  }
+}

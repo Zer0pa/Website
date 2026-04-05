@@ -81,7 +81,7 @@ export default async function ImcPage() {
           },
         }}
       />
-      <LaneAuthorityPage lane={lane} lanes={catalog.lanes} />
+      <LaneAuthorityPage lane={lane} lanes={catalog.lanes} specPrefix="imc" laneClassLabel="FLAGSHIP_LANE" />
       <Footer />
     </div>
   );

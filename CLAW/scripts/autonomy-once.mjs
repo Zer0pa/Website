@@ -90,6 +90,79 @@ function uniqueValues(values) {
   return [...new Set((values || []).filter(Boolean))];
 }
 
+function incrementCounter(counter, key) {
+  const normalizedKey = String(key || 'unknown').trim() || 'unknown';
+  counter[normalizedKey] = Number(counter[normalizedKey] || 0) + 1;
+}
+
+function compactSystemsOptimizerBacklogItem(item) {
+  return {
+    id: item.id || null,
+    status: item.status || null,
+    priority: item.priority || null,
+    target_route: item.target_route || null,
+    first_broken_law: item.first_broken_law || null,
+    runner_focus: item.runner_focus || null,
+    evaluator_focus: Array.isArray(item.evaluator_focus) ? item.evaluator_focus : [],
+    hypothesis: typeof item.hypothesis === 'string' ? item.hypothesis : null,
+  };
+}
+
+function buildSystemsOptimizerBacklogDigest(items = [], activeHypothesisId = null, maxItems = 6) {
+  const normalizedItems = (items || []).filter((item) => item && typeof item === 'object' && !Array.isArray(item));
+  const byStatus = {};
+  const byPriority = {};
+  const targetRoutes = {};
+  const statusScore = {
+    seeded: 40,
+    active: 35,
+    kept: 25,
+    rejected: 10,
+    proposed: 5,
+  };
+  const priorityScore = {
+    high: 12,
+    medium: 6,
+    low: 0,
+  };
+
+  for (const item of normalizedItems) {
+    incrementCounter(byStatus, item.status || 'unknown');
+    incrementCounter(byPriority, item.priority || 'unspecified');
+    if (item.target_route) {
+      incrementCounter(targetRoutes, item.target_route);
+    }
+  }
+
+  const focusItems = normalizedItems
+    .map((item, index) => {
+      const normalizedStatus = String(item.status || '').toLowerCase();
+      const normalizedPriority = String(item.priority || '').toLowerCase();
+      const score =
+        (item.id === activeHypothesisId ? 100 : 0) +
+        (statusScore[normalizedStatus] || 0) +
+        (priorityScore[normalizedPriority] || 0) +
+        (item.target_route === '/work/xr' ? 4 : 0) -
+        index * 0.01;
+
+      return {
+        score,
+        item: compactSystemsOptimizerBacklogItem(item),
+      };
+    })
+    .sort((left, right) => right.score - left.score)
+    .slice(0, maxItems)
+    .map((entry) => entry.item);
+
+  return {
+    total_items: normalizedItems.length,
+    by_status: byStatus,
+    by_priority: byPriority,
+    target_routes: targetRoutes,
+    focus_items: focusItems,
+  };
+}
+
 function markCurrentCheckpointStale(route, reason, gapIds = []) {
   const checkpointRelativePath = 'CLAW/control-plane/checkpoints/current.json';
   const checkpointPath = projectPath(checkpointRelativePath);
@@ -193,6 +266,13 @@ function buildBrief(control, queue, job) {
     job.lane_id === 'systems-optimizer'
       ? readJson('CLAW/control-plane/system-optimizer/backlog.json')
       : null;
+  const systemOptimizerBacklogDigest =
+    job.lane_id === 'systems-optimizer'
+      ? buildSystemsOptimizerBacklogDigest(
+          systemOptimizerBacklog?.items || [],
+          systemOptimizerState?.active_hypothesis || null,
+        )
+      : null;
   const currentIndex = (queue.jobs || []).findIndex((candidate) => candidate.job_id === job.job_id);
   const previousJobs = (queue.jobs || [])
     .slice(0, Math.max(currentIndex, 0))
@@ -273,8 +353,13 @@ function buildBrief(control, queue, job) {
             backlog_file: 'CLAW/control-plane/system-optimizer/backlog.json',
             active_hypothesis: systemOptimizerState?.active_hypothesis || null,
             policy: systemOptimizerState?.policy || null,
-            backlog_items: systemOptimizerBacklog?.items || [],
+            backlog_items: systemOptimizerBacklogDigest?.focus_items || [],
+            backlog_items_total: systemOptimizerBacklogDigest?.total_items || 0,
+            backlog_status_counts: systemOptimizerBacklogDigest?.by_status || {},
+            backlog_priority_counts: systemOptimizerBacklogDigest?.by_priority || {},
+            backlog_target_routes: systemOptimizerBacklogDigest?.target_routes || {},
             equation_engine: '/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py',
+            local_lawset_index: 'GGD/equations/lawsets.json',
             command: 'ggd-system-optimize',
             agent: 'ggd-systems-optimizer',
           }
@@ -475,6 +560,7 @@ function buildPrompt(control, queue, job, brief, briefFile) {
     '- if targeted inspection shows the slice cannot honestly advance, return a structured non-acceptance quickly instead of continuing to explore',
     '- installed GGD command surfaces available to you include $ggd-help, $ggd-derive-equation, $ggd-dimensional-analysis, $ggd-limiting-cases, $ggd-verify-work, $ggd-validate-conventions, and $ggd-debug',
     '- the executable equation surface is python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py',
+    '- the repo-local equation registry is GGD/equations/lawsets.json and should be treated as the first mathematical surface for this website',
     ...(job.lane_id === 'systems-optimizer'
       ? ['- accepted systems-optimizer commits are promoted back into the root control plane automatically, so your changed file list must stay exact and replayable']
       : []),
@@ -996,6 +1082,7 @@ function spawnCodexForJob(job, prompt, executionPolicy = {}) {
       stdoutStream.write(chunk);
     });
     child.stderr.on('data', (chunk) => {
+      touch();
       stderrStream.write(chunk);
     });
     child.stdin.end(prompt);
@@ -1551,7 +1638,7 @@ async function main() {
   } catch (error) {
     replayFailure = error instanceof Error ? error.message : String(error);
     try {
-      git(job.worktree, 'cherry-pick', '--abort');
+      git(['cherry-pick', '--abort'], job.worktree);
     } catch {}
     hardReset(job.worktree, preReplayHead);
   }

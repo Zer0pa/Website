@@ -89,7 +89,12 @@ export default async function WorkLanePage({
           },
         }}
       />
-      <LaneAuthorityPage lane={lane} lanes={catalog.lanes} />
+      <LaneAuthorityPage
+        lane={lane}
+        lanes={catalog.lanes}
+        specPrefix="work.lane"
+        laneClassLabel="PRODUCT_FAMILY_LANE"
+      />
       <Footer />
     </div>
   );

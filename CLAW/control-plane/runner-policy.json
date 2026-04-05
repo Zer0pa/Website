@@ -10,6 +10,10 @@
     "max_lane_runtime_seconds": 900,
     "max_lane_quiet_seconds": 180,
     "lane_overrides": {
+      "systems-optimizer": {
+        "max_lane_runtime_seconds": 1800,
+        "max_lane_quiet_seconds": 480
+      },
       "data-truth": {
         "max_lane_runtime_seconds": 1800,
         "max_lane_quiet_seconds": 480
@@ -65,6 +69,11 @@
           "./node_modules/.bin/tsc -p tsconfig.json --noEmit --incremental false"
         ]
       ],
+      "geometry-architect": [
+        ["npm run ggd:correction-cycle"],
+        ["npm run ggd:tokens"],
+        ["npm run build"]
+      ],
       "systems-qa": [
         ["npm run audit:quality"],
         ["npm run audit:responsive"],
@@ -75,9 +84,6 @@
       "systems-optimizer": [
         ["node CLAW/scripts/verify-systems-optimizer.mjs"],
         ["node CLAW/scripts/verify-ggd-binding.mjs"],
-        [
-          "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
-        ],
         ["node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer"],
         ["node CLAW/scripts/run-site-script.mjs claw:test:contracts"],
         ["node CLAW/scripts/run-site-script.mjs claw:validate"],

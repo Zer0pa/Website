@@ -1,0 +1,91 @@
+{
+  "id": "typography.scale",
+  "constants": {
+    "body_base": 16,
+    "desktop_ratio": 1.2,
+    "mobile_ratio": 1.125
+  },
+  "derived": {
+    "display": "round(modular_scale(body_base, 5, desktop_ratio), 2)",
+    "section_title": "round(modular_scale(body_base, 3, desktop_ratio), 2)",
+    "eyebrow": "round(modular_scale(body_base, -1, desktop_ratio), 2)",
+    "mobile_display": "round(modular_scale(body_base, 5, mobile_ratio), 2)"
+  },
+  "constraints": [
+    {
+      "id": "typography.body_base.eq",
+      "lhs": "body_base",
+      "op": "eq",
+      "rhs": 16,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "typography.display.range",
+      "lhs": "display",
+      "op": "between",
+      "rhs": [
+        39,
+        41
+      ],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.section_title.range",
+      "lhs": "section_title",
+      "op": "between",
+      "rhs": [
+        27,
+        28
+      ],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.eyebrow.range",
+      "lhs": "eyebrow",
+      "op": "between",
+      "rhs": [
+        13,
+        14
+      ],
+      "severity": "MINOR"
+    },
+    {
+      "id": "typography.display.gt_section_title",
+      "lhs": "display",
+      "op": "gt",
+      "rhs": "section_title",
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.section_title.gt_body",
+      "lhs": "section_title",
+      "op": "gt",
+      "rhs": "body_base",
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.body.gt_eyebrow",
+      "lhs": "body_base",
+      "op": "gt",
+      "rhs": "eyebrow",
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.mobile_display.range",
+      "lhs": "mobile_display",
+      "op": "between",
+      "rhs": [
+        28,
+        29.5
+      ],
+      "severity": "MINOR"
+    },
+    {
+      "id": "typography.mobile_display.lt_display",
+      "lhs": "display",
+      "op": "gt",
+      "rhs": "mobile_display",
+      "severity": "MINOR"
+    }
+  ]
+}

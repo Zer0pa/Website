@@ -18,9 +18,13 @@ import {
 export default function LaneAuthorityPage({
   lane,
   lanes,
+  specPrefix = 'imc',
+  laneClassLabel = 'FLAGSHIP_LANE',
 }: {
   lane: LanePacket;
   lanes: LanePacket[];
+  specPrefix?: 'imc' | 'work.lane';
+  laneClassLabel?: 'FLAGSHIP_LANE' | 'PRODUCT_FAMILY_LANE';
 }) {
   const metrics = selectMetricDeck(lane, 4);
   const assertions = selectAssertionDeck(lane, 3);
@@ -34,29 +38,30 @@ export default function LaneAuthorityPage({
     selectNarrativeLines(lane, 2).join(' ') || lane.tagline || lane.laneIdentifier,
     240,
   );
+  const spec = (suffix: string) => `${specPrefix}.${suffix}`;
 
   return (
     <main className="page-shell page-section authority-page">
-      <div className="authority-page-inner" data-spec="imc.page">
+      <div className="authority-page-inner" data-spec={spec('page')}>
         <div className="authority-top-row">
-          <h1 className="lane-display-h1" data-spec="imc.hero.title">
+          <h1 className="lane-display-h1" data-spec={spec('hero.title')}>
             {lane.laneIdentifier}
           </h1>
 
-          <div className="lane-meta-brackets" data-spec="imc.hero.meta">
+          <div className="lane-meta-brackets" data-spec={spec('hero.meta')}>
             <p>[ STATUS: {lane.authorityState.status} ]</p>
-            <p>[ CLASS: FLAGSHIP_LANE ]</p>
+            <p>[ CLASS: {laneClassLabel} ]</p>
             <p>[ ORIGIN: {lane.authorityState.sourceFile || 'README.md'} ]</p>
           </div>
         </div>
 
         <div className="lane-hero-grid authority-hero-grid">
-          <section className="lane-hero-intro" data-spec="imc.hero.identity">
+          <section className="lane-hero-intro" data-spec={spec('hero.identity')}>
             <p className="section-slash-title">SUBJECT_IDENTITY</p>
             <p className="lane-identity-copy">{summary}</p>
           </section>
 
-          <section className="lane-panel authority-state-panel" data-spec="imc.hero.authority">
+          <section className="lane-panel authority-state-panel" data-spec={spec('hero.authority')}>
             <p className="section-slash-title">AUTHORITY_STATE</p>
             <div className="authority-state-stack">
               <div className="authority-state-row authority-state-row-emphasis">
@@ -79,7 +84,7 @@ export default function LaneAuthorityPage({
           </section>
         </div>
 
-        <section className="authority-metric-row" data-spec="imc.metric.row">
+        <section className="authority-metric-row" data-spec={spec('metric.row')}>
           {metrics.map((metric) => (
             <article key={metric.label} className="authority-metric-card">
               <span className="label-micro">{metric.label}</span>
@@ -89,7 +94,7 @@ export default function LaneAuthorityPage({
         </section>
 
         <div className="authority-logic-grid">
-          <section className="lane-panel" data-spec="imc.proof.assertions">
+          <section className="lane-panel" data-spec={spec('proof.assertions')}>
             <p className="section-slash-title">PROOF_ASSERTIONS</p>
             <div className="assertion-stack">
               {assertions.map((assertion, index) => (
@@ -101,7 +106,7 @@ export default function LaneAuthorityPage({
             </div>
           </section>
 
-          <section className="lane-panel lane-panel-red" data-spec="imc.nonclaims">
+          <section className="lane-panel lane-panel-red" data-spec={spec('nonclaims')}>
             <p className="section-slash-title section-slash-title-red">EXPLICIT_NON_CLAIMS</p>
             <div className="nonclaim-stack">
               {nonClaims.map((nonClaim, index) => (
@@ -114,7 +119,7 @@ export default function LaneAuthorityPage({
           </section>
         </div>
 
-        <section className="modality-band" data-spec="imc.modality.snapshot">
+        <section className="modality-band" data-spec={spec('modality.snapshot')}>
           <p className="section-slash-title">MODALITY STATUS SNAPSHOT (RADICAL HONESTY)</p>
           <div className="modality-band-grid">
             {modalities.map((modality) => (
@@ -129,7 +134,7 @@ export default function LaneAuthorityPage({
         </section>
 
         <div className="evidence-repo-row authority-evidence-row">
-          <section data-spec="imc.evidence.routes">
+          <section data-spec={spec('evidence.routes')}>
             <p className="section-slash-title">EVIDENCE_ROUTES</p>
             <div className="evidence-hex-visual evidence-visual-panel">
               <div className="hex-shape evidence-hex-shape" />
@@ -143,7 +148,7 @@ export default function LaneAuthorityPage({
             </div>
           </section>
 
-          <section className="lane-panel repo-shape-panel" data-spec="imc.repo.shape">
+          <section className="lane-panel repo-shape-panel" data-spec={spec('repo.shape')}>
             <p className="section-slash-title">REPO_SHAPE</p>
             <p className="repo-shape-copy">
               Proof anchors: {lane.proofAnchors.length}. Modality lanes: {lane.modalityStatus.length}. Authority
@@ -164,7 +169,7 @@ export default function LaneAuthorityPage({
           </section>
         </div>
 
-        <section className="proof-terminal-section" data-spec="imc.proof.terminal">
+        <section className="proof-terminal-section" data-spec={spec('proof.terminal')}>
           <p className="proof-terminal-label">[ PROOF_ANCHOR_TERMINAL_V1.3 ]</p>
           <div className="terminal-anchor-v1">
             {terminalLines.map((line, index) => (
@@ -175,7 +180,7 @@ export default function LaneAuthorityPage({
           </div>
         </section>
 
-        <section className="related-lanes-section" data-spec="imc.related.lanes">
+        <section className="related-lanes-section" data-spec={spec('related.lanes')}>
           <p className="section-slash-title">RELATED_LANES</p>
           <div className="related-lanes-grid">
             {related.map((item) => (
@@ -191,7 +196,7 @@ export default function LaneAuthorityPage({
           </div>
         </section>
 
-        <section className="cta-band authority-cta-band" data-spec="imc.cta.band">
+        <section className="cta-band authority-cta-band" data-spec={spec('cta.band')}>
           <h2>SECURE THE EVIDENCE. JOIN THE CLUSTER.</h2>
           <p className="authority-cta-copy">
             Institutional access grants direct API hooks into the {lane.laneIdentifier} authority

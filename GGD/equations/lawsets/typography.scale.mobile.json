@@ -1,0 +1,63 @@
+{
+  "id": "typography.scale.mobile",
+  "constants": {
+    "body_base": 16,
+    "mobile_ratio": 1.125
+  },
+  "derived": {
+    "display": "round(modular_scale(body_base, 5, mobile_ratio), 2)",
+    "section_title": "round(modular_scale(body_base, 3, mobile_ratio), 2)",
+    "eyebrow": "round(modular_scale(body_base, -1, mobile_ratio), 2)"
+  },
+  "constraints": [
+    {
+      "id": "typography.mobile.body_base.eq",
+      "lhs": "body_base",
+      "op": "eq",
+      "rhs": 16,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "typography.mobile.display.range",
+      "lhs": "display",
+      "op": "between",
+      "rhs": [28, 30],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.mobile.section_title.range",
+      "lhs": "section_title",
+      "op": "between",
+      "rhs": [20, 23],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.mobile.eyebrow.range",
+      "lhs": "eyebrow",
+      "op": "between",
+      "rhs": [14, 15],
+      "severity": "MINOR"
+    },
+    {
+      "id": "typography.mobile.display.gt_section_title",
+      "lhs": "display",
+      "op": "gt",
+      "rhs": "section_title",
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.mobile.section_title.gt_body",
+      "lhs": "section_title",
+      "op": "gt",
+      "rhs": "body_base",
+      "severity": "MAJOR"
+    },
+    {
+      "id": "typography.mobile.body.gt_eyebrow",
+      "lhs": "body_base",
+      "op": "gt",
+      "rhs": "eyebrow",
+      "severity": "MAJOR"
+    }
+  ]
+}

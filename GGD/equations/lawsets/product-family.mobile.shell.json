@@ -1,0 +1,87 @@
+{
+  "id": "product-family.mobile.shell",
+  "constants": {
+    "u": 8,
+    "viewport_width": 375,
+    "page_pad": 16,
+    "page_shell": 343,
+    "cols": 6,
+    "gutter": 16,
+    "proof_left_x": 16,
+    "proof_left_width": 343,
+    "proof_right_x": 16,
+    "proof_right_width": 343,
+    "evidence_left_x": 16,
+    "evidence_left_width": 343,
+    "evidence_right_x": 16,
+    "evidence_right_width": 343,
+    "cta_band_width": 343
+  },
+  "derived": {
+    "shell_from_viewport": "viewport_width - page_pad * 2",
+    "col_w": "col_width(page_shell, cols, gutter)",
+    "proof_gap": 0,
+    "proof_span_left": "proof_left_width",
+    "proof_span_right": "proof_right_width",
+    "evidence_gap": 0,
+    "evidence_span_left": "evidence_left_width",
+    "evidence_span_right": "evidence_right_width"
+  },
+  "constraints": [
+    {
+      "id": "product_family.mobile.shell.from_viewport",
+      "lhs": "shell_from_viewport",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "product_family.mobile.col_width.range",
+      "lhs": "col_w",
+      "op": "between",
+      "rhs": [42, 45],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.mobile.proof_left.matches_shell",
+      "lhs": "proof_span_left",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.mobile.proof_right.matches_shell",
+      "lhs": "proof_span_right",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.mobile.evidence_left.matches_shell",
+      "lhs": "evidence_span_left",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.mobile.evidence_right.matches_shell",
+      "lhs": "evidence_span_right",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.mobile.cta_band.matches_shell",
+      "lhs": "cta_band_width",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    }
+  ]
+}

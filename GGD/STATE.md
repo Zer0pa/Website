@@ -2,7 +2,7 @@
 
 ## Current Position
 
-- date: `2026-04-03`
+- date: `2026-04-05`
 - status: `in_progress`
 - current phase: `Phase 4 - Propagate contract and promote geometry-law evidence`
 - current plan: `lane-contract-propagation`
@@ -16,15 +16,17 @@
 
 ## Route Status
 
-- `/`: canonical — homepage accepted through canonical closure
-- `/imc`: canonical — flagship IMC accepted through canonical closure
-- `/work/xr`: blocked — `/work/xr` remains blocked. Layout and geometry-law acceptance both fail, while responsive overflow and contrast stay clean.
-- `/work/ft`: pending-proof — FT replication proof still pending
+- `/`: canonical (70.9% @ 0.5) — homepage accepted through canonical closure
+- `/imc`: canonical (81.9% @ 0.5) — flagship IMC accepted through canonical closure
+- `/work/xr`: blocked (23.5% @ 0.5) — Rejected `/work/xr` after fresh layout, geometry-law, responsive, quality, and contrast falsification reruns.
+- `/work/ft`: blocked (19.0% @ 0.5) — Current `/work/ft` responsive evidence still fails the laptop limiting case with horizontal overflow and multiple shared-shell overflow culprits.
 
 ## Active Gaps
 
+- `work-ft.breakpoint-gap`: /work/ft — open (1 critical, 0 major)
+- `work-ft.geometry-gap`: /work/ft — open (14 critical, 6 major)
 - `work-xr.breakpoint-gap`: /work/xr — open (0 critical, 0 major)
-- `work-xr.geometry-gap`: /work/xr — open (0 critical, 0 major)
+- `work-xr.geometry-gap`: /work/xr — open (14 critical, 0 major)
 
 ## Augmentation Backlog
 
@@ -41,14 +43,16 @@
 - Propagate the current GGD/CLAW contract commits into the active lane worktrees.
 - Run contract-readiness verification after worktree propagation.
 - Resume XR closure under the stronger geometry-law contract.
-- Add explicit FT route-gap export once the first FT falsification exists.
 - Expose the named bundle entrypoints directly in the ggd-* command surface.
+- Quarantine contaminated handoffs before they can feed authoritative gap records.
+- Split shared responsive and contrast artifacts into route-and-cycle-keyed evidence.
 - Convert recurring XR/product-family rejections into accepted system-level ratchets or explicitly discarded hypotheses.
 - Keep the systems-optimizer backlog current and measurable.
 
 ## Blockers
 
 - XR remains blocked by an open deterministic geometry gap.
+- FT remains blocked by open deterministic geometry and breakpoint gap evidence.
 - Press-go remains false until supervised and guarded autonomy proofs are complete.
 
 ## Stop Rule

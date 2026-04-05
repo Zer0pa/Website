@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "id": "work-ft.breakpoint-gap",
+  "route": "/work/ft",
+  "route_role": "product-family",
+  "kind": "breakpoint-gap",
+  "status": "open",
+  "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json",
+  "cycle_id": "C4-20260404T034639Z",
+  "phase_id": "C4 / First generic product proof",
+  "lane": "systems-qa",
+  "hypothesis": "The shared product-family shell should satisfy desktop, tablet, and mobile limiting cases without overflow or clipped authority rows.",
+  "summary": "Current `/work/ft` responsive evidence still fails the laptop limiting case with horizontal overflow and multiple shared-shell overflow culprits.",
+  "severity_counts": {
+    "critical": 1,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "top_drift_surfaces": [
+    "label-micro",
+    "authority-metric-value",
+    "authority-metric-card",
+    "page-shell.page-section",
+    "work.lane.page",
+    "work.lane.metric.row",
+    "substrate"
+  ],
+  "flagship_invariants_intact": true,
+  "responsive_integrity": {
+    "horizontal_overflow": true,
+    "notes": [
+      "WORK-FT / LAPTOP reports `Horizontal overflow: YES`.",
+      "Overflow culprit: `label-micro`.",
+      "Overflow culprit: `authority-metric-value`."
+    ]
+  },
+  "quality_findings_summary": "`npm run audit:quality`: 0 critical, 0 major, 0 minor.",
+  "recommendation": "Do not promote `/work/ft` while the laptop limiting case overflows. Repair the shared work-lane shell and rerun responsive falsification.",
+  "next_hypothesis": "Tighten shared authority-row containment and source-file metric sizing so the FT laptop shell stops exceeding the page width.",
+  "rollback_target": null,
+  "evidence_files": [
+    "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json",
+    "deterministic-design-system/reports/responsive/responsive.verification.md"
+  ],
+  "learning_captured": [
+    "FT already had a blocking breakpoint failure but no explicit route gap, so integration truth stayed too optimistic."
+  ],
+  "commands_run": [
+    "npm run audit:responsive"
+  ],
+  "known_risks": [
+    "The current responsive report is shared across routes, so the supporting evidence still carries shared-artifact contamination risk."
+  ]
+}

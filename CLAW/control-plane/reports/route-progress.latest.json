@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-04-05T16:03:36Z",
+  "weights_file": "CLAW/control-plane/product-kernel/route-progress.weights.json",
+  "overall_progress_percentage": 48.8,
+  "contrast_truth": {
+    "status": "contradictory",
+    "default_score": 50,
+    "report": "deterministic-design-system/reports/contrast/contrast.verification.json",
+    "contradiction": {
+      "relativePath": "CLAW/control-plane/runtime/handoffs/C4-20260404T044816Z-04.json",
+      "majorFailures": 72,
+      "summary": "Fresh contrast evidence is now red across all audited routes and conflicts with the runtime summary that marked contrast as passing on 2026-04-03."
+    }
+  },
+  "routes": [
+    {
+      "route": "/",
+      "progress_percentage": 70.9,
+      "progress_confidence": 0.5,
+      "bundle_scores": {
+        "layout": 83.5,
+        "geometry": 52,
+        "responsive": 85,
+        "quality": 100,
+        "contrast": 50
+      },
+      "evidence": {
+        "layout_report": "deterministic-design-system/reports/home.verification.md",
+        "geometry_report": "deterministic-design-system/reports/geometry-laws/home.geometry-law.json",
+        "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+        "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+        "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+      },
+      "responsive_status": "internal_overflow",
+      "responsive_device_states": [
+        {
+          "viewport": "HOME / LAPTOP",
+          "horizontal_overflow": false,
+          "internal_overflow": true
+        },
+        {
+          "viewport": "HOME / TABLET",
+          "horizontal_overflow": false,
+          "internal_overflow": true
+        },
+        {
+          "viewport": "HOME / MOBILE",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        }
+      ],
+      "contrast_status": "contradictory"
+    },
+    {
+      "route": "/imc",
+      "progress_percentage": 81.9,
+      "progress_confidence": 0.5,
+      "bundle_scores": {
+        "layout": 88,
+        "geometry": 74.5,
+        "responsive": 100,
+        "quality": 100,
+        "contrast": 50
+      },
+      "evidence": {
+        "layout_report": "deterministic-design-system/reports/imc.verification.md",
+        "geometry_report": "deterministic-design-system/reports/geometry-laws/imc.geometry-law.json",
+        "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+        "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+        "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+      },
+      "responsive_status": "clean",
+      "responsive_device_states": [
+        {
+          "viewport": "IMC / LAPTOP",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        },
+        {
+          "viewport": "IMC / TABLET",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        },
+        {
+          "viewport": "IMC / MOBILE",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        }
+      ],
+      "contrast_status": "contradictory"
+    },
+    {
+      "route": "/work/xr",
+      "progress_percentage": 23.5,
+      "progress_confidence": 0.5,
+      "bundle_scores": {
+        "layout": 0,
+        "geometry": 0,
+        "responsive": 85,
+        "quality": 100,
+        "contrast": 50
+      },
+      "evidence": {
+        "layout_report": "deterministic-design-system/reports/work-xr.verification.md",
+        "geometry_report": "deterministic-design-system/reports/geometry-laws/work-xr.geometry-law.json",
+        "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+        "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+        "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+      },
+      "responsive_status": "internal_overflow",
+      "responsive_device_states": [
+        {
+          "viewport": "WORK-XR / LAPTOP",
+          "horizontal_overflow": false,
+          "internal_overflow": true
+        },
+        {
+          "viewport": "WORK-XR / TABLET",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        },
+        {
+          "viewport": "WORK-XR / MOBILE",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        }
+      ],
+      "contrast_status": "contradictory"
+    },
+    {
+      "route": "/work/ft",
+      "progress_percentage": 19,
+      "progress_confidence": 0.5,
+      "bundle_scores": {
+        "layout": 0,
+        "geometry": 0,
+        "responsive": 40,
+        "quality": 100,
+        "contrast": 50
+      },
+      "evidence": {
+        "layout_report": "deterministic-design-system/reports/work-ft.verification.md",
+        "geometry_report": "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.json",
+        "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+        "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+        "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+      },
+      "responsive_status": "horizontal_overflow",
+      "responsive_device_states": [
+        {
+          "viewport": "WORK-FT / LAPTOP",
+          "horizontal_overflow": true,
+          "internal_overflow": true
+        },
+        {
+          "viewport": "WORK-FT / TABLET",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        },
+        {
+          "viewport": "WORK-FT / MOBILE",
+          "horizontal_overflow": false,
+          "internal_overflow": false
+        }
+      ],
+      "contrast_status": "contradictory"
+    }
+  ]
+}

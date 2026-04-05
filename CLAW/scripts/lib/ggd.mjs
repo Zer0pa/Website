@@ -624,7 +624,13 @@ export function evaluateRouteGate(laneId, route) {
 export function writeStateMarkdown(state) {
   const routes = state.route_status || {};
   const routeLines = Object.entries(routes)
-    .map(([route, info]) => `- \`${route}\`: ${info.status}${info.summary ? ` — ${info.summary}` : ''}`)
+    .map(([route, info]) => {
+      const progress =
+        typeof info.progress_percent === 'number'
+          ? ` (${Number(info.progress_percent).toFixed(1)}%${typeof info.progress_confidence === 'number' ? ` @ ${info.progress_confidence}` : ''})`
+          : '';
+      return `- \`${route}\`: ${info.status}${progress}${info.summary ? ` — ${info.summary}` : ''}`;
+    })
     .join('\n');
   const gapLines = (state.gap_records || [])
     .map((gap) => `- \`${gap.id}\`: ${gap.route} — ${gap.status} (${gap.severity_counts.critical} critical, ${gap.severity_counts.major} major)`)

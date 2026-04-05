@@ -1,3 +1,5 @@
+@import '../styles/ggd-tokens.css';
+
 :root {
   /* Contrast law: secondary text must clear 4.5:1 on the dark surfaces used by the system. */
   --color-void: #0c0c0c;
@@ -19,8 +21,8 @@
   --font-masthead: var(--font-oswald);
   --font-ui: 'Courier New', Courier, monospace;
 
-  --grid-max: 984px;
-  --grid-pad: 20px;
+  --grid-max: var(--ggd-home-desktop-shell-page-shell);
+  --grid-pad: var(--ggd-home-desktop-shell-page-pad);
   --section-gap: 64px;
   --section-gap-tight: 40px;
 }
@@ -2740,8 +2742,8 @@ p {
 /* Roll back responsive size/width expansion while retaining falsification safety fixes */
 @media (min-width: 1280px) {
   :root {
-    --grid-max: 984px;
-    --grid-pad: 20px;
+    --grid-max: var(--ggd-home-desktop-shell-page-shell);
+    --grid-pad: var(--ggd-home-desktop-shell-page-pad);
   }
 
   body {

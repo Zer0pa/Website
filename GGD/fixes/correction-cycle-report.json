@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "started_at": "2026-04-05T21:24:35.305Z",
+  "steps": [
+    {
+      "step": "evaluate_lawsets",
+      "status": "ok",
+      "lawsets_evaluated": 10,
+      "total_constraints": 74,
+      "passed": 74,
+      "failed": 0
+    },
+    {
+      "step": "generate_tokens",
+      "status": "ok"
+    },
+    {
+      "step": "build",
+      "status": "ok"
+    },
+    {
+      "step": "compile_fixes",
+      "status": "ok",
+      "manifests_written": 2
+    }
+  ],
+  "success": true,
+  "finished_at": "2026-04-05T21:24:56.164Z",
+  "duration_ms": 20859,
+  "constraint_summary": {
+    "total": 74,
+    "passed": 74,
+    "failed": 0,
+    "pass_rate": 100
+  }
+}

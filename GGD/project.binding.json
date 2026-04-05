@@ -38,6 +38,12 @@
     "equation_engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
     "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
   },
+  "equation_surface": {
+    "engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
+    "function_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/function-catalog.md",
+    "external_example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "local_lawset_index": "GGD/equations/lawsets.json"
+  },
   "verification_bundle_index": "GGD/verification/bundles.json",
   "augmentation_backlog": "GGD/augmentations/augmentation-backlog.json",
   "gap_dir": "GGD/gaps/routes",

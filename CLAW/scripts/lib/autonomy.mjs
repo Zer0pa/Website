@@ -228,7 +228,26 @@ export function readRunnerPolicy() {
 }
 
 export function activeQueuePath(runtime) {
-  return runtime.active_cycle?.queue_file ? projectPath(runtime.active_cycle.queue_file) : null;
+  const queueIndexPath = controlPath('queue', 'index.json');
+  let indexedActiveQueue = null;
+  if (fs.existsSync(queueIndexPath)) {
+    try {
+      indexedActiveQueue = JSON.parse(fs.readFileSync(queueIndexPath, 'utf8')).active || null;
+    } catch {}
+  }
+
+  for (const candidate of [runtime.active_cycle?.queue_file, runtime.queue?.active, indexedActiveQueue]) {
+    if (!candidate) {
+      continue;
+    }
+
+    const absolutePath = projectPath(candidate);
+    if (fs.existsSync(absolutePath)) {
+      return absolutePath;
+    }
+  }
+
+  return null;
 }
 
 export function loadActiveQueue(runtime) {

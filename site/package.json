@@ -25,6 +25,7 @@
     "claw:run-cycle": "node ../CLAW/scripts/run-cycle.mjs",
     "claw:settle-cycle": "node ../CLAW/scripts/settle-cycle.mjs",
     "claw:health": "node ../CLAW/scripts/health-check.mjs",
+    "claw:progress": "node ../CLAW/scripts/compute-route-progress.mjs --write",
     "claw:recover": "node ../CLAW/scripts/recover-cycle.mjs",
     "claw:integration-replay": "node ../CLAW/scripts/integration-replay.mjs",
     "claw:recovery-drill": "node ../CLAW/scripts/run-recovery-drill.mjs",
@@ -33,7 +34,11 @@
     "claw:autonomy:once": "node ../CLAW/scripts/autonomy-once.mjs",
     "claw:autonomy:loop": "node ../CLAW/scripts/autonomy-loop.mjs",
     "claw:autonomy:install-service": "node ../CLAW/scripts/install-autonomy-service.mjs",
-    "claw:autonomy:uninstall-service": "node ../CLAW/scripts/uninstall-autonomy-service.mjs"
+    "claw:autonomy:uninstall-service": "node ../CLAW/scripts/uninstall-autonomy-service.mjs",
+    "ggd:evaluate": "node ../GGD/scripts/evaluate-lawset.mjs",
+    "ggd:tokens": "node ../GGD/scripts/generate-tokens.mjs",
+    "ggd:fixes": "node ../GGD/scripts/compile-fixes.mjs",
+    "ggd:correction-cycle": "node ../GGD/scripts/correction-loop.mjs"
   },
   "dependencies": {
     "@observablehq/plot": "^0.6",

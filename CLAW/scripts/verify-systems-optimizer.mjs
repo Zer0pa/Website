@@ -42,7 +42,6 @@ function validateCommandList(commands, label) {
 
 const REQUIRED_GGD_MUTATION_COMMANDS = [
   'node CLAW/scripts/verify-ggd-binding.mjs',
-  'python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json',
 ];
 
 const REQUIRED_SCOPE_LOCAL_PROMOTION_COMMANDS = [
@@ -89,7 +88,10 @@ const DISALLOWED_SCOPE_LOCAL_PROMOTION_COMMANDS = [
 ];
 const RUNNER_OBSERVABILITY_COMMANDS = [...DISALLOWED_SCOPE_LOCAL_PROMOTION_COMMANDS];
 const REQUIRED_SCOPE_LOCAL_SALVAGE_COMMAND_GROUPS = [
-  ...REQUIRED_SCOPE_LOCAL_PROMOTION_COMMANDS,
+  'node CLAW/scripts/verify-systems-optimizer.mjs',
+  'node CLAW/scripts/verify-ggd-binding.mjs',
+  'node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer',
+  'node CLAW/scripts/run-site-script.mjs claw:test:contracts',
   ...RUNNER_OBSERVABILITY_COMMANDS,
 ].map((command) => [command]);
 

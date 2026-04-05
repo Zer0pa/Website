@@ -1,9 +1,9 @@
 {
   "version": 1,
   "project_reference": {
-    "project_md_updated": "2026-04-03",
+    "project_md_updated": "2026-04-05",
     "core_research_question": "How do we turn the Zer0pa website into a deterministic geometry program whose layout, typography, color, semantic hierarchy, packet truth, and code quality are governed by explicit laws and falsified continuously until canonical closure is reached?",
-    "current_focus": "Propagate the GGD contract into active lane worktrees, require geometry-law evidence in lane execution, and resume route-family closure under one horizon program."
+    "current_focus": "Reduce route and system truth from artifacts, keep gap export honest, and push route-family verification closer to equation-native acceptance."
   },
   "project_contract": {
     "program_id": "ggd-zer0pa-website-v1",
@@ -60,9 +60,9 @@
     "current_plan": "lane-contract-propagation",
     "total_plans_in_phase": 3,
     "status": "in_progress",
-    "last_activity": "2026-04-03T23:30:06Z",
-    "last_activity_desc": "Established the horizon program, promoted geometry-law evidence into lane contracts, and began contract propagation into active worktrees.",
-    "progress_percent": 68
+    "last_activity": "2026-04-05T19:20:06Z",
+    "last_activity_desc": "Established executable route progress reduction, exported missing FT gap state, and tightened the contract surfaces around contradiction-aware truth.",
+    "progress_percent": 48.8
   },
   "open_questions": [
     "Which GGD command surface should be wired first into the Codex execution layer?",
@@ -85,13 +85,15 @@
     "Propagate the current GGD/CLAW contract commits into the active lane worktrees.",
     "Run contract-readiness verification after worktree propagation.",
     "Resume XR closure under the stronger geometry-law contract.",
-    "Add explicit FT route-gap export once the first FT falsification exists.",
     "Expose the named bundle entrypoints directly in the ggd-* command surface.",
+    "Quarantine contaminated handoffs before they can feed authoritative gap records.",
+    "Split shared responsive and contrast artifacts into route-and-cycle-keyed evidence.",
     "Convert recurring XR/product-family rejections into accepted system-level ratchets or explicitly discarded hypotheses.",
     "Keep the systems-optimizer backlog current and measurable."
   ],
   "blockers": [
     "XR remains blocked by an open deterministic geometry gap.",
+    "FT remains blocked by open deterministic geometry and breakpoint gap evidence.",
     "Press-go remains false until supervised and guarded autonomy proofs are complete."
   ],
   "session": {
@@ -117,28 +119,49 @@
     "agent_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/agent-catalog.json",
     "function_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/function-catalog.md",
     "equation_engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
-    "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+    "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "local_lawset_index": "GGD/equations/lawsets.json",
+    "route_progress_script": "CLAW/scripts/compute-route-progress.mjs",
+    "route_progress_report": "CLAW/control-plane/reports/route-progress.latest.json",
+    "evaluate_lawset_script": "GGD/scripts/evaluate-lawset.mjs",
+    "generate_tokens_script": "GGD/scripts/generate-tokens.mjs",
+    "compile_fixes_script": "GGD/scripts/compile-fixes.mjs",
+    "correction_loop_script": "GGD/scripts/correction-loop.mjs",
+    "tokens_output": "site/src/styles/ggd-tokens.css",
+    "fixes_dir": "GGD/fixes"
   },
   "route_status": {
     "/": {
       "role": "home",
       "status": "canonical",
-      "summary": "homepage accepted through canonical closure"
+      "summary": "homepage accepted through canonical closure",
+      "progress_percent": 70.9,
+      "progress_confidence": 0.5,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     },
     "/imc": {
       "role": "flagship",
       "status": "canonical",
-      "summary": "flagship IMC accepted through canonical closure"
+      "summary": "flagship IMC accepted through canonical closure",
+      "progress_percent": 81.9,
+      "progress_confidence": 0.5,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     },
     "/work/xr": {
       "role": "product-family",
       "status": "blocked",
-      "summary": "`/work/xr` remains blocked. Layout and geometry-law acceptance both fail, while responsive overflow and contrast stay clean."
+      "summary": "Rejected `/work/xr` after fresh layout, geometry-law, responsive, quality, and contrast falsification reruns.",
+      "progress_percent": 23.5,
+      "progress_confidence": 0.5,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     },
     "/work/ft": {
       "role": "product-family",
-      "status": "pending-proof",
-      "summary": "FT replication proof still pending"
+      "status": "blocked",
+      "summary": "Current `/work/ft` responsive evidence still fails the laptop limiting case with horizontal overflow and multiple shared-shell overflow culprits.",
+      "progress_percent": 19,
+      "progress_confidence": 0.5,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     }
   },
   "verification_bundle_index": {
@@ -155,6 +178,30 @@
   },
   "gap_records": [
     {
+      "id": "work-ft.breakpoint-gap",
+      "route": "/work/ft",
+      "status": "open",
+      "severity_counts": {
+        "critical": 1,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json"
+    },
+    {
+      "id": "work-ft.geometry-gap",
+      "route": "/work/ft",
+      "status": "open",
+      "severity_counts": {
+        "critical": 14,
+        "major": 6,
+        "minor": 4,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json"
+    },
+    {
       "id": "work-xr.breakpoint-gap",
       "route": "/work/xr",
       "status": "open",
@@ -164,19 +211,19 @@
         "minor": 0,
         "note": 0
       },
-      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T211939Z-03.json"
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T044816Z-04.json"
     },
     {
       "id": "work-xr.geometry-gap",
       "route": "/work/xr",
       "status": "open",
       "severity_counts": {
-        "critical": 0,
+        "critical": 14,
         "major": 0,
         "minor": 0,
         "note": 0
       },
-      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T215331Z-03.json"
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json"
     }
   ],
   "augmentation_backlog": [
@@ -306,9 +353,197 @@
     "state_file": "CLAW/control-plane/system-optimizer/state.json",
     "backlog_file": "CLAW/control-plane/system-optimizer/backlog.json",
     "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs",
-    "backlog_count": 3,
+    "backlog_count": 30,
     "active_hypothesis": null,
-    "last_kept_change": null,
+    "last_kept_change": {
+      "id": "sysopt.hypothesis-card-inventory-alignment-lock",
+      "hypothesis": "Systems-optimizer recovery becomes safer if every hypothesis-card artifact in `CLAW/control-plane/system-optimizer/hypotheses/` must resolve to exactly one backlog card with the same id and status, so orphaned or filename-drifted replay artifacts cannot survive outside backlog truth.",
+      "writable_scope": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/system-optimizer/**",
+        "CLAW/PRD*.md"
+      ],
+      "evaluation_bundle": [
+        "node CLAW/scripts/verify-systems-optimizer.mjs",
+        "node CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+        "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+      ],
+      "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` still reported clean after a controlled orphan baseline card `CLAW/control-plane/system-optimizer/hypotheses/sysopt.orphan-inventory-baseline.json` was added with no matching backlog item, so replayable artifact inventory could drift outside backlog truth. After the ratchet, the verifier rejects orphan or filename/id-drifted hypothesis cards in `CLAW/control-plane/system-optimizer/hypotheses/` while the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if every systems-optimizer hypothesis-card artifact must resolve to exactly one backlog item with the same id and status and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+      "learning_item": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
+      "recorded_at": "2026-04-04T20:33:38Z"
+    },
     "keep_only_if_better": true
+  },
+  "route_progress": {
+    "report_file": "CLAW/control-plane/reports/route-progress.latest.json",
+    "generated_at": "2026-04-05T16:03:36Z",
+    "overall_progress_percentage": 48.8,
+    "contrast_truth": {
+      "status": "contradictory",
+      "default_score": 50,
+      "report": "deterministic-design-system/reports/contrast/contrast.verification.json",
+      "contradiction": {
+        "relativePath": "CLAW/control-plane/runtime/handoffs/C4-20260404T044816Z-04.json",
+        "majorFailures": 72,
+        "summary": "Fresh contrast evidence is now red across all audited routes and conflicts with the runtime summary that marked contrast as passing on 2026-04-03."
+      }
+    },
+    "routes": [
+      {
+        "route": "/",
+        "progress_percentage": 70.9,
+        "progress_confidence": 0.5,
+        "bundle_scores": {
+          "layout": 83.5,
+          "geometry": 52,
+          "responsive": 85,
+          "quality": 100,
+          "contrast": 50
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/home.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/home.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "internal_overflow",
+        "responsive_device_states": [
+          {
+            "viewport": "HOME / LAPTOP",
+            "horizontal_overflow": false,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "HOME / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "HOME / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "contradictory"
+      },
+      {
+        "route": "/imc",
+        "progress_percentage": 81.9,
+        "progress_confidence": 0.5,
+        "bundle_scores": {
+          "layout": 88,
+          "geometry": 74.5,
+          "responsive": 100,
+          "quality": 100,
+          "contrast": 50
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/imc.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/imc.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "clean",
+        "responsive_device_states": [
+          {
+            "viewport": "IMC / LAPTOP",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "IMC / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "IMC / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "contradictory"
+      },
+      {
+        "route": "/work/xr",
+        "progress_percentage": 23.5,
+        "progress_confidence": 0.5,
+        "bundle_scores": {
+          "layout": 0,
+          "geometry": 0,
+          "responsive": 85,
+          "quality": 100,
+          "contrast": 50
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/work-xr.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/work-xr.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "internal_overflow",
+        "responsive_device_states": [
+          {
+            "viewport": "WORK-XR / LAPTOP",
+            "horizontal_overflow": false,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "WORK-XR / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "WORK-XR / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "contradictory"
+      },
+      {
+        "route": "/work/ft",
+        "progress_percentage": 19,
+        "progress_confidence": 0.5,
+        "bundle_scores": {
+          "layout": 0,
+          "geometry": 0,
+          "responsive": 40,
+          "quality": 100,
+          "contrast": 50
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/work-ft.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "horizontal_overflow",
+        "responsive_device_states": [
+          {
+            "viewport": "WORK-FT / LAPTOP",
+            "horizontal_overflow": true,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "WORK-FT / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "WORK-FT / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "contradictory"
+      }
+    ]
   }
 }

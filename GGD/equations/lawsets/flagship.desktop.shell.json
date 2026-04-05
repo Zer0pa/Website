@@ -1,0 +1,97 @@
+{
+  "id": "flagship.desktop.shell",
+  "constants": {
+    "u": 8,
+    "viewport_width": 1024,
+    "page_pad": 20,
+    "page_shell": 984,
+    "cols": 16,
+    "gutter": 24,
+    "hero_title_x": 20,
+    "hero_title_width": 260,
+    "hero_meta_x": 736,
+    "hero_meta_width": 248,
+    "hero_identity_x": 20,
+    "hero_identity_width": 520,
+    "hero_authority_x": 596,
+    "hero_authority_width": 388,
+    "metric_row_width": 984
+  },
+  "derived": {
+    "shell_from_viewport": "viewport_width - page_pad * 2",
+    "col_w": "col_width(page_shell, cols, gutter)",
+    "title_meta_gap": "hero_meta_x - (hero_title_x + hero_title_width)",
+    "title_meta_span": "hero_meta_x + hero_meta_width - hero_title_x",
+    "info_gap": "hero_authority_x - (hero_identity_x + hero_identity_width)",
+    "info_span": "hero_authority_x + hero_authority_width - hero_identity_x",
+    "title_ratio": "ratio(hero_title_width, title_meta_span)"
+  },
+  "constraints": [
+    {
+      "id": "flagship.shell.from_viewport",
+      "lhs": "shell_from_viewport",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "flagship.col_width.range",
+      "lhs": "col_w",
+      "op": "between",
+      "rhs": [
+        38,
+        40
+      ],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "flagship.title_meta_gap.multiple_of_u",
+      "lhs": "title_meta_gap",
+      "op": "multiple_of",
+      "rhs": "u",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "flagship.info_gap.multiple_of_u",
+      "lhs": "info_gap",
+      "op": "multiple_of",
+      "rhs": "u",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "flagship.title_meta_span.matches_shell",
+      "lhs": "title_meta_span",
+      "op": "approx_eq",
+      "rhs": "page_shell - page_pad",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "flagship.info_span.matches_shell",
+      "lhs": "info_span",
+      "op": "approx_eq",
+      "rhs": "page_shell - page_pad",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "flagship.title_ratio.range",
+      "lhs": "title_ratio",
+      "op": "between",
+      "rhs": [
+        0.26,
+        0.28
+      ],
+      "severity": "MINOR"
+    },
+    {
+      "id": "flagship.metric_row.matches_shell",
+      "lhs": "metric_row_width",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    }
+  ]
+}

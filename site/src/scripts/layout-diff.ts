@@ -53,6 +53,7 @@ type DiffItem = {
   dw: number;
   dh: number;
   distance: number;
+  toleranceOverrun: number;
   notes: string[];
 };
 
@@ -66,20 +67,24 @@ function readJsonFile<T>(filePath: string): T {
   return JSON.parse(fs.readFileSync(filePath, 'utf8')) as T;
 }
 
-function classifySeverity(distance: number, notes: string[]) {
+function classifySeverity(distance: number, toleranceOverrun: number, notes: string[]) {
   if (notes.includes('missing-live-entry')) {
     return 'critical' as const;
   }
 
-  if (distance > 120) {
+  if (distance > 120 || toleranceOverrun > 48) {
     return 'critical' as const;
   }
 
-  if (distance > 60) {
+  if (distance > 60 || toleranceOverrun > 24) {
     return 'major' as const;
   }
 
-  if (distance > 24) {
+  if (distance > 24 || toleranceOverrun > 0) {
+    return 'minor' as const;
+  }
+
+  if (notes.some((note) => note.startsWith('bg:') || note.startsWith('text:'))) {
     return 'minor' as const;
   }
 
@@ -96,6 +101,7 @@ function compareEntry(reference: LayoutReferenceEntry, live?: LiveEntry): DiffIt
       dw: Number.POSITIVE_INFINITY,
       dh: Number.POSITIVE_INFINITY,
       distance: Number.POSITIVE_INFINITY,
+      toleranceOverrun: Number.POSITIVE_INFINITY,
       notes: ['missing-live-entry'],
     };
   }
@@ -105,12 +111,18 @@ function compareEntry(reference: LayoutReferenceEntry, live?: LiveEntry): DiffIt
   const dw = Math.round(Math.abs(reference.width - live.width) * 100) / 100;
   const dh = reference.ignoreHeightDelta ? 0 : Math.round(Math.abs(reference.height - live.height) * 100) / 100;
   const distance = Math.max(dx, dy, dw, dh);
+  const positionTolerance = reference.positionTolerance ?? 12;
+  const sizeTolerance = reference.sizeTolerance ?? 18;
+  const toleranceOverrun =
+    Math.round(
+      Math.max(dx - positionTolerance, dy - positionTolerance, dw - sizeTolerance, dh - sizeTolerance, 0) * 100,
+    ) / 100;
   const notes: string[] = [];
 
-  if (dx > (reference.positionTolerance ?? 12)) notes.push(`x>${reference.positionTolerance ?? 12}`);
-  if (dy > (reference.positionTolerance ?? 12)) notes.push(`y>${reference.positionTolerance ?? 12}`);
-  if (dw > (reference.sizeTolerance ?? 18)) notes.push(`w>${reference.sizeTolerance ?? 18}`);
-  if (dh > (reference.sizeTolerance ?? 18)) notes.push(`h>${reference.sizeTolerance ?? 18}`);
+  if (dx > positionTolerance) notes.push(`x>${positionTolerance}`);
+  if (dy > positionTolerance) notes.push(`y>${positionTolerance}`);
+  if (dw > sizeTolerance) notes.push(`w>${sizeTolerance}`);
+  if (dh > sizeTolerance) notes.push(`h>${sizeTolerance}`);
   if (reference.backgroundColor && live.backgroundColor !== reference.backgroundColor) {
     notes.push(`bg:${live.backgroundColor}`);
   }
@@ -120,12 +132,13 @@ function compareEntry(reference: LayoutReferenceEntry, live?: LiveEntry): DiffIt
 
   return {
     id: reference.id,
-    severity: classifySeverity(distance, notes),
+    severity: classifySeverity(distance, toleranceOverrun, notes),
     dx,
     dy,
     dw,
     dh,
     distance,
+    toleranceOverrun,
     notes,
   };
 }
@@ -178,7 +191,7 @@ function summarizeDiff(page: LayoutPageId, spec: LayoutPageSpec, live: LiveLayou
 ${top
   .map(
     (item) =>
-      `- \`${item.id}\` [${item.severity}] dx=${item.dx} dy=${item.dy} dw=${item.dw} dh=${item.dh}${
+      `- \`${item.id}\` [${item.severity}] dx=${item.dx} dy=${item.dy} dw=${item.dw} dh=${item.dh} overrun=${item.toleranceOverrun}${
         item.notes.length ? ` :: ${item.notes.join(', ')}` : ''
       }`,
   )

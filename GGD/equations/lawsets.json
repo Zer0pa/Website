@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "lawsets": [
+    {
+      "id": "home.desktop.shell",
+      "kind": "route-shell",
+      "route": "/",
+      "route_role": "home",
+      "lawset": "GGD/equations/lawsets/home.desktop.shell.json"
+    },
+    {
+      "id": "flagship.desktop.shell",
+      "kind": "route-shell",
+      "route": "/imc",
+      "route_role": "flagship",
+      "lawset": "GGD/equations/lawsets/flagship.desktop.shell.json"
+    },
+    {
+      "id": "product-family.desktop.shell",
+      "kind": "route-shell",
+      "route": "/work/[slug]",
+      "route_role": "product-family",
+      "lawset": "GGD/equations/lawsets/product-family.desktop.shell.json"
+    },
+    {
+      "id": "typography.scale",
+      "kind": "typography",
+      "lawset": "GGD/equations/lawsets/typography.scale.json"
+    },
+    {
+      "id": "color.contrast",
+      "kind": "color",
+      "lawset": "GGD/equations/lawsets/color.contrast.json"
+    }
+  ]
+}

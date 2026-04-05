@@ -1,12 +1,21 @@
 {
   "version": 1,
   "checkpoint_id": "INT-20260403T120500Z",
-  "status": "accepted",
+  "status": "stale",
   "source_commits": [
     "2799941",
     "4f43c0d",
     "b940d26"
   ],
   "rollback_point": "cf7b49ee7e3dad686427ec3326da6a8152a4c0e8",
-  "updated_at": "2026-04-03T12:05:00Z"
+  "updated_at": "2026-04-03T12:05:00Z",
+  "invalidated_at": "2026-04-04T13:25:59Z",
+  "stale_reason": "Current integration checkpoint is stale for /work/xr: systems-qa settled rejected.",
+  "stale_routes": [
+    "/work/xr"
+  ],
+  "open_gap_ids": [
+    "work-xr.geometry-gap",
+    "work-xr.breakpoint-gap"
+  ]
 }

@@ -163,6 +163,109 @@ function parseRecordedTimestamp(value) {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+function parseAuditSummaryTimestamp(value) {
+  if (!value) {
+    return null;
+  }
+
+  const direct = Date.parse(String(value));
+  if (Number.isFinite(direct)) {
+    return direct;
+  }
+
+  const dateMatch = String(value).match(/\b(\d{4}-\d{2}-\d{2})\b/);
+  if (!dateMatch) {
+    return null;
+  }
+
+  const parsed = Date.parse(`${dateMatch[1]}T00:00:00Z`);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function readRecentRuntimeHandoffs(limit = Number.POSITIVE_INFINITY) {
+  const handoffDir = controlPath('runtime', 'handoffs');
+  if (!fs.existsSync(handoffDir)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(handoffDir)
+    .filter((name) => name.endsWith('.json'))
+    .map((name) => {
+      const absolutePath = path.join(handoffDir, name);
+      const relativePath = relativeProjectPath(absolutePath);
+      const handoff = readOptionalJson(relativePath);
+      const stat = fs.statSync(absolutePath);
+      const recordedAt =
+        parseRecordedTimestamp(
+          handoff?.completed_at ||
+            handoff?.finished_at ||
+            handoff?.recorded_at ||
+            handoff?.settled_at ||
+            handoff?.cycle_id ||
+            name,
+        ) || stat.mtimeMs;
+
+      return {
+        handoff,
+        relativePath,
+        recordedAt,
+      };
+    })
+    .filter((entry) => entry.handoff)
+    .sort((left, right) => right.recordedAt - left.recordedAt)
+    .slice(0, Number.isFinite(limit) ? limit : undefined);
+}
+
+function summarizeContrastFailure(entry, auditTimestamp) {
+  if (!entry?.handoff) {
+    return null;
+  }
+
+  if (auditTimestamp && entry.recordedAt && entry.recordedAt < auditTimestamp) {
+    return null;
+  }
+
+  const fragments = [
+    entry.handoff.summary,
+    ...(entry.handoff.audit_result?.notes || []),
+    ...(entry.handoff.postflight_metrics?.notes || []),
+    ...(entry.handoff.blockers || []),
+  ]
+    .filter(Boolean)
+    .map((value) => String(value).trim())
+    .filter(Boolean);
+
+  let majorFailures = 0;
+  let summary = null;
+
+  for (const fragment of fragments) {
+    const majorMatch = fragment.match(/contrast[\s\S]*?(\d+)\s+major/i);
+    if (majorMatch) {
+      majorFailures = Math.max(majorFailures, Number(majorMatch[1] || 0));
+      summary = summary || fragment;
+    }
+
+    if (
+      /contrast evidence is now red/i.test(fragment) ||
+      /latest_audits\.contrast\s*=\s*pass/i.test(fragment) ||
+      /contrast bundle is not promotable/i.test(fragment)
+    ) {
+      summary = summary || fragment;
+    }
+  }
+
+  if (!summary && majorFailures === 0) {
+    return null;
+  }
+
+  return {
+    relativePath: entry.relativePath,
+    majorFailures,
+    summary: summary || `contrast failure recorded in ${entry.relativePath}`,
+  };
+}
+
 export function lookupPhase(executionPlan, runtimePhase, overridePhase = null) {
   const requested = phaseToken(overridePhase || runtimePhase || executionPlan.current_phase);
   return executionPlan.phases.find((phase) => phase.id === requested) || null;
@@ -284,6 +387,22 @@ export function validateControlPlane(control, options = {}) {
     issues.push(
       `Current checkpoint ${checkpointState.checkpoint_id || 'unknown'} is stale while newer or unresolved GGD route gaps remain: ${staleCheckpointGaps.map((gap) => gap.id).join(', ')}.`,
     );
+  }
+
+  const runtimeContrastSummary = String(control.runtime.latest_audits?.contrast || '');
+  if (/pass/i.test(runtimeContrastSummary)) {
+    const contrastAuditTimestamp = parseAuditSummaryTimestamp(runtimeContrastSummary);
+    const contrastContradictions = readRecentRuntimeHandoffs()
+      .map((entry) => summarizeContrastFailure(entry, contrastAuditTimestamp))
+      .filter(Boolean);
+
+    if (contrastContradictions.length > 0) {
+      const latest = contrastContradictions[0];
+      const magnitude = latest.majorFailures > 0 ? `${latest.majorFailures} major failures` : 'a later failing contrast verdict';
+      issues.push(
+        `runtime.latest_audits.contrast claims pass, but newer handoff evidence reports ${magnitude} in ${latest.relativePath}: ${latest.summary}`,
+      );
+    }
   }
 
   if (
