@@ -115,6 +115,7 @@ export function loadControlPlane() {
     cycleTemplates: readJson('CLAW/control-plane/cycle-templates.json'),
     executionPlan: readJson('CLAW/control-plane/plans/canonical-routes-to-producing.json'),
     recursiveImprovement: readJson('CLAW/control-plane/recursive-improvement.json'),
+    runnerPolicy: readOptionalJson('CLAW/control-plane/runner-policy.json'),
     runtime: readJson('CLAW/control-plane/state/runtime-state.json'),
     stateMachine: readJson('CLAW/control-plane/state-machine.json'),
   };
@@ -271,6 +272,31 @@ export function lookupPhase(executionPlan, runtimePhase, overridePhase = null) {
   return executionPlan.phases.find((phase) => phase.id === requested) || null;
 }
 
+function laneActivationOverrides(runnerPolicy) {
+  return (
+    runnerPolicy?.execution?.activation_overrides ||
+    runnerPolicy?.execution?.lane_activation_overrides ||
+    {}
+  );
+}
+
+function laneDisabledForPhase(runnerPolicy, laneId, phaseId) {
+  const override = laneActivationOverrides(runnerPolicy)?.[laneId];
+  if (!override || typeof override !== 'object' || Array.isArray(override)) {
+    return false;
+  }
+
+  if (override.enabled === false) {
+    return true;
+  }
+
+  const disabledPhases = Array.isArray(override.disabled_phases)
+    ? override.disabled_phases.map((value) => phaseToken(value)).filter(Boolean)
+    : [];
+
+  return disabledPhases.includes(phaseToken(phaseId));
+}
+
 function referencedFiles(control) {
   return [
     control.runtime.latest_wave_report,
@@ -328,6 +354,24 @@ export function validateControlPlane(control, options = {}) {
     warnings.push(
       `Plan current_phase (${control.executionPlan.current_phase}) differs from runtime current_phase (${control.runtime.current_phase})`,
     );
+  }
+
+  for (const [laneId, override] of Object.entries(laneActivationOverrides(control.runnerPolicy))) {
+    if (!lanesById.has(laneId)) {
+      issues.push(`Runner activation override references unknown lane ${laneId}`);
+      continue;
+    }
+
+    if (!override || typeof override !== 'object' || Array.isArray(override)) {
+      issues.push(`Runner activation override for ${laneId} must be an object.`);
+      continue;
+    }
+
+    for (const disabledPhase of override.disabled_phases || []) {
+      if (!control.executionPlan.phases.some((candidate) => candidate.id === phaseToken(disabledPhase))) {
+        issues.push(`Runner activation override for ${laneId} references unknown phase ${disabledPhase}.`);
+      }
+    }
   }
 
   for (const lane of control.agentLanes.lanes) {
@@ -506,6 +550,9 @@ export function buildCyclePlan(control, options = {}) {
   }
 
   const lanesById = laneMap(control.agentLanes);
+  const activeLaneTemplates = (template.lanes || []).filter(
+    (laneTemplate) => !laneDisabledForPhase(control.runnerPolicy, laneTemplate.lane_id, phase.id),
+  );
   const createdAt = localTimestamp();
   const cycleId = cycleIdForPhase(phase.id);
   const profile = options.profile || template.profile || control.cycleTemplates.default_profile || 'supervised_dry_run';
@@ -527,7 +574,7 @@ export function buildCyclePlan(control, options = {}) {
       cycle_templates: 'CLAW/control-plane/cycle-templates.json',
       agent_lanes: 'CLAW/control-plane/agent-lanes.json',
     },
-    jobs: template.lanes.map((laneTemplate, index) => {
+    jobs: activeLaneTemplates.map((laneTemplate, index) => {
       const lane = lanesById.get(laneTemplate.lane_id);
       if (!lane) {
         throw new Error(`Unknown lane in template ${phase.id}: ${laneTemplate.lane_id}`);

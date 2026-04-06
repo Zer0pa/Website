@@ -52,7 +52,8 @@
     "backlog": "CLAW/control-plane/system-optimizer/backlog.json",
     "optimizer_command": "ggd-system-optimize",
     "optimizer_agent": "ggd-systems-optimizer",
-    "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs"
+    "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs",
+    "local_lawset_index": "GGD/equations/lawsets.json"
   },
   "route_roles": {
     "/": "home",

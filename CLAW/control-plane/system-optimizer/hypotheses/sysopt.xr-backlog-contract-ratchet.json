@@ -33,5 +33,12 @@
   "measurement": "Before the ratchet, `CLAW/scripts/verify-systems-optimizer.mjs` enforced `/work/xr` gap binding only for active, kept, or rejected cards in state, so a backlog `sysopt.xr-*` item could omit `target_route`, `target_gap`, or `evaluator_focus` and still verify clean. After the ratchet, the verifier applies the same XR gap contract to backlog items and the fixed promotion bundle stays green.",
   "keep_rule": "Keep only if malformed backlog `sysopt.xr-*` cards are rejected for missing `/work/xr` gap binding or evaluator focus, while the declared scope-local evaluation bundle passes without touching route implementation paths.",
   "learning_item": "XR systems-optimizer ratchets must fail closed at backlog time; if the authoritative gap binding is optional before execution, route lanes can inherit vague XR work orders.",
-  "recorded_at": "2026-04-04T01:32:45Z"
+  "recorded_at": "2026-04-04T01:32:45Z",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  }
 }

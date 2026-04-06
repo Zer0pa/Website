@@ -5,8 +5,8 @@
   "route_role": "product-family",
   "kind": "geometry-gap",
   "status": "open",
-  "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
-  "cycle_id": "C4-20260404T131253Z",
+  "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "cycle_id": "C4-20260406T094301Z",
   "phase_id": "C4",
   "lane": "systems-qa",
   "hypothesis": "Replay conflicts must fail closed as lane-local rejections so the runner can settle cleanly and preserve deterministic state.",
@@ -34,6 +34,12 @@
   "responsive_integrity": {
     "horizontal_overflow": false,
     "notes": []
+  },
+  "quality_severity_counts": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
   },
   "quality_findings_summary": "`npm run audit:quality`: 0 critical, 0 major, 0 minor.",
   "recommendation": "Reconcile the upstream/downstream overlap, then re-run the bounded slice from a clean base.",
@@ -71,5 +77,5 @@
   "known_risks": [
     "The downstream lane did not run because upstream accepted commits could not be overlaid cleanly."
   ],
-  "preserved_measured_evidence_from": "CLAW/control-plane/runtime/handoffs/C4-20260404T125747Z-04.json"
+  "preserved_measured_evidence_from": "CLAW/control-plane/runtime/handoffs/C4-20260406T093109Z-03.json"
 }

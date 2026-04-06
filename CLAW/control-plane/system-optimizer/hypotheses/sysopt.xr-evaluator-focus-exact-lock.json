@@ -33,5 +33,12 @@
   "keep_rule": "Keep only if the verifier fails XR cards that add non-authoritative or duplicate evaluator focus surfaces while the fixed scope-local evaluation bundle passes without touching route implementation paths.",
   "verdict": "kept",
   "learning_item": "XR systems-optimizer ratchets must use the exact evaluator focus contract; allowing extra or duplicate focus surfaces reintroduces vague route-neutral drift.",
-  "recorded_at": "2026-04-04T03:27:24Z"
+  "recorded_at": "2026-04-04T03:27:24Z",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  }
 }

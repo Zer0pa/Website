@@ -34,5 +34,12 @@
   "measurement": "Before the ratchet, `sysopt.xr-*` cards could bind to the authoritative `/work/xr` gap artifact yet still stay vague about which named broken law they were tightening, so route-neutral system work could drift away from the first measured XR failure. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any `sysopt.xr-*` card that omits `first_broken_law` or names a law outside `GGD/gaps/routes/work-xr.geometry-gap.json.top_drift_surfaces`, and the fixed promotion bundle stays green.",
   "keep_rule": "Keep only if the verifier fails XR cards that omit `first_broken_law` or target a non-authoritative XR drift surface, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
   "learning_item": "XR systems-optimizer ratchets must bind to one named broken law from the authoritative gap surface list, or evaluator tightening still leaves route-neutral work too vague to falsify.",
-  "recorded_at": "2026-04-04T01:57:22Z"
+  "recorded_at": "2026-04-04T01:57:22Z",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  }
 }

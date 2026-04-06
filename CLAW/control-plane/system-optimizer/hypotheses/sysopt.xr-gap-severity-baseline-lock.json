@@ -32,5 +32,12 @@
   "measurement": "Before the ratchet, `sysopt.xr-*` cards bound the authoritative gap and first broken law but not the current severity baseline, so a stale control-plane slice could still speak about XR failure magnitude vaguely after the gap changed. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any XR card whose `severity_baseline` is missing or drifts from `GGD/gaps/routes/work-xr.geometry-gap.json.severity_counts`, and the fixed scope-local promotion bundle stays green.",
   "keep_rule": "Keep only if the verifier fails XR cards with missing or stale `severity_baseline` counts while the fixed scope-local evaluation bundle passes without touching route implementation paths.",
   "learning_item": "XR systems-optimizer ratchets must pin the current severity baseline from the authoritative gap artifact, or route-neutral work can optimize against stale failure magnitude.",
-  "recorded_at": "2026-04-04T02:56:05Z"
+  "recorded_at": "2026-04-04T02:56:05Z",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  }
 }

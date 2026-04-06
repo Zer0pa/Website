@@ -6,9 +6,9 @@
   "current_milestone": "M4-ggd-autonomy-production-horizon",
   "current_phase": "C4-first-generic-product-proof",
   "active_wave": "W6",
-  "last_updated": "2026-04-05T21:35:57Z",
+  "last_updated": "2026-04-06T12:56:34Z",
   "control_style": "evaluator-optimizer",
-  "latest_wave_report": "CLAW/control-plane/reports/C4-20260404T205317Z.md",
+  "latest_wave_report": "CLAW/control-plane/reports/C4-20260406T094301Z.md",
   "phase_plan": "CLAW/control-plane/plans/ggd-autonomy-production-horizon.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "execution_prd": "CLAW/PRD_GGD_AUTONOMY_PRODUCTION_HORIZON.md",
@@ -52,26 +52,26 @@
     "product-family": {
       "status": "active",
       "last_accepted_commit": null,
-      "last_candidate_commit": "3104bc78a6e49682ddb6ec28f45c5cf51b1d4bd9",
-      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-03.json"
+      "last_candidate_commit": null,
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094920Z-02.json"
     },
     "data-truth": {
-      "status": "escalated",
+      "status": "active",
       "last_accepted_commit": null,
       "last_candidate_commit": null,
-      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T203010Z-02.json"
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094920Z-01.json"
     },
     "systems-qa": {
       "status": "rejected",
       "last_accepted_commit": null,
       "last_candidate_commit": null,
-      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json"
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json"
     },
     "systems-optimizer": {
       "status": "escalated",
       "last_accepted_commit": null,
-      "last_candidate_commit": null,
-      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T205317Z-01.json"
+      "last_candidate_commit": "bd296a6e64606742b6e7c79d3c6d21b88ce2ec9c",
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T051822Z-01.json"
     },
     "integration": {
       "status": "active",
@@ -86,7 +86,7 @@
     "layout": "stale checkpoint summary replaced: /work/xr remains blocked by an open geometry gap, with 14 critical layout diffs in the latest systems-qa rejection and 8 critical / 6 major geometry-law findings.",
     "responsive": "pass: no horizontal overflow on laptop, tablet, or mobile after contrast-law hardening",
     "quality": "stale checkpoint summary replaced: shared route-family quality cannot be treated as green while /work/xr remains blocked and the current integration checkpoint is stale.",
-    "contrast": "pass: 0 major, 0 minor, 0 warning-band across /, /imc, /work/xr, and /work/ft"
+    "contrast": "fail: 72 major, 0 minor, 0 warning-band across /, /imc, /work/xr, and /work/ft — reconciled 2026-04-06 after C4-20260404T044816Z-04 falsification"
   },
   "current_scores": {
     "fidelity": null,
@@ -113,23 +113,30 @@
     "code_quality_foundation_ready": true,
     "semantic_seo_foundation_ready": true,
     "responsive_matrix_ready": false,
-    "contrast_legibility_ready": true,
+    "contrast_legibility_ready": false,
     "augmentation_program_seeded": true,
     "codex_operator_interface_ready": true
   },
+  "active_directive": "CLAW/control-plane/directives/stitch-rescaffold.json",
   "blockers": [
-    "XR remains blocked by an open deterministic geometry gap.",
-    "Current integration checkpoint is stale for /work/xr.",
+    "STITCH RESCAFFOLD IN PROGRESS: Product pages must be rebuilt from Google Stitch HTML prototypes.",
+    "REPLAY CONFLICT: product-family worktree (HEAD 3104bc7) cannot cherry-pick data-truth commits. FIXED by Opus Engineer 2026-04-06: data-truth recipe now instructs no-commit accepts. If conflict persists, OPERATOR must hard-reset: cd '/Users/zer0palab/Zer0pa Website/worktrees/product-family' && git cherry-pick --abort && git reset --hard origin/main",
+    "Contrast regression: 72 major failures — likely resolved by Stitch rescaffold since it brings new color/contrast tokens.",
+    "Integration checkpoint stale for /work/xr — needs fresh systems-qa pass after rescaffold.",
     "Press-go criteria are not yet satisfied.",
-    "Current integration checkpoint is stale for /work/xr: systems-qa settled rejected.",
-    "Current integration checkpoint is stale for /work/xr: systems-qa settled escalated."
+    "Current integration checkpoint is stale for /work/xr: systems-qa settled rejected."
   ],
   "next_actions": [
     "Rebuild the integration checkpoint only after closing blocking gaps for /work/xr.",
-    "Finish H0 by collapsing runtime, manifest, and PRD truth onto the same active horizon program.",
-    "Finish H1 by propagating the current contract into active lane worktrees.",
-    "Promote geometry-law verification into systems-qa and integration acceptance before resuming XR closure.",
-    "Close XR, then FT, through systems-qa and integration before guarded_local_autonomy proof."
+    "ALL LANES: Read CLAW/control-plane/directives/stitch-rescaffold.json BEFORE starting any work this cycle.",
+    "data-truth: FIELD MAPPING FIX (Opus Engineer 2026-04-06T05:00Z). Acceptance criteria now reference ACTUAL packet field names, not idealized canonical names. Mapping: name=laneTitle, tagline=tagline, status=authorityState.status, metrics=headlineMetrics, proofAssertions=provedNow, repoShape=repoShape, evidenceRoutes=verificationPath/proofAnchors. relatedLanes is optional. The agent should ACCEPT with commit=null when these equivalent fields are present and commitSha is fresh.",
+    "data-truth: Do NOT reject because field names differ from idealized canonical names. Product-family already proved it can consume the packet as-is (accepted commit 29c57a9 in C4-20260406T025712Z-02).",
+    "product-family: Stitch rescaffold COMPLETED (WorkLaneStitchPage.tsx accepted, commit 29c57a9). Next cycle should pick up from here for systems-qa falsification.",
+    "product-family: WORKTREE MAY NEED RESET if replay conflict persists. Operator: cd '/Users/zer0palab/Zer0pa Website/worktrees/product-family' && git cherry-pick --abort 2>/dev/null; git reset --hard origin/main",
+    "systems-qa: After data-truth accepts, run falsification using Stitch HTML as layout reference against the product-family candidate (commit 29c57a9).",
+    "integration: Verify Stitch rescaffold passes build and parser tests, does not regress accepted routes.",
+    "Close XR first via Stitch rescaffold, then replicate to FT and remaining products.",
+    "systems-optimizer: PARKED — absorbed into Opus Engineer role. Keep parked until C5."
   ],
   "learning_backlog": [
     {
@@ -181,6 +188,36 @@
       "proposed_law_change": "Compact path-like metric values before rendering metric cards.",
       "owner_lane": "product-family-kernel",
       "status": "closed"
+    },
+    {
+      "id": "C4-data-truth-rejection-loop",
+      "category": "prompt-gap",
+      "route": "work-family",
+      "observation": "data-truth acceptance criteria ('sufficient and current') was interpreted as requiring exhaustive GitHub truth surface coverage (including docs/market_surface.json in packet repoShape). This blocked the entire C4 pipeline for 100+ cycles. The real requirement is Stitch template field sufficiency.",
+      "evidence": "CLAW/control-plane/runtime/handoffs/C4-20260406T025006Z-01.json and prior repeated rejections",
+      "proposed_law_change": "Acceptance criteria must be scoped to the CURRENT PHASE GOAL, not abstract completeness. For C4, sufficiency = core fields for Stitch template population.",
+      "owner_lane": "data-truth",
+      "status": "closed"
+    },
+    {
+      "id": "C4-replay-conflict-from-audit-files",
+      "category": "tooling-gap",
+      "route": "work-family",
+      "observation": "data-truth writes report files (xr-packet-truth-report.json) that get committed and then fail to cherry-pick into downstream worktrees (product-family). The upstream replay mechanism cannot handle divergence in shared file paths across worktrees.",
+      "evidence": "CLAW/control-plane/runtime/handoffs/C4-20260406T025333Z-02.json — cherry-pick of 1648284 failed",
+      "proposed_law_change": "Audit-only lanes should prefer no-commit accepts (commit=null) when the truth surface is already sufficient. Report findings in handoff JSON, not in committed files.",
+      "owner_lane": "data-truth",
+      "status": "closed"
+    },
+    {
+      "id": "C4-field-name-mismatch-rejection-loop",
+      "category": "prompt-gap",
+      "route": "work-family",
+      "observation": "data-truth acceptance criteria listed idealized canonical field names (name, metrics, proofAssertions, evidenceRoutes, relatedLanes) that don't match the actual packet schema (laneTitle, headlineMetrics, provedNow, verificationPath/proofAnchors). The agent correctly rejected against the literal criteria even though equivalent data was present. This is the THIRD variant of the same class of bug: acceptance criteria that are too literal/abstract for the actual data surface.",
+      "evidence": "CLAW/control-plane/runtime/handoffs/C4-20260406T030558Z-01.json — rejected because 'name', 'status', 'metrics', 'proofAssertions', 'evidenceRoutes', 'relatedLanes' were not top-level keys, despite laneTitle, authorityState.status, headlineMetrics, provedNow, verificationPath being present",
+      "proposed_law_change": "Acceptance criteria must reference actual field names or explicitly declare a mapping. Never use idealized field names that don't exist in the schema. The product-family consumer agent should handle field mapping, not the truth-audit agent.",
+      "owner_lane": "data-truth",
+      "status": "closed"
     }
   ],
   "stop_conditions": [
@@ -192,7 +229,7 @@
     "cross-repo write detected"
   ],
   "queue": {
-    "active": null,
+    "active": "CLAW/control-plane/queue/C4-20260406T094920Z.json",
     "history": [
       "CLAW/control-plane/queue/C3-20260403T110543Z.json",
       "CLAW/control-plane/queue/C3-20260403T113227Z.json",
@@ -321,33 +358,149 @@
       "CLAW/control-plane/queue/C4-20260404T175714Z.json",
       "CLAW/control-plane/queue/C4-20260404T193827Z.json",
       "CLAW/control-plane/queue/C4-20260404T203010Z.json",
-      "CLAW/control-plane/queue/C4-20260404T205317Z.json"
+      "CLAW/control-plane/queue/C4-20260404T205317Z.json",
+      "CLAW/control-plane/queue/C4-20260406T013632Z.json",
+      "CLAW/control-plane/queue/C4-20260406T014712Z.json",
+      "CLAW/control-plane/queue/C4-20260406T015933Z.json",
+      "CLAW/control-plane/queue/C4-20260406T020730Z.json",
+      "CLAW/control-plane/queue/C4-20260406T021708Z.json",
+      "CLAW/control-plane/queue/C4-20260406T021809Z.json",
+      "CLAW/control-plane/queue/C4-20260406T021909Z.json",
+      "CLAW/control-plane/queue/C4-20260406T022009Z.json",
+      "CLAW/control-plane/queue/C4-20260406T022110Z.json",
+      "CLAW/control-plane/queue/C4-20260406T022210Z.json",
+      "CLAW/control-plane/queue/C4-20260406T022311Z.json",
+      "CLAW/control-plane/queue/C4-20260406T022411Z.json",
+      "CLAW/control-plane/queue/C4-20260406T022512Z.json",
+      "CLAW/control-plane/queue/C4-20260406T023649Z.json",
+      "CLAW/control-plane/queue/C4-20260406T024643Z.json",
+      "CLAW/control-plane/queue/C4-20260406T025006Z.json",
+      "CLAW/control-plane/queue/C4-20260406T025333Z.json",
+      "CLAW/control-plane/queue/C4-20260406T025712Z.json",
+      "CLAW/control-plane/queue/C4-20260406T030558Z.json",
+      "CLAW/control-plane/queue/C4-20260406T030823Z.json",
+      "CLAW/control-plane/queue/C4-20260406T031025Z.json",
+      "CLAW/control-plane/queue/C4-20260406T031754Z.json",
+      "CLAW/control-plane/queue/C4-20260406T032344Z.json",
+      "CLAW/control-plane/queue/C4-20260406T033401Z.json",
+      "CLAW/control-plane/queue/C4-20260406T034408Z.json",
+      "CLAW/control-plane/queue/C4-20260406T035522Z.json",
+      "CLAW/control-plane/queue/C4-20260406T040515Z.json",
+      "CLAW/control-plane/queue/C4-20260406T041624Z.json",
+      "CLAW/control-plane/queue/C4-20260406T042625Z.json",
+      "CLAW/control-plane/queue/C4-20260406T043618Z.json",
+      "CLAW/control-plane/queue/C4-20260406T044548Z.json",
+      "CLAW/control-plane/queue/C4-20260406T045505Z.json",
+      "CLAW/control-plane/queue/C4-20260406T050603Z.json",
+      "CLAW/control-plane/queue/C4-20260406T051822Z.json",
+      "CLAW/control-plane/queue/C4-20260406T052040Z.json",
+      "CLAW/control-plane/queue/C4-20260406T052758Z.json",
+      "CLAW/control-plane/queue/C4-20260406T053443Z.json",
+      "CLAW/control-plane/queue/C4-20260406T054052Z.json",
+      "CLAW/control-plane/queue/C4-20260406T054742Z.json",
+      "CLAW/control-plane/queue/C4-20260406T055302Z.json",
+      "CLAW/control-plane/queue/C4-20260406T055835Z.json",
+      "CLAW/control-plane/queue/C4-20260406T060358Z.json",
+      "CLAW/control-plane/queue/C4-20260406T061050Z.json",
+      "CLAW/control-plane/queue/C4-20260406T061654Z.json",
+      "CLAW/control-plane/queue/C4-20260406T062322Z.json",
+      "CLAW/control-plane/queue/C4-20260406T063058Z.json",
+      "CLAW/control-plane/queue/C4-20260406T063857Z.json",
+      "CLAW/control-plane/queue/C4-20260406T064458Z.json",
+      "CLAW/control-plane/queue/C4-20260406T065138Z.json",
+      "CLAW/control-plane/queue/C4-20260406T065911Z.json",
+      "CLAW/control-plane/queue/C4-20260406T070521Z.json",
+      "CLAW/control-plane/queue/C4-20260406T071201Z.json",
+      "CLAW/control-plane/queue/C4-20260406T071830Z.json",
+      "CLAW/control-plane/queue/C4-20260406T072401Z.json",
+      "CLAW/control-plane/queue/C4-20260406T073020Z.json",
+      "CLAW/control-plane/queue/C4-20260406T073641Z.json",
+      "CLAW/control-plane/queue/C4-20260406T074213Z.json",
+      "CLAW/control-plane/queue/C4-20260406T075021Z.json",
+      "CLAW/control-plane/queue/C4-20260406T075940Z.json",
+      "CLAW/control-plane/queue/C4-20260406T080459Z.json",
+      "CLAW/control-plane/queue/C4-20260406T081209Z.json",
+      "CLAW/control-plane/queue/C4-20260406T081902Z.json",
+      "CLAW/control-plane/queue/C4-20260406T082439Z.json",
+      "CLAW/control-plane/queue/C4-20260406T082958Z.json",
+      "CLAW/control-plane/queue/C4-20260406T083839Z.json",
+      "CLAW/control-plane/queue/C4-20260406T084629Z.json",
+      "CLAW/control-plane/queue/C4-20260406T085609Z.json",
+      "CLAW/control-plane/queue/C4-20260406T090307Z.json",
+      "CLAW/control-plane/queue/C4-20260406T090943Z.json",
+      "CLAW/control-plane/queue/C4-20260406T091456Z.json",
+      "CLAW/control-plane/queue/C4-20260406T092131Z.json",
+      "CLAW/control-plane/queue/C4-20260406T093109Z.json",
+      "CLAW/control-plane/queue/C4-20260406T093625Z.json",
+      "CLAW/control-plane/queue/C4-20260406T094301Z.json",
+      "CLAW/control-plane/queue/C4-20260406T094920Z.json"
     ]
   },
-  "active_jobs": [],
-  "locks": [],
+  "active_jobs": [
+    {
+      "job_id": "C4-20260406T094920Z-01",
+      "lane_id": "data-truth",
+      "status": "accepted",
+      "target": "Verify that the XR packet contains fields sufficient to populate all content sections of the Stitch product page template (hero, metrics grid, proof assertions, evidence routes, repo shape, related lanes). Document any coverage gaps as non-blocking issues. Do NOT block on exhaustive GitHub truth surface coverage — focus on Stitch template field sufficiency.",
+      "handoff_file": "CLAW/control-plane/runtime/handoffs/C4-20260406T094920Z-01.json"
+    },
+    {
+      "job_id": "C4-20260406T094920Z-02",
+      "lane_id": "product-family",
+      "status": "accepted",
+      "target": "STITCH RESCAFFOLD: Read the Google Stitch product page HTML prototype from /Users/zer0palab/Zer0pa Website/Zer0pa ZPE Product Pages/ and rebuild /work/[slug]/page.tsx to match its layout structure. Wire dynamic content from loadLaneBySlug() packet cache. Use placeholder divs for visualization widget spaces. See CLAW/control-plane/directives/stitch-rescaffold.json for full instructions.",
+      "handoff_file": "CLAW/control-plane/runtime/handoffs/C4-20260406T094920Z-02.json"
+    },
+    {
+      "job_id": "C4-20260406T094920Z-03",
+      "lane_id": "systems-qa",
+      "status": "running",
+      "target": "Run falsification against /work/xr and reject any kernel, proportionality, or responsive regression."
+    },
+    {
+      "job_id": "C4-20260406T094920Z-04",
+      "lane_id": "integration",
+      "status": "queued",
+      "target": "Replay the accepted XR candidate through the integration lane before promotion."
+    }
+  ],
+  "locks": [
+    "CLAW/control-plane/locks/systems-qa.json"
+  ],
   "current_checkpoint": null,
   "last_stale_checkpoint": "CLAW/control-plane/checkpoints/current.json",
   "rollback_checkpoint": "cf7b49ee7e3dad686427ec3326da6a8152a4c0e8",
   "pause_requested": false,
   "stop_requested": false,
-  "heartbeat_at": null,
+  "heartbeat_at": "2026-04-06T12:56:34Z",
   "retry_budget": {
     "max_attempts_per_slice": 2,
     "max_recovery_attempts_per_cycle": 1,
     "lock_heartbeat_ttl_minutes": 90
   },
-  "active_cycle": null,
-  "last_recovery_event": "CLAW/control-plane/recoveries/RECOVER-20260404T122235Z.json",
-  "last_health_check": "2026-04-04T21:08:56Z",
+  "active_cycle": {
+    "cycle_id": "C4-20260406T094920Z",
+    "phase_id": "C4",
+    "profile": "guarded_local_autonomy",
+    "queue_file": "CLAW/control-plane/queue/C4-20260406T094920Z.json",
+    "lanes": [
+      "data-truth",
+      "product-family",
+      "systems-qa",
+      "integration"
+    ],
+    "created_at": "2026-04-06T09:49:20Z"
+  },
+  "last_recovery_event": "CLAW/control-plane/recoveries/RECOVER-20260406T052040Z.json",
+  "last_health_check": "2026-04-06T09:48:19Z",
   "runner": {
     "enabled": true,
     "mode": "guarded-override",
-    "last_job": "C4-20260404T205317Z-01",
-    "last_lane": "systems-optimizer",
-    "last_cycle": "C4-20260404T205317Z",
-    "last_outcome": "escalated",
-    "code_head": "5bd7fb5d74a91e3b6591396890872f01741b0fbb"
+    "last_job": "C4-20260406T094920Z-02",
+    "last_lane": "product-family",
+    "last_cycle": "C4-20260406T094301Z",
+    "last_outcome": "rejected",
+    "code_head": "44549bb3034ef018761d86e7430cbc853397bbfd"
   },
   "operator_authorized_local_runner": true
 }

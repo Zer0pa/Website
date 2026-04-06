@@ -27,6 +27,14 @@
         "max_lane_quiet_seconds": 300
       }
     },
+    "activation_overrides": {
+      "systems-optimizer": {
+        "disabled_phases": [
+          "C4"
+        ],
+        "reason": "Parked in C4 while Opus Engineer owns bounded CLAW/GGD hardening; resume autonomous systems-optimizer slices in C5."
+      }
+    },
     "allow_stalled_result_salvage": true,
     "use_search": false,
     "sandbox": "danger-full-access",
@@ -84,6 +92,7 @@
       "systems-optimizer": [
         ["node CLAW/scripts/verify-systems-optimizer.mjs"],
         ["node CLAW/scripts/verify-ggd-binding.mjs"],
+        ["python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"],
         ["node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer"],
         ["node CLAW/scripts/run-site-script.mjs claw:test:contracts"],
         ["node CLAW/scripts/run-site-script.mjs claw:validate"],

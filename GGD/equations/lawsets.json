@@ -1,36 +1,12 @@
 {
   "version": 1,
+  "project_id": "zer0pa-website",
   "lawsets": [
     {
-      "id": "home.desktop.shell",
-      "kind": "route-shell",
-      "route": "/",
-      "route_role": "home",
-      "lawset": "GGD/equations/lawsets/home.desktop.shell.json"
-    },
-    {
-      "id": "flagship.desktop.shell",
-      "kind": "route-shell",
-      "route": "/imc",
-      "route_role": "flagship",
-      "lawset": "GGD/equations/lawsets/flagship.desktop.shell.json"
-    },
-    {
-      "id": "product-family.desktop.shell",
-      "kind": "route-shell",
-      "route": "/work/[slug]",
-      "route_role": "product-family",
-      "lawset": "GGD/equations/lawsets/product-family.desktop.shell.json"
-    },
-    {
-      "id": "typography.scale",
-      "kind": "typography",
-      "lawset": "GGD/equations/lawsets/typography.scale.json"
-    },
-    {
-      "id": "color.contrast",
-      "kind": "color",
-      "lawset": "GGD/equations/lawsets/color.contrast.json"
+      "id": "ggd.shared.example-lawset",
+      "path": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+      "role": "equation-engine smoke-check baseline",
+      "source": "GGD/commands.json.example_lawset"
     }
   ]
 }

@@ -32,5 +32,12 @@
   "measurement": "Before the ratchet, `sysopt.xr-gap-ratchet` could stay vague about which authoritative XR gap and evaluator surfaces it was hardening, so recurring `/work/xr` failures could promote without binding to `work-xr.geometry-gap`. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any `sysopt.xr-*` card that omits the fixed `/work/xr` gap binding or the required evaluator focus, and the fixed promotion bundle stays green.",
   "keep_rule": "Keep only if the verifier enforces the `/work/xr` gap binding plus `layout-diff`, `quality`, and `flagship-invariants` evaluator focus for `sysopt.xr-*` cards, and the fixed evaluation bundle passes without touching route implementation paths.",
   "learning_item": "Recurring XR ratchets must cite the authoritative `work-xr.geometry-gap` artifact and fixed evaluator focus, or the machine keeps optimizing around vague route-family language instead of the first broken law.",
-  "recorded_at": "2026-04-04T00:49:56Z"
+  "recorded_at": "2026-04-04T00:49:56Z",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  }
 }

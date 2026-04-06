@@ -71,12 +71,14 @@
         },
         {
           "lane_id": "data-truth",
-          "objective": "Audit the XR packet and GitHub truth surfaces that feed the first generic proof page.",
+          "objective": "Verify that the XR packet contains fields sufficient to populate all content sections of the Stitch product page template (hero, metrics grid, proof assertions, evidence routes, repo shape, related lanes). Document any coverage gaps as non-blocking issues. Do NOT block on exhaustive GitHub truth surface coverage — focus on Stitch template field sufficiency.",
           "deliverables": [
-            "XR packet truth report"
+            "XR Stitch field sufficiency report"
           ],
           "acceptance": [
-            "XR packet truth is sufficient and current"
+            "XR packet contains data sufficient to populate each Stitch template section, under any field naming convention. The known mapping is: name=laneTitle, tagline=tagline, status=authorityState.status, metrics=headlineMetrics, proofAssertions=provedNow, repoShape=repoShape, evidenceRoutes=verificationPath OR proofAnchors. relatedLanes is optional for initial proof.",
+            "XR packet freshness verified against GitHub main HEAD via commitSha field",
+            "Any coverage gaps documented as non-blocking notes in the handoff JSON, not in committed report files"
           ]
         },
         {
@@ -84,7 +86,7 @@
           "depends_on": [
             "data-truth"
           ],
-          "objective": "Apply the locked product-family kernel to /work/xr without bespoke route hacks.",
+          "objective": "STITCH RESCAFFOLD: Read the Google Stitch product page HTML prototype from /Users/zer0palab/Zer0pa Website/Zer0pa ZPE Product Pages/ and rebuild /work/[slug]/page.tsx to match its layout structure. Wire dynamic content from loadLaneBySlug() packet cache. Use placeholder divs for visualization widget spaces. See CLAW/control-plane/directives/stitch-rescaffold.json for full instructions.",
           "deliverables": [
             "XR route instance",
             "XR layout closure",

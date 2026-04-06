@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_reference": {
-    "project_md_updated": "2026-04-05",
+    "project_md_updated": "2026-04-06",
     "core_research_question": "How do we turn the Zer0pa website into a deterministic geometry program whose layout, typography, color, semantic hierarchy, packet truth, and code quality are governed by explicit laws and falsified continuously until canonical closure is reached?",
     "current_focus": "Reduce route and system truth from artifacts, keep gap export honest, and push route-family verification closer to equation-native acceptance."
   },
@@ -60,7 +60,7 @@
     "current_plan": "lane-contract-propagation",
     "total_plans_in_phase": 3,
     "status": "in_progress",
-    "last_activity": "2026-04-05T19:20:06Z",
+    "last_activity": "2026-04-06T12:59:41Z",
     "last_activity_desc": "Established executable route progress reduction, exported missing FT gap state, and tightened the contract surfaces around contradiction-aware truth.",
     "progress_percent": 48.8
   },
@@ -122,13 +122,7 @@
     "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
     "local_lawset_index": "GGD/equations/lawsets.json",
     "route_progress_script": "CLAW/scripts/compute-route-progress.mjs",
-    "route_progress_report": "CLAW/control-plane/reports/route-progress.latest.json",
-    "evaluate_lawset_script": "GGD/scripts/evaluate-lawset.mjs",
-    "generate_tokens_script": "GGD/scripts/generate-tokens.mjs",
-    "compile_fixes_script": "GGD/scripts/compile-fixes.mjs",
-    "correction_loop_script": "GGD/scripts/correction-loop.mjs",
-    "tokens_output": "site/src/styles/ggd-tokens.css",
-    "fixes_dir": "GGD/fixes"
+    "route_progress_report": "CLAW/control-plane/reports/route-progress.latest.json"
   },
   "route_status": {
     "/": {
@@ -223,7 +217,7 @@
         "minor": 0,
         "note": 0
       },
-      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json"
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json"
     }
   ],
   "augmentation_backlog": [
@@ -353,15 +347,19 @@
     "state_file": "CLAW/control-plane/system-optimizer/state.json",
     "backlog_file": "CLAW/control-plane/system-optimizer/backlog.json",
     "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs",
-    "backlog_count": 30,
+    "backlog_count": 35,
     "active_hypothesis": null,
     "last_kept_change": {
-      "id": "sysopt.hypothesis-card-inventory-alignment-lock",
-      "hypothesis": "Systems-optimizer recovery becomes safer if every hypothesis-card artifact in `CLAW/control-plane/system-optimizer/hypotheses/` must resolve to exactly one backlog card with the same id and status, so orphaned or filename-drifted replay artifacts cannot survive outside backlog truth.",
+      "id": "sysopt.ggd-local-lawset-index-lock",
+      "hypothesis": "GGD binding becomes more deterministic if it must declare a repo-local lawset index and binding verification fails whenever that index is missing, empty, or points at missing lawset files.",
       "writable_scope": [
-        "CLAW/scripts/**",
-        "CLAW/control-plane/system-optimizer/**",
-        "CLAW/PRD*.md"
+        "CLAW/scripts/verify-ggd-binding.mjs",
+        "GGD/project.binding.json",
+        "GGD/schemas/project-binding.schema.json",
+        "GGD/equations/lawsets.json",
+        "CLAW/control-plane/system-optimizer/backlog.json",
+        "CLAW/control-plane/system-optimizer/state.json",
+        "CLAW/control-plane/system-optimizer/hypotheses/sysopt.ggd-local-lawset-index-lock.json"
       ],
       "evaluation_bundle": [
         "node CLAW/scripts/verify-systems-optimizer.mjs",
@@ -370,10 +368,10 @@
         "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
         "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
       ],
-      "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` still reported clean after a controlled orphan baseline card `CLAW/control-plane/system-optimizer/hypotheses/sysopt.orphan-inventory-baseline.json` was added with no matching backlog item, so replayable artifact inventory could drift outside backlog truth. After the ratchet, the verifier rejects orphan or filename/id-drifted hypothesis cards in `CLAW/control-plane/system-optimizer/hypotheses/` while the fixed scope-local promotion bundle stays green.",
-      "keep_rule": "Keep only if every systems-optimizer hypothesis-card artifact must resolve to exactly one backlog item with the same id and status and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
-      "learning_item": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
-      "recorded_at": "2026-04-04T20:33:38Z"
+      "measurement": "Before the ratchet, the control-plane brief could cite `GGD/equations/lawsets.json` as the first repo-local mathematical surface even though the file was absent and `node CLAW/scripts/verify-ggd-binding.mjs` still verified clean because it never required or inspected a local lawset index. After the ratchet, `GGD/project.binding.json` pins `system_optimizer.local_lawset_index`, the repo carries `GGD/equations/lawsets.json`, and the binding verifier rejects missing, empty, duplicate-id, or missing-path lawset index entries while the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if `node CLAW/scripts/verify-ggd-binding.mjs` now fails a missing or malformed repo-local lawset index contract and the exact five-command scope-local promotion bundle passes without touching route implementation paths.",
+      "learning_item": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
+      "recorded_at": "2026-04-06T02:10:25Z"
     },
     "keep_only_if_better": true
   },

@@ -140,9 +140,16 @@
       "hypothesis": "Repeated XR rejection can be reduced by forcing XR-targeting systems-optimizer cards to bind to the authoritative `/work/xr` geometry-gap artifact and an explicit evaluator focus before further route edits.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "quality_baseline": {
+        "critical": 0,
         "major": 0,
         "minor": 0,
         "note": 0
@@ -175,9 +182,16 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` backlog card is validated against the authoritative `/work/xr` gap artifact and evaluator focus contract before route lanes act on it.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "quality_baseline": {
+        "critical": 0,
         "major": 0,
         "minor": 0,
         "note": 0
@@ -209,9 +223,16 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card declares one explicit `first_broken_law` drawn from the authoritative `/work/xr` gap surface list, so route-neutral system work cannot optimize against vague XR wording.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "quality_baseline": {
+        "critical": 0,
         "major": 0,
         "minor": 0,
         "note": 0
@@ -244,9 +265,16 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins the current failure magnitude from the authoritative `/work/xr` gap artifact, so stale control-plane ratchets cannot target vague XR severity.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "quality_baseline": {
+        "critical": 0,
         "major": 0,
         "minor": 0,
         "note": 0
@@ -279,9 +307,16 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card is forced onto the exact authoritative evaluator focus contract, so route-neutral system work cannot widen beyond layout-diff, quality, and flagship-invariants.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "quality_baseline": {
+        "critical": 0,
         "major": 0,
         "minor": 0,
         "note": 0
@@ -306,6 +341,91 @@
       "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only checked whether `sysopt.xr-*` cards included the canonical evaluator focus surfaces, so an XR ratchet could still widen into extra or duplicate focus entries and remain structurally valid. After the ratchet, the verifier rejects any XR card whose `evaluator_focus` does not match the exact authoritative contract `layout-diff`, `quality`, `flagship-invariants`, while the fixed scope-local promotion bundle stays green.",
       "keep_rule": "Keep only if the verifier fails XR cards that add non-authoritative or duplicate evaluator focus surfaces while the fixed scope-local evaluation bundle passes without touching route implementation paths.",
       "learning_item": "XR systems-optimizer ratchets must use the exact evaluator focus contract; allowing extra or duplicate focus surfaces reintroduces vague route-neutral drift."
+    },
+    {
+      "id": "sysopt.xr-quality-baseline-lock",
+      "status": "kept",
+      "priority": "high",
+      "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins the current shared quality severity counts from the authoritative `/work/xr` gap artifact, so the required `quality` evaluator focus cannot degrade into narrative-only wording.",
+      "target_route": "/work/xr",
+      "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+      "first_broken_law": "work.lane.hero.authority",
+      "severity_baseline": {
+        "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "quality_baseline": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "evaluator_focus": [
+        "layout-diff",
+        "quality",
+        "flagship-invariants"
+      ],
+      "writable_scope": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/system-optimizer/**",
+        "CLAW/PRD*.md",
+        "GGD/**"
+      ],
+      "evaluation_bundle": [
+        "node CLAW/scripts/verify-systems-optimizer.mjs",
+        "node CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+        "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+      ],
+      "measurement": "Before the ratchet, `sysopt.xr-*` cards could claim the required `quality` evaluator focus while `GGD/gaps/routes/work-xr.geometry-gap.json` exposed shared quality findings only as a free-text summary, so XR system work could widen around narrative quality language instead of a measured baseline. After the ratchet, the XR gap artifact exposes machine-readable `quality_severity_counts` and `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any XR card whose `quality_baseline` is missing or drifts from that authoritative baseline, while the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if the verifier fails XR cards with missing or stale `quality_baseline` counts from `target_gap.quality_severity_counts` and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+      "learning_item": "XR systems-optimizer ratchets need a machine-readable shared quality baseline; evaluator focus alone leaves quality drift as narrative rather than falsifiable contract."
+    },
+    {
+      "id": "sysopt.xr-gap-source-handoff-lock",
+      "status": "kept",
+      "priority": "high",
+      "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins the exact authoritative `source_handoff` from `/work/xr` gap truth, so route-neutral control-plane work cannot keep targeting superseded XR rejection evidence.",
+      "target_route": "/work/xr",
+      "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+      "first_broken_law": "work.lane.hero.authority",
+      "severity_baseline": {
+        "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "quality_baseline": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "evaluator_focus": [
+        "layout-diff",
+        "quality",
+        "flagship-invariants"
+      ],
+      "writable_scope": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/system-optimizer/**",
+        "CLAW/PRD*.md"
+      ],
+      "evaluation_bundle": [
+        "node CLAW/scripts/verify-systems-optimizer.mjs",
+        "node CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+        "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+      ],
+      "measurement": "Before the ratchet, `sysopt.xr-*` cards could still verify after `/work/xr` gap truth moved to a different rejecting handoff, as long as `target_route`, `target_gap`, `first_broken_law`, and the current severity baselines still matched, so stale XR control-plane work could keep citing superseded evidence. After the ratchet, every XR card must pin `gap_source_handoff` to `GGD/gaps/routes/work-xr.geometry-gap.json.source_handoff`, and `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any missing or stale handoff binding while the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if the verifier fails XR cards whose `gap_source_handoff` is missing or drifts from `target_gap.source_handoff`, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+      "learning_item": "XR systems-optimizer ratchets need an exact handoff-evidence binding; route, law, and severity locks still allow stale control-plane work if the authoritative gap packet is refreshed."
     },
     {
       "id": "sysopt.equation-law-expansion",
@@ -722,6 +842,81 @@
       "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` still reported clean after a controlled orphan baseline card `CLAW/control-plane/system-optimizer/hypotheses/sysopt.orphan-inventory-baseline.json` was added with no matching backlog item, so replayable artifact inventory could drift outside backlog truth. After the ratchet, the verifier rejects orphan or filename/id-drifted hypothesis cards in `CLAW/control-plane/system-optimizer/hypotheses/` while the fixed scope-local promotion bundle stays green.",
       "keep_rule": "Keep only if every systems-optimizer hypothesis-card artifact must resolve to exactly one backlog item with the same id and status and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
       "learning_item": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth."
+    },
+    {
+      "id": "sysopt.runner-observability-tail-only-lock",
+      "status": "kept",
+      "priority": "medium",
+      "hypothesis": "Systems-optimizer recovery becomes safer if runner-stability cards can treat `node CLAW/scripts/run-site-script.mjs claw:health` only as trailing observability after the full replayable runner evidence trail, not as a mid-stream proof step.",
+      "writable_scope": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/system-optimizer/**",
+        "CLAW/PRD*.md"
+      ],
+      "evaluation_bundle": [
+        "node CLAW/scripts/verify-systems-optimizer.mjs",
+        "node CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+        "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+      ],
+      "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` accepted runner-stability cards whose `evidence_commands` inserted `node CLAW/scripts/run-site-script.mjs claw:health` between replayable runner scripts, so passive observability could split the replayable proof trail and still verify clean. After the ratchet, the verifier rejects any runner-stability card that places `claw:health` before the last replayable runner evidence command, while the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if runner-stability cards can use `claw:health` only after all replayable runner script commands and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+      "learning_item": "Runner-stability observability must stay trailing after the full replayable evidence trail; allowing `claw:health` mid-sequence weakens closed-fail recovery proof."
+    },
+    {
+      "id": "sysopt.runner-stability-evidence-uniqueness-lock",
+      "status": "kept",
+      "priority": "medium",
+      "hypothesis": "Stale-cycle runner hardening becomes safer if runner-stability cards must keep `evidence_commands` unique, so replayable proof cannot silently duplicate recovery or observability steps.",
+      "runner_focus": "stale-cycle",
+      "failure_mode": "A runner-stability card can currently repeat the same replayable or observability command inside `evidence_commands`, so the proof trail can imply ambiguous retries or padded evidence while still passing boundary and ordering checks.",
+      "closed_fail_rule": "Keep the slice only if runner-stability cards fail verification unless every `evidence_commands` entry is unique and the replayable proof trail stays bounded.",
+      "evidence_commands": [
+        "node CLAW/scripts/recover-cycle.mjs --max-age-minutes=0",
+        "node CLAW/scripts/run-recovery-drill.mjs --scenario=stale-lock",
+        "node CLAW/scripts/run-site-script.mjs claw:health"
+      ],
+      "writable_scope": [
+        "CLAW/scripts/**",
+        "CLAW/control-plane/system-optimizer/**",
+        "CLAW/PRD*.md"
+      ],
+      "evaluation_bundle": [
+        "node CLAW/scripts/verify-systems-optimizer.mjs",
+        "node CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+        "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+      ],
+      "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` accepted runner-stability cards whose `evidence_commands` repeated the same `recover-cycle`, `run-recovery-drill`, or `claw:health` step, so the replayable proof trail could be padded with duplicate evidence and still verify clean. After the ratchet, the verifier rejects any runner-stability card whose `evidence_commands` contain duplicate commands while the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if the verifier fails runner-stability cards with duplicate `evidence_commands` and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+      "learning_item": "Runner-stability evidence commands must stay unique; duplicate recovery or observability steps make the replayable proof trail ambiguous without adding new evidence."
+    },
+    {
+      "id": "sysopt.ggd-local-lawset-index-lock",
+      "status": "kept",
+      "priority": "high",
+      "hypothesis": "GGD binding becomes more deterministic if it must declare a repo-local lawset index and binding verification fails whenever that index is missing, empty, or points at missing lawset files.",
+      "writable_scope": [
+        "CLAW/scripts/verify-ggd-binding.mjs",
+        "GGD/project.binding.json",
+        "GGD/schemas/project-binding.schema.json",
+        "GGD/equations/lawsets.json",
+        "CLAW/control-plane/system-optimizer/backlog.json",
+        "CLAW/control-plane/system-optimizer/state.json",
+        "CLAW/control-plane/system-optimizer/hypotheses/sysopt.ggd-local-lawset-index-lock.json"
+      ],
+      "evaluation_bundle": [
+        "node CLAW/scripts/verify-systems-optimizer.mjs",
+        "node CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+        "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+      ],
+      "measurement": "Before the ratchet, the control-plane brief could cite `GGD/equations/lawsets.json` as the first repo-local mathematical surface even though the file was absent and `node CLAW/scripts/verify-ggd-binding.mjs` still verified clean because it never required or inspected a local lawset index. After the ratchet, `GGD/project.binding.json` pins `system_optimizer.local_lawset_index`, the repo carries `GGD/equations/lawsets.json`, and the binding verifier rejects missing, empty, duplicate-id, or missing-path lawset index entries while the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if `node CLAW/scripts/verify-ggd-binding.mjs` now fails a missing or malformed repo-local lawset index contract and the exact five-command scope-local promotion bundle passes without touching route implementation paths.",
+      "learning_item": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean."
     }
   ]
 }

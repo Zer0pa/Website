@@ -42,6 +42,7 @@ function validateCommandList(commands, label) {
 
 const REQUIRED_GGD_MUTATION_COMMANDS = [
   'node CLAW/scripts/verify-ggd-binding.mjs',
+  'python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json',
 ];
 
 const REQUIRED_SCOPE_LOCAL_PROMOTION_COMMANDS = [
@@ -88,10 +89,7 @@ const DISALLOWED_SCOPE_LOCAL_PROMOTION_COMMANDS = [
 ];
 const RUNNER_OBSERVABILITY_COMMANDS = [...DISALLOWED_SCOPE_LOCAL_PROMOTION_COMMANDS];
 const REQUIRED_SCOPE_LOCAL_SALVAGE_COMMAND_GROUPS = [
-  'node CLAW/scripts/verify-systems-optimizer.mjs',
-  'node CLAW/scripts/verify-ggd-binding.mjs',
-  'node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer',
-  'node CLAW/scripts/run-site-script.mjs claw:test:contracts',
+  ...REQUIRED_SCOPE_LOCAL_PROMOTION_COMMANDS,
   ...RUNNER_OBSERVABILITY_COMMANDS,
 ].map((command) => [command]);
 
@@ -109,8 +107,10 @@ const ACTIVE_HYPOTHESIS_MIRRORED_FIELDS = [
   'evaluation_bundle',
   'target_route',
   'target_gap',
+  'gap_source_handoff',
   'first_broken_law',
   'severity_baseline',
+  'quality_baseline',
   'evaluator_focus',
   'runner_focus',
   'failure_mode',
@@ -346,36 +346,53 @@ function validateScopeLocalPromotionBundle(commands, label) {
   }
 }
 
-function validateXrSeverityBaseline(card, gap, label) {
-  const baseline = card.severity_baseline;
+function validateSeverityBaseline(baseline, gapSeverity, label, fieldName, gapFieldName) {
   if (!baseline || typeof baseline !== 'object' || Array.isArray(baseline)) {
-    issues.push(`${label} must declare severity_baseline.`);
+    issues.push(`${label} must declare ${fieldName}.`);
     return;
   }
 
+  for (const level of XR_SEVERITY_LEVELS) {
+    if (!Number.isInteger(baseline[level]) || baseline[level] < 0) {
+      issues.push(`${label}.${fieldName}.${level} must be a non-negative integer.`);
+      continue;
+    }
+
+    if (!Number.isInteger(gapSeverity[level]) || gapSeverity[level] < 0) {
+      issues.push(`${label} target_gap ${gapFieldName}.${level} must be a non-negative integer.`);
+      continue;
+    }
+
+    if (baseline[level] !== gapSeverity[level]) {
+      issues.push(`${label}.${fieldName}.${level} must match target_gap.${gapFieldName}.${level} (${gapSeverity[level]}).`);
+    }
+  }
+}
+
+function validateXrSeverityBaseline(card, gap, label) {
   const gapSeverity = gap?.severity_counts;
   if (!gapSeverity || typeof gapSeverity !== 'object' || Array.isArray(gapSeverity)) {
     issues.push(`${label} target_gap must expose severity_counts.`);
     return;
   }
 
-  for (const level of XR_SEVERITY_LEVELS) {
-    if (!Number.isInteger(baseline[level]) || baseline[level] < 0) {
-      issues.push(`${label}.severity_baseline.${level} must be a non-negative integer.`);
-      continue;
-    }
+  validateSeverityBaseline(card.severity_baseline, gapSeverity, label, 'severity_baseline', 'severity_counts');
+}
 
-    if (!Number.isInteger(gapSeverity[level]) || gapSeverity[level] < 0) {
-      issues.push(`${label} target_gap severity_counts.${level} must be a non-negative integer.`);
-      continue;
-    }
-
-    if (baseline[level] !== gapSeverity[level]) {
-      issues.push(
-        `${label}.severity_baseline.${level} must match target_gap.severity_counts.${level} (${gapSeverity[level]}).`,
-      );
-    }
+function validateXrQualityBaseline(card, gap, label) {
+  const gapQualitySeverity = gap?.quality_severity_counts;
+  if (!gapQualitySeverity || typeof gapQualitySeverity !== 'object' || Array.isArray(gapQualitySeverity)) {
+    issues.push(`${label} target_gap must expose quality_severity_counts.`);
+    return;
   }
+
+  validateSeverityBaseline(
+    card.quality_baseline,
+    gapQualitySeverity,
+    label,
+    'quality_baseline',
+    'quality_severity_counts',
+  );
 }
 
 function validateXrGapBinding(card, label) {
@@ -400,12 +417,28 @@ function validateXrGapBinding(card, label) {
       if (!gap.severity_counts || typeof gap.severity_counts !== 'object' || Array.isArray(gap.severity_counts)) {
         issues.push(`${label} target_gap must expose severity_counts.`);
       }
+      if (
+        !gap.quality_severity_counts ||
+        typeof gap.quality_severity_counts !== 'object' ||
+        Array.isArray(gap.quality_severity_counts)
+      ) {
+        issues.push(`${label} target_gap must expose quality_severity_counts.`);
+      }
+      if (typeof gap.source_handoff !== 'string' || gap.source_handoff.trim().length === 0) {
+        issues.push(`${label} target_gap must expose source_handoff.`);
+      }
       if (!Array.isArray(gap.top_drift_surfaces) || gap.top_drift_surfaces.length === 0) {
         issues.push(`${label} target_gap must expose a non-empty top_drift_surfaces list.`);
       }
     } catch (error) {
       issues.push(`${label} target_gap could not be read: ${error.message}`);
     }
+  }
+
+  if (typeof card.gap_source_handoff !== 'string' || card.gap_source_handoff.trim().length === 0) {
+    issues.push(`${label} must declare gap_source_handoff.`);
+  } else if (typeof gap?.source_handoff === 'string' && card.gap_source_handoff !== gap.source_handoff) {
+    issues.push(`${label}.gap_source_handoff must match target_gap.source_handoff (${gap.source_handoff}).`);
   }
 
   if (typeof card.first_broken_law !== 'string' || card.first_broken_law.trim().length === 0) {
@@ -417,6 +450,7 @@ function validateXrGapBinding(card, label) {
   }
 
   validateXrSeverityBaseline(card, gap, label);
+  validateXrQualityBaseline(card, gap, label);
 
   if (!Array.isArray(card.evaluator_focus) || card.evaluator_focus.length === 0) {
     issues.push(`${label} must declare a non-empty evaluator_focus array.`);
@@ -472,6 +506,13 @@ function validateRunnerStabilityContract(card, label) {
 
   validateCommandList(card.evidence_commands, `${label}.evidence_commands`);
 
+  const uniqueEvidenceCommands = [...new Set(card.evidence_commands)];
+  if (uniqueEvidenceCommands.length !== card.evidence_commands.length) {
+    issues.push(
+      `${label}.evidence_commands may not contain duplicate commands; replayable runner proof must stay unique and ordered.`,
+    );
+  }
+
   for (const [index, command] of card.evidence_commands.entries()) {
     if (
       !RUNNER_STABILITY_EVIDENCE_COMMAND_PATTERNS.some((pattern) => pattern.test(command))
@@ -505,6 +546,13 @@ function validateRunnerStabilityContract(card, label) {
   const replayableEvidenceIndex = card.evidence_commands.findIndex((command) =>
     RUNNER_STABILITY_REPLAYABLE_EVIDENCE_COMMAND_PATTERNS.some((pattern) => pattern.test(command)),
   );
+  const lastReplayableEvidenceIndex = card.evidence_commands.reduce(
+    (lastIndex, command, index) =>
+      RUNNER_STABILITY_REPLAYABLE_EVIDENCE_COMMAND_PATTERNS.some((pattern) => pattern.test(command))
+        ? index
+        : lastIndex,
+    -1,
+  );
 
   for (const [index, command] of card.evidence_commands.entries()) {
     if (!RUNNER_STABILITY_OBSERVABILITY_COMMAND_PATTERNS.some((pattern) => pattern.test(command))) {
@@ -514,6 +562,12 @@ function validateRunnerStabilityContract(card, label) {
     if (replayableEvidenceIndex === -1 || index < replayableEvidenceIndex) {
       issues.push(
         `${label}.evidence_commands must place claw:health observability only after at least one replayable runner script command.`,
+      );
+    }
+
+    if (lastReplayableEvidenceIndex !== -1 && index < lastReplayableEvidenceIndex) {
+      issues.push(
+        `${label}.evidence_commands must keep claw:health observability trailing after the final replayable runner script command.`,
       );
     }
   }
@@ -1179,6 +1233,14 @@ if (!optimizerState.policy?.require_runner_observability_after_replayable_eviden
   issues.push('systems-optimizer state must require runner observability only after replayable evidence commands.');
 }
 
+if (!optimizerState.policy?.require_runner_observability_tail_only) {
+  issues.push('systems-optimizer state must require runner observability to remain trailing after replayable evidence.');
+}
+
+if (!optimizerState.policy?.require_runner_unique_evidence_commands) {
+  issues.push('systems-optimizer state must require unique runner evidence_commands.');
+}
+
 if (!optimizerState.policy?.require_runner_singleton_command_groups) {
   issues.push('systems-optimizer state must require exact singleton systems-optimizer runner command groups.');
 }
@@ -1201,6 +1263,14 @@ if (!optimizerState.policy?.require_normalized_relative_writable_scope) {
 
 if (!optimizerState.policy?.require_exact_xr_evaluator_focus) {
   issues.push('systems-optimizer state must require exact XR evaluator focus.');
+}
+
+if (!optimizerState.policy?.require_xr_quality_baseline) {
+  issues.push('systems-optimizer state must require XR quality baseline alignment.');
+}
+
+if (!optimizerState.policy?.require_xr_gap_source_handoff) {
+  issues.push('systems-optimizer state must require XR gap source_handoff alignment.');
 }
 
 if (!optimizerState.policy?.require_active_hypothesis_backlog_alignment) {
@@ -1501,6 +1571,8 @@ console.log(
         xr_gap_binding_required: true,
         xr_first_broken_law_required: true,
         xr_severity_baseline_required: true,
+        xr_quality_baseline_required: true,
+        xr_gap_source_handoff_required: true,
         xr_exact_evaluator_focus_required: true,
         active_hypothesis_backlog_alignment_required: true,
         active_hypothesis_card_alignment_required: true,
@@ -1514,6 +1586,8 @@ console.log(
         runner_replayable_evidence_script_required: true,
         runner_evidence_command_boundary_required: true,
         runner_observability_after_replayable_evidence_required: true,
+        runner_observability_tail_only_required: true,
+        runner_unique_evidence_commands_required: true,
         runner_singleton_command_groups_required: true,
         runner_scope_local_salvage_order_required: true,
         state_backlog_link_lock_required: true,

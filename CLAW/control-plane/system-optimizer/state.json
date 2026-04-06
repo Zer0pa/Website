@@ -12,12 +12,16 @@
     "require_runner_replayable_evidence_script": true,
     "require_runner_evidence_command_boundary": true,
     "require_runner_observability_after_replayable_evidence": true,
+    "require_runner_observability_tail_only": true,
+    "require_runner_unique_evidence_commands": true,
     "require_runner_singleton_command_groups": true,
     "require_learning_item_alignment": true,
     "require_scope_local_salvage_order": true,
     "require_writable_scope_allowlist": true,
     "require_normalized_relative_writable_scope": true,
     "require_exact_xr_evaluator_focus": true,
+    "require_xr_quality_baseline": true,
+    "require_xr_gap_source_handoff": true,
     "require_active_hypothesis_backlog_alignment": true,
     "require_active_hypothesis_card_alignment": true,
     "require_rejected_change_backlog_alignment": true,
@@ -56,12 +60,16 @@
   },
   "active_hypothesis": null,
   "last_kept_change": {
-    "id": "sysopt.hypothesis-card-inventory-alignment-lock",
-    "hypothesis": "Systems-optimizer recovery becomes safer if every hypothesis-card artifact in `CLAW/control-plane/system-optimizer/hypotheses/` must resolve to exactly one backlog card with the same id and status, so orphaned or filename-drifted replay artifacts cannot survive outside backlog truth.",
+    "id": "sysopt.ggd-local-lawset-index-lock",
+    "hypothesis": "GGD binding becomes more deterministic if it must declare a repo-local lawset index and binding verification fails whenever that index is missing, empty, or points at missing lawset files.",
     "writable_scope": [
-      "CLAW/scripts/**",
-      "CLAW/control-plane/system-optimizer/**",
-      "CLAW/PRD*.md"
+      "CLAW/scripts/verify-ggd-binding.mjs",
+      "GGD/project.binding.json",
+      "GGD/schemas/project-binding.schema.json",
+      "GGD/equations/lawsets.json",
+      "CLAW/control-plane/system-optimizer/backlog.json",
+      "CLAW/control-plane/system-optimizer/state.json",
+      "CLAW/control-plane/system-optimizer/hypotheses/sysopt.ggd-local-lawset-index-lock.json"
     ],
     "evaluation_bundle": [
       "node CLAW/scripts/verify-systems-optimizer.mjs",
@@ -70,10 +78,10 @@
       "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
       "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
     ],
-    "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` still reported clean after a controlled orphan baseline card `CLAW/control-plane/system-optimizer/hypotheses/sysopt.orphan-inventory-baseline.json` was added with no matching backlog item, so replayable artifact inventory could drift outside backlog truth. After the ratchet, the verifier rejects orphan or filename/id-drifted hypothesis cards in `CLAW/control-plane/system-optimizer/hypotheses/` while the fixed scope-local promotion bundle stays green.",
-    "keep_rule": "Keep only if every systems-optimizer hypothesis-card artifact must resolve to exactly one backlog item with the same id and status and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
-    "learning_item": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
-    "recorded_at": "2026-04-04T20:33:38Z"
+    "measurement": "Before the ratchet, the control-plane brief could cite `GGD/equations/lawsets.json` as the first repo-local mathematical surface even though the file was absent and `node CLAW/scripts/verify-ggd-binding.mjs` still verified clean because it never required or inspected a local lawset index. After the ratchet, `GGD/project.binding.json` pins `system_optimizer.local_lawset_index`, the repo carries `GGD/equations/lawsets.json`, and the binding verifier rejects missing, empty, duplicate-id, or missing-path lawset index entries while the fixed scope-local promotion bundle stays green.",
+    "keep_rule": "Keep only if `node CLAW/scripts/verify-ggd-binding.mjs` now fails a missing or malformed repo-local lawset index contract and the exact five-command scope-local promotion bundle passes without touching route implementation paths.",
+    "learning_item": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
+    "recorded_at": "2026-04-06T02:10:25Z"
   },
   "last_rejected_change": {
     "id": "sysopt.runner-policy-self-verify",
@@ -98,9 +106,34 @@
     "learning_item": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
     "recorded_at": "2026-04-04T00:06:21Z"
   },
-  "accepted_count": 29,
+  "accepted_count": 34,
   "rejected_count": 1,
   "learning_log": [
+    {
+      "id": "sysopt.ggd-local-lawset-index-lock",
+      "learning": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
+      "recorded_at": "2026-04-06T02:10:25Z"
+    },
+    {
+      "id": "sysopt.runner-stability-evidence-uniqueness-lock",
+      "learning": "Runner-stability evidence commands must stay unique; duplicate recovery or observability steps make the replayable proof trail ambiguous without adding new evidence.",
+      "recorded_at": "2026-04-06T02:02:00Z"
+    },
+    {
+      "id": "sysopt.xr-gap-source-handoff-lock",
+      "learning": "XR systems-optimizer ratchets need an exact handoff-evidence binding; route, law, and severity locks still allow stale control-plane work if the authoritative gap packet is refreshed.",
+      "recorded_at": "2026-04-06T01:50:20Z"
+    },
+    {
+      "id": "sysopt.xr-quality-baseline-lock",
+      "learning": "XR systems-optimizer ratchets need a machine-readable shared quality baseline; evaluator focus alone leaves quality drift as narrative rather than falsifiable contract.",
+      "recorded_at": "2026-04-06T01:39:20Z"
+    },
+    {
+      "id": "sysopt.runner-observability-tail-only-lock",
+      "learning": "Runner-stability observability must stay trailing after the full replayable evidence trail; allowing `claw:health` mid-sequence weakens closed-fail recovery proof.",
+      "recorded_at": "2026-04-04T20:56:05Z"
+    },
     {
       "id": "sysopt.hypothesis-card-inventory-alignment-lock",
       "learning": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
@@ -252,5 +285,5 @@
       "recorded_at": "2026-04-04T10:31:09Z"
     }
   ],
-  "last_updated": "2026-04-04T20:33:38Z"
+  "last_updated": "2026-04-06T02:10:25Z"
 }

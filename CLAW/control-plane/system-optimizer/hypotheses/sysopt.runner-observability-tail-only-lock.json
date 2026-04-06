@@ -1,0 +1,22 @@
+{
+  "id": "sysopt.runner-observability-tail-only-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if runner-stability cards can treat `node CLAW/scripts/run-site-script.mjs claw:health` only as trailing observability after the full replayable runner evidence trail, not as a mid-stream proof step.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` accepted runner-stability cards whose `evidence_commands` inserted `node CLAW/scripts/run-site-script.mjs claw:health` between replayable runner scripts, so passive observability could split the replayable proof trail and still verify clean. After the ratchet, the verifier rejects any runner-stability card that places `claw:health` before the last replayable runner evidence command, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if runner-stability cards can use `claw:health` only after all replayable runner script commands and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Runner-stability observability must stay trailing after the full replayable evidence trail; allowing `claw:health` mid-sequence weakens closed-fail recovery proof.",
+  "recorded_at": "2026-04-04T20:56:05Z"
+}
