@@ -5,7 +5,7 @@
   "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins the current shared quality severity counts from the authoritative `/work/xr` gap artifact, so the required `quality` evaluator focus cannot degrade into narrative-only wording.",
   "target_route": "/work/xr",
   "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
   "first_broken_law": "work.lane.hero.authority",
   "severity_baseline": {
     "critical": 14,

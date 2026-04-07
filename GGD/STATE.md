@@ -2,7 +2,7 @@
 
 ## Current Position
 
-- date: `2026-04-06`
+- date: `2026-04-07`
 - status: `in_progress`
 - current phase: `Phase 4 - Propagate contract and promote geometry-law evidence`
 - current plan: `lane-contract-propagation`
@@ -16,10 +16,10 @@
 
 ## Route Status
 
-- `/`: canonical (70.9% @ 0.5) — homepage accepted through canonical closure
-- `/imc`: canonical (81.9% @ 0.5) — flagship IMC accepted through canonical closure
-- `/work/xr`: blocked (23.5% @ 0.5) — Rejected `/work/xr` after fresh layout, geometry-law, responsive, quality, and contrast falsification reruns.
-- `/work/ft`: blocked (19.0% @ 0.5) — Current `/work/ft` responsive evidence still fails the laptop limiting case with horizontal overflow and multiple shared-shell overflow culprits.
+- `/`: canonical (75.9% @ 1) — homepage accepted through canonical closure
+- `/imc`: canonical (86.9% @ 1) — flagship IMC accepted through canonical closure
+- `/work/xr`: blocked (28.5% @ 1) — Rejected `/work/xr` after fresh layout, geometry-law, responsive, quality, and contrast falsification reruns.
+- `/work/ft`: blocked (24.0% @ 1) — Current `/work/ft` responsive evidence still fails the laptop limiting case with horizontal overflow and multiple shared-shell overflow culprits.
 
 ## Active Gaps
 

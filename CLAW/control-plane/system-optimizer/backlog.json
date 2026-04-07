@@ -62,7 +62,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card keeps `severity_baseline` and `quality_baseline` on the exact four-level severity dimension system `critical`, `major`, `minor`, `note`, so route-neutral system work cannot smuggle stale XR severity shapes behind matching counts.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -308,7 +308,7 @@
       "hypothesis": "Repeated XR rejection can be reduced by forcing XR-targeting systems-optimizer cards to bind to the authoritative `/work/xr` geometry-gap artifact and an explicit evaluator focus before further route edits.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -351,7 +351,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` backlog card is validated against the authoritative `/work/xr` gap artifact and evaluator focus contract before route lanes act on it.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -393,7 +393,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card declares one explicit `first_broken_law` drawn from the authoritative `/work/xr` gap surface list, so route-neutral system work cannot optimize against vague XR wording.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -436,7 +436,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins the current failure magnitude from the authoritative `/work/xr` gap artifact, so stale control-plane ratchets cannot target vague XR severity.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -479,7 +479,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card is forced onto the exact authoritative evaluator focus contract, so route-neutral system work cannot widen beyond layout-diff, quality, and flagship-invariants.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -522,7 +522,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins the current shared quality severity counts from the authoritative `/work/xr` gap artifact, so the required `quality` evaluator focus cannot degrade into narrative-only wording.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -566,7 +566,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins the exact authoritative `source_handoff` from `/work/xr` gap truth, so route-neutral control-plane work cannot keep targeting superseded XR rejection evidence.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -609,7 +609,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card pins whether flagship invariants are currently intact from the authoritative `/work/xr` gap artifact, so route-neutral system work cannot keep retargeting IMC isolation when XR fails elsewhere.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -1175,7 +1175,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card must pin `first_broken_law` to the authoritative primary drift surface, so route-neutral system work cannot legally target a secondary XR gap while the first broken law is still open.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -1266,7 +1266,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card can only promote against a `gap_source_handoff` packet that resolves inside the current autonomous truth surfaces, so route-neutral system work cannot inherit XR evidence that exists only in an external runtime mirror.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -1310,7 +1310,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if seeded `sysopt.xr-*` cards may only enter the queue when their authoritative `gap_source_handoff` resolves inside the current worktree runtime or declared shared truth cache, so route lanes cannot act on XR evidence that exists only in an external runtime mirror.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,
@@ -1355,7 +1355,7 @@
       "hypothesis": "Repeated XR rejection can be reduced if systems-optimizer state policy must explicitly require XR `severity_baseline` alignment, so the machine contract cannot silently claim XR severity locking while its retained policy omits that law.",
       "target_route": "/work/xr",
       "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+      "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
       "first_broken_law": "work.lane.hero.authority",
       "severity_baseline": {
         "critical": 14,

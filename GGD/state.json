@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project_reference": {
-    "project_md_updated": "2026-04-06",
+    "project_md_updated": "2026-04-07",
     "core_research_question": "How do we turn the Zer0pa website into a deterministic geometry program whose layout, typography, color, semantic hierarchy, packet truth, and code quality are governed by explicit laws and falsified continuously until canonical closure is reached?",
     "current_focus": "Reduce route and system truth from artifacts, keep gap export honest, and push route-family verification closer to equation-native acceptance."
   },
@@ -60,9 +60,9 @@
     "current_plan": "lane-contract-propagation",
     "total_plans_in_phase": 3,
     "status": "in_progress",
-    "last_activity": "2026-04-06T12:59:41Z",
+    "last_activity": "2026-04-07T18:46:11Z",
     "last_activity_desc": "Established executable route progress reduction, exported missing FT gap state, and tightened the contract surfaces around contradiction-aware truth.",
-    "progress_percent": 48.8
+    "progress_percent": 53.8
   },
   "open_questions": [
     "Which GGD command surface should be wired first into the Codex execution layer?",
@@ -129,32 +129,32 @@
       "role": "home",
       "status": "canonical",
       "summary": "homepage accepted through canonical closure",
-      "progress_percent": 70.9,
-      "progress_confidence": 0.5,
+      "progress_percent": 75.9,
+      "progress_confidence": 1,
       "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     },
     "/imc": {
       "role": "flagship",
       "status": "canonical",
       "summary": "flagship IMC accepted through canonical closure",
-      "progress_percent": 81.9,
-      "progress_confidence": 0.5,
+      "progress_percent": 86.9,
+      "progress_confidence": 1,
       "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     },
     "/work/xr": {
       "role": "product-family",
       "status": "blocked",
       "summary": "Rejected `/work/xr` after fresh layout, geometry-law, responsive, quality, and contrast falsification reruns.",
-      "progress_percent": 23.5,
-      "progress_confidence": 0.5,
+      "progress_percent": 28.5,
+      "progress_confidence": 1,
       "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     },
     "/work/ft": {
       "role": "product-family",
       "status": "blocked",
       "summary": "Current `/work/ft` responsive evidence still fails the laptop limiting case with horizontal overflow and multiple shared-shell overflow culprits.",
-      "progress_percent": 19,
-      "progress_confidence": 0.5,
+      "progress_percent": 24,
+      "progress_confidence": 1,
       "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
     }
   },
@@ -347,19 +347,17 @@
     "state_file": "CLAW/control-plane/system-optimizer/state.json",
     "backlog_file": "CLAW/control-plane/system-optimizer/backlog.json",
     "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs",
-    "backlog_count": 35,
+    "backlog_count": 49,
     "active_hypothesis": null,
     "last_kept_change": {
-      "id": "sysopt.ggd-local-lawset-index-lock",
-      "hypothesis": "GGD binding becomes more deterministic if it must declare a repo-local lawset index and binding verification fails whenever that index is missing, empty, or points at missing lawset files.",
+      "id": "sysopt.runner-field-contract-classification-lock",
+      "hypothesis": "Runner-stability hardening becomes safer if any systems-optimizer card that declares `runner_focus`, `failure_mode`, `closed_fail_rule`, or `evidence_commands` is classified as runner-stability even when its id does not use the `sysopt.runner-stability-*` prefix, so naming drift cannot bypass replayable runner-law verification.",
       "writable_scope": [
-        "CLAW/scripts/verify-ggd-binding.mjs",
-        "GGD/project.binding.json",
-        "GGD/schemas/project-binding.schema.json",
-        "GGD/equations/lawsets.json",
+        "CLAW/PRD_SYSTEMS_OPTIMIZER.md",
+        "CLAW/scripts/verify-systems-optimizer.mjs",
         "CLAW/control-plane/system-optimizer/backlog.json",
-        "CLAW/control-plane/system-optimizer/state.json",
-        "CLAW/control-plane/system-optimizer/hypotheses/sysopt.ggd-local-lawset-index-lock.json"
+        "CLAW/control-plane/system-optimizer/hypotheses/sysopt.runner-field-contract-classification-lock.json",
+        "CLAW/control-plane/system-optimizer/state.json"
       ],
       "evaluation_bundle": [
         "node CLAW/scripts/verify-systems-optimizer.mjs",
@@ -368,38 +366,32 @@
         "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
         "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
       ],
-      "measurement": "Before the ratchet, the control-plane brief could cite `GGD/equations/lawsets.json` as the first repo-local mathematical surface even though the file was absent and `node CLAW/scripts/verify-ggd-binding.mjs` still verified clean because it never required or inspected a local lawset index. After the ratchet, `GGD/project.binding.json` pins `system_optimizer.local_lawset_index`, the repo carries `GGD/equations/lawsets.json`, and the binding verifier rejects missing, empty, duplicate-id, or missing-path lawset index entries while the fixed scope-local promotion bundle stays green.",
-      "keep_rule": "Keep only if `node CLAW/scripts/verify-ggd-binding.mjs` now fails a missing or malformed repo-local lawset index contract and the exact five-command scope-local promotion bundle passes without touching route implementation paths.",
-      "learning_item": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
-      "recorded_at": "2026-04-06T02:10:25Z"
+      "measurement": "Before the ratchet, `isRunnerStabilityRatchet` checked only `card.id.startsWith('sysopt.runner-stability')`, so kept cards such as `sysopt.runner-stale-cycle-exact-evidence-lock` and `sysopt.runner-observability-tail-lock` still carried `runner_focus`, `failure_mode`, `closed_fail_rule`, and `evidence_commands` yet bypassed `validateRunnerStabilityContract` because their ids drifted to `sysopt.runner-*` without the `-stability-` infix. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` classifies any card with those runner-stability fields as runner-stability, state policy explicitly requires that field-based classification, and the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if field-bearing runner cards are forced through the runner-stability contract even when their ids drift from `sysopt.runner-stability-*`, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+      "learning_item": "Runner-stability verification must classify by declared runner contract fields, not only by one id prefix; otherwise naming drift can let field-bearing recovery ratchets bypass the very laws they are supposed to prove.",
+      "recorded_at": "2026-04-06T05:21:17Z"
     },
     "keep_only_if_better": true
   },
   "route_progress": {
     "report_file": "CLAW/control-plane/reports/route-progress.latest.json",
-    "generated_at": "2026-04-05T16:03:36Z",
-    "overall_progress_percentage": 48.8,
+    "generated_at": "2026-04-06T20:04:55Z",
+    "overall_progress_percentage": 53.8,
     "contrast_truth": {
-      "status": "contradictory",
-      "default_score": 50,
-      "report": "deterministic-design-system/reports/contrast/contrast.verification.json",
-      "contradiction": {
-        "relativePath": "CLAW/control-plane/runtime/handoffs/C4-20260404T044816Z-04.json",
-        "majorFailures": 72,
-        "summary": "Fresh contrast evidence is now red across all audited routes and conflicts with the runtime summary that marked contrast as passing on 2026-04-03."
-      }
+      "status": "report-backed",
+      "report": "deterministic-design-system/reports/contrast/contrast.verification.json"
     },
     "routes": [
       {
         "route": "/",
-        "progress_percentage": 70.9,
-        "progress_confidence": 0.5,
+        "progress_percentage": 75.9,
+        "progress_confidence": 1,
         "bundle_scores": {
           "layout": 83.5,
           "geometry": 52,
           "responsive": 85,
           "quality": 100,
-          "contrast": 50
+          "contrast": 100
         },
         "evidence": {
           "layout_report": "deterministic-design-system/reports/home.verification.md",
@@ -426,18 +418,18 @@
             "internal_overflow": false
           }
         ],
-        "contrast_status": "contradictory"
+        "contrast_status": "clean"
       },
       {
         "route": "/imc",
-        "progress_percentage": 81.9,
-        "progress_confidence": 0.5,
+        "progress_percentage": 86.9,
+        "progress_confidence": 1,
         "bundle_scores": {
           "layout": 88,
           "geometry": 74.5,
           "responsive": 100,
           "quality": 100,
-          "contrast": 50
+          "contrast": 100
         },
         "evidence": {
           "layout_report": "deterministic-design-system/reports/imc.verification.md",
@@ -464,18 +456,18 @@
             "internal_overflow": false
           }
         ],
-        "contrast_status": "contradictory"
+        "contrast_status": "clean"
       },
       {
         "route": "/work/xr",
-        "progress_percentage": 23.5,
-        "progress_confidence": 0.5,
+        "progress_percentage": 28.5,
+        "progress_confidence": 1,
         "bundle_scores": {
           "layout": 0,
           "geometry": 0,
           "responsive": 85,
           "quality": 100,
-          "contrast": 50
+          "contrast": 100
         },
         "evidence": {
           "layout_report": "deterministic-design-system/reports/work-xr.verification.md",
@@ -502,18 +494,18 @@
             "internal_overflow": false
           }
         ],
-        "contrast_status": "contradictory"
+        "contrast_status": "clean"
       },
       {
         "route": "/work/ft",
-        "progress_percentage": 19,
-        "progress_confidence": 0.5,
+        "progress_percentage": 24,
+        "progress_confidence": 1,
         "bundle_scores": {
           "layout": 0,
           "geometry": 0,
           "responsive": 40,
           "quality": 100,
-          "contrast": 50
+          "contrast": 100
         },
         "evidence": {
           "layout_report": "deterministic-design-system/reports/work-ft.verification.md",
@@ -540,7 +532,7 @@
             "internal_overflow": false
           }
         ],
-        "contrast_status": "contradictory"
+        "contrast_status": "clean"
       }
     ]
   }

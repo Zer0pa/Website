@@ -7,7 +7,7 @@
   "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card keeps `severity_baseline` and `quality_baseline` on the exact four-level severity dimension system `critical`, `major`, `minor`, `note`, so route-neutral system work cannot smuggle stale XR severity shapes behind matching counts.",
   "target_route": "/work/xr",
   "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
   "first_broken_law": "work.lane.hero.authority",
   "severity_baseline": {
     "critical": 14,

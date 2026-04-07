@@ -5,7 +5,7 @@
   "hypothesis": "Repeated XR rejection can be reduced by forcing XR-targeting systems-optimizer cards to bind to the authoritative `/work/xr` geometry-gap artifact and an explicit evaluator focus before further route edits.",
   "target_route": "/work/xr",
   "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
   "first_broken_law": "work.lane.hero.authority",
   "severity_baseline": {
     "critical": 14,

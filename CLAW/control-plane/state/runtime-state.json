@@ -6,9 +6,9 @@
   "current_milestone": "M4-ggd-autonomy-production-horizon",
   "current_phase": "C4-first-generic-product-proof",
   "active_wave": "W6",
-  "last_updated": "2026-04-07T02:47:39Z",
+  "last_updated": "2026-04-07T19:43:53Z",
   "control_style": "evaluator-optimizer",
-  "latest_wave_report": "CLAW/control-plane/reports/C4-20260406T235926Z.md",
+  "latest_wave_report": "CLAW/control-plane/reports/C4-20260407T174636Z.md",
   "phase_plan": "CLAW/control-plane/plans/ggd-autonomy-production-horizon.json",
   "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
   "execution_prd": "CLAW/PRD_GGD_AUTONOMY_PRODUCTION_HORIZON.md",
@@ -59,7 +59,7 @@
       "status": "escalated",
       "last_accepted_commit": null,
       "last_candidate_commit": null,
-      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T203010Z-02.json"
+      "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260407T174636Z-01.json"
     },
     "systems-qa": {
       "status": "rejected",
@@ -325,7 +325,11 @@
       "CLAW/control-plane/queue/C4-20260406T210026Z.json",
       "CLAW/control-plane/queue/C4-20260406T220042Z.json",
       "CLAW/control-plane/queue/C4-20260406T230012Z.json",
-      "CLAW/control-plane/queue/C4-20260406T235926Z.json"
+      "CLAW/control-plane/queue/C4-20260406T235926Z.json",
+      "CLAW/control-plane/queue/C4-20260407T045902Z.json",
+      "CLAW/control-plane/queue/C4-20260407T114619Z.json",
+      "CLAW/control-plane/queue/C4-20260407T164626Z.json",
+      "CLAW/control-plane/queue/C4-20260407T174636Z.json"
     ]
   },
   "active_jobs": [],
@@ -343,15 +347,15 @@
   },
   "active_cycle": null,
   "last_recovery_event": "CLAW/control-plane/recoveries/RECOVER-20260404T122235Z.json",
-  "last_health_check": "2026-04-06T23:59:57Z",
+  "last_health_check": "2026-04-07T17:47:07Z",
   "runner": {
     "enabled": false,
     "mode": "stopped",
-    "last_job": "C4-20260406T235926Z-01",
-    "last_lane": "systems-optimizer",
-    "last_cycle": "C4-20260406T235926Z",
+    "last_job": "C4-20260407T174636Z-01",
+    "last_lane": "data-truth",
+    "last_cycle": "C4-20260407T174636Z",
     "last_outcome": "escalated",
-    "code_head": "a6deac4f0060d7229828a37439ce85062227ec22"
+    "code_head": "c1db56373beb65a55c7f90bcf0b86181efdfd7fc"
   },
   "operator_authorized_local_runner": true
 }

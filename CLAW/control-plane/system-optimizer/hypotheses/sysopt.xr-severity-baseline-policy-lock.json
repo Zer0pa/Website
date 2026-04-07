@@ -7,7 +7,7 @@
   "hypothesis": "Repeated XR rejection can be reduced if systems-optimizer state policy must explicitly require XR `severity_baseline` alignment, so the machine contract cannot silently claim XR severity locking while its retained policy omits that law.",
   "target_route": "/work/xr",
   "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
-  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
   "first_broken_law": "work.lane.hero.authority",
   "severity_baseline": {
     "critical": 14,
