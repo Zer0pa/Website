@@ -78,6 +78,14 @@
       "last_accepted_commit": "50b71220a69167eb73c60b6de58c52dd5228c8c1",
       "last_candidate_commit": null,
       "last_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260403T135814Z-04.json"
+    },
+    "opus-engineer": {
+      "status": "scaffolded",
+      "enabled": false,
+      "last_accepted_commit": null,
+      "last_candidate_commit": null,
+      "last_handoff": null,
+      "_note": "Scaffolded 2026-04-07. Set runner-policy.json activation_overrides.opus-engineer.enabled=true and create a dedicated worktree to activate."
     }
   },
   "latest_audits": {

@@ -1,0 +1,32 @@
+{
+  "id": "opus-engineer",
+  "branch": "codex/opus-engineer",
+  "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/opus-engineer",
+  "reasoning": "xhigh",
+  "lane_class": "orchestrator",
+  "replayable": false,
+  "control_plane_only": false,
+  "role": "persistent orchestrator — drives PRD execution and geometry-gap closure via bounded sub-agent spawning",
+  "writes": [
+    "site/src/app/**",
+    "site/src/components/**",
+    "CLAW/opus-engineer/**",
+    "CLAW/control-plane/reports/opus-engineer/**"
+  ],
+  "inputs": [
+    "CLAW/control-plane/state/runtime-state.json",
+    "CLAW/control-plane/queue/index.json",
+    "GGD/gap-records/**",
+    "CLAW/PRD*.md",
+    "CLAW/opus-engineer/decision-policy.md",
+    "CLAW/opus-engineer/prompts/**"
+  ],
+  "outputs": [
+    "CLAW/control-plane/reports/opus-engineer/<cycle-id>.md",
+    "site/src/app/** (via committed sub-agent work)",
+    "site/src/components/** (via committed sub-agent work)"
+  ],
+  "decision_policy": "CLAW/opus-engineer/decision-policy.md",
+  "enabled": false,
+  "_note": "enabled:false is enforced via runner-policy.json activation_overrides. Update worktree path and set enabled:true there when activating."
+}

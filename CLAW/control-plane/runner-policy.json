@@ -33,6 +33,10 @@
           "C4"
         ],
         "reason": "Parked in C4 while Opus Engineer owns bounded CLAW/GGD hardening; resume autonomous systems-optimizer slices in C5."
+      },
+      "opus-engineer": {
+        "enabled": false,
+        "reason": "Scaffolded but not yet activated. To enable: (1) create git worktree at /Users/zer0palab/Zer0pa Website/worktrees/opus-engineer on branch codex/opus-engineer, (2) update agent-lanes.json opus-engineer.worktree to that path, (3) set this enabled field to true."
       }
     },
     "allow_stalled_result_salvage": true,
