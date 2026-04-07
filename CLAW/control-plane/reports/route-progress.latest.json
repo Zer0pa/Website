@@ -1,28 +1,22 @@
 {
-  "generated_at": "2026-04-05T16:03:36Z",
+  "generated_at": "2026-04-06T20:04:55Z",
   "weights_file": "CLAW/control-plane/product-kernel/route-progress.weights.json",
-  "overall_progress_percentage": 48.8,
+  "overall_progress_percentage": 53.8,
   "contrast_truth": {
-    "status": "contradictory",
-    "default_score": 50,
-    "report": "deterministic-design-system/reports/contrast/contrast.verification.json",
-    "contradiction": {
-      "relativePath": "CLAW/control-plane/runtime/handoffs/C4-20260404T044816Z-04.json",
-      "majorFailures": 72,
-      "summary": "Fresh contrast evidence is now red across all audited routes and conflicts with the runtime summary that marked contrast as passing on 2026-04-03."
-    }
+    "status": "report-backed",
+    "report": "deterministic-design-system/reports/contrast/contrast.verification.json"
   },
   "routes": [
     {
       "route": "/",
-      "progress_percentage": 70.9,
-      "progress_confidence": 0.5,
+      "progress_percentage": 75.9,
+      "progress_confidence": 1,
       "bundle_scores": {
         "layout": 83.5,
         "geometry": 52,
         "responsive": 85,
         "quality": 100,
-        "contrast": 50
+        "contrast": 100
       },
       "evidence": {
         "layout_report": "deterministic-design-system/reports/home.verification.md",
@@ -49,18 +43,18 @@
           "internal_overflow": false
         }
       ],
-      "contrast_status": "contradictory"
+      "contrast_status": "clean"
     },
     {
       "route": "/imc",
-      "progress_percentage": 81.9,
-      "progress_confidence": 0.5,
+      "progress_percentage": 86.9,
+      "progress_confidence": 1,
       "bundle_scores": {
         "layout": 88,
         "geometry": 74.5,
         "responsive": 100,
         "quality": 100,
-        "contrast": 50
+        "contrast": 100
       },
       "evidence": {
         "layout_report": "deterministic-design-system/reports/imc.verification.md",
@@ -87,18 +81,18 @@
           "internal_overflow": false
         }
       ],
-      "contrast_status": "contradictory"
+      "contrast_status": "clean"
     },
     {
       "route": "/work/xr",
-      "progress_percentage": 23.5,
-      "progress_confidence": 0.5,
+      "progress_percentage": 28.5,
+      "progress_confidence": 1,
       "bundle_scores": {
         "layout": 0,
         "geometry": 0,
         "responsive": 85,
         "quality": 100,
-        "contrast": 50
+        "contrast": 100
       },
       "evidence": {
         "layout_report": "deterministic-design-system/reports/work-xr.verification.md",
@@ -125,18 +119,18 @@
           "internal_overflow": false
         }
       ],
-      "contrast_status": "contradictory"
+      "contrast_status": "clean"
     },
     {
       "route": "/work/ft",
-      "progress_percentage": 19,
-      "progress_confidence": 0.5,
+      "progress_percentage": 24,
+      "progress_confidence": 1,
       "bundle_scores": {
         "layout": 0,
         "geometry": 0,
         "responsive": 40,
         "quality": 100,
-        "contrast": 50
+        "contrast": 100
       },
       "evidence": {
         "layout_report": "deterministic-design-system/reports/work-ft.verification.md",
@@ -163,7 +157,7 @@
           "internal_overflow": false
         }
       ],
-      "contrast_status": "contradictory"
+      "contrast_status": "clean"
     }
   ]
 }

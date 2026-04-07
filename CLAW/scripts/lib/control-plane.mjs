@@ -115,7 +115,6 @@ export function loadControlPlane() {
     cycleTemplates: readJson('CLAW/control-plane/cycle-templates.json'),
     executionPlan: readJson('CLAW/control-plane/plans/canonical-routes-to-producing.json'),
     recursiveImprovement: readJson('CLAW/control-plane/recursive-improvement.json'),
-    runnerPolicy: readOptionalJson('CLAW/control-plane/runner-policy.json'),
     runtime: readJson('CLAW/control-plane/state/runtime-state.json'),
     stateMachine: readJson('CLAW/control-plane/state-machine.json'),
   };
@@ -267,34 +266,113 @@ function summarizeContrastFailure(entry, auditTimestamp) {
   };
 }
 
+function summarizeAuditFailure(entry, auditTimestamp, patterns) {
+  if (!entry?.handoff) {
+    return null;
+  }
+
+  if (auditTimestamp && entry.recordedAt && entry.recordedAt < auditTimestamp) {
+    return null;
+  }
+
+  const fragments = [
+    entry.handoff.summary,
+    ...(entry.handoff.audit_result?.notes || []),
+    ...(entry.handoff.postflight_metrics?.notes || []),
+    ...(entry.handoff.blockers || []),
+  ]
+    .filter(Boolean)
+    .map((value) => String(value).trim())
+    .filter(Boolean);
+
+  const summary = fragments.find((fragment) => patterns.some((pattern) => pattern.test(fragment)));
+  if (!summary) {
+    return null;
+  }
+
+  return {
+    relativePath: entry.relativePath,
+    summary,
+  };
+}
+
+const PASS_AUDIT_RECONCILIATIONS = [
+  {
+    key: 'build',
+    patterns: [/build gate is hard red/i, /`?npm run build`?.*fail/i, /\bbuild failed\b/i],
+  },
+  {
+    key: 'parser',
+    patterns: [/parser gate is red/i, /`?npm run test:parser`?.*fail/i, /\bparser failed\b/i],
+  },
+  {
+    key: 'responsive',
+    patterns: [/responsive gate is red/i, /horizontal overflow/i],
+  },
+  {
+    key: 'contrast',
+    patterns: [
+      /contrast gate is red/i,
+      /contrast audit reports.*major failures/i,
+      /contrast evidence is now red/i,
+      /contrast bundle is not promotable/i,
+    ],
+  },
+];
+
+export function reconcileRuntimeLatestAudits(runtime) {
+  const nextRuntime = structuredClone(runtime || {});
+  const nextLatestAudits = structuredClone(nextRuntime.latest_audits || {});
+  const recentHandoffs = readRecentRuntimeHandoffs();
+  const changes = [];
+
+  for (const audit of PASS_AUDIT_RECONCILIATIONS) {
+    const currentSummary = String(nextLatestAudits[audit.key] || '');
+    if (!/pass/i.test(currentSummary)) {
+      continue;
+    }
+
+    const auditTimestamp = parseAuditSummaryTimestamp(currentSummary);
+    const failure = recentHandoffs
+      .map((entry) => summarizeAuditFailure(entry, auditTimestamp, audit.patterns))
+      .find(Boolean);
+
+    if (!failure) {
+      continue;
+    }
+
+    const nextSummary = `fail: ${failure.summary} (${failure.relativePath})`;
+    if (nextSummary === currentSummary) {
+      continue;
+    }
+
+    nextLatestAudits[audit.key] = nextSummary;
+    changes.push({
+      audit: audit.key,
+      source_handoff: failure.relativePath,
+      summary: failure.summary,
+    });
+  }
+
+  if (changes.length === 0) {
+    return {
+      runtime: nextRuntime,
+      changed: false,
+      changes,
+    };
+  }
+
+  nextRuntime.latest_audits = nextLatestAudits;
+  return {
+    runtime: nextRuntime,
+    changed: true,
+    changes,
+  };
+}
+
 export function lookupPhase(executionPlan, runtimePhase, overridePhase = null) {
   const requested = phaseToken(overridePhase || runtimePhase || executionPlan.current_phase);
   return executionPlan.phases.find((phase) => phase.id === requested) || null;
-}
-
-function laneActivationOverrides(runnerPolicy) {
-  return (
-    runnerPolicy?.execution?.activation_overrides ||
-    runnerPolicy?.execution?.lane_activation_overrides ||
-    {}
-  );
-}
-
-function laneDisabledForPhase(runnerPolicy, laneId, phaseId) {
-  const override = laneActivationOverrides(runnerPolicy)?.[laneId];
-  if (!override || typeof override !== 'object' || Array.isArray(override)) {
-    return false;
-  }
-
-  if (override.enabled === false) {
-    return true;
-  }
-
-  const disabledPhases = Array.isArray(override.disabled_phases)
-    ? override.disabled_phases.map((value) => phaseToken(value)).filter(Boolean)
-    : [];
-
-  return disabledPhases.includes(phaseToken(phaseId));
 }
 
 function referencedFiles(control) {
@@ -354,24 +432,6 @@ export function validateControlPlane(control, options = {}) {
     warnings.push(
       `Plan current_phase (${control.executionPlan.current_phase}) differs from runtime current_phase (${control.runtime.current_phase})`,
     );
-  }
-
-  for (const [laneId, override] of Object.entries(laneActivationOverrides(control.runnerPolicy))) {
-    if (!lanesById.has(laneId)) {
-      issues.push(`Runner activation override references unknown lane ${laneId}`);
-      continue;
-    }
-
-    if (!override || typeof override !== 'object' || Array.isArray(override)) {
-      issues.push(`Runner activation override for ${laneId} must be an object.`);
-      continue;
-    }
-
-    for (const disabledPhase of override.disabled_phases || []) {
-      if (!control.executionPlan.phases.some((candidate) => candidate.id === phaseToken(disabledPhase))) {
-        issues.push(`Runner activation override for ${laneId} references unknown phase ${disabledPhase}.`);
-      }
-    }
   }
 
   for (const lane of control.agentLanes.lanes) {
@@ -550,9 +610,12 @@ export function buildCyclePlan(control, options = {}) {
   }
 
   const lanesById = laneMap(control.agentLanes);
-  const activeLaneTemplates = (template.lanes || []).filter(
-    (laneTemplate) => !laneDisabledForPhase(control.runnerPolicy, laneTemplate.lane_id, phase.id),
-  );
+  const activationOverrides = readOptionalJson('CLAW/control-plane/runner-policy.json')?.execution?.activation_overrides || {};
+  const activeLaneTemplates = (template.lanes || []).filter((laneTemplate) => {
+    const laneOverride = activationOverrides[laneTemplate.lane_id];
+    const disabledPhases = Array.isArray(laneOverride?.disabled_phases) ? laneOverride.disabled_phases : [];
+    return !disabledPhases.includes(phase.id);
+  });
   const createdAt = localTimestamp();
   const cycleId = cycleIdForPhase(phase.id);
   const profile = options.profile || template.profile || control.cycleTemplates.default_profile || 'supervised_dry_run';

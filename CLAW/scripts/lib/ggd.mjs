@@ -67,33 +67,6 @@ export function gapIdForRoute(route, kind = 'geometry-gap') {
   return `${routeFileStem(route)}.${kind}`;
 }
 
-function normalizeSeverityCounts(counts) {
-  if (!counts || typeof counts !== 'object' || Array.isArray(counts)) {
-    return null;
-  }
-
-  return {
-    critical: Number(counts.critical || 0),
-    major: Number(counts.major || 0),
-    minor: Number(counts.minor || 0),
-    note: Number(counts.note || 0),
-  };
-}
-
-function parseCountsFromText(text) {
-  const match = String(text).match(/(?:`)?(\d+)(?:`)?\s+critical[\s\S]*?(?:`)?(\d+)(?:`)?\s+major[\s\S]*?(?:`)?(\d+)(?:`)?\s+minor/i);
-  if (!match) {
-    return null;
-  }
-
-  return {
-    critical: Number(match[1] || 0),
-    major: Number(match[2] || 0),
-    minor: Number(match[3] || 0),
-    note: 0,
-  };
-}
-
 export function geometryLawReportPathForRoute(route) {
   return path.join(GEOMETRY_LAW_REPORT_DIR, `${routeReportStem(route)}.geometry-law.json`);
 }
@@ -254,13 +227,31 @@ export function severityCountsFromHandoff(handoff) {
     null;
 
   if (counts && typeof counts === 'object') {
-    return normalizeSeverityCounts(counts);
+    return {
+      critical: Number(counts.critical || 0),
+      major: Number(counts.major || 0),
+      minor: Number(counts.minor || 0),
+      note: Number(counts.note || 0),
+    };
   }
 
   const notes = [
     ...(handoff.audit_result?.notes || []),
     ...(handoff.postflight_metrics?.notes || []),
   ];
+
+  const parseCountsFromText = (text) => {
+    const match = String(text).match(/(?:`)?(\d+)(?:`)?\s+critical[\s\S]*?(?:`)?(\d+)(?:`)?\s+major[\s\S]*?(?:`)?(\d+)(?:`)?\s+minor/i);
+    if (!match) {
+      return null;
+    }
+    return {
+      critical: Number(match[1] || 0),
+      major: Number(match[2] || 0),
+      minor: Number(match[3] || 0),
+      note: 0,
+    };
+  };
 
   const route = parseRouteFromHandoff(handoff);
   const routeSpecificNote = notes.find((note) => route && String(note).includes(route) && /critical/i.test(String(note)) && /major/i.test(String(note)) && /minor/i.test(String(note)));
@@ -287,51 +278,6 @@ export function severityCountsFromHandoff(handoff) {
   }
 
   return { critical: 0, major: 0, minor: 0, note: 0 };
-}
-
-function qualitySeverityCountsFromHandoff(handoff) {
-  const directCounts =
-    handoff.quality_severity_counts ||
-    handoff.audit_result?.quality_severity_counts ||
-    handoff.postflight_metrics?.quality_severity_counts ||
-    null;
-  const normalizedDirectCounts = normalizeSeverityCounts(directCounts);
-  if (normalizedDirectCounts) {
-    return normalizedDirectCounts;
-  }
-
-  const qualityNotes = [...(handoff.postflight_metrics?.notes || []), ...(handoff.audit_result?.notes || [])]
-    .filter((note) => /audit:quality|quality/i.test(String(note)));
-  for (const note of qualityNotes) {
-    const parsedCounts = parseCountsFromText(note);
-    if (parsedCounts) {
-      return parsedCounts;
-    }
-  }
-
-  const explicitReport = existingEvidenceFilesFromHandoff(handoff).find(
-    (filePath) => filePath.endsWith('quality.verification.json') && filePath.includes('/reports/quality/'),
-  );
-  const candidatePaths = [
-    explicitReport ? projectPath(explicitReport) : null,
-    projectPath('deterministic-design-system/reports/quality/quality.verification.json'),
-  ].filter(Boolean);
-
-  for (const candidatePath of candidatePaths) {
-    if (!fs.existsSync(candidatePath)) {
-      continue;
-    }
-
-    try {
-      const report = JSON.parse(fs.readFileSync(candidatePath, 'utf8'));
-      const normalizedSummary = normalizeSeverityCounts(report.summary);
-      if (normalizedSummary) {
-        return normalizedSummary;
-      }
-    } catch {}
-  }
-
-  return null;
 }
 
 function existingEvidenceFilesFromHandoff(handoff) {
@@ -553,7 +499,6 @@ export function buildGapRecordFromHandoff(handoff, options = {}) {
   const route = options.route || parseRouteFromHandoff(handoff);
   const kind = options.kind || inferGapKindFromHandoff(handoff, handoff.lane);
   const severityCounts = severityCountsFromHandoff(handoff);
-  const qualitySeverityCounts = qualitySeverityCountsFromHandoff(handoff);
   const gap = {
     version: 1,
     id: gapIdForRoute(route, kind),
@@ -578,7 +523,6 @@ export function buildGapRecordFromHandoff(handoff, options = {}) {
       horizontal_overflow: (handoff.audit_result?.notes || []).some((note) => String(note).includes('no horizontal overflow')),
       notes: (handoff.audit_result?.notes || []).filter((note) => String(note).includes('horizontal overflow')),
     },
-    quality_severity_counts: qualitySeverityCounts,
     quality_findings_summary:
       (handoff.postflight_metrics?.notes || []).find((note) => String(note).includes('audit:quality')) ||
       (handoff.postflight_metrics?.notes || []).find((note) => /critical|major/i.test(String(note))) ||
@@ -599,7 +543,6 @@ export function buildGapRecordFromHandoff(handoff, options = {}) {
       if (!gapHasMeasuredEvidence(gap) && gapHasMeasuredEvidence(existingGap)) {
         gap.severity_counts = existingGap.severity_counts || gap.severity_counts;
         gap.top_drift_surfaces = existingGap.top_drift_surfaces || gap.top_drift_surfaces;
-        gap.quality_severity_counts = gap.quality_severity_counts || existingGap.quality_severity_counts || null;
         gap.quality_findings_summary = existingGap.quality_findings_summary || gap.quality_findings_summary;
         gap.evidence_files = [...new Set([...(existingGap.evidence_files || []), ...(gap.evidence_files || [])])];
         gap.learning_captured = [

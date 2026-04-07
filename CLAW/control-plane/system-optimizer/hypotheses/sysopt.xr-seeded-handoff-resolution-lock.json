@@ -1,0 +1,48 @@
+{
+  "id": "sysopt.xr-seeded-handoff-resolution-lock",
+  "cycle_id": "C4-20260406T043618Z",
+  "job_id": "C4-20260406T043618Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Repeated XR rejection can be reduced if seeded `sysopt.xr-*` cards may only enter the queue when their authoritative `gap_source_handoff` resolves inside the current worktree runtime or declared shared truth cache, so route lanes cannot act on XR evidence that exists only in an external runtime mirror.",
+  "target_route": "/work/xr",
+  "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+  "first_broken_law": "work.lane.hero.authority",
+  "severity_baseline": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "flagship_invariants_baseline": true,
+  "evaluator_focus": [
+    "layout-diff",
+    "quality",
+    "flagship-invariants"
+  ],
+  "writable_scope": [
+    "CLAW/scripts/verify-systems-optimizer.mjs",
+    "CLAW/PRD_SYSTEMS_OPTIMIZER.md",
+    "CLAW/control-plane/system-optimizer/backlog.json",
+    "CLAW/control-plane/system-optimizer/state.json",
+    "CLAW/control-plane/system-optimizer/hypotheses/sysopt.xr-seeded-handoff-resolution-lock.json"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` treated `gap_source_handoff` as a string-alignment field for every `sysopt.xr-*` card, so a synchronized falsification could seed a future XR card that still matched `GGD/gaps/routes/work-xr.geometry-gap.json.source_handoff` even when `CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json` was missing in this worktree and `/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/truth-cache/packets/C4-20260403T165341Z-03.json` was also missing. After the ratchet, the verifier rejects any seeded `sysopt.xr-*` card whose `gap_source_handoff` resolves in neither local runtime nor the shared truth cache, while historical kept/rejected XR cards remain replayable and the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if seeded `sysopt.xr-*` cards fail verification when their authoritative `gap_source_handoff` is missing from both the current worktree runtime and the declared shared truth cache, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Seeded XR systems-optimizer ratchets must resolve their authoritative handoff packet in local runtime or shared truth cache before queue entry; otherwise route lanes can inherit XR work orders whose evidence only lives in an external mirror.",
+  "recorded_at": "2026-04-06T04:39:43Z"
+}

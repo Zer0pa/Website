@@ -1,0 +1,48 @@
+{
+  "id": "sysopt.xr-gap-source-handoff-resolution-lock",
+  "cycle_id": "C4-20260406T042625Z",
+  "job_id": "C4-20260406T042625Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "rejected",
+  "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card can only promote against a `gap_source_handoff` packet that resolves inside the current autonomous truth surfaces, so route-neutral system work cannot inherit XR evidence that exists only in an external runtime mirror.",
+  "target_route": "/work/xr",
+  "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+  "first_broken_law": "work.lane.hero.authority",
+  "severity_baseline": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "flagship_invariants_baseline": true,
+  "evaluator_focus": [
+    "layout-diff",
+    "quality",
+    "flagship-invariants"
+  ],
+  "writable_scope": [
+    "CLAW/control-plane/system-optimizer/backlog.json",
+    "CLAW/control-plane/system-optimizer/state.json",
+    "CLAW/control-plane/system-optimizer/hypotheses/sysopt.xr-gap-source-handoff-resolution-lock.json"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the candidate ratchet, the XR control-plane contract only pinned `gap_source_handoff` as a string. Baseline falsification showed `test -f 'CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json'` returned missing in this worktree and `test -f '/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/truth-cache/packets/C4-20260403T165341Z-03.json'` also returned missing, while `test -f '/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json'` still returned present in the external Website-main runtime mirror. Tightening `node CLAW/scripts/verify-systems-optimizer.mjs` to require local or shared-cache handoff resolution would therefore turn the current XR ratchet inventory red before the bounded evaluation bundle even ran. The candidate was rejected instead of promoted.",
+  "keep_rule": "Keep only if the authoritative `/work/xr` gap `source_handoff` resolves inside the current worktree runtime or the declared shared truth cache, and the tightened verifier plus fixed scope-local evaluation bundle pass without touching route implementation paths.",
+  "verdict": "rejected",
+  "learning_item": "XR handoff-resolution locks cannot promote until the authoritative `/work/xr` rejection packet is materialized inside the current worktree runtime or shared truth cache; today it only resolves through the external Website-main runtime mirror.",
+  "rejection_reason": "The candidate depends on XR handoff packets that are missing from both this worktree runtime surface and the declared shared truth cache; only the external Website-main runtime mirror still contains the packet.",
+  "recorded_at": "2026-04-06T04:30:43Z"
+}

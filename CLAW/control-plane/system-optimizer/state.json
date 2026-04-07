@@ -9,26 +9,39 @@
     "require_scope_local_promotion_bundle": true,
     "require_exact_scope_local_promotion_bundle": true,
     "require_runner_stability_contract": true,
+    "require_runner_stability_field_classification": true,
     "require_runner_replayable_evidence_script": true,
     "require_runner_evidence_command_boundary": true,
     "require_runner_observability_after_replayable_evidence": true,
     "require_runner_observability_tail_only": true,
     "require_runner_unique_evidence_commands": true,
+    "require_runner_stale_cycle_exact_evidence_contract": true,
     "require_runner_singleton_command_groups": true,
     "require_learning_item_alignment": true,
     "require_scope_local_salvage_order": true,
     "require_writable_scope_allowlist": true,
     "require_normalized_relative_writable_scope": true,
+    "require_shell_safe_command_strings": true,
+    "require_exact_xr_first_broken_law": true,
     "require_exact_xr_evaluator_focus": true,
+    "require_xr_severity_baseline": true,
     "require_xr_quality_baseline": true,
+    "require_exact_xr_severity_dimensions": true,
     "require_xr_gap_source_handoff": true,
+    "require_seeded_xr_gap_source_handoff_resolution": true,
+    "require_xr_flagship_invariants_baseline": true,
     "require_active_hypothesis_backlog_alignment": true,
     "require_active_hypothesis_card_alignment": true,
+    "require_active_hypothesis_recorded_at_alignment": true,
     "require_rejected_change_backlog_alignment": true,
     "require_terminal_hypothesis_card_alignment": true,
+    "require_terminal_recency_pointer_alignment": true,
+    "require_terminal_latest_learning_entry_uniqueness": true,
     "require_resolved_backlog_hypothesis_card_alignment": true,
     "require_seeded_backlog_hypothesis_card_alignment": true,
+    "require_seeded_recorded_at_alignment": true,
     "require_hypothesis_inventory_alignment": true,
+    "require_utc_recorded_at_timestamps": true,
     "default_writable_scope": [
       "CLAW/scripts/**",
       "CLAW/control-plane/*.json",
@@ -60,16 +73,14 @@
   },
   "active_hypothesis": null,
   "last_kept_change": {
-    "id": "sysopt.ggd-local-lawset-index-lock",
-    "hypothesis": "GGD binding becomes more deterministic if it must declare a repo-local lawset index and binding verification fails whenever that index is missing, empty, or points at missing lawset files.",
+    "id": "sysopt.runner-field-contract-classification-lock",
+    "hypothesis": "Runner-stability hardening becomes safer if any systems-optimizer card that declares `runner_focus`, `failure_mode`, `closed_fail_rule`, or `evidence_commands` is classified as runner-stability even when its id does not use the `sysopt.runner-stability-*` prefix, so naming drift cannot bypass replayable runner-law verification.",
     "writable_scope": [
-      "CLAW/scripts/verify-ggd-binding.mjs",
-      "GGD/project.binding.json",
-      "GGD/schemas/project-binding.schema.json",
-      "GGD/equations/lawsets.json",
+      "CLAW/PRD_SYSTEMS_OPTIMIZER.md",
+      "CLAW/scripts/verify-systems-optimizer.mjs",
       "CLAW/control-plane/system-optimizer/backlog.json",
-      "CLAW/control-plane/system-optimizer/state.json",
-      "CLAW/control-plane/system-optimizer/hypotheses/sysopt.ggd-local-lawset-index-lock.json"
+      "CLAW/control-plane/system-optimizer/hypotheses/sysopt.runner-field-contract-classification-lock.json",
+      "CLAW/control-plane/system-optimizer/state.json"
     ],
     "evaluation_bundle": [
       "node CLAW/scripts/verify-systems-optimizer.mjs",
@@ -78,37 +89,126 @@
       "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
       "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
     ],
-    "measurement": "Before the ratchet, the control-plane brief could cite `GGD/equations/lawsets.json` as the first repo-local mathematical surface even though the file was absent and `node CLAW/scripts/verify-ggd-binding.mjs` still verified clean because it never required or inspected a local lawset index. After the ratchet, `GGD/project.binding.json` pins `system_optimizer.local_lawset_index`, the repo carries `GGD/equations/lawsets.json`, and the binding verifier rejects missing, empty, duplicate-id, or missing-path lawset index entries while the fixed scope-local promotion bundle stays green.",
-    "keep_rule": "Keep only if `node CLAW/scripts/verify-ggd-binding.mjs` now fails a missing or malformed repo-local lawset index contract and the exact five-command scope-local promotion bundle passes without touching route implementation paths.",
-    "learning_item": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
-    "recorded_at": "2026-04-06T02:10:25Z"
+    "measurement": "Before the ratchet, `isRunnerStabilityRatchet` checked only `card.id.startsWith('sysopt.runner-stability')`, so kept cards such as `sysopt.runner-stale-cycle-exact-evidence-lock` and `sysopt.runner-observability-tail-lock` still carried `runner_focus`, `failure_mode`, `closed_fail_rule`, and `evidence_commands` yet bypassed `validateRunnerStabilityContract` because their ids drifted to `sysopt.runner-*` without the `-stability-` infix. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` classifies any card with those runner-stability fields as runner-stability, state policy explicitly requires that field-based classification, and the fixed scope-local promotion bundle stays green.",
+    "keep_rule": "Keep only if field-bearing runner cards are forced through the runner-stability contract even when their ids drift from `sysopt.runner-stability-*`, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+    "learning_item": "Runner-stability verification must classify by declared runner contract fields, not only by one id prefix; otherwise naming drift can let field-bearing recovery ratchets bypass the very laws they are supposed to prove.",
+    "recorded_at": "2026-04-06T05:21:17Z"
   },
   "last_rejected_change": {
-    "id": "sysopt.runner-policy-self-verify",
-    "hypothesis": "Systems-optimizer salvage becomes safer if the runner is forced to execute the systems-optimizer self-verifier before a ratchet is considered replayable or recoverable.",
+    "id": "sysopt.xr-gap-source-handoff-resolution-lock",
+    "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card can only promote against a `gap_source_handoff` packet that resolves inside the current autonomous truth surfaces, so route-neutral system work cannot inherit XR evidence that exists only in an external runtime mirror.",
     "writable_scope": [
-      "CLAW/scripts/**",
-      "CLAW/control-plane/*.json",
-      "CLAW/control-plane/system-optimizer/**",
-      "CLAW/PRD*.md"
+      "CLAW/control-plane/system-optimizer/backlog.json",
+      "CLAW/control-plane/system-optimizer/state.json",
+      "CLAW/control-plane/system-optimizer/hypotheses/sysopt.xr-gap-source-handoff-resolution-lock.json"
+    ],
+    "target_route": "/work/xr",
+    "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+    "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json",
+    "first_broken_law": "work.lane.hero.authority",
+    "severity_baseline": {
+      "critical": 14,
+      "major": 0,
+      "minor": 0,
+      "note": 0
+    },
+    "quality_baseline": {
+      "critical": 0,
+      "major": 0,
+      "minor": 0,
+      "note": 0
+    },
+    "flagship_invariants_baseline": true,
+    "evaluator_focus": [
+      "layout-diff",
+      "quality",
+      "flagship-invariants"
     ],
     "evaluation_bundle": [
-      "node CLAW/scripts/run-site-script.mjs claw:validate",
-      "node CLAW/scripts/run-site-script.mjs claw:test:contracts",
-      "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
-      "node CLAW/scripts/run-site-script.mjs claw:health",
-      "node CLAW/scripts/verify-ggd-binding.mjs",
       "node CLAW/scripts/verify-systems-optimizer.mjs",
-      "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+      "node CLAW/scripts/verify-ggd-binding.mjs",
+      "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+      "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+      "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
     ],
-    "measurement": "Before the ratchet, the systems-optimizer salvage command groups could pass without ever running `node CLAW/scripts/verify-systems-optimizer.mjs`, so backlog/state contract drift could survive recovery. After the ratchet, the verifier fails if runner-policy omits that command and the fixed bundle stays green.",
-    "keep_rule": "Keep only if runner-policy declares the self-verifier as a required systems-optimizer command, the stricter verifier enforces it, and the fixed evaluation bundle passes without touching route implementation paths.",
-    "learning_item": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
-    "recorded_at": "2026-04-04T00:06:21Z"
+    "measurement": "Before the candidate ratchet, the XR control-plane contract only pinned `gap_source_handoff` as a string. Baseline falsification showed `test -f 'CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json'` returned missing in this worktree and `test -f '/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/truth-cache/packets/C4-20260403T165341Z-03.json'` also returned missing, while `test -f '/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json'` still returned present in the external Website-main runtime mirror. Tightening `node CLAW/scripts/verify-systems-optimizer.mjs` to require local or shared-cache handoff resolution would therefore turn the current XR ratchet inventory red before the bounded evaluation bundle even ran. The candidate was rejected instead of promoted.",
+    "keep_rule": "Keep only if the authoritative `/work/xr` gap `source_handoff` resolves inside the current worktree runtime or the declared shared truth cache, and the tightened verifier plus fixed scope-local evaluation bundle pass without touching route implementation paths.",
+    "learning_item": "XR handoff-resolution locks cannot promote until the authoritative `/work/xr` rejection packet is materialized inside the current worktree runtime or shared truth cache; today it only resolves through the external Website-main runtime mirror.",
+    "recorded_at": "2026-04-06T04:30:43Z"
   },
-  "accepted_count": 34,
-  "rejected_count": 1,
+  "accepted_count": 47,
+  "rejected_count": 2,
   "learning_log": [
+    {
+      "id": "sysopt.runner-field-contract-classification-lock",
+      "learning": "Runner-stability verification must classify by declared runner contract fields, not only by one id prefix; otherwise naming drift can let field-bearing recovery ratchets bypass the very laws they are supposed to prove.",
+      "recorded_at": "2026-04-06T05:21:17Z"
+    },
+    {
+      "id": "sysopt.runner-stale-cycle-exact-evidence-lock",
+      "learning": "Stale-cycle runner evidence must stay bound to the exact stale-lock proof pair; generic recovery replay is not specific enough to prove the stale-cycle surface.",
+      "recorded_at": "2026-04-06T05:09:57Z"
+    },
+    {
+      "id": "sysopt.xr-exact-severity-dimensions-lock",
+      "learning": "XR severity baselines are exact four-level vectors, not loose maps; if extra or missing severity dimensions verify clean, route-neutral ratchets can drift away from the authoritative gap dimension system while still claiming baseline alignment.",
+      "recorded_at": "2026-04-06T04:58:23Z"
+    },
+    {
+      "id": "sysopt.xr-severity-baseline-policy-lock",
+      "learning": "XR severity locking must be declared in systems-optimizer state policy, not just enforced inside card validation or verifier summaries; otherwise the machine-level contract can drift from retained XR backlog law.",
+      "recorded_at": "2026-04-06T04:48:43Z"
+    },
+    {
+      "id": "sysopt.xr-seeded-handoff-resolution-lock",
+      "learning": "Seeded XR systems-optimizer ratchets must resolve their authoritative handoff packet in local runtime or shared truth cache before queue entry; otherwise route lanes can inherit XR work orders whose evidence only lives in an external mirror.",
+      "recorded_at": "2026-04-06T04:39:43Z"
+    },
+    {
+      "id": "sysopt.xr-gap-source-handoff-resolution-lock",
+      "learning": "XR handoff-resolution locks cannot promote until the authoritative `/work/xr` rejection packet is materialized inside the current worktree runtime or shared truth cache; today it only resolves through the external Website-main runtime mirror.",
+      "recorded_at": "2026-04-06T04:30:43Z"
+    },
+    {
+      "id": "sysopt.terminal-latest-learning-singleton-lock",
+      "learning": "Terminal systems-optimizer recency needs a singleton latest retained `learning_log.recorded_at` per status; if multiple ratchets share the newest second, terminal pointers stop being deterministic.",
+      "recorded_at": "2026-04-06T04:20:22Z"
+    },
+    {
+      "id": "sysopt.seeded-recorded-at-card-alignment-lock",
+      "learning": "Seeded systems-optimizer slices need one exact UTC `recorded_at` shared across backlog, active state, and hypothesis card artifacts; otherwise queued or resumed recovery can silently retimestamp the same replayable ratchet.",
+      "recorded_at": "2026-04-06T04:07:34Z"
+    },
+    {
+      "id": "sysopt.xr-first-broken-law-primary-lock",
+      "learning": "XR systems-optimizer ratchets must lock `first_broken_law` to the authoritative primary drift surface; allowing any lower-ranked XR surface keeps route-neutral system work pointed away from the first measured failure.",
+      "recorded_at": "2026-04-06T03:58:32Z"
+    },
+    {
+      "id": "sysopt.utc-recorded-at-timestamp-lock",
+      "learning": "Systems-optimizer `recorded_at` fields must use exact UTC ISO-8601 timestamps; recency locks are only deterministic when every retained artifact shares one canonical sortable clock format.",
+      "recorded_at": "2026-04-06T03:48:11Z"
+    },
+    {
+      "id": "sysopt.command-ampersand-shell-safety-lock",
+      "learning": "Systems-optimizer command lists must reject lone `&` shell operators; blocking `&&` and `||` alone still leaves backgrounded or chained shell work inside replayable proof.",
+      "recorded_at": "2026-04-06T03:36:42Z"
+    },
+    {
+      "id": "sysopt.command-shell-safety-lock",
+      "learning": "Systems-optimizer command lists must stay shell-safe single commands; root-relative prefixes alone do not prevent chained shell steps from widening replayable proof.",
+      "recorded_at": "2026-04-06T03:28:18Z"
+    },
+    {
+      "id": "sysopt.terminal-recency-pointer-lock",
+      "learning": "Terminal systems-optimizer pointers must track the latest retained verdict per status; contract-aligned older pointers still make recovery and reporting stale.",
+      "recorded_at": "2026-04-06T02:39:44Z"
+    },
+    {
+      "id": "sysopt.xr-flagship-invariants-baseline-lock",
+      "learning": "XR systems-optimizer ratchets must pin whether flagship invariants are currently intact; evaluator focus alone still lets route-neutral work misdiagnose shared-lane XR failure as IMC isolation drift.",
+      "recorded_at": "2026-04-06T02:30:16Z"
+    },
     {
       "id": "sysopt.ggd-local-lawset-index-lock",
       "learning": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
@@ -285,5 +385,5 @@
       "recorded_at": "2026-04-04T10:31:09Z"
     }
   ],
-  "last_updated": "2026-04-06T02:10:25Z"
+  "last_updated": "2026-04-06T05:21:17Z"
 }
