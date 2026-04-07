@@ -128,6 +128,19 @@
             "XR candidate replays cleanly in integration",
             "XR has no open blocking GGD gaps at promotion time"
           ]
+        },
+        {
+          "lane_id": "opus-engineer",
+          "objective": "Pick the highest-priority open PRD or geometry gap per decision-policy.md, spawn a bounded sub-agent to close it, and write a report. Disabled by default — activate via runner-policy.json.",
+          "deliverables": [
+            "opus-engineer cycle report",
+            "sub-agent commit (if accepted)"
+          ],
+          "acceptance": [
+            "sub-agent returned accepted or hold with truthful report",
+            "writable scope stayed inside declared opus-engineer paths",
+            "sub-agent committed if any files changed"
+          ]
         }
       ]
     },

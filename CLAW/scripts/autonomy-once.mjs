@@ -638,6 +638,15 @@ function laneExecutionRecipe(job) {
       '- Do not accept a route-family candidate while any blocking GGD route gap remains open for the subject route.',
       '- Do not broaden scope beyond conflict-free promotion and replay verification.',
     ],
+    'opus-engineer': [
+      '- This is the Opus Engineer orchestrator lane. Run its dedicated runner instead of doing direct implementation work.',
+      '- Execute: `node CLAW/opus-engineer/runner.mjs --cycle=${job.job_id}`',
+      '- The runner loads runtime-state.json, selects the highest-priority task per CLAW/opus-engineer/decision-policy.md, spawns a bounded sub-agent, and writes a report to CLAW/control-plane/reports/opus-engineer/.',
+      '- Do not implement site features directly in this lane — delegate all implementation to the sub-agent via the prompt templates in CLAW/opus-engineer/prompts/.',
+      '- Writable scope: site/src/app/**, site/src/components/**, CLAW/opus-engineer/**, CLAW/control-plane/reports/opus-engineer/**.',
+      '- WORKTREE COMMIT REMINDER: If the sub-agent produces file changes, it must commit them. Escalate if the sub-agent exits without a commit after making changes.',
+      '- Return the runner\'s JSON output as your lane result.',
+    ],
   };
 
   return recipes[job.lane_id] || ['- Stay inside the lane brief and keep the slice minimal.'];
