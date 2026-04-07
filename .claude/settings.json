@@ -1,0 +1,115 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read",
+
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git branch *)",
+      "Bash(git stash list)",
+      "Bash(git rev-parse *)",
+      "Bash(git rev-list *)",
+      "Bash(git merge-base *)",
+      "Bash(git patch-id *)",
+      "Bash(git worktree list)",
+
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git checkout *)",
+      "Bash(git switch *)",
+      "Bash(git fetch *)",
+      "Bash(git stash *)",
+      "Bash(git cherry-pick *)",
+      "Bash(git reset *)",
+      "Bash(git clean *)",
+      "Bash(git worktree *)",
+
+      "Bash(git -C * status *)",
+      "Bash(git -C * diff *)",
+      "Bash(git -C * log *)",
+      "Bash(git -C * show *)",
+      "Bash(git -C * branch *)",
+      "Bash(git -C * rev-parse *)",
+      "Bash(git -C * rev-list *)",
+      "Bash(git -C * merge-base *)",
+      "Bash(git -C * worktree *)",
+      "Bash(git -C * add *)",
+      "Bash(git -C * commit *)",
+      "Bash(git -C * checkout *)",
+      "Bash(git -C * switch *)",
+      "Bash(git -C * fetch *)",
+      "Bash(git -C * cherry-pick *)",
+      "Bash(git -C * reset *)",
+      "Bash(git -C * clean *)",
+
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "Bash(npm ci)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(/Users/zer0palab/.nvm/versions/*/bin/npx tsc *)",
+      "Bash(/usr/local/bin/npx tsc *)",
+      "Bash(node node_modules/.bin/tsc *)",
+
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(find *)",
+      "Bash(rg *)",
+      "Bash(grep *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(jq *)",
+      "Bash(echo *)",
+      "Bash(which *)",
+      "Bash(pwd)",
+      "Bash(date *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(export PATH *)",
+
+      "Bash(launchctl *)",
+
+      "Bash(security find-generic-password *)",
+
+      "Bash(codex *)",
+
+      "Read(//Users/zer0palab/.nvm/**)",
+      "Read(//opt/homebrew/**)",
+      "Read(//usr/local/**)",
+      "Read(//usr/bin/**)",
+      "Read(//usr/lib/**)"
+    ],
+    "deny": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git -C * push --force *)",
+      "Bash(git -C * push -f *)",
+
+      "Bash(git push * main)",
+      "Bash(git push * master)",
+      "Bash(git push * HEAD:main)",
+      "Bash(git push * HEAD:master)",
+      "Bash(git -C * push * main)",
+      "Bash(git -C * push * master)",
+      "Bash(git -C * push * HEAD:main)",
+      "Bash(git -C * push * HEAD:master)",
+
+      "Bash(git reset --hard HEAD~*)",
+
+      "Bash(rm -rf /)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/)",
+      "Bash(rm -rf ~/*)",
+
+      "Bash(sudo *)"
+    ]
+  }
+}
