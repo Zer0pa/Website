@@ -26,3 +26,4 @@ CLAW/control-plane/reports/C*.md
 deterministic-design-system/maps/live/work-*.json
 deterministic-design-system/maps/diff/work-*.diff.json
 deterministic-design-system/reports/work-*.verification.md
+.claude/worktrees/
