@@ -1272,7 +1272,7 @@ p {
 
 .authority-hero-grid {
   display: grid;
-  grid-template-columns: 520px 388px;
+  grid-template-columns: minmax(0, 520px) minmax(0, 388px);
   gap: 56px;
   margin-bottom: 28px;
   align-items: flex-start;
@@ -1432,7 +1432,7 @@ p {
 }
 
 .authority-evidence-row {
-  grid-template-columns: 472px 492px;
+  grid-template-columns: minmax(0, 472px) minmax(0, 492px);
   gap: 20px;
   margin-top: 0;
   margin-bottom: 50px;
@@ -1684,7 +1684,7 @@ p {
 }
 
 .authority-hero-grid {
-  grid-template-columns: 520px 388px;
+  grid-template-columns: minmax(0, 520px) minmax(0, 388px);
   gap: 56px;
   margin-bottom: 32px;
 }
@@ -1742,7 +1742,7 @@ p {
 
 .authority-logic-grid {
   display: grid;
-  grid-template-columns: 470px 490px;
+  grid-template-columns: minmax(0, 470px) minmax(0, 490px);
   gap: 24px;
   margin-bottom: 44px;
 }
@@ -1766,7 +1766,7 @@ p {
 }
 
 .authority-evidence-row {
-  grid-template-columns: 472px 492px;
+  grid-template-columns: minmax(0, 472px) minmax(0, 492px);
   gap: 20px;
   margin-top: 0;
   margin-bottom: 50px;
@@ -2295,7 +2295,7 @@ p {
 }
 
 .authority-hero-grid {
-  grid-template-columns: 520px 388px;
+  grid-template-columns: minmax(0, 520px) minmax(0, 388px);
   gap: 56px;
 }
 
@@ -2316,7 +2316,7 @@ p {
 }
 
 .authority-evidence-row {
-  grid-template-columns: 472px 492px;
+  grid-template-columns: minmax(0, 472px) minmax(0, 492px);
   gap: 20px;
   margin-top: 0;
 }
@@ -2854,7 +2854,7 @@ p {
   }
 
   .authority-hero-grid {
-    grid-template-columns: 520px 388px;
+    grid-template-columns: minmax(0, 520px) minmax(0, 388px);
     gap: 56px;
   }
 
@@ -2872,7 +2872,7 @@ p {
   }
 
   .authority-evidence-row {
-    grid-template-columns: 472px 492px;
+    grid-template-columns: minmax(0, 472px) minmax(0, 492px);
     gap: 20px;
     margin-top: 0;
   }
