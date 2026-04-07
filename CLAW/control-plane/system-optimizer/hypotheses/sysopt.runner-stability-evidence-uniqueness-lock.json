@@ -1,0 +1,30 @@
+{
+  "id": "sysopt.runner-stability-evidence-uniqueness-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Stale-cycle runner hardening becomes safer if runner-stability cards must keep `evidence_commands` unique, so replayable proof cannot silently duplicate recovery or observability steps.",
+  "runner_focus": "stale-cycle",
+  "failure_mode": "A runner-stability card can currently repeat the same replayable or observability command inside `evidence_commands`, so the proof trail can imply ambiguous retries or padded evidence while still passing boundary and ordering checks.",
+  "closed_fail_rule": "Keep the slice only if runner-stability cards fail verification unless every `evidence_commands` entry is unique and the replayable proof trail stays bounded.",
+  "evidence_commands": [
+    "node CLAW/scripts/recover-cycle.mjs --max-age-minutes=0",
+    "node CLAW/scripts/run-recovery-drill.mjs --scenario=stale-lock",
+    "node CLAW/scripts/run-site-script.mjs claw:health"
+  ],
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` accepted runner-stability cards whose `evidence_commands` repeated the same `recover-cycle`, `run-recovery-drill`, or `claw:health` step, so the replayable proof trail could be padded with duplicate evidence and still verify clean. After the ratchet, the verifier rejects any runner-stability card whose `evidence_commands` contain duplicate commands while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier fails runner-stability cards with duplicate `evidence_commands` and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Runner-stability evidence commands must stay unique; duplicate recovery or observability steps make the replayable proof trail ambiguous without adding new evidence.",
+  "recorded_at": "2026-04-06T02:02:00Z"
+}

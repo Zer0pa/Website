@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "project_id": "zer0pa-website",
+  "lawsets": [
+    {
+      "id": "ggd.shared.example-lawset",
+      "path": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+      "role": "equation-engine smoke-check baseline",
+      "source": "GGD/commands.json.example_lawset"
+    }
+  ]
+}

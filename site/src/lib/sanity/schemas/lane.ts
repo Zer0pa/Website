@@ -1,4 +1,4 @@
-export default {
+const laneSchema = {
   name: 'lane',
   title: 'Lane',
   type: 'document',
@@ -42,4 +42,6 @@ export default {
     },
     { name: 'cardAccentTreatment', title: 'Card Accent Treatment', type: 'string' },
   ]
-}
+};
+
+export default laneSchema;

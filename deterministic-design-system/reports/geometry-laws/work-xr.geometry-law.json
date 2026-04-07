@@ -1,0 +1,237 @@
+{
+  "page": "work-xr",
+  "route": "/work/xr",
+  "auditedAt": "2026-04-03T20:01:41.383Z",
+  "baseUnitPx": 8,
+  "findings": [
+    {
+      "id": "work-xr.work.lane.hero.title|work.lane.hero.meta.row-span",
+      "severity": "major",
+      "law": "row-span",
+      "expected": 964,
+      "actual": 1008,
+      "delta": 44,
+      "entries": [
+        "work.lane.hero.title",
+        "work.lane.hero.meta"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.hero.title.work.lane.hero.meta.row-gap",
+      "severity": "critical",
+      "law": "row-gap",
+      "expected": 456,
+      "actual": -1008,
+      "delta": 1464,
+      "entries": [
+        "work.lane.hero.title",
+        "work.lane.hero.meta"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.hero.title.work.lane.hero.meta.row-ratio",
+      "severity": "critical",
+      "law": "row-ratio",
+      "expected": 0.27,
+      "actual": 1,
+      "delta": 0.73,
+      "entries": [
+        "work.lane.hero.title",
+        "work.lane.hero.meta"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.hero.authority|work.lane.hero.identity.row-order",
+      "severity": "critical",
+      "law": "row-order",
+      "expected": "work.lane.hero.identity | work.lane.hero.authority",
+      "actual": "work.lane.hero.authority | work.lane.hero.identity",
+      "delta": 1,
+      "entries": [
+        "work.lane.hero.identity",
+        "work.lane.hero.authority"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.proof.assertions|work.lane.nonclaims.row-span",
+      "severity": "minor",
+      "law": "row-span",
+      "expected": 984,
+      "actual": 1008,
+      "delta": 24,
+      "entries": [
+        "work.lane.proof.assertions",
+        "work.lane.nonclaims"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.proof.assertions.work.lane.nonclaims.row-gap",
+      "severity": "critical",
+      "law": "row-gap",
+      "expected": 24,
+      "actual": -1008,
+      "delta": 1032,
+      "entries": [
+        "work.lane.proof.assertions",
+        "work.lane.nonclaims"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.proof.assertions.work.lane.nonclaims.row-ratio",
+      "severity": "critical",
+      "law": "row-ratio",
+      "expected": 0.478,
+      "actual": 1,
+      "delta": 0.522,
+      "entries": [
+        "work.lane.proof.assertions",
+        "work.lane.nonclaims"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.evidence.routes|work.lane.repo.shape.row-span",
+      "severity": "minor",
+      "law": "row-span",
+      "expected": 984,
+      "actual": 1008,
+      "delta": 24,
+      "entries": [
+        "work.lane.evidence.routes",
+        "work.lane.repo.shape"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.evidence.routes.work.lane.repo.shape.row-gap",
+      "severity": "critical",
+      "law": "row-gap",
+      "expected": 20,
+      "actual": -1008,
+      "delta": 1028,
+      "entries": [
+        "work.lane.evidence.routes",
+        "work.lane.repo.shape"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.evidence.routes.work.lane.repo.shape.row-ratio",
+      "severity": "critical",
+      "law": "row-ratio",
+      "expected": 0.48,
+      "actual": 1,
+      "delta": 0.52,
+      "entries": [
+        "work.lane.evidence.routes",
+        "work.lane.repo.shape"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.hero.title|work.lane.hero.meta.work.lane.hero.authority|work.lane.hero.identity.section-gap",
+      "severity": "minor",
+      "law": "section-gap",
+      "expected": 38,
+      "actual": 16,
+      "delta": 22,
+      "entries": [
+        "work.lane.hero.title",
+        "work.lane.hero.meta",
+        "work.lane.hero.authority",
+        "work.lane.hero.identity"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.hero.authority|work.lane.hero.identity.work.lane.metric.row.section-gap",
+      "severity": "major",
+      "law": "section-gap",
+      "expected": 32,
+      "actual": 0,
+      "delta": 32,
+      "entries": [
+        "work.lane.hero.authority",
+        "work.lane.hero.identity",
+        "work.lane.metric.row"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.metric.row.work.lane.proof.assertions|work.lane.nonclaims.section-gap",
+      "severity": "major",
+      "law": "section-gap",
+      "expected": 46,
+      "actual": 16,
+      "delta": 30,
+      "entries": [
+        "work.lane.metric.row",
+        "work.lane.proof.assertions",
+        "work.lane.nonclaims"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.proof.assertions|work.lane.nonclaims.work.lane.modality.snapshot.section-gap",
+      "severity": "major",
+      "law": "section-gap",
+      "expected": 44,
+      "actual": 16,
+      "delta": 28,
+      "entries": [
+        "work.lane.proof.assertions",
+        "work.lane.nonclaims",
+        "work.lane.modality.snapshot"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.modality.snapshot.work.lane.evidence.routes|work.lane.repo.shape.section-gap",
+      "severity": "major",
+      "law": "section-gap",
+      "expected": 56,
+      "actual": 16,
+      "delta": 40,
+      "entries": [
+        "work.lane.modality.snapshot",
+        "work.lane.evidence.routes",
+        "work.lane.repo.shape"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.evidence.routes|work.lane.repo.shape.work.lane.proof.terminal.section-gap",
+      "severity": "major",
+      "law": "section-gap",
+      "expected": 50,
+      "actual": 16,
+      "delta": 34,
+      "entries": [
+        "work.lane.evidence.routes",
+        "work.lane.repo.shape",
+        "work.lane.proof.terminal"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.proof.terminal.work.lane.related.lanes.section-gap",
+      "severity": "critical",
+      "law": "section-gap",
+      "expected": 72,
+      "actual": 16,
+      "delta": 56,
+      "entries": [
+        "work.lane.proof.terminal",
+        "work.lane.related.lanes"
+      ]
+    },
+    {
+      "id": "work-xr.work.lane.related.lanes.work.lane.cta.band.section-gap",
+      "severity": "minor",
+      "law": "section-gap",
+      "expected": 38,
+      "actual": 19.9,
+      "delta": 18.1,
+      "entries": [
+        "work.lane.related.lanes",
+        "work.lane.cta.band"
+      ]
+    }
+  ],
+  "counts": {
+    "critical": 8,
+    "major": 6,
+    "minor": 4,
+    "note": 0
+  }
+}

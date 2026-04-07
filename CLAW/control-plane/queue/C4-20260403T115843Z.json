@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "cycle_id": "C4-20260403T115843Z",
+  "created_at": "2026-04-03T11:58:43Z",
+  "phase_id": "C4",
+  "phase_title": "First generic product proof",
+  "current_phase": "C4-first-generic-product-proof",
+  "profile": "supervised_dry_run",
+  "materialize": false,
+  "allowed_path_prefixes": [
+    "/Users/zer0palab/Zer0pa Website/Website-main",
+    "/Users/zer0palab/Zer0pa Website/worktrees"
+  ],
+  "stop_conditions": [
+    "build failure",
+    "parser test failure",
+    "critical or major audit regression",
+    "lane scope violation",
+    "data-truth contradiction",
+    "cross-repo write detected"
+  ],
+  "source_files": {
+    "runtime_state": "CLAW/control-plane/state/runtime-state.json",
+    "execution_plan": "CLAW/control-plane/plans/canonical-routes-to-producing.json",
+    "cycle_templates": "CLAW/control-plane/cycle-templates.json",
+    "agent_lanes": "CLAW/control-plane/agent-lanes.json"
+  },
+  "jobs": [
+    {
+      "job_id": "C4-20260403T115843Z-01",
+      "lane_id": "product-family",
+      "branch": "codex/product-family",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/product-family",
+      "role": "batch rollout of approved product-page law",
+      "reasoning": "high",
+      "writes": [
+        "site/src/app/work/**",
+        "site/src/components/lane/**",
+        "site/src/lib/data/presentation.ts",
+        "site/src/lib/product-kernel/**",
+        "site/src/app/globals.css"
+      ],
+      "objective": "Apply the locked product-family kernel to /work/xr without bespoke route hacks.",
+      "deliverables": [
+        "XR route instance",
+        "XR layout closure",
+        "XR law-compliance report"
+      ],
+      "acceptance": [
+        "XR renders from the kernel",
+        "XR remains packet-truthful"
+      ],
+      "status": "queued"
+    },
+    {
+      "job_id": "C4-20260403T115843Z-02",
+      "lane_id": "data-truth",
+      "branch": "codex/data-truth",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/data-truth",
+      "role": "GitHub truth ingestion and sync",
+      "reasoning": "high",
+      "writes": [
+        "site/src/lib/github/**",
+        "site/src/lib/parser/**",
+        "site/src/lib/data/**",
+        "site/src/scripts/ingest.ts",
+        "site/src/scripts/sync-to-sanity.ts"
+      ],
+      "objective": "Audit the XR packet and GitHub truth surfaces that feed the first generic proof page.",
+      "deliverables": [
+        "XR packet truth report"
+      ],
+      "acceptance": [
+        "XR packet truth is sufficient and current"
+      ],
+      "status": "queued"
+    },
+    {
+      "job_id": "C4-20260403T115843Z-03",
+      "lane_id": "systems-qa",
+      "branch": "codex/systems-qa",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/systems-qa",
+      "role": "verification, regression, and rejection",
+      "reasoning": "xhigh",
+      "writes": [
+        "deterministic-design-system/maps/**",
+        "deterministic-design-system/reports/**",
+        "CLAW/**"
+      ],
+      "objective": "Run falsification against /work/xr and reject any kernel or responsive regression.",
+      "deliverables": [
+        "XR layout and responsive reports"
+      ],
+      "acceptance": [
+        "XR has zero critical and zero major diffs"
+      ],
+      "status": "queued"
+    },
+    {
+      "job_id": "C4-20260403T115843Z-04",
+      "lane_id": "integration",
+      "branch": "codex/integration",
+      "worktree": "/Users/zer0palab/Zer0pa Website/worktrees/integration",
+      "role": "staging and conflict-free integration rehearsal",
+      "reasoning": "high",
+      "writes": [
+        "site/**",
+        "deterministic-design-system/**",
+        "CLAW/**"
+      ],
+      "objective": "Replay the accepted XR candidate through the integration lane before promotion.",
+      "deliverables": [
+        "XR integration rehearsal"
+      ],
+      "acceptance": [
+        "XR candidate replays cleanly in integration"
+      ],
+      "status": "queued"
+    }
+  ],
+  "status": "queued"
+}

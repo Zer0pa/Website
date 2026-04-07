@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "states": [
+    "planned",
+    "queued",
+    "leased",
+    "running",
+    "qa_pending",
+    "evaluated",
+    "accepted",
+    "integration_pending",
+    "rejected",
+    "escalated",
+    "checkpointed",
+    "recovering",
+    "paused",
+    "completed",
+    "abandoned"
+  ],
+  "transitions": [
+    {
+      "from": "planned",
+      "to": "queued",
+      "actor": "orchestrator",
+      "required_artifacts": ["brief", "queue-item"]
+    },
+    {
+      "from": "queued",
+      "to": "leased",
+      "actor": "orchestrator",
+      "required_artifacts": ["queue-item", "lock-allocation"]
+    },
+    {
+      "from": "leased",
+      "to": "running",
+      "actor": "lane-owner",
+      "required_artifacts": ["lock-allocation", "continuation-state"]
+    },
+    {
+      "from": "running",
+      "to": "qa_pending",
+      "actor": "lane-owner",
+      "required_artifacts": ["handoff", "audit-bundle"]
+    },
+    {
+      "from": "qa_pending",
+      "to": "evaluated",
+      "actor": "systems-qa",
+      "required_artifacts": ["qa-verdict"]
+    },
+    {
+      "from": "evaluated",
+      "to": "accepted",
+      "actor": "systems-qa",
+      "required_artifacts": ["qa-verdict"]
+    },
+    {
+      "from": "evaluated",
+      "to": "rejected",
+      "actor": "systems-qa",
+      "required_artifacts": ["qa-verdict", "learning-item"]
+    },
+    {
+      "from": "evaluated",
+      "to": "escalated",
+      "actor": "orchestrator",
+      "required_artifacts": ["handoff", "learning-item"]
+    },
+    {
+      "from": "accepted",
+      "to": "integration_pending",
+      "actor": "orchestrator",
+      "required_artifacts": ["qa-verdict", "checkpoint-brief"]
+    },
+    {
+      "from": "integration_pending",
+      "to": "checkpointed",
+      "actor": "integration",
+      "required_artifacts": ["checkpoint", "full-qa-bundle"]
+    },
+    {
+      "from": "checkpointed",
+      "to": "completed",
+      "actor": "orchestrator",
+      "required_artifacts": ["checkpoint", "continuation-state"]
+    },
+    {
+      "from": "rejected",
+      "to": "planned",
+      "actor": "orchestrator",
+      "required_artifacts": ["revised-brief"]
+    },
+    {
+      "from": "escalated",
+      "to": "planned",
+      "actor": "orchestrator",
+      "required_artifacts": ["reframed-brief"]
+    },
+    {
+      "from": "leased",
+      "to": "recovering",
+      "actor": "orchestrator",
+      "required_artifacts": ["recovery-event"]
+    },
+    {
+      "from": "running",
+      "to": "recovering",
+      "actor": "orchestrator",
+      "required_artifacts": ["recovery-event"]
+    },
+    {
+      "from": "recovering",
+      "to": "planned",
+      "actor": "orchestrator",
+      "required_artifacts": ["recovery-event", "reframed-brief"]
+    },
+    {
+      "from": "queued",
+      "to": "paused",
+      "actor": "orchestrator",
+      "required_artifacts": ["pause-request"]
+    },
+    {
+      "from": "paused",
+      "to": "planned",
+      "actor": "orchestrator",
+      "required_artifacts": ["resume-request"]
+    }
+  ]
+}

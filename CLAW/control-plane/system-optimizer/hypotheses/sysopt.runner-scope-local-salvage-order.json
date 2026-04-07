@@ -1,0 +1,25 @@
+{
+  "id": "sysopt.runner-scope-local-salvage-order",
+  "cycle_id": "C4-20260404T023628Z",
+  "job_id": "C4-20260404T023628Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer salvage becomes safer if runner-policy must front-load the exact scope-local promotion bundle before stale-truth-sensitive observability commands.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/runner-policy.json",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `CLAW/scripts/verify-systems-optimizer.mjs` only checked a subset of systems-optimizer salvage commands and allowed `runner-policy.json` to start with `node CLAW/scripts/run-site-script.mjs claw:validate`, so stale integration truth could stop recovery before self-verifier, binding, or equation-law checks ran. After the ratchet, the verifier requires the exact scope-local promotion bundle as the systems-optimizer salvage prefix and rejects any ordering that places `claw:validate` or `claw:health` ahead of it, while the fixed evaluation bundle stays green.",
+  "keep_rule": "Keep only if the verifier rejects any systems-optimizer salvage order that does not begin with the exact scope-local promotion bundle or that moves `claw:validate` or `claw:health` ahead of it, and the fixed evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Systems-optimizer salvage must front-load the full scope-local promotion bundle before `claw:validate` or `claw:health`, or stale integration truth can preempt local contract drift and GGD law checks.",
+  "recorded_at": "2026-04-04T02:41:08Z"
+}

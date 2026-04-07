@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "program": "deterministic-recursive-production",
+  "authoritative_prd": "CLAW/PRD_DETERMINISTIC_RECURSIVE_PRODUCTION.md",
+  "status": "active",
+  "current_focus": [
+    "D2",
+    "D3",
+    "D7"
+  ],
+  "operator_interface": "codex-supervised",
+  "dependencies": {
+    "canonical_route_plan": "CLAW/control-plane/plans/canonical-routes-to-producing.json",
+    "autonomy_hardening_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json"
+  },
+  "phases": [
+    {
+      "id": "D0",
+      "title": "Always-on deterministic invariants",
+      "status": "active",
+      "gates": [
+        "Build passes.",
+        "Parser falsification passes.",
+        "No path-scope violations occur.",
+        "Critical and major regressions are rejected.",
+        "Truth surfaces are not fabricated."
+      ]
+    },
+    {
+      "id": "D1",
+      "title": "Structural quality foundation",
+      "status": "completed",
+      "streams": [
+        "orchestrator",
+        "systems-qa",
+        "integration"
+      ],
+      "deliverables": [
+        "site/.eslintrc.json",
+        "site/src/scripts/quality-audit.ts",
+        "deterministic-design-system/reports/quality/quality.verification.md"
+      ],
+      "exit_gates": [
+        "Lint is configured and runnable.",
+        "Quality audit exists for /, /imc, /work/xr, and /work/ft.",
+        "Structural issues are visible as machine-readable evidence."
+      ]
+    },
+    {
+      "id": "D2",
+      "title": "Canonical route proof continuation",
+      "status": "in_progress",
+      "depends_on": [
+        "D1"
+      ],
+      "streams": [
+        "product-family",
+        "data-truth",
+        "systems-qa",
+        "integration"
+      ],
+      "targets": [
+        "/work/xr",
+        "/work/ft"
+      ],
+      "exit_gates": [
+        "XR is accepted under kernel law.",
+        "FT is accepted as replication proof.",
+        "Both routes replay through integration."
+      ]
+    },
+    {
+      "id": "D3",
+      "title": "Responsive matrix expansion",
+      "status": "pending",
+      "depends_on": [
+        "D2"
+      ],
+      "streams": [
+        "systems-qa",
+        "integration"
+      ],
+      "breakpoints": [
+        "desktop-wide",
+        "laptop",
+        "tablet",
+        "mobile",
+        "television"
+      ],
+      "exit_gates": [
+        "No horizontal overflow across the matrix.",
+        "Hierarchy remains coherent across the matrix.",
+        "Large-screen behavior is explicit."
+      ]
+    },
+    {
+      "id": "D4",
+      "title": "Contrast and legibility refinement",
+      "status": "completed",
+      "depends_on": [
+        "D2"
+      ],
+      "streams": [
+        "systems-qa",
+        "integration"
+      ],
+      "deliverables": [
+        "site/src/scripts/contrast-audit.ts",
+        "deterministic-design-system/reports/contrast/contrast.verification.md"
+      ],
+      "exit_gates": [
+        "Contrast audit exists for /, /imc, /work/xr, and /work/ft.",
+        "Failing contrast pairs are corrected or explicitly waived."
+      ]
+    },
+    {
+      "id": "D5",
+      "title": "Layout optimization after parity",
+      "status": "pending",
+      "depends_on": [
+        "D3",
+        "D4"
+      ],
+      "streams": [
+        "homepage-fidelity",
+        "imc-flagship",
+        "product-family",
+        "systems-qa"
+      ],
+      "exit_gates": [
+        "Optimization changes are law-backed or exception-backed.",
+        "Canonical parity is preserved."
+      ]
+    },
+    {
+      "id": "D6",
+      "title": "Augmentation and data surface",
+      "status": "pending",
+      "depends_on": [
+        "D5"
+      ],
+      "streams": [
+        "data-truth",
+        "product-family",
+        "orchestrator"
+      ],
+      "exit_gates": [
+        "Augmentation backlog is seeded.",
+        "Augmentations remain subordinate to truth and geometry.",
+        "No augmentation introduces false claims."
+      ]
+    },
+    {
+      "id": "D7",
+      "title": "Codex-supervised recursive operation",
+      "status": "in_progress",
+      "depends_on": [
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "streams": [
+        "orchestrator",
+        "systems-qa",
+        "integration"
+      ],
+      "exit_gates": [
+        "Codex operator runbook is active.",
+        "Page squads are explicit.",
+        "The system can continue improving without deterioration under supervised recursive operation."
+      ]
+    }
+  ]
+}

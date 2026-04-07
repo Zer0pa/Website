@@ -45,7 +45,7 @@ If Sanity is not configured, the site may still run from cache packets locally, 
 1. Run:
 
 ```bash
-cd "/Users/Zer0pa/Zer0pa Website/site"
+cd "/Users/zer0palab/Zer0pa Website/Website-main/site"
 npm run ingest
 npm run test:parser
 npm run build

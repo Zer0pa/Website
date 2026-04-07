@@ -1,4 +1,4 @@
-export default {
+const laneSnapshotSchema = {
   name: 'laneSnapshot',
   title: 'Lane Snapshot (Machine)',
   type: 'document',
@@ -83,4 +83,6 @@ export default {
     { name: 'parserWarnings', title: 'Parser Warnings', type: 'array', of: [{ type: 'string' }] },
     { name: 'confidenceScore', title: 'Confidence Score', type: 'number' },
   ]
-}
+};
+
+export default laneSnapshotSchema;

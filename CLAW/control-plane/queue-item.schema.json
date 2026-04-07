@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Queue Item",
+  "type": "object",
+  "required": [
+    "version",
+    "cycle_id",
+    "phase_id",
+    "profile",
+    "created_at",
+    "status",
+    "jobs"
+  ],
+  "properties": {
+    "version": { "type": "integer" },
+    "cycle_id": { "type": "string" },
+    "phase_id": { "type": "string" },
+    "profile": { "type": "string" },
+    "created_at": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "leased", "running", "accepted", "rejected", "escalated", "checkpointed", "abandoned"]
+    },
+    "jobs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

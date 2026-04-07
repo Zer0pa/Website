@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.zer0palab.claw-telegram</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>-lc</string>
+      <string>cd '/Users/zer0palab/Zer0pa Website/Website-main/site' && npm run claw:telegram</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <false/>
+    <key>WorkingDirectory</key>
+    <string>/Users/zer0palab/Zer0pa Website/Website-main/site</string>
+    <key>StandardOutPath</key>
+    <string>/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/logs/telegram.stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/logs/telegram.stderr.log</string>
+  </dict>
+</plist>

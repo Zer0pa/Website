@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "namespace": "ggd",
+  "source_root": "/Users/zer0palab/Get-Geometry-Done",
+  "skills_dir": "/Users/zer0palab/.codex/skills",
+  "agents_dir": "/Users/zer0palab/.codex/agents",
+  "command_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/command-catalog.json",
+  "agent_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/agent-catalog.json",
+  "function_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/function-catalog.md",
+  "equation_engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
+  "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+  "local_lawset_index": "GGD/equations/lawsets.json",
+  "recommended_commands": {
+    "bootstrap": [
+      "ggd-help",
+      "ggd-new-project",
+      "ggd-map-research",
+      "ggd-plan-phase",
+      "ggd-execute-phase",
+      "ggd-resume-work"
+    ],
+    "equations": [
+      "ggd-derive-equation",
+      "ggd-dimensional-analysis",
+      "ggd-limiting-cases",
+      "ggd-parameter-sweep",
+      "ggd-sensitivity-analysis",
+      "ggd-numerical-convergence"
+    ],
+    "verification": [
+      "ggd-verify-work",
+      "ggd-validate-conventions",
+      "ggd-regression-check",
+      "ggd-debug",
+      "ggd-peer-review"
+    ],
+    "optimization": [
+      "ggd-system-optimize",
+      "ggd-derive-equation",
+      "ggd-parameter-sweep",
+      "ggd-sensitivity-analysis",
+      "ggd-verify-work",
+      "ggd-peer-review"
+    ],
+    "system": [
+      "ggd-sync-state",
+      "ggd-progress",
+      "ggd-health",
+      "ggd-suggest-next"
+    ]
+  },
+  "aliases": {
+    "ggd-new-geometry-program": "ggd-new-project",
+    "ggd-map-existing-design": "ggd-map-research",
+    "ggd-debug-geometry": "ggd-debug",
+    "ggd-resume-cycle": "ggd-resume-work",
+    "ggd-convention-coordinator": "ggd-notation-coordinator"
+  }
+}

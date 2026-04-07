@@ -1,0 +1,389 @@
+{
+  "version": 1,
+  "lane_id": "systems-optimizer",
+  "mode": "bounded-ratchet",
+  "policy": {
+    "keep_only_if_better": true,
+    "require_fixed_writable_scope": true,
+    "require_fixed_eval_bundle": true,
+    "require_scope_local_promotion_bundle": true,
+    "require_exact_scope_local_promotion_bundle": true,
+    "require_runner_stability_contract": true,
+    "require_runner_stability_field_classification": true,
+    "require_runner_replayable_evidence_script": true,
+    "require_runner_evidence_command_boundary": true,
+    "require_runner_observability_after_replayable_evidence": true,
+    "require_runner_observability_tail_only": true,
+    "require_runner_unique_evidence_commands": true,
+    "require_runner_stale_cycle_exact_evidence_contract": true,
+    "require_runner_singleton_command_groups": true,
+    "require_learning_item_alignment": true,
+    "require_scope_local_salvage_order": true,
+    "require_writable_scope_allowlist": true,
+    "require_normalized_relative_writable_scope": true,
+    "require_shell_safe_command_strings": true,
+    "require_exact_xr_first_broken_law": true,
+    "require_exact_xr_evaluator_focus": true,
+    "require_xr_severity_baseline": true,
+    "require_xr_quality_baseline": true,
+    "require_exact_xr_severity_dimensions": true,
+    "require_xr_gap_source_handoff": true,
+    "require_seeded_xr_gap_source_handoff_resolution": true,
+    "require_xr_flagship_invariants_baseline": true,
+    "require_active_hypothesis_backlog_alignment": true,
+    "require_active_hypothesis_card_alignment": true,
+    "require_active_hypothesis_recorded_at_alignment": true,
+    "require_rejected_change_backlog_alignment": true,
+    "require_terminal_hypothesis_card_alignment": true,
+    "require_terminal_recency_pointer_alignment": true,
+    "require_terminal_latest_learning_entry_uniqueness": true,
+    "require_resolved_backlog_hypothesis_card_alignment": true,
+    "require_seeded_backlog_hypothesis_card_alignment": true,
+    "require_seeded_recorded_at_alignment": true,
+    "require_hypothesis_inventory_alignment": true,
+    "require_utc_recorded_at_timestamps": true,
+    "default_writable_scope": [
+      "CLAW/scripts/**",
+      "CLAW/control-plane/*.json",
+      "CLAW/control-plane/*.md",
+      "CLAW/control-plane/*.schema.json",
+      "CLAW/control-plane/plans/**",
+      "CLAW/control-plane/patterns/**",
+      "CLAW/control-plane/continuations/**",
+      "CLAW/control-plane/product-kernel/**",
+      "CLAW/control-plane/system-optimizer/**",
+      "CLAW/control-plane/reports/**",
+      "CLAW/PRD*.md",
+      "GGD/**",
+      ".agents/skills/get-geometry-done/**",
+      "AGENTS.md"
+    ],
+    "forbidden_without_explicit_override": [
+      "CLAW/control-plane/queue/**",
+      "CLAW/control-plane/runtime/**",
+      "CLAW/control-plane/locks/**",
+      "CLAW/control-plane/checkpoints/**",
+      "CLAW/control-plane/state/runtime-state.json",
+      "CLAW/services/autonomy/state.json",
+      "site/src/app/**",
+      "site/src/components/**",
+      "site/src/lib/data/**",
+      "site/src/lib/product-kernel/**"
+    ]
+  },
+  "active_hypothesis": null,
+  "last_kept_change": {
+    "id": "sysopt.runner-field-contract-classification-lock",
+    "hypothesis": "Runner-stability hardening becomes safer if any systems-optimizer card that declares `runner_focus`, `failure_mode`, `closed_fail_rule`, or `evidence_commands` is classified as runner-stability even when its id does not use the `sysopt.runner-stability-*` prefix, so naming drift cannot bypass replayable runner-law verification.",
+    "writable_scope": [
+      "CLAW/PRD_SYSTEMS_OPTIMIZER.md",
+      "CLAW/scripts/verify-systems-optimizer.mjs",
+      "CLAW/control-plane/system-optimizer/backlog.json",
+      "CLAW/control-plane/system-optimizer/hypotheses/sysopt.runner-field-contract-classification-lock.json",
+      "CLAW/control-plane/system-optimizer/state.json"
+    ],
+    "evaluation_bundle": [
+      "node CLAW/scripts/verify-systems-optimizer.mjs",
+      "node CLAW/scripts/verify-ggd-binding.mjs",
+      "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+      "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+      "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+    ],
+    "measurement": "Before the ratchet, `isRunnerStabilityRatchet` checked only `card.id.startsWith('sysopt.runner-stability')`, so kept cards such as `sysopt.runner-stale-cycle-exact-evidence-lock` and `sysopt.runner-observability-tail-lock` still carried `runner_focus`, `failure_mode`, `closed_fail_rule`, and `evidence_commands` yet bypassed `validateRunnerStabilityContract` because their ids drifted to `sysopt.runner-*` without the `-stability-` infix. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` classifies any card with those runner-stability fields as runner-stability, state policy explicitly requires that field-based classification, and the fixed scope-local promotion bundle stays green.",
+    "keep_rule": "Keep only if field-bearing runner cards are forced through the runner-stability contract even when their ids drift from `sysopt.runner-stability-*`, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+    "learning_item": "Runner-stability verification must classify by declared runner contract fields, not only by one id prefix; otherwise naming drift can let field-bearing recovery ratchets bypass the very laws they are supposed to prove.",
+    "recorded_at": "2026-04-06T05:21:17Z"
+  },
+  "last_rejected_change": {
+    "id": "sysopt.xr-gap-source-handoff-resolution-lock",
+    "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card can only promote against a `gap_source_handoff` packet that resolves inside the current autonomous truth surfaces, so route-neutral system work cannot inherit XR evidence that exists only in an external runtime mirror.",
+    "writable_scope": [
+      "CLAW/control-plane/system-optimizer/backlog.json",
+      "CLAW/control-plane/system-optimizer/state.json",
+      "CLAW/control-plane/system-optimizer/hypotheses/sysopt.xr-gap-source-handoff-resolution-lock.json"
+    ],
+    "target_route": "/work/xr",
+    "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+    "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+    "first_broken_law": "work.lane.hero.authority",
+    "severity_baseline": {
+      "critical": 14,
+      "major": 0,
+      "minor": 0,
+      "note": 0
+    },
+    "quality_baseline": {
+      "critical": 0,
+      "major": 0,
+      "minor": 0,
+      "note": 0
+    },
+    "flagship_invariants_baseline": true,
+    "evaluator_focus": [
+      "layout-diff",
+      "quality",
+      "flagship-invariants"
+    ],
+    "evaluation_bundle": [
+      "node CLAW/scripts/verify-systems-optimizer.mjs",
+      "node CLAW/scripts/verify-ggd-binding.mjs",
+      "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+      "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+      "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+    ],
+    "measurement": "Before the candidate ratchet, the XR control-plane contract only pinned `gap_source_handoff` as a string. Baseline falsification showed `test -f 'CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json'` returned missing in this worktree and `test -f '/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/truth-cache/packets/C4-20260403T165341Z-03.json'` also returned missing, while `test -f '/Users/zer0palab/Zer0pa Website/Website-main/CLAW/control-plane/runtime/handoffs/C4-20260404T131253Z-04.json'` still returned present in the external Website-main runtime mirror. Tightening `node CLAW/scripts/verify-systems-optimizer.mjs` to require local or shared-cache handoff resolution would therefore turn the current XR ratchet inventory red before the bounded evaluation bundle even ran. The candidate was rejected instead of promoted.",
+    "keep_rule": "Keep only if the authoritative `/work/xr` gap `source_handoff` resolves inside the current worktree runtime or the declared shared truth cache, and the tightened verifier plus fixed scope-local evaluation bundle pass without touching route implementation paths.",
+    "learning_item": "XR handoff-resolution locks cannot promote until the authoritative `/work/xr` rejection packet is materialized inside the current worktree runtime or shared truth cache; today it only resolves through the external Website-main runtime mirror.",
+    "recorded_at": "2026-04-06T04:30:43Z"
+  },
+  "accepted_count": 47,
+  "rejected_count": 2,
+  "learning_log": [
+    {
+      "id": "sysopt.runner-field-contract-classification-lock",
+      "learning": "Runner-stability verification must classify by declared runner contract fields, not only by one id prefix; otherwise naming drift can let field-bearing recovery ratchets bypass the very laws they are supposed to prove.",
+      "recorded_at": "2026-04-06T05:21:17Z"
+    },
+    {
+      "id": "sysopt.runner-stale-cycle-exact-evidence-lock",
+      "learning": "Stale-cycle runner evidence must stay bound to the exact stale-lock proof pair; generic recovery replay is not specific enough to prove the stale-cycle surface.",
+      "recorded_at": "2026-04-06T05:09:57Z"
+    },
+    {
+      "id": "sysopt.xr-exact-severity-dimensions-lock",
+      "learning": "XR severity baselines are exact four-level vectors, not loose maps; if extra or missing severity dimensions verify clean, route-neutral ratchets can drift away from the authoritative gap dimension system while still claiming baseline alignment.",
+      "recorded_at": "2026-04-06T04:58:23Z"
+    },
+    {
+      "id": "sysopt.xr-severity-baseline-policy-lock",
+      "learning": "XR severity locking must be declared in systems-optimizer state policy, not just enforced inside card validation or verifier summaries; otherwise the machine-level contract can drift from retained XR backlog law.",
+      "recorded_at": "2026-04-06T04:48:43Z"
+    },
+    {
+      "id": "sysopt.xr-seeded-handoff-resolution-lock",
+      "learning": "Seeded XR systems-optimizer ratchets must resolve their authoritative handoff packet in local runtime or shared truth cache before queue entry; otherwise route lanes can inherit XR work orders whose evidence only lives in an external mirror.",
+      "recorded_at": "2026-04-06T04:39:43Z"
+    },
+    {
+      "id": "sysopt.xr-gap-source-handoff-resolution-lock",
+      "learning": "XR handoff-resolution locks cannot promote until the authoritative `/work/xr` rejection packet is materialized inside the current worktree runtime or shared truth cache; today it only resolves through the external Website-main runtime mirror.",
+      "recorded_at": "2026-04-06T04:30:43Z"
+    },
+    {
+      "id": "sysopt.terminal-latest-learning-singleton-lock",
+      "learning": "Terminal systems-optimizer recency needs a singleton latest retained `learning_log.recorded_at` per status; if multiple ratchets share the newest second, terminal pointers stop being deterministic.",
+      "recorded_at": "2026-04-06T04:20:22Z"
+    },
+    {
+      "id": "sysopt.seeded-recorded-at-card-alignment-lock",
+      "learning": "Seeded systems-optimizer slices need one exact UTC `recorded_at` shared across backlog, active state, and hypothesis card artifacts; otherwise queued or resumed recovery can silently retimestamp the same replayable ratchet.",
+      "recorded_at": "2026-04-06T04:07:34Z"
+    },
+    {
+      "id": "sysopt.xr-first-broken-law-primary-lock",
+      "learning": "XR systems-optimizer ratchets must lock `first_broken_law` to the authoritative primary drift surface; allowing any lower-ranked XR surface keeps route-neutral system work pointed away from the first measured failure.",
+      "recorded_at": "2026-04-06T03:58:32Z"
+    },
+    {
+      "id": "sysopt.utc-recorded-at-timestamp-lock",
+      "learning": "Systems-optimizer `recorded_at` fields must use exact UTC ISO-8601 timestamps; recency locks are only deterministic when every retained artifact shares one canonical sortable clock format.",
+      "recorded_at": "2026-04-06T03:48:11Z"
+    },
+    {
+      "id": "sysopt.command-ampersand-shell-safety-lock",
+      "learning": "Systems-optimizer command lists must reject lone `&` shell operators; blocking `&&` and `||` alone still leaves backgrounded or chained shell work inside replayable proof.",
+      "recorded_at": "2026-04-06T03:36:42Z"
+    },
+    {
+      "id": "sysopt.command-shell-safety-lock",
+      "learning": "Systems-optimizer command lists must stay shell-safe single commands; root-relative prefixes alone do not prevent chained shell steps from widening replayable proof.",
+      "recorded_at": "2026-04-06T03:28:18Z"
+    },
+    {
+      "id": "sysopt.terminal-recency-pointer-lock",
+      "learning": "Terminal systems-optimizer pointers must track the latest retained verdict per status; contract-aligned older pointers still make recovery and reporting stale.",
+      "recorded_at": "2026-04-06T02:39:44Z"
+    },
+    {
+      "id": "sysopt.xr-flagship-invariants-baseline-lock",
+      "learning": "XR systems-optimizer ratchets must pin whether flagship invariants are currently intact; evaluator focus alone still lets route-neutral work misdiagnose shared-lane XR failure as IMC isolation drift.",
+      "recorded_at": "2026-04-06T02:30:16Z"
+    },
+    {
+      "id": "sysopt.ggd-local-lawset-index-lock",
+      "learning": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
+      "recorded_at": "2026-04-06T02:10:25Z"
+    },
+    {
+      "id": "sysopt.runner-stability-evidence-uniqueness-lock",
+      "learning": "Runner-stability evidence commands must stay unique; duplicate recovery or observability steps make the replayable proof trail ambiguous without adding new evidence.",
+      "recorded_at": "2026-04-06T02:02:00Z"
+    },
+    {
+      "id": "sysopt.xr-gap-source-handoff-lock",
+      "learning": "XR systems-optimizer ratchets need an exact handoff-evidence binding; route, law, and severity locks still allow stale control-plane work if the authoritative gap packet is refreshed.",
+      "recorded_at": "2026-04-06T01:50:20Z"
+    },
+    {
+      "id": "sysopt.xr-quality-baseline-lock",
+      "learning": "XR systems-optimizer ratchets need a machine-readable shared quality baseline; evaluator focus alone leaves quality drift as narrative rather than falsifiable contract.",
+      "recorded_at": "2026-04-06T01:39:20Z"
+    },
+    {
+      "id": "sysopt.runner-observability-tail-only-lock",
+      "learning": "Runner-stability observability must stay trailing after the full replayable evidence trail; allowing `claw:health` mid-sequence weakens closed-fail recovery proof.",
+      "recorded_at": "2026-04-04T20:56:05Z"
+    },
+    {
+      "id": "sysopt.hypothesis-card-inventory-alignment-lock",
+      "learning": "Systems-optimizer hypothesis-card inventory must stay backlog-linked; orphan or filename/id-drifted card files weaken replayable recovery and reporting by leaving stale artifacts outside backlog truth.",
+      "recorded_at": "2026-04-04T20:33:38Z"
+    },
+    {
+      "id": "sysopt.normalized-relative-writable-scope-lock",
+      "learning": "Systems-optimizer writable_scope entries must stay normalized repo-relative patterns; raw allowlist matching alone can hide dot-segment escapes into runtime or route surfaces.",
+      "recorded_at": "2026-04-04T13:16:50Z"
+    },
+    {
+      "id": "sysopt.kept-history-promotion-bundle-lock",
+      "learning": "Historical kept systems-optimizer cards must preserve the exact promotion bundle, or replayable history can silently widen the proof surface after promotion.",
+      "recorded_at": "2026-04-04T12:59:50Z"
+    },
+    {
+      "id": "sysopt.active-hypothesis-card-alignment-lock",
+      "learning": "Active systems-optimizer slices need replayable seeded hypothesis-card artifacts; backlog alignment alone leaves interrupted recovery exposed to missing or drifted card files.",
+      "recorded_at": "2026-04-04T05:58:55Z"
+    },
+    {
+      "id": "sysopt.terminal-hypothesis-card-alignment-lock",
+      "learning": "Terminal systems-optimizer verdicts need replayable hypothesis-card artifacts; state/backlog alignment alone still leaves recovery and reporting blind if the card file is missing.",
+      "recorded_at": "2026-04-04T05:43:22Z"
+    },
+    {
+      "id": "sysopt.rejected-change-backlog-alignment-lock",
+      "learning": "Rejected systems-optimizer ratchets must mirror backlog contract fields in state, or recovery can carry stale failure history that no longer matches the ratchet actually rejected.",
+      "recorded_at": "2026-04-04T05:30:57Z"
+    },
+    {
+      "id": "sysopt.exact-scope-local-promotion-bundle",
+      "learning": "Scope-local promotion bundles must stay exact for promotable systems-optimizer cards; superset or reordered bundles silently widen the proof surface beyond the bounded slice.",
+      "recorded_at": "2026-04-04T05:18:01Z"
+    },
+    {
+      "id": "sysopt.runner-stability-evidence-boundary-lock",
+      "learning": "Runner-stability evidence commands must stay inside an explicit root-relative runner boundary; arbitrary shell steps inside `evidence_commands` weaken replayability and closed-fail recovery proof.",
+      "recorded_at": "2026-04-04T04:51:08Z"
+    },
+    {
+      "id": "sysopt.active-hypothesis-backlog-alignment-lock",
+      "learning": "Non-null active_hypothesis must stay backlog-linked and contract-identical to one seeded card, or interrupted systems-optimizer recovery can resume with silent scope or proof drift.",
+      "recorded_at": "2026-04-04T05:36:00Z"
+    },
+    {
+      "id": "sysopt.runner-singleton-command-groups",
+      "learning": "Systems-optimizer salvage commands must retain exact singleton group boundaries; flatten-equivalent merged groups weaken required proofs into alternatives.",
+      "recorded_at": "2026-04-04T05:02:11Z"
+    },
+    {
+      "id": "sysopt.runner-observability-tail-lock",
+      "learning": "Runner-stability observability must trail replayable runner evidence; `claw:health` can summarize recovery state but cannot lead the proof surface.",
+      "recorded_at": "2026-04-04T04:12:32Z"
+    },
+    {
+      "id": "sysopt.runner-replayable-evidence-lock",
+      "learning": "Runner-stability evidence must include at least one replayable runner script command; `claw:health` alone is observability, not recovery proof.",
+      "recorded_at": "2026-04-04T03:50:16Z"
+    },
+    {
+      "id": "sysopt.xr-evaluator-focus-exact-lock",
+      "learning": "XR systems-optimizer ratchets must use the exact evaluator focus contract; allowing extra or duplicate focus surfaces reintroduces vague route-neutral drift.",
+      "recorded_at": "2026-04-04T03:27:24Z"
+    },
+    {
+      "id": "sysopt.writable-scope-allowlist-lock",
+      "learning": "Systems-optimizer writable_scope must stay on the explicit control-plane allowlist; recursive control-plane globs are too broad because they can silently reach runtime and recovery state.",
+      "recorded_at": "2026-04-04T10:45:00Z"
+    },
+    {
+      "id": "sysopt.xr-gap-severity-baseline-lock",
+      "learning": "XR systems-optimizer ratchets must pin the current severity baseline from the authoritative gap artifact, or route-neutral work can optimize against stale failure magnitude.",
+      "recorded_at": "2026-04-04T02:56:05Z"
+    },
+    {
+      "id": "sysopt.runner-scope-local-salvage-order",
+      "learning": "Systems-optimizer salvage must front-load the full scope-local promotion bundle before `claw:validate` or `claw:health`, or stale integration truth can preempt local contract drift and GGD law checks.",
+      "recorded_at": "2026-04-04T02:41:08Z"
+    },
+    {
+      "id": "sysopt.learning-item-alignment-lock",
+      "learning": "Resolved systems-optimizer backlog cards must retain the exact learning_item logged in state and learning_log, or recovery can replay one ratchet with split lessons across surfaces.",
+      "recorded_at": "2026-04-04T02:24:53Z"
+    },
+    {
+      "id": "sysopt.state-backlog-link-lock",
+      "learning": "Systems-optimizer state must link back to unique backlog ids, verdict counts, and retained learning entries, or recovery can treat stale ratchet history as valid.",
+      "recorded_at": "2026-04-04T02:10:37Z"
+    },
+    {
+      "id": "sysopt.xr-first-broken-law-binding",
+      "learning": "XR systems-optimizer ratchets must bind to one named broken law from the authoritative gap surface list, or evaluator tightening still leaves route-neutral work too vague to falsify.",
+      "recorded_at": "2026-04-04T01:57:22Z"
+    },
+    {
+      "id": "sysopt.xr-backlog-contract-ratchet",
+      "learning": "XR systems-optimizer ratchets must fail closed at backlog time; if the authoritative gap binding is optional before execution, route lanes can inherit vague XR work orders.",
+      "recorded_at": "2026-04-04T01:32:45Z"
+    },
+    {
+      "id": "sysopt.runner-stability-ratchet",
+      "learning": "Runner-stability ratchets must reduce to one named failure surface with an explicit closed-fail rule and replayable evidence commands; multi-surface runner hardening language is too vague to promote.",
+      "recorded_at": "2026-04-04T01:14:32Z"
+    },
+    {
+      "id": "sysopt.runner-policy-self-verify-scope-local",
+      "learning": "Systems-optimizer recovery must self-verify its own state and backlog contract before replay or salvage, and that safety check has to promote through the scope-local bundle rather than stale-truth-sensitive global health gates.",
+      "recorded_at": "2026-04-04T01:03:10Z"
+    },
+    {
+      "id": "sysopt.xr-gap-ratchet",
+      "learning": "Recurring XR ratchets must cite the authoritative `work-xr.geometry-gap` artifact and fixed evaluator focus, or the machine keeps optimizing around vague route-family language instead of the first broken law.",
+      "recorded_at": "2026-04-04T00:49:56Z"
+    },
+    {
+      "id": "sysopt.scope-local-promotion-bundle",
+      "learning": "Systems-optimizer promotion bundles must stay scope-local; global health commands belong to runner observability, not keep-discard criteria for control-plane-only ratchets.",
+      "recorded_at": "2026-04-04T00:38:01Z"
+    },
+    {
+      "id": "sysopt.equation-law-expansion",
+      "learning": "Any systems-optimizer slice that can mutate `GGD/**` must carry both binding verification and executable equation-law checks in its fixed evaluation bundle, or the machine can drift its truth layer without proving law integrity.",
+      "recorded_at": "2026-04-04T09:20:00Z"
+    },
+    {
+      "id": "sysopt.runner-policy-self-verify",
+      "learning": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
+      "recorded_at": "2026-04-04T00:06:21Z"
+    },
+    {
+      "id": "sysopt.ratchet-contract-hardening",
+      "learning": "Optimizer ratchets need explicit measurement and keep rules in backlog plus a retained learning_item in state, or repeated XR/autonomy failures remain under-specified.",
+      "recorded_at": "2026-04-04T08:30:00Z"
+    },
+    {
+      "id": "sysopt.root-exec-eval-wrapper",
+      "learning": "Systems-optimizer bundles must be executable from the lane worktree root; otherwise autonomy and salvage loops fail for packaging reasons before they reach the real control-plane checks.",
+      "recorded_at": "2026-04-03T23:46:09Z"
+    },
+    {
+      "id": "sysopt.resolved-backlog-hypothesis-card-alignment-lock",
+      "learning": "Resolved systems-optimizer history must keep replayable hypothesis-card artifacts for every kept/rejected card; terminal pointers alone leave older ratchets unverifiable.",
+      "recorded_at": "2026-04-04T10:01:35Z"
+    },
+    {
+      "id": "sysopt.seeded-backlog-hypothesis-card-alignment-lock",
+      "learning": "Seeded systems-optimizer backlog items need replayable hypothesis-card artifacts before activation; otherwise queued recovery work can drift before state.active_hypothesis is populated.",
+      "recorded_at": "2026-04-04T10:31:09Z"
+    }
+  ],
+  "last_updated": "2026-04-06T05:21:17Z"
+}

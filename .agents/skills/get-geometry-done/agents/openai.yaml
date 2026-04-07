@@ -1,0 +1,4 @@
+interface:
+  display_name: "Get Geometry Done"
+  short_description: "Deterministic layout and fidelity harness"
+  default_prompt: "Use $get-geometry-done to turn the Zer0pa mockups and route contracts into geometry-first website implementation and verification work."

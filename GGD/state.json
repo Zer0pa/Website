@@ -1,0 +1,539 @@
+{
+  "version": 1,
+  "project_reference": {
+    "project_md_updated": "2026-04-07",
+    "core_research_question": "How do we turn the Zer0pa website into a deterministic geometry program whose layout, typography, color, semantic hierarchy, packet truth, and code quality are governed by explicit laws and falsified continuously until canonical closure is reached?",
+    "current_focus": "Reduce route and system truth from artifacts, keep gap export honest, and push route-family verification closer to equation-native acceptance."
+  },
+  "project_contract": {
+    "program_id": "ggd-zer0pa-website-v1",
+    "route_roles": [
+      "home",
+      "flagship",
+      "product-family"
+    ],
+    "decisive_outputs": [
+      "canonical routes with zero critical and zero major geometry failures",
+      "a convention lock that prevents creative drift",
+      "verification bundles that cover geometry, truth, semantic, SEO, contrast, and code quality",
+      "a product-family kernel proven on more than one repo-backed page",
+      "an autonomy layer that can recurse without degrading quality"
+    ],
+    "authoritative_artifacts": [
+      "GGD/PROJECT.md",
+      "GGD/CONVENTIONS.md",
+      "GGD/REQUIREMENTS.md",
+      "GGD/ROADMAP.md",
+      "GGD/STATE.md",
+      "GGD/VERIFICATION.md",
+      "CLAW/PRD_GPD_GEOMETRY_ADAPTATION.md"
+    ],
+    "constants": {
+      "base_unit_px": 8,
+      "half_unit_px": 4,
+      "desktop_columns": 16,
+      "tablet_columns": 10,
+      "mobile_columns": 6,
+      "desktop_gutter_px": 24,
+      "tablet_gutter_px": 24,
+      "mobile_gutter_px": 16,
+      "type_ratio_desktop": 1.2,
+      "type_ratio_mobile": 1.125
+    },
+    "viewport_matrix": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
+    "forbidden_moves": [
+      "creative restyling without law backing",
+      "route-specific hacks inside the shared product kernel",
+      "flattening IMC flagship behavior into generic route logic",
+      "bypassing packet truth to hide weak data",
+      "declaring autonomy readiness while route failures are still unmodeled"
+    ]
+  },
+  "position": {
+    "current_phase": "4",
+    "current_phase_name": "Propagate contract and promote geometry-law evidence",
+    "total_phases": 8,
+    "current_plan": "lane-contract-propagation",
+    "total_plans_in_phase": 3,
+    "status": "in_progress",
+    "last_activity": "2026-04-07T20:45:19Z",
+    "last_activity_desc": "Established executable route progress reduction, exported missing FT gap state, and tightened the contract surfaces around contradiction-aware truth.",
+    "progress_percent": 53.8
+  },
+  "open_questions": [
+    "Which GGD command surface should be wired first into the Codex execution layer?",
+    "Should GGD state become the direct upstream input for CLAW runtime-state promotion decisions?",
+    "Which existing audits should be reclassified into named GGD verification bundles first?"
+  ],
+  "decisions": [
+    {
+      "phase": "0",
+      "summary": "Adapt GPD more literally as GGD instead of keeping only GPD-inspired prose doctrine.",
+      "rationale": "The current system copied evaluator-optimizer behavior but not enough of the stronger GPD structure: state, conventions, protocol catalog, and verification contract."
+    },
+    {
+      "phase": "0",
+      "summary": "Keep CLAW as the autonomy layer and install GGD as the deterministic contract layer.",
+      "rationale": "Runner orchestration and design contract are separate responsibilities and should remain separate."
+    }
+  ],
+  "pending_todos": [
+    "Propagate the current GGD/CLAW contract commits into the active lane worktrees.",
+    "Run contract-readiness verification after worktree propagation.",
+    "Resume XR closure under the stronger geometry-law contract.",
+    "Expose the named bundle entrypoints directly in the ggd-* command surface.",
+    "Quarantine contaminated handoffs before they can feed authoritative gap records.",
+    "Split shared responsive and contrast artifacts into route-and-cycle-keyed evidence.",
+    "Convert recurring XR/product-family rejections into accepted system-level ratchets or explicitly discarded hypotheses.",
+    "Keep the systems-optimizer backlog current and measurable."
+  ],
+  "blockers": [
+    "XR remains blocked by an open deterministic geometry gap.",
+    "FT remains blocked by open deterministic geometry and breakpoint gap evidence.",
+    "Press-go remains false until supervised and guarded autonomy proofs are complete."
+  ],
+  "session": {
+    "last_date": "2026-04-03",
+    "hostname": "zer0palab",
+    "platform": "macOS",
+    "stopped_at": null,
+    "resume_file": "CLAW/PRD_GPD_GEOMETRY_ADAPTATION.md"
+  },
+  "command_binding": {
+    "command_namespace": "ggd",
+    "binding_file": "GGD/project.binding.json",
+    "command_surface": "GGD/commands.json",
+    "verification_bundle_index": "GGD/verification/bundles.json",
+    "gap_dir": "GGD/gaps/routes",
+    "sync_script": "CLAW/scripts/sync-ggd-state.mjs",
+    "export_gap_script": "CLAW/scripts/export-ggd-gap.mjs",
+    "verify_binding_script": "CLAW/scripts/verify-ggd-binding.mjs",
+    "source_root": "/Users/zer0palab/Get-Geometry-Done",
+    "skills_dir": "/Users/zer0palab/.codex/skills",
+    "agents_dir": "/Users/zer0palab/.codex/agents",
+    "command_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/command-catalog.json",
+    "agent_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/agent-catalog.json",
+    "function_catalog": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/function-catalog.md",
+    "equation_engine": "/Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py",
+    "example_lawset": "/Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "local_lawset_index": "GGD/equations/lawsets.json",
+    "route_progress_script": "CLAW/scripts/compute-route-progress.mjs",
+    "route_progress_report": "CLAW/control-plane/reports/route-progress.latest.json"
+  },
+  "route_status": {
+    "/": {
+      "role": "home",
+      "status": "canonical",
+      "summary": "homepage accepted through canonical closure",
+      "progress_percent": 75.9,
+      "progress_confidence": 1,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
+    },
+    "/imc": {
+      "role": "flagship",
+      "status": "canonical",
+      "summary": "flagship IMC accepted through canonical closure",
+      "progress_percent": 86.9,
+      "progress_confidence": 1,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
+    },
+    "/work/xr": {
+      "role": "product-family",
+      "status": "blocked",
+      "summary": "Rejected `/work/xr` after fresh layout, geometry-law, responsive, quality, and contrast falsification reruns.",
+      "progress_percent": 28.5,
+      "progress_confidence": 1,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
+    },
+    "/work/ft": {
+      "role": "product-family",
+      "status": "blocked",
+      "summary": "Current `/work/ft` responsive evidence still fails the laptop limiting case with horizontal overflow and multiple shared-shell overflow culprits.",
+      "progress_percent": 24,
+      "progress_confidence": 1,
+      "progress_source": "CLAW/control-plane/reports/route-progress.latest.json"
+    }
+  },
+  "verification_bundle_index": {
+    "file": "GGD/verification/bundles.json",
+    "bundle_count": 6,
+    "bundle_ids": [
+      "geometry",
+      "breakpoint",
+      "color-contrast",
+      "semantic-seo",
+      "truth",
+      "code-quality"
+    ]
+  },
+  "gap_records": [
+    {
+      "id": "work-ft.breakpoint-gap",
+      "route": "/work/ft",
+      "status": "open",
+      "severity_counts": {
+        "critical": 1,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json"
+    },
+    {
+      "id": "work-ft.geometry-gap",
+      "route": "/work/ft",
+      "status": "open",
+      "severity_counts": {
+        "critical": 14,
+        "major": 6,
+        "minor": 4,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json"
+    },
+    {
+      "id": "work-xr.breakpoint-gap",
+      "route": "/work/xr",
+      "status": "open",
+      "severity_counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T044816Z-04.json"
+    },
+    {
+      "id": "work-xr.geometry-gap",
+      "route": "/work/xr",
+      "status": "open",
+      "severity_counts": {
+        "critical": 14,
+        "major": 0,
+        "minor": 0,
+        "note": 0
+      },
+      "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json"
+    }
+  ],
+  "augmentation_backlog": [
+    {
+      "id": "aug.proportional-hero-law",
+      "category": "proportionality",
+      "hypothesis": "Hero regions should resolve from explicit ratio families per route role instead of implicit current widths, so flagship and product-family pages preserve identity under the same mathematical system.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "hero split ratios stay inside approved families",
+        "hero authority and identity blocks remain aligned at all declared breakpoints"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.section-flow-integral",
+      "category": "geometry",
+      "hypothesis": "Section transitions should be governed by a declared vertical-flow law so macro spacing and sectional density can be improved without introducing local hacks.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "section offsets remain on the spacing ladder",
+        "macro section movement is attributable to declared law changes"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.typographic-baseline-rhythm",
+      "category": "typography",
+      "hypothesis": "Baseline rhythm and line-length control should be made explicit so density, legibility, and mathematical proportionality improve together rather than by visual compromise.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "type roles map cleanly to the modular scale",
+        "critical headings preserve intended line breaks and readable line lengths"
+      ],
+      "owner_lane": "fidelity-reviewer",
+      "priority": "medium"
+    },
+    {
+      "id": "aug.numeric-color-field",
+      "category": "color-system",
+      "hypothesis": "Foreground, surface, rule, and accent tokens should be governed by explicit numeric relationships so color behavior is algebraic and contrast-safe rather than taste-driven.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "token luminance deltas remain declared and inspectable",
+        "accent-soft and secondary text remain derived instead of hand-tuned"
+      ],
+      "owner_lane": "geometry-architect",
+      "priority": "high"
+    },
+    {
+      "id": "aug.viewport-limiting-cases",
+      "category": "responsive-law",
+      "hypothesis": "Responsive behavior should be treated as explicit limiting cases, including larger displays, so routes do not merely avoid overflow but preserve geometric intent across dimensions.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "no overflow across expanded viewport set",
+        "hero and metric regions preserve lawful proportionality on wide displays"
+      ],
+      "owner_lane": "systems-qa",
+      "priority": "high"
+    },
+    {
+      "id": "aug.depth-and-z-order-law",
+      "category": "dimensionality",
+      "hypothesis": "Visual depth, overlay ordering, and emphasis should be encoded as a limited dimensional system so perceived hierarchy follows declared structure rather than ad hoc layering.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "elevated surfaces use declared depth roles only",
+        "z-order and emphasis do not contradict semantic priority"
+      ],
+      "owner_lane": "fidelity-reviewer",
+      "priority": "medium"
+    },
+    {
+      "id": "aug.semantic-depth-minimization",
+      "category": "code-quality",
+      "hypothesis": "Semantic hierarchy and DOM depth should be simplified where possible so content management, SEO, and inspection quality improve without changing route truth.",
+      "status": "seeded",
+      "route_scope": [
+        "/",
+        "/imc",
+        "/work/[slug]"
+      ],
+      "measured_checks": [
+        "main landmark and heading hierarchy remain valid",
+        "no unnecessary wrapper nesting in route-critical regions"
+      ],
+      "owner_lane": "integration",
+      "priority": "medium"
+    }
+  ],
+  "system_optimizer": {
+    "command": "ggd-system-optimize",
+    "agent": "ggd-systems-optimizer",
+    "state_file": "CLAW/control-plane/system-optimizer/state.json",
+    "backlog_file": "CLAW/control-plane/system-optimizer/backlog.json",
+    "evaluation_script": "CLAW/scripts/verify-systems-optimizer.mjs",
+    "backlog_count": 49,
+    "active_hypothesis": null,
+    "last_kept_change": {
+      "id": "sysopt.runner-field-contract-classification-lock",
+      "hypothesis": "Runner-stability hardening becomes safer if any systems-optimizer card that declares `runner_focus`, `failure_mode`, `closed_fail_rule`, or `evidence_commands` is classified as runner-stability even when its id does not use the `sysopt.runner-stability-*` prefix, so naming drift cannot bypass replayable runner-law verification.",
+      "writable_scope": [
+        "CLAW/PRD_SYSTEMS_OPTIMIZER.md",
+        "CLAW/scripts/verify-systems-optimizer.mjs",
+        "CLAW/control-plane/system-optimizer/backlog.json",
+        "CLAW/control-plane/system-optimizer/hypotheses/sysopt.runner-field-contract-classification-lock.json",
+        "CLAW/control-plane/system-optimizer/state.json"
+      ],
+      "evaluation_bundle": [
+        "node CLAW/scripts/verify-systems-optimizer.mjs",
+        "node CLAW/scripts/verify-ggd-binding.mjs",
+        "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+        "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+        "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+      ],
+      "measurement": "Before the ratchet, `isRunnerStabilityRatchet` checked only `card.id.startsWith('sysopt.runner-stability')`, so kept cards such as `sysopt.runner-stale-cycle-exact-evidence-lock` and `sysopt.runner-observability-tail-lock` still carried `runner_focus`, `failure_mode`, `closed_fail_rule`, and `evidence_commands` yet bypassed `validateRunnerStabilityContract` because their ids drifted to `sysopt.runner-*` without the `-stability-` infix. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` classifies any card with those runner-stability fields as runner-stability, state policy explicitly requires that field-based classification, and the fixed scope-local promotion bundle stays green.",
+      "keep_rule": "Keep only if field-bearing runner cards are forced through the runner-stability contract even when their ids drift from `sysopt.runner-stability-*`, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+      "learning_item": "Runner-stability verification must classify by declared runner contract fields, not only by one id prefix; otherwise naming drift can let field-bearing recovery ratchets bypass the very laws they are supposed to prove.",
+      "recorded_at": "2026-04-06T05:21:17Z"
+    },
+    "keep_only_if_better": true
+  },
+  "route_progress": {
+    "report_file": "CLAW/control-plane/reports/route-progress.latest.json",
+    "generated_at": "2026-04-06T20:04:55Z",
+    "overall_progress_percentage": 53.8,
+    "contrast_truth": {
+      "status": "report-backed",
+      "report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+    },
+    "routes": [
+      {
+        "route": "/",
+        "progress_percentage": 75.9,
+        "progress_confidence": 1,
+        "bundle_scores": {
+          "layout": 83.5,
+          "geometry": 52,
+          "responsive": 85,
+          "quality": 100,
+          "contrast": 100
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/home.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/home.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "internal_overflow",
+        "responsive_device_states": [
+          {
+            "viewport": "HOME / LAPTOP",
+            "horizontal_overflow": false,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "HOME / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "HOME / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "clean"
+      },
+      {
+        "route": "/imc",
+        "progress_percentage": 86.9,
+        "progress_confidence": 1,
+        "bundle_scores": {
+          "layout": 88,
+          "geometry": 74.5,
+          "responsive": 100,
+          "quality": 100,
+          "contrast": 100
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/imc.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/imc.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "clean",
+        "responsive_device_states": [
+          {
+            "viewport": "IMC / LAPTOP",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "IMC / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "IMC / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "clean"
+      },
+      {
+        "route": "/work/xr",
+        "progress_percentage": 28.5,
+        "progress_confidence": 1,
+        "bundle_scores": {
+          "layout": 0,
+          "geometry": 0,
+          "responsive": 85,
+          "quality": 100,
+          "contrast": 100
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/work-xr.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/work-xr.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "internal_overflow",
+        "responsive_device_states": [
+          {
+            "viewport": "WORK-XR / LAPTOP",
+            "horizontal_overflow": false,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "WORK-XR / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "WORK-XR / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "clean"
+      },
+      {
+        "route": "/work/ft",
+        "progress_percentage": 24,
+        "progress_confidence": 1,
+        "bundle_scores": {
+          "layout": 0,
+          "geometry": 0,
+          "responsive": 40,
+          "quality": 100,
+          "contrast": 100
+        },
+        "evidence": {
+          "layout_report": "deterministic-design-system/reports/work-ft.verification.md",
+          "geometry_report": "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.json",
+          "responsive_report": "deterministic-design-system/reports/responsive/responsive.verification.md",
+          "quality_report": "deterministic-design-system/reports/quality/quality.verification.json",
+          "contrast_report": "deterministic-design-system/reports/contrast/contrast.verification.json"
+        },
+        "responsive_status": "horizontal_overflow",
+        "responsive_device_states": [
+          {
+            "viewport": "WORK-FT / LAPTOP",
+            "horizontal_overflow": true,
+            "internal_overflow": true
+          },
+          {
+            "viewport": "WORK-FT / TABLET",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          },
+          {
+            "viewport": "WORK-FT / MOBILE",
+            "horizontal_overflow": false,
+            "internal_overflow": false
+          }
+        ],
+        "contrast_status": "clean"
+      }
+    ]
+  }
+}

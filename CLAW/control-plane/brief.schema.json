@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Lane Brief",
+  "type": "object",
+  "required": [
+    "cycle_id",
+    "job_id",
+    "lane",
+    "phase",
+    "target",
+    "objective",
+    "writes",
+    "acceptance"
+  ],
+  "properties": {
+    "cycle_id": { "type": "string" },
+    "job_id": { "type": "string" },
+    "lane": { "type": "string" },
+    "phase": { "type": "string" },
+    "target": { "type": "string" },
+    "objective": { "type": "string" },
+    "writes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "acceptance": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

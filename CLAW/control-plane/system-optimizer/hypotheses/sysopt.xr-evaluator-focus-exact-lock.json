@@ -1,0 +1,45 @@
+{
+  "id": "sysopt.xr-evaluator-focus-exact-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card is forced onto the exact authoritative evaluator focus contract, so route-neutral system work cannot widen beyond layout-diff, quality, and flagship-invariants.",
+  "target_route": "/work/xr",
+  "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "first_broken_law": "work.lane.hero.authority",
+  "severity_baseline": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "flagship_invariants_baseline": true,
+  "evaluator_focus": [
+    "layout-diff",
+    "quality",
+    "flagship-invariants"
+  ],
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` only checked whether `sysopt.xr-*` cards included the canonical evaluator focus surfaces, so an XR ratchet could still widen into extra or duplicate focus entries and remain structurally valid. After the ratchet, the verifier rejects any XR card whose `evaluator_focus` does not match the exact authoritative contract `layout-diff`, `quality`, `flagship-invariants`, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier fails XR cards that add non-authoritative or duplicate evaluator focus surfaces while the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "verdict": "kept",
+  "learning_item": "XR systems-optimizer ratchets must use the exact evaluator focus contract; allowing extra or duplicate focus surfaces reintroduces vague route-neutral drift.",
+  "recorded_at": "2026-04-04T03:27:24Z"
+}

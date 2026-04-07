@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Date:** 2026-03-27  
-**Working Directory:** `/Users/Zer0pa/Zer0pa Website`  
+**Working Directory:** `/Users/zer0palab/Zer0pa Website/Website-main`  
 **Applies To:** `site/` implementation and associated GitHub/Sanity data flow
 
 ## 1. Governing Objective

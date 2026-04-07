@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "id": "work-xr.geometry-gap",
+  "route": "/work/xr",
+  "route_role": "product-family",
+  "kind": "geometry-gap",
+  "status": "open",
+  "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "cycle_id": "C4-20260406T094301Z",
+  "phase_id": "C4",
+  "lane": "systems-qa",
+  "hypothesis": "Replay conflicts must fail closed as lane-local rejections so the runner can settle cleanly and preserve deterministic state.",
+  "summary": "Upstream replay conflicted before lane execution could begin.",
+  "severity_counts": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "top_drift_surfaces": [
+    "work.lane.hero.authority",
+    "work.lane.nonclaims",
+    "work.lane.metric.row",
+    "work.lane.hero.meta",
+    "work.lane.hero.identity",
+    "work.lane.proof.assertions",
+    "work.lane.hero.title",
+    "work.lane.repo.shape",
+    "work.lane.evidence.routes",
+    "work.lane.proof.terminal",
+    "work.lane.related.lanes"
+  ],
+  "flagship_invariants_intact": true,
+  "responsive_integrity": {
+    "horizontal_overflow": false,
+    "notes": []
+  },
+  "quality_severity_counts": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "quality_findings_summary": "`npm run audit:quality`: 0 critical, 0 major, 0 minor.",
+  "recommendation": "Reconcile the upstream/downstream overlap, then re-run the bounded slice from a clean base.",
+  "next_hypothesis": null,
+  "rollback_target": "5ec193be3b0aa7b5ab2ad7bdce09ba1a4ca2bba7",
+  "evidence_files": [
+    "CLAW/control-plane/runtime/logs/C4-20260404T044816Z-04.xr-gap-verdict.json",
+    "deterministic-design-system/maps/diff/home.diff.json",
+    "deterministic-design-system/maps/diff/imc.diff.json",
+    "deterministic-design-system/maps/diff/work-ft.diff.json",
+    "deterministic-design-system/maps/diff/work-xr.diff.json",
+    "deterministic-design-system/maps/live/home.live.json",
+    "deterministic-design-system/maps/live/imc.live.json",
+    "deterministic-design-system/maps/live/work-ft.live.json",
+    "deterministic-design-system/maps/live/work-xr.live.json",
+    "deterministic-design-system/reports/C4-20260404T044816Z-04.xr-falsification.rejected.md",
+    "deterministic-design-system/reports/contrast/contrast.verification.json",
+    "deterministic-design-system/reports/contrast/contrast.verification.md",
+    "deterministic-design-system/reports/geometry-laws/home.geometry-law.json",
+    "deterministic-design-system/reports/geometry-laws/home.geometry-law.md",
+    "deterministic-design-system/reports/geometry-laws/imc.geometry-law.json",
+    "deterministic-design-system/reports/geometry-laws/imc.geometry-law.md",
+    "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.json",
+    "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.md",
+    "deterministic-design-system/reports/geometry-laws/work-xr.geometry-law.json",
+    "deterministic-design-system/reports/quality/quality.verification.json"
+  ],
+  "learning_captured": [
+    "Replay conflicts must settle as lane-local rejections instead of runner-fatal errors.",
+    "Preserved prior measured geometry-gap evidence because this handoff did not produce fresh structured drift data."
+  ],
+  "commands_run": [
+    "upstream-replay"
+  ],
+  "known_risks": [
+    "The downstream lane did not run because upstream accepted commits could not be overlaid cleanly."
+  ],
+  "preserved_measured_evidence_from": "CLAW/control-plane/runtime/handoffs/C4-20260406T093109Z-03.json"
+}

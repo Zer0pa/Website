@@ -48,14 +48,14 @@ For frontend runtime Sanity reads:
 1. Run ingest:
 
 ```bash
-cd "/Users/Zer0pa/Zer0pa Website/site"
+cd "/Users/zer0palab/Zer0pa Website/Website-main/site"
 npm run ingest
 ```
 
 If Sanity is configured, sync the refreshed packets:
 
 ```bash
-cd "/Users/Zer0pa/Zer0pa Website/site"
+cd "/Users/zer0palab/Zer0pa Website/Website-main/site"
 npm run sync:sanity
 ```
 
@@ -81,7 +81,7 @@ npm run sync:sanity
 5. Rebuild and confirm the site still renders:
 
 ```bash
-cd "/Users/Zer0pa/Zer0pa Website/site"
+cd "/Users/zer0palab/Zer0pa Website/Website-main/site"
 npm run test:parser
 npm run build
 ```

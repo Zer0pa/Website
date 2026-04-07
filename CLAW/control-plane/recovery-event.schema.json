@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Recovery Event",
+  "type": "object",
+  "required": [
+    "event_id",
+    "cycle_id",
+    "reason",
+    "released_locks",
+    "runtime_mutation",
+    "created_at"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "cycle_id": { "type": ["string", "null"] },
+    "reason": { "type": "string" },
+    "released_locks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "runtime_mutation": { "type": "string" },
+    "created_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+{
+  "id": "sysopt.normalized-relative-writable-scope-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer ratchets become safer if every writable_scope entry must stay normalized and repo-relative, so dot-segment or separator escapes cannot masquerade as allowlisted control-plane paths.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` matched raw writable_scope globs against the allowlist, so malformed entries like `CLAW/scripts/../control-plane/runtime/**` or `CLAW/scripts/../../site/src/app/**` could still inherit the allowed `CLAW/scripts/**` prefix and verify clean. After the ratchet, the verifier rejects any writable_scope entry that contains dot-segment traversal, duplicate slash separators, a leading slash, or backslash separators, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier fails non-normalized writable_scope entries that try to escape through dot segments or separator drift and the fixed evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Systems-optimizer writable_scope entries must stay normalized repo-relative patterns; raw allowlist matching alone can hide dot-segment escapes into runtime or route surfaces.",
+  "recorded_at": "2026-04-04T13:16:50Z"
+}

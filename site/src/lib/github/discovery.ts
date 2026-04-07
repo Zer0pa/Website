@@ -1,10 +1,8 @@
-import { Octokit } from '@octokit/rest';
 import * as fs from 'fs';
-import * as path from 'path';
+import { resolvePacketCacheDir } from '../data/packet-cache';
+import { createGitHubOctokit, describeGitHubTokenProvisioning } from './auth';
 
-const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
-});
+const octokit = createGitHubOctokit();
 
 export interface RepoInfo {
   name: string;
@@ -30,7 +28,11 @@ export async function discoverZpeRepos(org: string = 'Zer0pa'): Promise<RepoInfo
         pushed_at: repo.pushed_at || null,
       }));
   } catch (error) {
-    console.error('[DISCOVERY] Error fetching repos:', summarizeError(error));
+    const detail = summarizeError(error);
+    const rateLimitNote =
+      /\brate limit\b/i.test(detail) ? ` ${describeGitHubTokenProvisioning()}` : '';
+
+    console.error('[DISCOVERY] Error fetching repos:', `${detail}${rateLimitNote}`);
     const cached = discoverFromCache();
     if (cached.length > 0) {
       console.warn(`[DISCOVERY] Falling back to ${cached.length} cached repo packets.`);
@@ -41,7 +43,7 @@ export async function discoverZpeRepos(org: string = 'Zer0pa'): Promise<RepoInfo
 }
 
 function discoverFromCache(): RepoInfo[] {
-  const cacheDir = path.join(process.cwd(), '.cache/packets');
+  const cacheDir = resolvePacketCacheDir();
   if (!fs.existsSync(cacheDir)) {
     return [];
   }

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "status": "not-ready",
+  "press_go_allowed": false,
+  "required_evidence": {
+    "authoritative_prd": "CLAW/PRD_GGD_AUTONOMY_PRODUCTION_HORIZON.md",
+    "system_engineering_prd": "CLAW/PRD_DETERMINISTIC_RECURSIVE_PRODUCTION.md",
+    "phase_plan": "CLAW/control-plane/plans/ggd-autonomy-production-horizon.json",
+    "deterministic_engineering_plan": "CLAW/control-plane/plans/deterministic-recursive-production.json",
+    "pattern_library": "CLAW/control-plane/patterns/geometry-patterns.json",
+    "continuation_state": "CLAW/control-plane/continuations/lane-continuations.json",
+    "runner_state_bundle": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
+    "product_kernel_law_bundle": "CLAW/control-plane/reports/W3-product-kernel-lock.md",
+    "ggd_contract_state": "GGD/state.json",
+    "ggd_binding": "GGD/project.binding.json",
+    "codex_operator_runbook": "CLAW/RUNBOOK_CODEX_OPERATOR.md",
+    "quality_bundle": "deterministic-design-system/reports/quality/quality.verification.md",
+    "contrast_bundle": "deterministic-design-system/reports/contrast/contrast.verification.md",
+    "geometry_law_bundle": "deterministic-design-system/reports/geometry-laws/work-xr.geometry-law.md",
+    "supervised_run": null,
+    "integration_checkpoint": "CLAW/control-plane/checkpoints/INT-20260403T120500Z.json",
+    "full_qa_bundle": "CLAW/control-plane/reports/W4-integration-replay.md",
+    "recovery_drill_bundle": "CLAW/control-plane/reports/W4-recovery-hardening.md",
+    "guarded_local_autonomy_bundle": null,
+    "extended_local_autonomy_bundle": null,
+    "runtime_state": "CLAW/control-plane/state/runtime-state.json"
+  }
+}

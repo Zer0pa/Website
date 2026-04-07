@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GGD Project Binding",
+  "type": "object",
+  "required": [
+    "version",
+    "project_id",
+    "command_namespace",
+    "binding_file",
+    "project_root",
+    "state_files",
+    "schemas",
+    "scripts",
+    "command_surface",
+    "verification_bundle_index",
+    "augmentation_backlog",
+    "gap_dir",
+    "system_optimizer",
+    "route_roles",
+    "focus_routes"
+  ],
+  "properties": {
+    "version": { "type": "integer" },
+    "project_id": { "type": "string" },
+    "command_namespace": { "type": "string" },
+    "binding_file": { "type": "string" },
+    "project_root": { "type": "string" },
+    "authoritative_layers": { "type": "object" },
+    "state_files": { "type": "object" },
+    "schemas": { "type": "object" },
+    "scripts": { "type": "object" },
+    "command_surface": { "type": "string" },
+    "verification_bundle_index": { "type": "string" },
+    "augmentation_backlog": { "type": "string" },
+    "gap_dir": { "type": "string" },
+    "system_optimizer": {
+      "type": "object",
+      "required": [
+        "state",
+        "backlog",
+        "optimizer_command",
+        "optimizer_agent",
+        "evaluation_script",
+        "local_lawset_index"
+      ],
+      "properties": {
+        "state": { "type": "string" },
+        "backlog": { "type": "string" },
+        "optimizer_command": { "type": "string" },
+        "optimizer_agent": { "type": "string" },
+        "evaluation_script": { "type": "string" },
+        "local_lawset_index": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "route_roles": { "type": "object" },
+    "focus_routes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "geometry_authority": { "type": "object" }
+  },
+  "additionalProperties": true
+}

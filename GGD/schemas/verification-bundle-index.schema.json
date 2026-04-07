@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GGD Verification Bundle Index",
+  "type": "object",
+  "required": [
+    "version",
+    "project_id",
+    "bundles"
+  ],
+  "properties": {
+    "version": { "type": "integer" },
+    "project_id": { "type": "string" },
+    "bundles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "owner_lane", "checks", "promotion_gate"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "owner_lane": { "type": "string" },
+          "gap_kind": { "type": "string" },
+          "applies_to_route_roles": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "checks": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "scripts": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "evidence_artifacts": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "promotion_gate": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

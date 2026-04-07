@@ -1,0 +1,26 @@
+{
+  "id": "sysopt.ggd-local-lawset-index-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "GGD binding becomes more deterministic if it must declare a repo-local lawset index and binding verification fails whenever that index is missing, empty, or points at missing lawset files.",
+  "writable_scope": [
+    "CLAW/scripts/verify-ggd-binding.mjs",
+    "GGD/project.binding.json",
+    "GGD/schemas/project-binding.schema.json",
+    "GGD/equations/lawsets.json",
+    "CLAW/control-plane/system-optimizer/backlog.json",
+    "CLAW/control-plane/system-optimizer/state.json",
+    "CLAW/control-plane/system-optimizer/hypotheses/sysopt.ggd-local-lawset-index-lock.json"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, the control-plane brief could cite `GGD/equations/lawsets.json` as the first repo-local mathematical surface even though the file was absent and `node CLAW/scripts/verify-ggd-binding.mjs` still verified clean because it never required or inspected a local lawset index. After the ratchet, `GGD/project.binding.json` pins `system_optimizer.local_lawset_index`, the repo carries `GGD/equations/lawsets.json`, and the binding verifier rejects missing, empty, duplicate-id, or missing-path lawset index entries while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if `node CLAW/scripts/verify-ggd-binding.mjs` now fails a missing or malformed repo-local lawset index contract and the exact five-command scope-local promotion bundle passes without touching route implementation paths.",
+  "learning_item": "The GGD binding must expose a repo-local lawset index as a first-class contract surface; relying only on external example-lawset pointers leaves equation truth partly implicit and lets missing local registry surfaces verify clean.",
+  "recorded_at": "2026-04-06T02:10:25Z"
+}

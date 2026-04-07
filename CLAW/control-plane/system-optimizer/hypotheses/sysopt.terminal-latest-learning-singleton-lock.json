@@ -1,0 +1,26 @@
+{
+  "id": "sysopt.terminal-latest-learning-singleton-lock",
+  "cycle_id": "C4-20260406T041624Z",
+  "job_id": "C4-20260406T041624Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery and reporting become more deterministic if terminal recency must resolve to exactly one latest retained learning entry per status, so tied kept or rejected timestamps cannot leave `last_kept_change` or `last_rejected_change` ambiguous.",
+  "writable_scope": [
+    "CLAW/scripts/verify-systems-optimizer.mjs",
+    "CLAW/PRD_SYSTEMS_OPTIMIZER.md",
+    "CLAW/control-plane/system-optimizer/backlog.json",
+    "CLAW/control-plane/system-optimizer/state.json",
+    "CLAW/control-plane/system-optimizer/hypotheses/sysopt.terminal-latest-learning-singleton-lock.json"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `findLatestRetainedLearningEntries` could return multiple kept or rejected ids that shared the newest `learning_log.recorded_at`, and `node CLAW/scripts/verify-systems-optimizer.mjs` still accepted `state.last_kept_change` or `state.last_rejected_change` as long as each pointer matched any one of those tied ids. That left terminal recency ambiguous under same-second retained timestamps. After the ratchet, the verifier rejects any kept or rejected status whose latest retained `learning_log.recorded_at` is shared by multiple ids, and the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier fails tied latest kept or rejected `learning_log.recorded_at` values and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Terminal systems-optimizer recency needs a singleton latest retained `learning_log.recorded_at` per status; if multiple ratchets share the newest second, terminal pointers stop being deterministic.",
+  "recorded_at": "2026-04-06T04:20:22Z"
+}

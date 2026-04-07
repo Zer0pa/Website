@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Audit Bundle",
+  "type": "object",
+  "required": [
+    "candidate_commit",
+    "build",
+    "parser",
+    "layout",
+    "responsive",
+    "law_compliance"
+  ],
+  "properties": {
+    "candidate_commit": { "type": "string" },
+    "build": { "type": "string" },
+    "parser": { "type": "string" },
+    "layout": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "responsive": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "law_compliance": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

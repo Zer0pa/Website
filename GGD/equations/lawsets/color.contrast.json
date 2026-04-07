@@ -1,0 +1,67 @@
+{
+  "id": "color.contrast",
+  "constants": {
+    "surface": "#0a0a0a",
+    "surface_raised": "#111111",
+    "text_primary": "#9a9a9a",
+    "text_secondary": "#8a8a8a",
+    "emphasis": "#ffffff",
+    "warning": "#a98a44",
+    "fail": "#d07a75"
+  },
+  "derived": {
+    "text_primary_on_surface": "contrast_ratio(text_primary, surface)",
+    "text_secondary_on_surface": "contrast_ratio(text_secondary, surface)",
+    "emphasis_on_surface": "contrast_ratio(emphasis, surface)",
+    "warning_on_surface": "contrast_ratio(warning, surface)",
+    "fail_on_surface": "contrast_ratio(fail, surface)",
+    "surface_delta": "contrast_ratio(surface_raised, surface)"
+  },
+  "constraints": [
+    {
+      "id": "color.text_primary_on_surface.gte_4_5",
+      "lhs": "text_primary_on_surface",
+      "op": "gte",
+      "rhs": 4.5,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "color.text_secondary_on_surface.gte_4_5",
+      "lhs": "text_secondary_on_surface",
+      "op": "gte",
+      "rhs": 4.5,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "color.emphasis_on_surface.gte_12",
+      "lhs": "emphasis_on_surface",
+      "op": "gte",
+      "rhs": 12,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "color.warning_on_surface.gte_4_5",
+      "lhs": "warning_on_surface",
+      "op": "gte",
+      "rhs": 4.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "color.fail_on_surface.gte_4_5",
+      "lhs": "fail_on_surface",
+      "op": "gte",
+      "rhs": 4.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "color.surface_delta.range",
+      "lhs": "surface_delta",
+      "op": "between",
+      "rhs": [
+        1,
+        1.2
+      ],
+      "severity": "MINOR"
+    }
+  ]
+}

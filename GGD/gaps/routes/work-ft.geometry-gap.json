@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "id": "work-ft.geometry-gap",
+  "route": "/work/ft",
+  "route_role": "product-family",
+  "kind": "geometry-gap",
+  "status": "open",
+  "source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json",
+  "cycle_id": "C4-20260404T034639Z",
+  "phase_id": "C4 / First generic product proof",
+  "lane": "systems-qa",
+  "hypothesis": "The shared product-family lane must preserve lawful hero ordering, row-gap, section-gap, and shell containment for FT without route-specific patching.",
+  "summary": "Current `/work/ft` evidence still fails layout and geometry-law falsification and must block integration until the shared product-family lane is repaired.",
+  "severity_counts": {
+    "critical": 14,
+    "major": 6,
+    "minor": 4,
+    "note": 0
+  },
+  "layout_severity_counts": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "cosmetic": 0
+  },
+  "geometry_law_counts": {
+    "critical": 8,
+    "major": 6,
+    "minor": 4,
+    "note": 0
+  },
+  "top_drift_surfaces": [
+    "work.lane.hero.authority",
+    "work.lane.nonclaims",
+    "work.lane.metric.row",
+    "work.lane.hero.meta",
+    "work.lane.hero.identity",
+    "work.lane.proof.assertions",
+    "work.lane.hero.title",
+    "work.lane.repo.shape",
+    "work.lane.evidence.routes",
+    "work.lane.proof.terminal",
+    "work.lane.related.lanes"
+  ],
+  "flagship_invariants_intact": true,
+  "responsive_integrity": {
+    "horizontal_overflow": true,
+    "notes": [
+      "Laptop limiting case still reports horizontal overflow on `/work/ft`.",
+      "Multiple internal overflow surfaces remain in the shared work-lane metrics and authority rows."
+    ]
+  },
+  "quality_findings_summary": "`npm run audit:quality`: 0 critical, 0 major, 0 minor.",
+  "recommendation": "Block integration for `/work/ft`, repair the shared work-lane geometry and ordering laws, and rerun layout, geometry-law, responsive, and contrast falsification from the repaired baseline.",
+  "next_hypothesis": "Restore lawful hero row ordering, section-gap spacing, and containment in the shared product-family shell so FT closes under the same geometric law family as XR.",
+  "rollback_target": null,
+  "evidence_files": [
+    "CLAW/control-plane/runtime/handoffs/C4-20260404T034639Z-04.json",
+    "deterministic-design-system/reports/work-ft.verification.md",
+    "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.json",
+    "deterministic-design-system/reports/geometry-laws/work-ft.geometry-law.md",
+    "deterministic-design-system/reports/responsive/responsive.verification.md",
+    "deterministic-design-system/reports/quality/quality.verification.json"
+  ],
+  "learning_captured": [
+    "FT already had blocking product-family drift in shared reports but no authoritative route gap; that left route truth underspecified.",
+    "Product-family routes must export explicit geometry gaps whenever layout or geometry-law evidence contains critical or major failures."
+  ],
+  "commands_run": [
+    "npm run audit:layout",
+    "npm run audit:geometry-law",
+    "npm run audit:responsive",
+    "npm run audit:quality"
+  ],
+  "known_risks": [
+    "The current responsive and contrast bundles still share artifacts across multiple routes, so the supporting evidence is not yet fully route-local.",
+    "Contrast truth remains contradictory across runtime summaries, handoffs, and shared artifacts."
+  ]
+}

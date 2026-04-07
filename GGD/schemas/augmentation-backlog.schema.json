@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GGD Augmentation Backlog",
+  "type": "object",
+  "required": [
+    "version",
+    "project_id",
+    "items"
+  ],
+  "properties": {
+    "version": { "type": "integer" },
+    "project_id": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "hypothesis", "status", "route_scope", "measured_checks"],
+        "properties": {
+          "id": { "type": "string" },
+          "category": { "type": "string" },
+          "hypothesis": { "type": "string" },
+          "status": { "type": "string" },
+          "route_scope": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "measured_checks": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "owner_lane": { "type": "string" },
+          "priority": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,27 @@
+{
+  "id": "sysopt.runner-policy-self-verify",
+  "lane_id": "systems-optimizer",
+  "status": "rejected",
+  "hypothesis": "Systems-optimizer salvage becomes safer if the runner is forced to execute the systems-optimizer self-verifier before a ratchet is considered replayable or recoverable.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/*.json",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/run-site-script.mjs claw:validate",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:health",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+  ],
+  "measurement": "Before the ratchet, the systems-optimizer salvage command groups could pass without ever running `node CLAW/scripts/verify-systems-optimizer.mjs`, so backlog/state contract drift could survive recovery. After the ratchet, the verifier fails if runner-policy omits that command and the fixed bundle stays green.",
+  "keep_rule": "Keep only if runner-policy declares the self-verifier as a required systems-optimizer command, the stricter verifier enforces it, and the fixed evaluation bundle passes without touching route implementation paths.",
+  "verdict": "rejected",
+  "learning_item": "Runner-policy completeness ratchets cannot promote while `claw:validate` and `claw:health` are already red for stale integration truth outside the systems-optimizer writable slice.",
+  "rejection_reason": "The fixed evaluation bundle was not clean: `claw:validate` and `claw:health` both failed on a missing control-plane report and stale integration checkpoint truth that this lane cannot truthfully repair inside the bounded slice.",
+  "recorded_at": "2026-04-04T00:06:21Z"
+}

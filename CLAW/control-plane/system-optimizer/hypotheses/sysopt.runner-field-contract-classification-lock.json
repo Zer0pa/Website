@@ -1,0 +1,26 @@
+{
+  "id": "sysopt.runner-field-contract-classification-lock",
+  "cycle_id": "C4-20260406T051822Z",
+  "job_id": "C4-20260406T051822Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Runner-stability hardening becomes safer if any systems-optimizer card that declares `runner_focus`, `failure_mode`, `closed_fail_rule`, or `evidence_commands` is classified as runner-stability even when its id does not use the `sysopt.runner-stability-*` prefix, so naming drift cannot bypass replayable runner-law verification.",
+  "writable_scope": [
+    "CLAW/PRD_SYSTEMS_OPTIMIZER.md",
+    "CLAW/scripts/verify-systems-optimizer.mjs",
+    "CLAW/control-plane/system-optimizer/backlog.json",
+    "CLAW/control-plane/system-optimizer/hypotheses/sysopt.runner-field-contract-classification-lock.json",
+    "CLAW/control-plane/system-optimizer/state.json"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `isRunnerStabilityRatchet` checked only `card.id.startsWith('sysopt.runner-stability')`, so kept cards such as `sysopt.runner-stale-cycle-exact-evidence-lock` and `sysopt.runner-observability-tail-lock` still carried `runner_focus`, `failure_mode`, `closed_fail_rule`, and `evidence_commands` yet bypassed `validateRunnerStabilityContract` because their ids drifted to `sysopt.runner-*` without the `-stability-` infix. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` classifies any card with those runner-stability fields as runner-stability, state policy explicitly requires that field-based classification, and the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if field-bearing runner cards are forced through the runner-stability contract even when their ids drift from `sysopt.runner-stability-*`, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Runner-stability verification must classify by declared runner contract fields, not only by one id prefix; otherwise naming drift can let field-bearing recovery ratchets bypass the very laws they are supposed to prove.",
+  "recorded_at": "2026-04-06T05:21:17Z"
+}

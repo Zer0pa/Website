@@ -1,4 +1,4 @@
-export type LayoutPageId = 'home' | 'imc';
+export type LayoutPageId = 'home' | 'imc' | 'work-xr' | 'work-ft';
 
 export type LayoutReferenceEntry = {
   id: string;
@@ -24,6 +24,35 @@ export type LayoutPageSpec = {
   };
   entries: LayoutReferenceEntry[];
 };
+
+function genericWorkEntries(): LayoutReferenceEntry[] {
+  return [
+    {
+      id: 'work.lane.page',
+      role: 'authority-page',
+      x: 20,
+      y: 34,
+      width: 984,
+      height: 1600,
+      positionTolerance: 30,
+      sizeTolerance: 120,
+      ignoreHeightDelta: true,
+    },
+    { id: 'work.lane.hero.title', role: 'title', x: 20, y: 58, width: 260, height: 86, positionTolerance: 10, sizeTolerance: 30 },
+    { id: 'work.lane.hero.meta', role: 'meta-brackets', x: 736, y: 58, width: 248, height: 72, positionTolerance: 18, sizeTolerance: 36 },
+    { id: 'work.lane.hero.identity', role: 'identity-copy', x: 20, y: 186, width: 520, height: 128, positionTolerance: 18, sizeTolerance: 40 },
+    { id: 'work.lane.hero.authority', role: 'authority-panel', x: 596, y: 182, width: 388, height: 132, positionTolerance: 18, sizeTolerance: 40 },
+    { id: 'work.lane.metric.row', role: 'metric-row', x: 20, y: 346, width: 984, height: 88, positionTolerance: 18, sizeTolerance: 24 },
+    { id: 'work.lane.proof.assertions', role: 'assertions-panel', x: 20, y: 480, width: 470, height: 164, positionTolerance: 22, sizeTolerance: 48 },
+    { id: 'work.lane.nonclaims', role: 'nonclaims-panel', x: 514, y: 480, width: 490, height: 164, positionTolerance: 22, sizeTolerance: 48 },
+    { id: 'work.lane.modality.snapshot', role: 'modality-band', x: 20, y: 688, width: 984, height: 128, positionTolerance: 18, sizeTolerance: 32 },
+    { id: 'work.lane.evidence.routes', role: 'evidence-panel', x: 20, y: 872, width: 472, height: 286, positionTolerance: 22, sizeTolerance: 50 },
+    { id: 'work.lane.repo.shape', role: 'repo-panel', x: 512, y: 872, width: 492, height: 286, positionTolerance: 22, sizeTolerance: 50 },
+    { id: 'work.lane.proof.terminal', role: 'proof-terminal', x: 20, y: 1208, width: 984, height: 144, positionTolerance: 18, sizeTolerance: 24 },
+    { id: 'work.lane.related.lanes', role: 'related-lanes', x: 20, y: 1424, width: 984, height: 128, positionTolerance: 20, sizeTolerance: 32 },
+    { id: 'work.lane.cta.band', role: 'cta-band', x: 20, y: 1590, width: 984, height: 212, positionTolerance: 22, sizeTolerance: 44 },
+  ];
+}
 
 export const REFERENCE_LAYOUT_SPECS: Record<LayoutPageId, LayoutPageSpec> = {
   home: {
@@ -75,5 +104,17 @@ export const REFERENCE_LAYOUT_SPECS: Record<LayoutPageId, LayoutPageSpec> = {
       { id: 'imc.related.lanes', role: 'related-lanes', x: 20, y: 1424, width: 984, height: 128, positionTolerance: 20, sizeTolerance: 32 },
       { id: 'imc.cta.band', role: 'cta-band', x: 20, y: 1590, width: 984, height: 212, positionTolerance: 22, sizeTolerance: 44 },
     ],
+  },
+  'work-xr': {
+    page: 'work-xr',
+    route: '/work/xr',
+    viewport: { width: 1024, height: 1850 },
+    entries: genericWorkEntries(),
+  },
+  'work-ft': {
+    page: 'work-ft',
+    route: '/work/ft',
+    viewport: { width: 1024, height: 1850 },
+    entries: genericWorkEntries(),
   },
 };

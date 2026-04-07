@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "route": "/imc",
+  "status": "active",
+  "non_inheritable_rules": [
+    "[ CLASS: FLAGSHIP_LANE ] is reserved for /imc.",
+    "The flagship route may use editorial naming or copy that generic /work/[slug] routes may not inherit.",
+    "Flagship-specific meta emphasis is allowed only on /imc.",
+    "Flagship-only art direction may deepen emphasis, but may not redefine the generic section grammar."
+  ],
+  "declared_overrides": {
+    "hero.meta.class": "FLAGSHIP_LANE",
+    "route_priority": "flagship before family",
+    "editorial_context": "institutional proof route, not generic product dossier"
+  },
+  "prohibited_leakage": [
+    "No generic product page may claim flagship status.",
+    "No generic product page may import /imc-only editorial copy by default.",
+    "No generic product page may flatten IMC-specific narrative into family law."
+  ]
+}

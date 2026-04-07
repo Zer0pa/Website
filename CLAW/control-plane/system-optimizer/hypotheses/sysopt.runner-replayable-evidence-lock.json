@@ -1,0 +1,22 @@
+{
+  "id": "sysopt.runner-replayable-evidence-lock",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if runner-stability cards must include at least one replayable runner script command and cannot rely on `node CLAW/scripts/run-site-script.mjs claw:health` alone as evidence.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` accepted runner-stability cards whose `evidence_commands` only named `node CLAW/scripts/run-site-script.mjs claw:health`, so a passive health check could masquerade as replayable recovery proof. After the ratchet, the verifier rejects any runner-stability card that omits `node CLAW/scripts/recover-cycle.mjs` or `node CLAW/scripts/run-recovery-drill.mjs`, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if runner-stability cards must carry at least one replayable runner script command instead of health-only evidence and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Runner-stability evidence must include at least one replayable runner script command; `claw:health` alone is observability, not recovery proof.",
+  "recorded_at": "2026-04-04T03:50:16Z"
+}

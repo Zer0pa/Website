@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "mode": "guarded-local-override",
+  "operator_interface": "codex-supervised",
+  "execution": {
+    "max_active_jobs": 1,
+    "loop_interval_seconds": 60,
+    "active_cycle_interval_seconds": 2,
+    "monitor_interval_seconds": 5,
+    "max_lane_runtime_seconds": 900,
+    "max_lane_quiet_seconds": 180,
+    "lane_overrides": {
+      "systems-optimizer": {
+        "max_lane_runtime_seconds": 1800,
+        "max_lane_quiet_seconds": 480
+      },
+      "data-truth": {
+        "max_lane_runtime_seconds": 1800,
+        "max_lane_quiet_seconds": 480
+      },
+      "systems-qa": {
+        "max_lane_runtime_seconds": 1800,
+        "max_lane_quiet_seconds": 360
+      },
+      "integration": {
+        "max_lane_runtime_seconds": 1200,
+        "max_lane_quiet_seconds": 300
+      }
+    },
+    "activation_overrides": {
+      "systems-optimizer": {
+        "disabled_phases": [
+          "C4"
+        ],
+        "reason": "Parked in C4 while Opus Engineer owns bounded CLAW/GGD hardening; resume autonomous systems-optimizer slices in C5."
+      }
+    },
+    "allow_stalled_result_salvage": true,
+    "use_search": false,
+    "sandbox": "danger-full-access",
+    "capture_json_events": true,
+    "allow_remote_push": false,
+    "allow_production_writes": false
+  },
+  "salvage": {
+    "fatal_stderr_patterns": [
+      "UnhandledPromiseRejection",
+      "SyntaxError:",
+      "TypeError:",
+      "ReferenceError:",
+      "ERR_REQUIRE_CYCLE_MODULE",
+      "ERR_MODULE_",
+      "Cannot find module"
+    ],
+    "required_command_groups_by_lane": {
+      "homepage-fidelity": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "imc-flagship": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "product-family": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "product-family-kernel": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"]
+      ],
+      "data-truth": [
+        [
+          "npm run test:parser",
+          "node --import tsx src/scripts/test-parser.ts",
+          "./node_modules/.bin/tsc -p tsconfig.json --noEmit",
+          "./node_modules/.bin/tsc -p tsconfig.json --noEmit --incremental false"
+        ]
+      ],
+      "geometry-architect": [
+        ["npm run ggd:correction-cycle"],
+        ["npm run ggd:tokens"],
+        ["npm run build"]
+      ],
+      "systems-qa": [
+        ["npm run audit:quality"],
+        ["npm run audit:responsive"],
+        ["npm run audit:geometry-law"],
+        ["npm run audit:layout", "npm run layout:measure"],
+        ["npm run audit:layout", "npm run layout:diff"]
+      ],
+      "systems-optimizer": [
+        ["node CLAW/scripts/verify-systems-optimizer.mjs"],
+        ["node CLAW/scripts/verify-ggd-binding.mjs"],
+        [
+          "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json"
+        ],
+        ["node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer"],
+        ["node CLAW/scripts/run-site-script.mjs claw:test:contracts"],
+        ["node CLAW/scripts/run-site-script.mjs claw:validate"],
+        ["node CLAW/scripts/run-site-script.mjs claw:health"]
+      ],
+      "integration": [
+        ["npm run build"],
+        ["npm run test:parser", "node --import tsx src/scripts/test-parser.ts"],
+        ["npm run audit:quality"],
+        ["npm run audit:geometry-law"]
+      ]
+    }
+  },
+  "resources": {
+    "exclusive": [
+      "next-build",
+      "browser-audit",
+      "truth-sync",
+      "integration-promotion",
+      "dev-server-port"
+    ]
+  },
+  "notes": [
+    "This file documents the autonomous runner posture before press_go.",
+    "All runs are local-only and repo-scoped.",
+    "Codex CLI is the cognition layer. The Node runner owns queue, locks, settlement, and commit finalization."
+  ]
+}

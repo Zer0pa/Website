@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "program": "zer0pa-website-ggd-autonomy-production-horizon",
+  "status": "active",
+  "current_phase": "H0-truth-authority-collapse",
+  "phases": [
+    {
+      "id": "H0",
+      "title": "Truth authority collapse",
+      "status": "in_progress",
+      "depends_on": [],
+      "streams": ["orchestrator"],
+      "tasks": [
+        "point runtime state, manifest, and active PRD to one authoritative program",
+        "demote stale primary plans",
+        "align current blockers and next actions with actual route and runner truth"
+      ],
+      "exit_gates": [
+        "runtime state is aligned with the current program",
+        "press-go manifest references the current authoritative plan",
+        "stale primary plans are no longer treated as authoritative"
+      ]
+    },
+    {
+      "id": "H1",
+      "title": "Contract propagation and lane convergence",
+      "status": "pending",
+      "depends_on": ["H0"],
+      "streams": ["orchestrator", "systems-qa", "integration"],
+      "tasks": [
+        "propagate current contract commits into active lane worktrees",
+        "verify geometry-law command surface in active worktrees",
+        "verify route-gate aware contract availability in active worktrees"
+      ],
+      "exit_gates": [
+        "active lane worktrees carry the current contract",
+        "worktree contract verification passes"
+      ]
+    },
+    {
+      "id": "H2",
+      "title": "Geometry-law execution as first-class QA",
+      "status": "pending",
+      "depends_on": ["H1"],
+      "streams": ["systems-qa", "integration"],
+      "tasks": [
+        "promote geometry-law audit into systems-qa acceptance",
+        "require geometry-law evidence for route-family integration promotion",
+        "update squads, cycle templates, and salvage rules"
+      ],
+      "exit_gates": [
+        "geometry-law reports are required route-family artifacts",
+        "systems-qa and integration recipes explicitly require geometry-law evidence"
+      ]
+    },
+    {
+      "id": "H3",
+      "title": "XR closure under shared kernel law",
+      "status": "pending",
+      "depends_on": ["H2"],
+      "streams": ["data-truth", "product-family", "systems-qa"],
+      "tasks": [
+        "refresh XR truth and evidence",
+        "repair shared route-family law surfaces only",
+        "close the blocking XR gap"
+      ],
+      "exit_gates": [
+        "/work/xr closes with zero critical and zero major route-family diffs",
+        "no blocking XR gap remains",
+        "no XR-only fork exists"
+      ]
+    },
+    {
+      "id": "H4",
+      "title": "FT replication proof",
+      "status": "pending",
+      "depends_on": ["H3"],
+      "streams": ["data-truth", "product-family", "systems-qa", "integration"],
+      "tasks": [
+        "prove family-law replication on /work/ft",
+        "emit explicit FT gap state if replication fails",
+        "reject any XR-only kernel patch"
+      ],
+      "exit_gates": [
+        "/work/ft closes or emits an explicit deterministic gap",
+        "XR and FT remain explainable under one family law"
+      ]
+    },
+    {
+      "id": "H5",
+      "title": "Integration currency and checkpoint freshness",
+      "status": "pending",
+      "depends_on": ["H3", "H4"],
+      "streams": ["integration", "orchestrator"],
+      "tasks": [
+        "replay accepted XR and FT candidates through integration",
+        "create a fresh current integration checkpoint",
+        "update evidence pointers to current accepted commits"
+      ],
+      "exit_gates": [
+        "integration evidence is current",
+        "current checkpoint matches current accepted route-family state"
+      ]
+    },
+    {
+      "id": "H6",
+      "title": "Matrix and augmentation law expansion",
+      "status": "pending",
+      "depends_on": ["H3", "H4"],
+      "streams": ["systems-qa", "integration", "orchestrator"],
+      "tasks": [
+        "expand the viewport matrix",
+        "promote augmentation backlog into measurable law items",
+        "preserve route integrity across the expanded matrix"
+      ],
+      "exit_gates": [
+        "responsive matrix is current",
+        "augmentation program is seeded and measurable"
+      ]
+    },
+    {
+      "id": "H7",
+      "title": "Supervised recursive proof",
+      "status": "pending",
+      "depends_on": ["H5", "H6"],
+      "streams": ["orchestrator", "data-truth", "product-family", "systems-qa", "integration"],
+      "tasks": [
+        "run one supervised current-contract recursive cycle",
+        "require clean queue settlement and current evidence",
+        "reject any cycle that requires manual queue edits"
+      ],
+      "exit_gates": [
+        "supervised cycle passes",
+        "no stale lock or runner mismatch survives"
+      ]
+    },
+    {
+      "id": "H8",
+      "title": "Recovery and interruption proof",
+      "status": "pending",
+      "depends_on": ["H7"],
+      "streams": ["orchestrator", "systems-qa"],
+      "tasks": [
+        "exercise stale-job recovery on the current runner",
+        "exercise replay conflict rejection and interruption recovery",
+        "capture fresh recovery evidence"
+      ],
+      "exit_gates": [
+        "recovery evidence is current",
+        "no recovery drift remains"
+      ]
+    },
+    {
+      "id": "H9",
+      "title": "Guarded unattended eligibility",
+      "status": "pending",
+      "depends_on": ["H8"],
+      "streams": ["all"],
+      "window_hours": 4,
+      "tasks": [
+        "run a bounded guarded local autonomy window",
+        "verify improvement-or-hold behavior only",
+        "keep press_go false until explicit human authorization"
+      ],
+      "exit_gates": [
+        "guarded local autonomy passes",
+        "system is truthfully eligible for bounded unattended operation"
+      ]
+    }
+  ],
+  "stop_conditions": [
+    "new critical diff",
+    "new major diff",
+    "build failure",
+    "parser failure",
+    "path-scope violation",
+    "cross-repo write",
+    "runner/runtime truth drift",
+    "integration replay contradiction",
+    "packet-truth contradiction",
+    "stale lock that cannot be recovered cleanly"
+  ],
+  "press_go_rule": "press_go remains false until H0-H9 are satisfied and explicit human authorization is recorded"
+}

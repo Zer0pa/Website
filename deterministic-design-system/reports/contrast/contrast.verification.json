@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-04-03T15:12:14.225Z",
+  "summary": {
+    "major": 0,
+    "minor": 0,
+    "warnings": 0
+  },
+  "routes": [
+    {
+      "page": "home",
+      "route": "/",
+      "totalChecked": 77,
+      "failing": [],
+      "warningBand": [],
+      "minRatio": 4.37
+    },
+    {
+      "page": "imc",
+      "route": "/imc",
+      "totalChecked": 89,
+      "failing": [],
+      "warningBand": [],
+      "minRatio": 5.51
+    },
+    {
+      "page": "work-xr",
+      "route": "/work/xr",
+      "totalChecked": 87,
+      "failing": [],
+      "warningBand": [],
+      "minRatio": 5.51
+    },
+    {
+      "page": "work-ft",
+      "route": "/work/ft",
+      "totalChecked": 83,
+      "failing": [],
+      "warningBand": [],
+      "minRatio": 5.51
+    }
+  ]
+}

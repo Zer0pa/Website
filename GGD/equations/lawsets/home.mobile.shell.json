@@ -1,0 +1,76 @@
+{
+  "id": "home.mobile.shell",
+  "constants": {
+    "u": 8,
+    "h": 4,
+    "viewport_width": 375,
+    "page_pad": 16,
+    "page_shell": 343,
+    "cols": 6,
+    "gutter": 16,
+    "hero_heading_width": 204,
+    "hero_heading_height": 100,
+    "hero_body_width": 112,
+    "hero_telemetry_width": 88
+  },
+  "derived": {
+    "shell_from_viewport": "viewport_width - page_pad * 2",
+    "col_w": "col_width(page_shell, cols, gutter)",
+    "hero_heading_ratio": "ratio(hero_heading_width, page_shell)",
+    "hero_heading_aspect": "aspect_ratio(hero_heading_width, hero_heading_height)",
+    "hero_body_ratio": "ratio(hero_body_width, page_shell)",
+    "telemetry_ratio": "ratio(hero_telemetry_width, page_shell)"
+  },
+  "constraints": [
+    {
+      "id": "home.mobile.shell.from_viewport",
+      "lhs": "shell_from_viewport",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "CRITICAL"
+    },
+{
+      "id": "home.mobile.pad.multiple_of_h",
+      "lhs": "page_pad",
+      "op": "multiple_of",
+      "rhs": "h",
+      "severity": "MAJOR"
+    },
+    {
+      "id": "home.mobile.col_width.range",
+      "lhs": "col_w",
+      "op": "between",
+      "rhs": [42, 45],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "home.mobile.hero_heading_ratio.range",
+      "lhs": "hero_heading_ratio",
+      "op": "between",
+      "rhs": [0.57, 0.61],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "home.mobile.hero_heading_aspect.range",
+      "lhs": "hero_heading_aspect",
+      "op": "between",
+      "rhs": [1.95, 2.1],
+      "severity": "MINOR"
+    },
+    {
+      "id": "home.mobile.hero_body_ratio.range",
+      "lhs": "hero_body_ratio",
+      "op": "between",
+      "rhs": [0.3, 0.33],
+      "severity": "MINOR"
+    },
+    {
+      "id": "home.mobile.telemetry_ratio.range",
+      "lhs": "telemetry_ratio",
+      "op": "between",
+      "rhs": [0.24, 0.27],
+      "severity": "MINOR"
+    }
+  ]
+}

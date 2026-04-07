@@ -1,0 +1,46 @@
+{
+  "id": "sysopt.xr-first-broken-law-binding",
+  "cycle_id": "C4-20260404T015429Z",
+  "job_id": "C4-20260404T015429Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Repeated XR rejection can be reduced if every `sysopt.xr-*` card declares one explicit `first_broken_law` drawn from the authoritative `/work/xr` gap surface list, so route-neutral system work cannot optimize against vague XR wording.",
+  "target_route": "/work/xr",
+  "target_gap": "GGD/gaps/routes/work-xr.geometry-gap.json",
+  "gap_source_handoff": "CLAW/control-plane/runtime/handoffs/C4-20260406T094301Z-03.json",
+  "first_broken_law": "work.lane.hero.authority",
+  "severity_baseline": {
+    "critical": 14,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "quality_baseline": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "note": 0
+  },
+  "flagship_invariants_baseline": true,
+  "evaluator_focus": [
+    "layout-diff",
+    "quality",
+    "flagship-invariants"
+  ],
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `sysopt.xr-*` cards could bind to the authoritative `/work/xr` gap artifact yet still stay vague about which named broken law they were tightening, so route-neutral system work could drift away from the first measured XR failure. After the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` rejects any `sysopt.xr-*` card that omits `first_broken_law` or names a law outside `GGD/gaps/routes/work-xr.geometry-gap.json.top_drift_surfaces`, and the fixed promotion bundle stays green.",
+  "keep_rule": "Keep only if the verifier fails XR cards that omit `first_broken_law` or target a non-authoritative XR drift surface, and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "XR systems-optimizer ratchets must bind to one named broken law from the authoritative gap surface list, or evaluator tightening still leaves route-neutral work too vague to falsify.",
+  "recorded_at": "2026-04-04T01:57:22Z"
+}

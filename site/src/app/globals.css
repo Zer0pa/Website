@@ -1,4 +1,7 @@
+@import '../styles/ggd-tokens.css';
+
 :root {
+  /* Contrast law: secondary text must clear 4.5:1 on the dark surfaces used by the system. */
   --color-void: #0c0c0c;
   --color-surface: #0a0a0a;
   --color-surface-raised: #111111;
@@ -6,19 +9,20 @@
   --color-border: #1a1a1a;
   --color-border-active: #333333;
   --color-emphasis: #ffffff;
-  --color-text-primary: #8a8a8a;
-  --color-text-secondary: #5a5a5a;
-  --color-text-tertiary: #2f2f2f;
-  --color-ghost: #1a1a1a;
+  --color-text-primary: #9a9a9a;
+  --color-text-secondary: #8a8a8a;
+  --color-text-tertiary: #6a6a6a;
+  --color-ghost: #777777;
   --color-pass: #7fb67f;
-  --color-fail: #b05a55;
+  --color-fail: #d07a75;
   --color-warning: #a98a44;
 
-  --font-masthead: var(--font-oswald), 'Oswald', sans-serif;
+  --font-oswald: 'Oswald', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  --font-masthead: var(--font-oswald);
   --font-ui: 'Courier New', Courier, monospace;
 
-  --grid-max: 984px;
-  --grid-pad: 20px;
+  --grid-max: var(--ggd-home-desktop-shell-page-shell);
+  --grid-pad: var(--ggd-home-desktop-shell-page-pad);
   --section-gap: 64px;
   --section-gap-tight: 40px;
 }
@@ -1186,7 +1190,7 @@ p {
   background: rgba(255, 255, 255, 0.015);
 }
 
-.related-lane-card h3 {
+.related-lane-title {
   font-size: 1.1rem;
 }
 
@@ -2738,8 +2742,8 @@ p {
 /* Roll back responsive size/width expansion while retaining falsification safety fixes */
 @media (min-width: 1280px) {
   :root {
-    --grid-max: 984px;
-    --grid-pad: 20px;
+    --grid-max: var(--ggd-home-desktop-shell-page-shell);
+    --grid-pad: var(--ggd-home-desktop-shell-page-pad);
   }
 
   body {
@@ -3587,7 +3591,7 @@ p {
     padding: calc(16px * var(--desktop-proportion-scale));
   }
 
-  .related-lane-card h3 {
+  .related-lane-title {
     font-size: calc(1.1rem * var(--desktop-proportion-scale));
   }
 

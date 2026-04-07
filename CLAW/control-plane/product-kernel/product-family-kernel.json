@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "route_role": "product-family",
+  "status": "active",
+  "canonical_sources": {
+    "shell_law": "/",
+    "authority_grammar": "/imc"
+  },
+  "section_order": [
+    "hero",
+    "metric_row",
+    "assertions_vs_nonclaims",
+    "modality_snapshot",
+    "evidence_vs_repo_shape",
+    "proof_terminal",
+    "related_lanes",
+    "cta_band"
+  ],
+  "section_boxes": {
+    "hero": {
+      "title_width_px": 260,
+      "title_height_px": 86,
+      "meta_width_px": 248,
+      "meta_height_px": 72,
+      "identity_width_px": 520,
+      "identity_height_px": 128,
+      "authority_width_px": 388,
+      "authority_height_px": 132
+    },
+    "metric_row": {
+      "card_count": 4,
+      "row_height_px": 88
+    },
+    "assertions_vs_nonclaims": {
+      "left_width_px": 470,
+      "right_width_px": 490,
+      "panel_height_px": 164
+    },
+    "modality_snapshot": {
+      "height_px": 128,
+      "row_count_max": 6
+    },
+    "evidence_vs_repo_shape": {
+      "left_width_px": 472,
+      "right_width_px": 492,
+      "panel_height_px": 286
+    },
+    "proof_terminal": {
+      "height_px": 144,
+      "line_count_max": 5
+    },
+    "related_lanes": {
+      "height_px": 128,
+      "card_count_max": 3
+    },
+    "cta_band": {
+      "target_height_px": 212,
+      "min_height_px": 188
+    }
+  },
+  "packet_bindings": {
+    "hero.title": "laneIdentifier",
+    "hero.meta.status": "authorityState.status",
+    "hero.meta.class": "PRODUCT_LANE",
+    "hero.meta.origin": "authorityState.sourceFile",
+    "hero.identity": "tagline -> whatThisIs[0] -> whatThisIs[1] -> laneTitle",
+    "hero.authority.verdict": "displayAuthorityAsset(lane)",
+    "hero.authority.hash": "commitSha.slice(0, 12)",
+    "hero.authority.timestamp": "authorityState.timestamp",
+    "hero.authority.consensus": "confidenceScore",
+    "metric_row": "headlineMetrics[0..3]",
+    "assertions": "provedNow[0..2]",
+    "nonclaims": "explicitNonClaims[0..3]",
+    "modality_snapshot": "modalityStatus[0..5]",
+    "evidence.routes.primary": "proofAnchors[0]",
+    "repo_shape.items": "repoShape[0..2]",
+    "proof_terminal": "proofAnchors + verificationPath + parserWarnings",
+    "related_lanes": "buildRelatedLanes(lane, lanes, 3)",
+    "cta.primary": "/contact",
+    "cta.secondary": "repoUrl"
+  },
+  "variant_rules": [
+    "If headline metrics are fewer than four, promote supported authority-state values into the metric row.",
+    "If proof anchors are sparse, terminal lines may borrow from verificationPath before parserWarnings.",
+    "If the lane title is materially stronger than the lane identifier, use the title only in supporting copy, never in the hero title box.",
+    "If a packet is low-signal, preserve empty space rather than fabricating decorative sections."
+  ]
+}

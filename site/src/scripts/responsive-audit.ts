@@ -3,7 +3,7 @@ import path from 'node:path';
 import { chromium } from 'playwright';
 
 type PageConfig = {
-  id: 'home' | 'imc';
+  id: 'home' | 'imc' | 'work-xr' | 'work-ft';
   route: string;
   readySelector: string;
   textSelectors: string[];
@@ -57,6 +57,18 @@ const pages: PageConfig[] = [
     route: '/imc',
     readySelector: '[data-spec="imc.page"]',
     textSelectors: ['[data-spec="imc.hero.identity"]', '[data-spec="imc.cta.band"]'],
+  },
+  {
+    id: 'work-xr',
+    route: '/work/xr',
+    readySelector: '[data-spec="work.lane.page"]',
+    textSelectors: ['[data-spec="work.lane.hero.identity"]', '[data-spec="work.lane.cta.band"]'],
+  },
+  {
+    id: 'work-ft',
+    route: '/work/ft',
+    readySelector: '[data-spec="work.lane.page"]',
+    textSelectors: ['[data-spec="work.lane.hero.identity"]', '[data-spec="work.lane.cta.band"]'],
   },
 ];
 

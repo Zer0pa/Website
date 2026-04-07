@@ -1,0 +1,24 @@
+{
+  "id": "sysopt.active-hypothesis-card-alignment-lock",
+  "cycle_id": "C4-20260404T055602Z",
+  "job_id": "C4-20260404T055602Z-01",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer recovery becomes safer if any non-null active_hypothesis must resolve to a matching seeded hypothesis-card artifact, so interrupted slices cannot resume from state/backlog pointers alone.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `node CLAW/scripts/verify-systems-optimizer.mjs` enforced active_hypothesis alignment only against backlog, so a non-null active_hypothesis could still point at no hypothesis card or a drifted seeded card artifact and verify clean. After the ratchet, the verifier rejects any non-null active_hypothesis that lacks `CLAW/control-plane/system-optimizer/hypotheses/<id>.json`, is not `seeded`, or drifts from that card across the bounded contract fields, while the fixed scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if active systems-optimizer state must resolve to a matching seeded hypothesis-card artifact and the fixed scope-local evaluation bundle passes without touching route implementation paths.",
+  "learning_item": "Active systems-optimizer slices need replayable seeded hypothesis-card artifacts; backlog alignment alone leaves interrupted recovery exposed to missing or drifted card files.",
+  "recorded_at": "2026-04-04T05:58:55Z"
+}

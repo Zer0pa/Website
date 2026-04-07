@@ -1,0 +1,24 @@
+{
+  "id": "sysopt.runner-policy-self-verify-scope-local",
+  "lane_id": "systems-optimizer",
+  "status": "kept",
+  "hypothesis": "Systems-optimizer salvage becomes safer if the runner is forced to execute the systems-optimizer self-verifier before a ratchet is considered replayable or recoverable, while promotion stays bound to the scope-local systems-optimizer bundle.",
+  "writable_scope": [
+    "CLAW/scripts/**",
+    "CLAW/control-plane/*.json",
+    "CLAW/control-plane/system-optimizer/**",
+    "CLAW/PRD*.md"
+  ],
+  "evaluation_bundle": [
+    "node CLAW/scripts/verify-systems-optimizer.mjs",
+    "node CLAW/scripts/verify-ggd-binding.mjs",
+    "python3 /Users/zer0palab/Get-Geometry-Done/scripts/ggd_equation_engine.py check-lawset --lawset /Users/zer0palab/Get-Geometry-Done/ggd/shared/example-lawset.json",
+    "node CLAW/scripts/run-site-script.mjs claw:test:systems-optimizer",
+    "node CLAW/scripts/run-site-script.mjs claw:test:contracts"
+  ],
+  "measurement": "Before the ratchet, `runner-policy.json` could omit `node CLAW/scripts/verify-systems-optimizer.mjs` from the systems-optimizer salvage command groups, so recovery could advance without checking backlog/state contract drift. After the ratchet, the runner-policy declares that self-verifier as a required systems-optimizer command and `node CLAW/scripts/verify-systems-optimizer.mjs` fails if it disappears, while the scope-local promotion bundle stays green.",
+  "keep_rule": "Keep only if systems-optimizer salvage requires `node CLAW/scripts/verify-systems-optimizer.mjs`, the verifier enforces that requirement, and the scope-local evaluation bundle passes without touching route implementation paths.",
+  "verdict": "kept",
+  "learning_item": "Systems-optimizer recovery must self-verify its own state and backlog contract before replay or salvage, and that safety check has to promote through the scope-local bundle rather than stale-truth-sensitive global health gates.",
+  "recorded_at": "2026-04-04T01:03:10Z"
+}

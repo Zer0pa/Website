@@ -1,0 +1,86 @@
+{
+  "id": "product-family.desktop.shell",
+  "constants": {
+    "u": 8,
+    "viewport_width": 1024,
+    "page_pad": 20,
+    "page_shell": 984,
+    "cols": 16,
+    "gutter": 24,
+    "proof_left_x": 20,
+    "proof_left_width": 470,
+    "proof_right_x": 514,
+    "proof_right_width": 490,
+    "evidence_left_x": 20,
+    "evidence_left_width": 472,
+    "evidence_right_x": 512,
+    "evidence_right_width": 492,
+    "cta_band_width": 984
+  },
+  "derived": {
+    "shell_from_viewport": "viewport_width - page_pad * 2",
+    "col_w": "col_width(page_shell, cols, gutter)",
+    "proof_gap": "proof_right_x - (proof_left_x + proof_left_width)",
+    "proof_span": "proof_right_x + proof_right_width - proof_left_x",
+    "evidence_gap": "evidence_right_x - (evidence_left_x + evidence_left_width)",
+    "evidence_span": "evidence_right_x + evidence_right_width - evidence_left_x"
+  },
+  "constraints": [
+    {
+      "id": "product_family.shell.from_viewport",
+      "lhs": "shell_from_viewport",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "product_family.col_width.range",
+      "lhs": "col_w",
+      "op": "between",
+      "rhs": [
+        38,
+        40
+      ],
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.proof_gap.multiple_of_u",
+      "lhs": "proof_gap",
+      "op": "multiple_of",
+      "rhs": "u",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "product_family.evidence_gap.multiple_of_h",
+      "lhs": "evidence_gap",
+      "op": "multiple_of",
+      "rhs": 4,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "product_family.proof_span.matches_shell",
+      "lhs": "proof_span",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.evidence_span.matches_shell",
+      "lhs": "evidence_span",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    },
+    {
+      "id": "product_family.cta_band.matches_shell",
+      "lhs": "cta_band_width",
+      "op": "approx_eq",
+      "rhs": "page_shell",
+      "tolerance": 0.5,
+      "severity": "MAJOR"
+    }
+  ]
+}

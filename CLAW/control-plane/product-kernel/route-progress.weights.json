@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "routes": ["/", "/imc", "/work/xr", "/work/ft"],
+  "bundle_weights": {
+    "layout": 35,
+    "geometry": 35,
+    "responsive": 10,
+    "quality": 10,
+    "contrast": 10
+  },
+  "severity_penalties": {
+    "critical": 12,
+    "major": 6,
+    "minor": 1.5
+  },
+  "responsive_scores": {
+    "horizontal_overflow": 40,
+    "internal_overflow": 85,
+    "clean": 100
+  },
+  "quality_formula": {
+    "issue_penalty": 10
+  },
+  "contrast_policy": {
+    "clean": 100,
+    "warning_penalty": 5,
+    "failing_penalty": 20,
+    "contradiction_score": 50
+  },
+  "rounding_precision": 1
+}

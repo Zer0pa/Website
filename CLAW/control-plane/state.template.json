@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "project": "zer0pa-website",
+  "mode": "control-plane-setup",
+  "press_go": false,
+  "current_milestone": "M1-recursive-autonomy-hardening",
+  "current_phase": "P0-drift-eradication-and-prd-lock",
+  "active_wave": "W0",
+  "control_style": "evaluator-optimizer",
+  "latest_wave_report": null,
+  "phase_plan": "CLAW/control-plane/plans/24x7-hardening-plan.json",
+  "evidence_manifest": "CLAW/control-plane/press-go.manifest.json",
+  "execution_prd": null,
+  "execution_plan": null,
+  "hardening_artifacts": {
+    "pattern_library": "CLAW/control-plane/patterns/geometry-patterns.json",
+    "continuation_state": "CLAW/control-plane/continuations/lane-continuations.json",
+    "queue_index": "CLAW/control-plane/queue/index.json",
+    "checkpoint_pointer": "CLAW/control-plane/checkpoints/current.json"
+  },
+  "active_cadence_profile": "supervised_dry_run",
+  "run_window": {
+    "mode": "manual-supervised-only",
+    "timezone": "Africa/Johannesburg",
+    "hours": "09:00-23:00",
+    "lane_iteration_minutes": 20
+  },
+  "lanes": {
+    "orchestrator": {
+      "status": "active",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "homepage-fidelity": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "imc-flagship": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "product-family-kernel": {
+      "status": "blocked",
+      "reason": "Wait for homepage and /imc canonical laws."
+    },
+    "product-family": {
+      "status": "blocked",
+      "reason": "Wait for product-family-kernel to stabilize."
+    },
+    "data-truth": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "systems-qa": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    },
+    "integration": {
+      "status": "waiting",
+      "last_accepted_commit": null,
+      "last_handoff": null
+    }
+  },
+  "latest_audits": {
+    "build": null,
+    "parser": null,
+    "layout": null,
+    "responsive": null
+  },
+  "current_scores": {
+    "fidelity": null,
+    "geometry_compliance": null,
+    "responsive_integrity": null,
+    "truth_integrity": null,
+    "accessibility": null,
+    "weighted": null
+  },
+  "gates": {
+    "docs_written": true,
+    "worktrees_aligned": true,
+    "supervised_cycle_passed": false,
+    "guarded_local_autonomy_passed": false,
+    "extended_local_autonomy_passed": false,
+    "recovery_drill_passed": false,
+    "integration_qa_passed": false,
+    "cross_repo_writes_detected": false,
+    "p0_drift_eradicated": false,
+    "p1_homepage_canonical": false,
+    "p2_imc_canonical": false,
+    "p3_product_kernel_ready": false,
+    "p4_recovery_hardened": false
+  },
+  "blockers": [
+    "Press-go criteria are not yet satisfied.",
+    "No supervised end-to-end cycle has passed yet.",
+    "24/7 hardening phases are not yet complete."
+  ],
+  "next_actions": [
+    "Complete P0 drift eradication and PRD lock.",
+    "Run the next supervised homepage slice.",
+    "Run one full canonical cycle for /imc.",
+    "Exercise integration replay for the first accepted lane candidate.",
+    "Prove the recovery drill matrix."
+  ],
+  "learning_backlog": [],
+  "stop_conditions": [
+    "build failure",
+    "parser test failure",
+    "critical or major audit regression",
+    "lane scope violation",
+    "data-truth contradiction",
+    "cross-repo write detected"
+  ],
+  "queue": {
+    "active": null,
+    "history": []
+  },
+  "active_jobs": [],
+  "locks": [],
+  "current_checkpoint": "CLAW/control-plane/checkpoints/current.json",
+  "rollback_checkpoint": null,
+  "pause_requested": false,
+  "stop_requested": false,
+  "heartbeat_at": null,
+  "retry_budget": {
+    "max_attempts_per_slice": 2,
+    "max_recovery_attempts_per_cycle": 1,
+    "lock_heartbeat_ttl_minutes": 90
+  },
+  "active_cycle": null,
+  "last_recovery_event": null,
+  "last_health_check": null
+}

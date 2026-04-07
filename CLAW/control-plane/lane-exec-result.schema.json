@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CLAW Lane Execution Result",
+  "type": "object",
+  "required": [
+    "cycle_id",
+    "job_id",
+    "lane",
+    "phase",
+    "target",
+    "hypothesis",
+    "status",
+    "summary",
+    "files_changed",
+    "commands_run",
+    "preflight_baseline",
+    "postflight_metrics",
+    "audit_result",
+    "known_risks",
+    "blockers",
+    "recommendation",
+    "next_hypothesis",
+    "rollback_target",
+    "learning_captured",
+    "commit"
+  ],
+  "properties": {
+    "cycle_id": { "type": "string" },
+    "job_id": { "type": "string" },
+    "lane": { "type": "string" },
+    "phase": { "type": "string" },
+    "target": { "type": "string" },
+    "hypothesis": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "rejected", "hold", "escalated"]
+    },
+    "summary": { "type": "string" },
+    "files_changed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "commands_run": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "preflight_baseline": {
+      "type": "object",
+      "required": ["notes"],
+      "properties": {
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "postflight_metrics": {
+      "type": "object",
+      "required": ["notes"],
+      "properties": {
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "audit_result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": ["summary", "status", "notes", "report"],
+          "properties": {
+            "summary": { "type": "string" },
+            "status": { "type": ["string", "null"] },
+            "notes": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "report": { "type": ["string", "null"] }
+          },
+          "additionalProperties": false
+        },
+        { "type": "string" },
+        { "type": "null" }
+      ]
+    },
+    "known_risks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommendation": { "type": "string" },
+    "next_hypothesis": {
+      "type": ["string", "null"]
+    },
+    "rollback_target": {
+      "type": ["string", "null"]
+    },
+    "learning_captured": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "commit": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": false
+}
