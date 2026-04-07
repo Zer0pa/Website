@@ -63,3 +63,25 @@ Sub-agents spawned by runner.mjs inherit the same scope constraint. Any sub-agen
 3. **Executor**: runner.mjs uses `claude --print` (Claude Code CLI) rather than `codex exec` so it works when Codex is unavailable. Swap `resolveClaudeBin()` for `resolveCodexBin()` when Codex is restored.
 
 4. **Recipe in autonomy-once.mjs**: the `laneExecutionRecipe` switch in `autonomy-once.mjs` includes an `opus-engineer` entry that tells the Codex/Claude sub-agent to invoke `node CLAW/opus-engineer/runner.mjs`. This keeps the orchestration layer consistent with other lanes.
+
+## Lessons Baked In (2026-04-07)
+
+Three production failure patterns were diagnosed on 2026-04-07 and addressed in this revision.
+
+### Refinement 1 — Trust the build, not the audit
+
+**Problem:** Sub-agents were triggered by `npm ls` / `npm audit` warnings about unresolved peer deps (specifically `lightningcss` native binaries) and treated those warnings as proof that the environment was broken. Each agent independently rescaffolded large sections of the site when `npm run build` would have succeeded without any code changes.
+
+**Fix:** Every prompt template now opens with a mandatory **PRE-FLIGHT** block that runs `npm run build` first. If the build passes, all audit warnings are explicitly labelled lies and ignored. Only a real build failure justifies code changes. See `decision-policy.md § Audit lies` for the full rule.
+
+### Refinement 2 — Lane lock for file-scoped work
+
+**Problem:** Multiple sub-agents were dispatched in parallel to the same routes (e.g. `/imc`) because each agent's prompt was scoped per-page and agents had no visibility into other live worktrees. Three concurrent rescaffolds of the same file produced merge conflicts and wasted cycles.
+
+**Fix:** `CLAW/opus-engineer/lib/lane-lock.mjs` inspects all live git worktrees via `git worktree list --porcelain` and identifies which ones have unmerged commits touching a given file or route. `runner.mjs` calls this before dispatching any `geometry-gap` or `route-progress` task; if the path is contested, the task is **skipped this cycle** and the runner emits a `hold` report instead of spawning a sub-agent. All three prompt templates also include a "check before you write" lane-lock reminder for dispatched sub-agents. Smoke test: `node CLAW/opus-engineer/lib/lane-lock.test.mjs` (66 assertions, all passing).
+
+### Refinement 3 — Phase-scoped batch template
+
+**Problem:** When 2+ tasks at the same priority tier targeted independent routes, the runner spawned N parallel single-task sub-agents. Each fresh context re-read the same files, ran its own build, and produced N commits and N reports. Token cost scaled linearly with N.
+
+**Fix:** New template `prompts/phase-batch.md` tells a single sub-agent to fix N routes sequentially in one session, committing once per route and running a single final build verification. `decision-policy.md` now says: if 2+ tasks at the same priority tier touch independent files, prefer `phase-batch` over parallel single-task dispatch. The template includes: pre-flight (R1), per-route lane-lock check (R2), Stitch doctrine, worktree-commit reminder, and structured JSON output with a `batch_results` array.

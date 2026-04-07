@@ -41,6 +41,21 @@ When the task involves a product page:
 - Geometry laws must be updated to match Stitch, not the other way around.
 - All page work must reference `CLAW/control-plane/directives/stitch-rescaffold.json` before acting.
 
+## Audit lies (baked in 2026-04-07)
+
+On 2026-04-07, multiple sub-agents independently rescaffolded the same pages because they trusted the CLAW audit's "missing dependency" verdict instead of running the build. The root cause was `lightningcss`'s native binary — `npm ls` flagged it as a missing peer dep at audit time, but the build succeeded normally because Next.js bundles its own resolved copy. Sub-agents saw the audit warning, assumed broken environment, and started rescaffolding from scratch.
+
+**Rule: build status is ground truth; audit output is a hint.**
+
+- If `npm run build` (from `site/`) exits 0, the project is healthy — do not act on audit warnings.
+- If `npm run build` exits non-zero, read the actual compile error, not the audit summary.
+- Never rescaffold a file because `npm audit` or `npm ls` flagged a peer dependency.
+- The PRE-FLIGHT block at the top of every prompt template encodes this rule operationally.
+
+## Dispatch: prefer phase-batch for same-tier independent tasks (baked in 2026-04-07)
+
+When 2 or more tasks sit at the same priority tier and touch independent files, prefer the `phase-batch.md` template over spawning N parallel single-task sub-agents. Rationale: fewer fresh contexts, fewer round-trips, lower token cost, and the batch agent shares build state across all route fixes so one `npm run build` validates everything. Only fall back to parallel dispatch when routes are genuinely blocking each other (e.g., shared component under concurrent edit — caught by lane-lock).
+
 ## Report Format
 
 Every invocation writes a report to `CLAW/control-plane/reports/opus-engineer/<cycle-id>.md` with:
