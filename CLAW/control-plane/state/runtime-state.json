@@ -6,7 +6,7 @@
   "current_milestone": "M4-ggd-autonomy-production-horizon",
   "current_phase": "C4-first-generic-product-proof",
   "active_wave": "W6",
-  "last_updated": "2026-04-07T22:52:49Z",
+  "last_updated": "2026-04-07T22:54:23Z",
   "control_style": "evaluator-optimizer",
   "latest_wave_report": "CLAW/control-plane/reports/C4-20260407T214615Z.md",
   "phase_plan": "CLAW/control-plane/plans/ggd-autonomy-production-horizon.json",
@@ -365,7 +365,7 @@
     "last_lane": "data-truth",
     "last_cycle": "C4-20260407T214615Z",
     "last_outcome": "escalated",
-    "code_head": "26bc016e5e2373f14a82fe5f5386cecd3786f35b"
+    "code_head": "ef527c85b844cbf14960509b31850896303f3bb8"
   },
   "operator_authorized_local_runner": true
 }
