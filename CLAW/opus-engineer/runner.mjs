@@ -24,7 +24,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Paths
@@ -361,6 +361,47 @@ async function main() {
     };
     console.log(JSON.stringify(result, null, 2));
     return;
+  }
+
+  // 3a. Lane-lock check — skip contested rescaffold/geometry tasks this cycle
+  //     to prevent the "three competing rescaffolds" failure mode (2026-04-07).
+  const targetPath = task.gap?.route || task.lane || '';
+  if (targetPath && ['geometry-gap', 'route-progress'].includes(task.type)) {
+    let laneLock;
+    try {
+      const lockModule = await import(
+        pathToFileURL(projectPath('CLAW', 'opus-engineer', 'lib', 'lane-lock.mjs')).href
+      );
+      const conflicts = await lockModule.contestedBy(targetPath);
+      laneLock = { isContested: conflicts.length > 0, contestedBy: conflicts };
+    } catch (lockErr) {
+      // Lane-lock failure is non-fatal — log and continue
+      console.error(`[opus-engineer] lane-lock check failed (non-fatal): ${lockErr.message}`);
+      laneLock = { isContested: false, contestedBy: [] };
+    }
+
+    if (laneLock.isContested) {
+      const contestors = laneLock.contestedBy.map((c) => c.branch || c.head?.slice(0, 8)).join(', ');
+      console.error(`[opus-engineer] task SKIPPED — lane contested by: ${contestors}`);
+      const skipReport = writeReport(id, task, {
+        output: {
+          status: 'hold',
+          summary: `Skipped: lane contested by [${contestors}]. Another worktree has unmerged commits touching ${targetPath}. Will retry next cycle.`,
+        },
+      });
+      const skipResult = {
+        cycle_id: id,
+        lane: 'opus-engineer',
+        status: 'hold',
+        skipped_reason: 'lane_contested',
+        contested_by: laneLock.contestedBy.map((c) => c.branch || c.head),
+        task: { tier: task.tier, type: task.type, reason: task.reason },
+        report: skipReport,
+        timestamp: localTimestamp(),
+      };
+      console.log(JSON.stringify(skipResult, null, 2));
+      return;
+    }
   }
 
   // 4. Render prompt
