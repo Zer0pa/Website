@@ -557,7 +557,7 @@ def generate_page(data: dict) -> str:
 <nav class="hidden lg:flex gap-10 items-center ml-10">
 <a class="mono-label text-white border-b border-white" href="#">ZERO-POINT-ENCODING</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZER0SHIP</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">WHITEPAPER</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="#">WHITEPAPERS</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">LICENSING</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">CONTACT</a>
 </nav>
@@ -745,7 +745,7 @@ def generate_page(data: dict) -> str:
 <div class="flex flex-col gap-3 w-80 shrink-0 relative z-10">
 <a href="{esc(data['url'])}" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">CLONE REPO</a>
 <a href="{esc(data['url'])}/blob/main/LICENSE" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">DOWNLOAD LICENSE</a>
-<a href="#" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">READ WHITEPAPER</a>
+<a href="#" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">READ WHITEPAPERS</a>
 </div>
 </div>
 </footer>
