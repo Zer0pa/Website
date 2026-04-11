@@ -558,7 +558,7 @@ def generate_page(data: dict) -> str:
 <a class="mono-label text-white border-b border-white" href="#">ZERO-POINT-ENCODING</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZER0SHIP</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">WHITEPAPERS</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">LICENSING</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="#">LICENSES</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">CONTACT</a>
 </nav>
 <!-- ZONE 3 & 4: EXTERNAL LINKS & CTA -->
@@ -743,9 +743,11 @@ def generate_page(data: dict) -> str:
 <div class="font-headline font-medium text-[20rem] leading-none tracking-tighter select-none pointer-events-none" style="color: #111111;">ZER<span style="color: #ffffff;">0</span>PA</div>
 <!-- ZONE 18: BUTTONS — stacked, right-justified -->
 <div class="flex flex-col gap-3 w-80 shrink-0 relative z-10">
-<a href="{esc(data['url'])}" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">CLONE REPO</a>
-<a href="{esc(data['url'])}/blob/main/LICENSE" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">DOWNLOAD LICENSE</a>
-<a href="#" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">READ WHITEPAPERS</a>
+<a href="https://reddit.com/r/zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">REDDIT</a>
+<a href="https://huggingface.co/Zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">HUGGING FACE</a>
+<a href="https://github.com/Zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">GITHUB</a>
+<a href="#" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">WHITEPAPERS</a>
+<a href="https://github.com/Zer0pa/ZPE-IMC/blob/main/LICENSE" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">DOWNLOAD LICENSES</a>
 </div>
 </div>
 </footer>
