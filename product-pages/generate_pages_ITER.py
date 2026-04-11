@@ -555,12 +555,12 @@ def generate_page(data: dict) -> str:
 <a href="#" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
 <!-- ZONE 2: NAVIGATION MENU -->
 <nav class="hidden lg:flex gap-10 items-center">
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">COMPANY</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="#">HOME</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZER0SHIP</a>
 <a class="mono-label text-white border-b border-white" href="#">ZPE</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">WHITEPAPERS</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="#">0-POINT ENCODING WHITE PAPER</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">LICENSING</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">INVESTORS</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="#">CONTACT</a>
 </nav>
 <!-- ZONE 3 & 4: EXTERNAL LINKS & CTA -->
 <div class="flex items-center gap-8">
