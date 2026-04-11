@@ -557,7 +557,7 @@ def generate_page(data: dict) -> str:
 <nav class="hidden lg:flex gap-10 items-center">
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">HOME</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZER0SHIP</a>
-<a class="mono-label text-white border-b border-white" href="#">ZPE</a>
+<a class="mono-label text-white border-b border-white" href="#">0-POINT-ENCODING</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZERO-POINT ENCODING WHITE PAPER</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">LICENSING</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">CONTACT</a>
