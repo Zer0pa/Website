@@ -550,7 +550,7 @@ def generate_page(data: dict) -> str:
 </head>
 <body class="bg-background text-primary overflow-x-hidden selection:bg-white selection:text-black">
 <!-- HEADER (ZONES 1, 2, 3, 4) -->
-<header class="bg-background/65 backdrop-blur-md h-20 fixed top-0 left-0 right-0 z-50 px-8 flex items-center max-w-[1440px] mx-auto">
+<header class="bg-background/65 backdrop-blur-md h-20 fixed top-0 left-0 right-0 z-50 px-8 flex items-center max-w-[1440px] mx-auto transition-transform duration-300">
 <!-- ZONE 1: LOGO -->
 <a href="#" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
 <!-- ZONE 2: NAVIGATION MENU -->
@@ -752,6 +752,21 @@ def generate_page(data: dict) -> str:
 </div>
 </footer>
 </main>
+<script>
+(function(){{
+    const header = document.querySelector('header');
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', () => {{
+        const y = window.scrollY;
+        if (y > lastY && y > 80) {{
+            header.style.transform = 'translateY(-100%)';
+        }} else {{
+            header.style.transform = 'translateY(0)';
+        }}
+        lastY = y;
+    }});
+}})();
+</script>
 </body></html>'''
 
 

@@ -77,9 +77,9 @@
         }
     </style>
 </head>
-<body class="text-primary selection:bg-white selection:text-black" style="background-color: #000000;">
+<body class="text-primary selection:bg-white selection:text-black" style="background-color: #0a0a0a;">
 <!-- HEADER -->
-<header class="bg-background/65 backdrop-blur-md h-20 fixed top-0 left-0 right-0 z-50 px-8 flex items-center max-w-[1440px] mx-auto">
+<header class="bg-background/65 backdrop-blur-md h-20 fixed top-0 left-0 right-0 z-50 px-8 flex items-center max-w-[1440px] mx-auto transition-transform duration-300">
 <a href="#" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
 <nav class="hidden lg:flex gap-10 items-center ml-10">
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZERO-POINT-ENCODING</a>
@@ -104,15 +104,14 @@
 </div>
 </header>
 <div class="pt-20 pb-0 flex flex-col max-w-[1440px] mx-auto">
-    <!-- Version label -->
-    <div class="px-12 py-4 flex items-center justify-between">
-        <span class="mono-label text-tertiary">ZER0PA SOURCE-AVAILABLE LICENSE v6.0</span>
-        <span id="license-status" class="mono-label text-tertiary text-xs">LOADING...</span>
-    </div>
-
     <!-- Recessed document well -->
-    <div class="max-w-[920px] mx-auto mb-8 license-well rounded-sm px-10 py-10 lg:px-16 lg:py-12" style="height: calc(100vh - 10rem);">
-        <div id="license-content" class="license-text max-w-[800px] mx-auto">
+    <div class="max-w-[920px] mx-auto mb-8 license-well rounded-sm" style="height: calc(100vh - 10rem);">
+        <!-- Version label (sticky inside well) -->
+        <div class="sticky top-0 z-10 px-10 lg:px-16 py-4 flex items-center justify-between bg-black/40 backdrop-blur-md">
+            <span class="mono-label text-tertiary">ZER0PA SOURCE-AVAILABLE LICENSE v6.0</span>
+            <span id="license-status" class="mono-label text-tertiary text-xs">LOADING...</span>
+        </div>
+        <div id="license-content" class="license-text max-w-[800px] mx-auto px-10 py-10 lg:px-16 lg:py-12">
             <!-- License text injected here by JS -->
         </div>
     </div>
@@ -156,6 +155,22 @@ fetch(LICENSE_URL)
         statusEl.classList.add('text-error');
         container.textContent = `Zer0pa Source-Available License v6.0\nLicensor: Zer0pa (Pty) Ltd, Republic of South Africa\nSPDX Identifier: LicenseRef-Zer0pa-SAL-6.0\nCanonical URL: https://github.com/Zer0pa/ZPE-License-Commercial\n\n[License could not be loaded from repository. Visit the Canonical URL above for the full text.]`;
     });
+</script>
+<script>
+(function(){
+    const header = document.querySelector('header');
+    const well = document.querySelector('.license-well');
+    let lastY = 0;
+    well.addEventListener('scroll', () => {
+        const y = well.scrollTop;
+        if (y > lastY && y > 80) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        lastY = y;
+    });
+})();
 </script>
 </body>
 </html>
