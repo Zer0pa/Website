@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ZER0PA.AI | ZPE-IMC DOSSIER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&amp;family=Courier+Prime:wght@400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-container": "#000000",
+                        "outline": "#919191",
+                        "surface-tint": "#c6c6c7",
+                        "on-background": "#e2e2e2",
+                        "tertiary": "#e4e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-fixed-dim": "#454747",
+                        "secondary-container": "#464747",
+                        "primary": "#ffffff",
+                        "on-tertiary-container": "#000000",
+                        "tertiary-fixed-dim": "#474747",
+                        "on-secondary": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#3b3b3c",
+                        "on-tertiary-fixed-variant": "#e4e2e1",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ababab",
+                        "inverse-primary": "#5d5f5f",
+                        "on-secondary-container": "#e3e2e2",
+                        "surface-container-highest": "#353535",
+                        "on-surface": "#e2e2e2",
+                        "on-tertiary-fixed": "#ffffff",
+                        "secondary": "#c7c6c6",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-container-low": "#1b1b1b",
+                        "on-tertiary": "#1b1c1c",
+                        "tertiary-container": "#929090",
+                        "on-primary-fixed": "#ffffff",
+                        "surface": "#131313",
+                        "surface-bright": "#393939",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c6c6c6",
+                        "primary-fixed": "#5d5f5f",
+                        "background": "#131313",
+                        "primary-container": "#d4d4d4",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#353535",
+                        "outline-variant": "#474747",
+                        "on-primary-fixed-variant": "#e2e2e2",
+                        "on-primary": "#1a1c1c",
+                        "tertiary-fixed": "#5f5e5e",
+                        "surface-container": "#1f1f1f",
+                        "inverse-surface": "#e2e2e2",
+                        "secondary-fixed": "#c7c6c6",
+                        "inverse-on-surface": "#303030"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0px",
+                        lg: "0px",
+                        xl: "0px",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Oswald", "sans-serif"],
+                        body: ["Courier Prime", "monospace"],
+                        label: ["Courier Prime", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: 'Courier Prime', monospace;
+            cursor: crosshair;
+        }
+        .radial-grid {
+            background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.03;
+        }
+        .text-60 { color: #C7C6C6; }
+        .text-30 { color: #474747; }
+        .no-radius { border-radius: 0 !important; }
+        .singularity-mask {
+            font-size: 12rem;
+            line-height: 1;
+            font-weight: 700;
+            color: white;
+            opacity: 0.05;
+            pointer-events: none;
+            position: absolute;
+            right: -2rem;
+            top: -2rem;
+        }
+        /* Ensure brand SVGs adhere to white constraint */
+        svg text { fill: white !important; }
+        svg { height: 100%; width: auto; }
+    </style>
+</head>
+<body class="bg-black overflow-x-hidden">
+<div class="fixed inset-0 radial-grid pointer-events-none"></div>
+<!-- Zones 1-5: Masthead -->
+<nav class="fixed top-0 w-full border-0 bg-[#131313] z-50 flex justify-between items-center px-8 h-16 font-mono uppercase tracking-tighter text-[0.875rem]">
+<div class="flex items-center gap-8">
+<a href="/" class="text-2xl font-medium font-headline tracking-widest text-white"><div class="h-8 text-white flex items-center"><svg viewBox="0 0 701 353" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto"><g transform="translate(-169 -41)"><text fill="#C7C6C6" font-family="Oswald,sans-serif" font-weight="400" font-size="165" transform="matrix(1 0 0 1 272.924 254)">ZER</text><text fill="#FFFFFF" font-family="Oswald,sans-serif" font-weight="400" font-size="165" transform="matrix(1 0 0 1 494.07 254)">0</text><text fill="#C7C6C6" font-family="Oswald,sans-serif" font-weight="400" font-size="165" transform="matrix(1 0 0 1 579.435 254)">PA</text></g></svg></div></a>
+<div class="hidden md:flex gap-6">
+<a class="text-[#C7C6C6] hover:text-white transition-colors duration-200" href="#">COMPANY</a>
+<a class="text-[#C7C6C6] hover:text-white transition-colors duration-200" href="#">ZER0SHIP</a>
+<a class="text-white font-bold border-b border-white" href="#">ZPE</a>
+<a class="text-[#C7C6C6] hover:text-white transition-colors duration-200" href="#">WHITEPAPERS</a>
+<a class="text-[#C7C6C6] hover:text-white transition-colors duration-200" href="#">LICENSING</a>
+<a class="text-[#C7C6C6] hover:text-white transition-colors duration-200" href="#">INVESTORS</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4 text-[#C7C6C6]">
+<span class="material-symbols-outlined scale-75 cursor-pointer hover:text-white">terminal</span>
+<span class="material-symbols-outlined scale-75 cursor-pointer hover:text-white">code</span>
+<span class="material-symbols-outlined scale-75 cursor-pointer hover:text-white">share</span>
+</div>
+<button class="bg-white text-black px-4 py-2 font-bold no-radius hover:bg-[#C7C6C6] active:opacity-80 transition-all">CLONE_REPO</button>
+<div class="h-12 w-12 text-white opacity-20 ml-4 flex items-center justify-center"><svg viewBox="0 0 326 353" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto"><g transform="translate(-1090 -64)"><text fill="#FFFFFF" font-family="Oswald,sans-serif" font-weight="400" font-size="165" transform="matrix(1 0 0 1 1193.6 275)">0</text></g></svg></div>
+</div>
+</nav>
+<main class="pt-24 pb-12 px-8 max-w-[1440px] mx-auto relative">
+<div class="singularity-mask font-headline">0</div>
+<!-- Zones 6-7: Header & Status -->
+<header class="flex justify-between items-end mb-16 border-b border-[#474747]/30 pb-8">
+<div>
+<span class="text-30 text-xs mb-2 block">PROJECT_IDENTIFIER</span>
+<h1 class="text-8xl font-headline font-bold tracking-tighter text-white">ZPE-IMC</h1>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="bg-surface-container-high px-4 py-1 text-white font-bold text-xs">
+                    STATUS: OPERATIONAL_V.4.2
+                </div>
+<div class="text-30 text-[0.6875rem] font-mono">
+                    LAST_SYNC: 2023-10-24 14:32:01 UTC
+                </div>
+</div>
+</header>
+<!-- Zones 8-9: Overview vs Authority -->
+<div class="grid grid-cols-8 gap-12 mb-16">
+<div class="col-span-4">
+<h2 class="text-white font-headline text-2xl mb-6 flex items-center gap-3">
+<span class="w-2 h-2 bg-white"></span>
+                    WHAT THIS IS
+                </h2>
+<p class="text-60 text-lg leading-relaxed">
+                    ZPE-IMC is the fundamental Infinite Mass Compression architecture. It provides a non-linear evidence-based protocol for distilling hyper-dimensional data into zero-point singularities without loss of functional integrity.
+                </p>
+<div class="mt-8 grid grid-cols-2 gap-4">
+<div class="border-l-2 border-white pl-4 py-2">
+<span class="text-30 text-[0.6875rem] block">ARCHITECTURE</span>
+<span class="text-white text-sm">NEURAL_VOID_NET</span>
+</div>
+<div class="border-l-2 border-white pl-4 py-2">
+<span class="text-30 text-[0.6875rem] block">ENCODING</span>
+<span class="text-white text-sm">HEX_LATTICE_V3</span>
+</div>
+</div>
+</div>
+<div class="col-span-4 bg-surface-container-low p-8 border-l border-white/10">
+<div class="flex justify-between items-start mb-8">
+<h2 class="text-white font-headline text-2xl">AUTHORITY STATUS</h2>
+<div class="bg-white text-black px-3 py-1 text-xs font-bold uppercase">VERDICT: ABSOLUTE_TRUTH</div>
+</div>
+<div class="space-y-4 font-mono">
+<div class="flex justify-between text-sm">
+<span class="text-30">COMMIT_SHA</span>
+<span class="text-white uppercase">8f2a9c1e7d4b0f3e...</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-30">CONFIDENCE_RATING</span>
+<span class="text-white">99.999992%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-30">VALIDATOR_NODE</span>
+<span class="text-white">ZER0_PRIME_MAIN</span>
+</div>
+<div class="pt-6 border-t border-[#474747]/30">
+<div class="w-full bg-[#131313] h-1">
+<div class="bg-white h-full w-[99.9%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Zone 10: Key Metrics -->
+<section class="mb-16">
+<h2 class="text-30 text-[0.6875rem] mb-6 tracking-widest uppercase">CRITICAL_TELEMETRY</h2>
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-6 border-t-2 border-white">
+<span class="text-30 text-xs block mb-4 uppercase">Compression</span>
+<div class="text-4xl text-white font-bold mb-2">1:10^8</div>
+<span class="text-[0.6875rem] text-[#FFB4AB] font-mono">STABILITY_LOCK_ON</span>
+</div>
+<div class="bg-surface-container-low p-6 border-t-2 border-white">
+<span class="text-30 text-xs block mb-4 uppercase">Fidelity</span>
+<div class="text-4xl text-white font-bold mb-2">BIT_PERF</div>
+<span class="text-[0.6875rem] text-60 font-mono">LOSSLESS_ABSOLUTE</span>
+</div>
+<div class="bg-surface-container-low p-6 border-t-2 border-white">
+<span class="text-30 text-xs block mb-4 uppercase">Latency</span>
+<div class="text-4xl text-white font-bold mb-2">&lt;0.001ms</div>
+<span class="text-[0.6875rem] text-60 font-mono">ZERO_POINT_TRANSFER</span>
+</div>
+<div class="bg-surface-container-low p-6 border-t-2 border-white">
+<span class="text-30 text-xs block mb-4 uppercase">Integrity</span>
+<div class="text-4xl text-white font-bold mb-2">99.9%</div>
+<span class="text-[0.6875rem] text-60 font-mono">ECC_LATTICE_ACTIVE</span>
+</div>
+</div>
+</section>
+<!-- Zones 11-12: Proof Claims -->
+<div class="grid grid-cols-2 gap-12 mb-16">
+<div class="p-8 border border-[#474747]/20">
+<h3 class="text-white font-headline text-xl mb-6">WHAT WE PROVE</h3>
+<div class="flex flex-wrap gap-2">
+<span class="bg-white/10 text-white px-3 py-1 text-[0.6875rem] flex items-center gap-2">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> DATA_PARITY
+                    </span>
+<span class="bg-white/10 text-white px-3 py-1 text-[0.6875rem] flex items-center gap-2">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> CRYPTO_IMMUTABILITY
+                    </span>
+<span class="bg-white/10 text-white px-3 py-1 text-[0.6875rem] flex items-center gap-2">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> SINGULARITY_MAP
+                    </span>
+<span class="bg-white/10 text-white px-3 py-1 text-[0.6875rem] flex items-center gap-2">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> LATENCY_VOID
+                    </span>
+</div>
+</div>
+<div class="p-8 border border-[#474747]/20 relative overflow-hidden">
+<div class="absolute inset-0 pointer-events-none opacity-10 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#FFB4AB_10px,#FFB4AB_11px)]"></div>
+<h3 class="text-[#FFB4AB] font-headline text-xl mb-6">WHAT WE DON'T CLAIM</h3>
+<div class="flex flex-wrap gap-2 opacity-80">
+<span class="border border-[#FFB4AB]/40 text-[#FFB4AB] px-3 py-1 text-[0.6875rem] line-through">GENERAL_AI_SENTIENCE</span>
+<span class="border border-[#FFB4AB]/40 text-[#FFB4AB] px-3 py-1 text-[0.6875rem] line-through">PREDICTIVE_FUTURE_DATA</span>
+<span class="border border-[#FFB4AB]/40 text-[#FFB4AB] px-3 py-1 text-[0.6875rem] line-through">MARKET_MANIPULATION</span>
+</div>
+</div>
+</div>
+<!-- Zone 13: Verification Status -->
+<section class="mb-16">
+<div class="bg-surface-container-high p-4 flex justify-between items-center mb-0.5">
+<h3 class="text-white font-headline">VERIFICATION STATUS</h3>
+<span class="text-30 text-[0.6875rem]">MODALITY_GRID_OUTPUT</span>
+</div>
+<div class="grid grid-cols-6 gap-0.5">
+<div class="bg-surface-container-low p-4 text-center">
+<span class="text-30 text-[0.625rem] block mb-2">V_01</span>
+<div class="text-white font-bold">PASS</div>
+</div>
+<div class="bg-surface-container-low p-4 text-center">
+<span class="text-30 text-[0.625rem] block mb-2">V_02</span>
+<div class="text-white font-bold">PASS</div>
+</div>
+<div class="bg-surface-container-low p-4 text-center">
+<span class="text-30 text-[0.625rem] block mb-2">V_03</span>
+<div class="text-[#FFB4AB] font-bold italic">FAIL</div>
+</div>
+<div class="bg-surface-container-low p-4 text-center">
+<span class="text-30 text-[0.625rem] block mb-2">V_04</span>
+<div class="text-white font-bold">PASS</div>
+</div>
+<div class="bg-surface-container-low p-4 text-center">
+<span class="text-30 text-[0.625rem] block mb-2">V_05</span>
+<div class="text-[#C7C6C6]/40 font-bold uppercase">INC_0</div>
+</div>
+<div class="bg-surface-container-low p-4 text-center">
+<span class="text-30 text-[0.625rem] block mb-2">V_06</span>
+<div class="text-white font-bold">PASS</div>
+</div>
+</div>
+</section>
+<!-- Zones 14-16: Proof Anchors & Repo Shape -->
+<div class="grid grid-cols-12 gap-4 mb-16 items-stretch">
+<div class="col-span-3 bg-surface-container-low p-6 font-mono text-[0.6875rem] leading-relaxed border-r-2 border-white">
+<h4 class="text-white mb-4">PROOF ANCHORS</h4>
+<div class="space-y-3">
+<div class="text-30">/root/bin/core/imc_0.so</div>
+<div class="text-60">LINK_STATE: SECURE</div>
+<div class="text-30">/root/vault/hashes/SHA-512</div>
+<div class="text-60">AUTH_KEY: **********</div>
+<div class="text-30">/tmp/streaming/v_node_42</div>
+</div>
+</div>
+<div class="col-span-6 bg-surface-container-highest relative min-h-[400px] flex items-center justify-center">
+<div class="absolute inset-0 bg-black/20"></div>
+<!-- Hexagonal Media Slot Placeholder -->
+<div class="relative z-10 w-64 h-64 border-2 border-white/20 flex items-center justify-center p-4">
+<img class="w-full h-full object-cover grayscale opacity-80 mix-blend-screen" data-alt="abstract geometric 3D render of a technical data core with glowing lines and monochrome aesthetic high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-fnzrCnME40V6GIFMnr3GYlb2eHp_-SRunpRwzlnoqSwUJ8LkYYotmcVerimfmpWG9FJYREz9d7v9wzrf2LZm0TtgPghcPl4k2aO-fbw59W59QFKumIXt6r-QkeLDcRYae-D6LIrA9TclpoDqFYEo4lpUXayM9dCJ9f2vGTJkjxu9i63C4WzZJ6gHekoBx-4aXS-Kx_ADfBG5nWAsixRR5rJ0gnIxU7zZ_Rfn9d7z-BM4lzh6ozzCqEc9snYValYll-LMb-zseQ" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"/>
+</div>
+<div class="absolute bottom-4 left-4 text-30 text-[0.625rem]">RAW_VISUAL_TELEMETRY.IMG</div>
+</div>
+<div class="col-span-3 bg-surface-container-low p-6 border-l-2 border-white">
+<h4 class="text-white mb-4 font-headline uppercase">REPO SHAPE</h4>
+<div class="space-y-6">
+<div>
+<span class="text-30 text-[0.625rem] block">SIZE_ON_DISK</span>
+<span class="text-2xl text-white font-bold">14.8 PB</span>
+</div>
+<div>
+<span class="text-30 text-[0.625rem] block">LATTICE_DEPTH</span>
+<span class="text-2xl text-white font-bold">0xFFFF</span>
+</div>
+<div>
+<span class="text-30 text-[0.625rem] block">HASH_STRENGTH</span>
+<span class="text-2xl text-white font-bold">QUANTUM_IMMUNE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Zones 17-18: Related & Footer Band -->
+<section class="mb-16">
+<h3 class="text-30 text-[0.6875rem] mb-6 uppercase tracking-widest">RELATED_REPOS</h3>
+<div class="grid grid-cols-3 gap-6">
+<div class="border border-[#474747]/30 p-6 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-white font-bold">ZPE-CORE</span>
+<span class="material-symbols-outlined text-30 group-hover:text-white">open_in_new</span>
+</div>
+<p class="text-30 text-xs mb-4">Underlying engine for all zero-point operations.</p>
+<div class="text-[0.625rem] text-60 uppercase">FORKS: 1,429</div>
+</div>
+<div class="border border-[#474747]/30 p-6 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-white font-bold">IMC-SDK-PYTHON</span>
+<span class="material-symbols-outlined text-30 group-hover:text-white">open_in_new</span>
+</div>
+<p class="text-30 text-xs mb-4">Official interface for Python-based void analysis.</p>
+<div class="text-[0.625rem] text-60 uppercase">VERSION: 2.1.0-STABLE</div>
+</div>
+<div class="border border-[#474747]/30 p-6 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<span class="text-white font-bold">VOID-RENDERER</span>
+<span class="material-symbols-outlined text-30 group-hover:text-white">open_in_new</span>
+</div>
+<p class="text-30 text-xs mb-4">High-performance visual data reconstruction tool.</p>
+<div class="text-[0.625rem] text-60 uppercase">STATUS: EXPERIMENTAL</div>
+</div>
+</div>
+</section>
+<!-- Final Band -->
+<div class="bg-surface-container-highest p-12 flex flex-col md:flex-row justify-between items-center gap-8 border-t-2 border-white">
+<div class="text-center md:text-left">
+<h4 class="text-2xl font-headline text-white mb-2">FINALIZE_ACCESS_PROTOCOL</h4>
+<p class="text-60 text-sm">Download the complete technical dossier and encrypted binary assets.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-transparent border-2 border-white text-white px-8 py-3 font-bold no-radius hover:bg-white hover:text-black transition-all">DOWNLOAD LICENSE</button>
+<button class="bg-white text-black px-8 py-3 font-bold no-radius hover:bg-[#C7C6C6] transition-all">CLONE THIS REPO</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full border-t border-[#474747]/20 bg-[#131313]">
+<div class="mb-8 md:mb-0">
+<span class="text-white font-headline text-xl tracking-widest block mb-2"><div class="h-6 text-white mb-2"><svg viewBox="0 0 701 353" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto"><g transform="translate(-169 -41)"><text fill="#C7C6C6" font-family="Oswald,sans-serif" font-weight="400" font-size="165" transform="matrix(1 0 0 1 272.924 254)">ZER</text><text fill="#FFFFFF" font-family="Oswald,sans-serif" font-weight="400" font-size="165" transform="matrix(1 0 0 1 494.07 254)">0</text><text fill="#C7C6C6" font-family="Oswald,sans-serif" font-weight="400" font-size="165" transform="matrix(1 0 0 1 579.435 254)">PA</text></g></svg></div></span>
+<span class="text-[#C7C6C6] font-mono text-[0.6875rem] uppercase">© ZER0PA.AI - TECHNICAL_DATA_UNREDACTED</span>
+</div>
+<div class="flex flex-wrap justify-center gap-8 text-[#474747] font-mono text-[0.6875rem] uppercase">
+<a class="hover:text-white transition-opacity" href="#">LEGAL</a>
+<a class="hover:text-white transition-opacity" href="#">SECURITY</a>
+<a class="hover:text-white transition-opacity" href="#">ENCRYPTION_STANDARDS</a>
+<a class="hover:text-white transition-opacity" href="#">PRIVACY_VOID</a>
+</div>
+<div class="mt-8 md:mt-0 text-30 text-[0.625rem] font-mono">
+            STAMP_ID: 0x00000000_IMC
+        </div>
+</footer>
+</body></html>
