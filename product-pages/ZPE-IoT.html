@@ -92,7 +92,9 @@
 
         /* -- Section / card hover inversion -- */
         .inv { transition: all 0.3s ease; }
-        .inv:hover { background-color: #ffffff !important; border-color: #ffffff !important; }
+        @media (hover: hover) {
+.inv:hover { background-color: #ffffff !important; border-color: #ffffff !important; }
+}
         .inv .font-headline, .inv .mono-label, .inv .mono-meta,
         .inv .text-white, .inv .text-secondary, .inv .text-tertiary,
         .inv .material-symbols-outlined, .inv p, .inv code { transition: color 0.3s ease; }
@@ -115,7 +117,7 @@
 <!-- ZONE 1: LOGO -->
 <a href="#" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
 <!-- ZONE 2: NAVIGATION MENU -->
-<nav class="hidden lg:flex gap-10 items-center ml-10">
+<nav class="hidden md:flex gap-6 lg:gap-10 items-center ml-10">
 <a class="mono-label text-white border-b border-white" href="#">ZERO-POINT-ENCODING</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZER0SHIP</a>
 <a class="mono-label text-secondary hover:text-white transition-colors" href="#">WHITEPAPERS</a>
@@ -140,7 +142,7 @@
 </header>
 <main class="pt-20 grid-overlay min-h-screen w-full max-w-[1440px] mx-auto border-x border-outline-variant">
 <!-- HERO SECTION (ZONES 5, 6, 7) -->
-<section class="px-12 py-20 border-b border-outline-variant flex justify-between items-start bg-black">
+<section class="px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20 border-b border-outline-variant flex flex-col sm:flex-row justify-between items-start bg-black">
 <div class="flex flex-col gap-4">
 <!-- ZONE 7: STATUS BADGES -->
 <div class="flex gap-4">
@@ -148,7 +150,7 @@
 <span class="mono-meta text-secondary">[ STATUS: <span class="text-white">UNREDACTED</span> ]</span>
 </div>
 <!-- ZONE 6: PRODUCT NAME -->
-<h1 class="font-headline text-[8rem] font-bold tracking-tighter uppercase leading-[0.85] text-white">ZPE-IOT</h1>
+<h1 class="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter uppercase leading-[0.85] text-white">ZPE-IOT</h1>
 <div class="mt-4 flex items-center gap-6">
 <span class="px-3 py-1 bg-surface border border-outline-variant mono-label text-white">CLASS: SINGULARITY</span>
 <span class="mono-meta text-tertiary">TIMESTAMP: 2026.04.11.22:22:27_UTC</span>
@@ -193,7 +195,7 @@
 </section>
 <!-- ZONE 10: KEY METRICS -->
 <section class="border-b border-outline-variant">
-<div class="px-12 pt-12 pb-6">
+<div class="px-4 sm:px-6 md:px-8 lg:px-12 pt-8 sm:pt-10 md:pt-12 pb-4 sm:pb-6">
 <h2 class="mono-label text-secondary">03 // KEY METRICS</h2>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-4">
@@ -215,7 +217,7 @@
 <div class="text-7xl font-headline font-bold text-white mt-4 whitespace-nowrap">11</div>
 </div>
 </div>
-<div class="px-12 py-4 border-t border-outline-variant">
+<div class="px-4 sm:px-6 md:px-8 lg:px-12 py-4 border-t border-outline-variant">
 <p class="text-xs font-mono text-tertiary">* Baselines are approximate analogues — not direct comparisons. Corpus, scope, and conditions differ.</p>
 </div>
 </section>
@@ -351,7 +353,7 @@
 <p class="mono-meta text-secondary">GEOMETRIC PROOF OF ZERO-STATE</p>
 </div>
 <div class="w-full aspect-square border border-outline-variant flex items-center justify-center relative bg-black/50">
-<div class="text-white/10 font-headline text-[8rem]">IOT</div>
+<div class="text-white/10 font-headline text-4xl sm:text-6xl md:text-7xl lg:text-[8rem]">IOT</div>
 <div class="absolute top-4 left-4 mono-meta text-tertiary">LOC: 00.0000 N</div>
 <div class="absolute bottom-4 right-4 mono-meta text-tertiary">V: 1.0.0.1</div>
 </div>
@@ -437,12 +439,12 @@
 .footer-watermark:hover .gpd-line { color: #000000 !important; }
 </style>
 <!-- ZER0PA watermark with flanking details -->
-<div class="footer-watermark relative px-12 py-20">
+<div class="footer-watermark relative px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20">
     <!-- Left: email — centered in space between left edge and watermark -->
     <a href="mailto:architects@zer0pa.ai" class="mono-meta absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; left: 4%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
     <!-- Watermark — centered -->
     <div class="flex items-center justify-center pointer-events-none">
-        <div class="wm-text font-headline font-medium text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span class="wm-zero" style="color: #ffffff;">0</span>PA</div>
+        <div class="wm-text font-headline font-medium text-[4rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span class="wm-zero" style="color: #ffffff;">0</span>PA</div>
     </div>
     <!-- Right: GPD mark — centered in space between watermark and right edge -->
     <div class="absolute z-10" style="right: 6%; top: 50%; transform: translateY(-50%);">
@@ -458,7 +460,7 @@
 </div>
 <!-- FOOTER LINKS — HORIZONTAL ROW -->
 <div class="px-6 pb-6">
-    <div class="flex items-center justify-center gap-3">
+    <div class="flex flex-wrap items-center justify-center gap-3">
         <a href="https://reddit.com/r/zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">REDDIT</a>
         <a href="https://huggingface.co/Zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">HUGGING FACE</a>
         <a href="https://github.com/Zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">GITHUB</a>
