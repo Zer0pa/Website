@@ -382,13 +382,28 @@
 </section>
 <!-- FOOTER -->
 <footer class="bg-black relative overflow-hidden">
+<style>
+.footer-watermark { transition: background-color 0.3s ease; }
+.footer-watermark:hover { background-color: #ffffff; }
+.footer-watermark .wm-text { transition: color 0.3s ease; }
+.footer-watermark:hover .wm-text { color: #eeeeee !important; }
+.footer-watermark .wm-zero { transition: color 0.3s ease; }
+.footer-watermark:hover .wm-zero { color: #000000 !important; }
+.footer-watermark a { transition: color 0.3s ease; }
+.footer-watermark:hover a { color: #000000 !important; }
+.footer-watermark:hover a:hover { color: #555555 !important; }
+.footer-watermark pre { transition: color 0.3s ease; }
+.footer-watermark:hover pre { color: #000000 !important; }
+.footer-watermark .gpd-line { transition: color 0.3s ease; }
+.footer-watermark:hover .gpd-line { color: #000000 !important; }
+</style>
 <!-- ZER0PA watermark with flanking details -->
-<div class="relative px-12 py-20">
+<div class="footer-watermark relative px-12 py-20">
     <!-- Left: email — centered in space between left edge and watermark -->
-    <a href="mailto:architects@zer0pa.ai" class="mono-meta hover:text-secondary transition-colors absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; left: 4%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
+    <a href="mailto:architects@zer0pa.ai" class="mono-meta absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; left: 4%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
     <!-- Watermark — centered -->
     <div class="flex items-center justify-center pointer-events-none">
-        <div class="font-headline font-medium text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span style="color: #ffffff;">0</span>PA</div>
+        <div class="wm-text font-headline font-medium text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span class="wm-zero" style="color: #ffffff;">0</span>PA</div>
     </div>
     <!-- Right: GPD mark — centered in space between watermark and right edge -->
     <div class="absolute z-10" style="right: 6%; top: 50%; transform: translateY(-50%);">
@@ -398,8 +413,8 @@
 ██║   ██║██╔═══╝ ██║  ██║
 ╚██████╔╝██║     ██████╔╝
 &#x20;╚═════╝ ╚═╝     ╚═════╝</pre>
-        <span class="block mt-1" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.08em;">GPD v1.0.1 — GET PHYSICS DONE</span>
-        <span class="block" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 7px; letter-spacing: 0.05em;">© 2026 PHYSICAL SUPERINTELLIGENCE PBC (PSI)</span>
+        <span class="gpd-line block mt-1" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.08em;">GPD v1.0.1 — GET PHYSICS DONE</span>
+        <span class="gpd-line block" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 7px; letter-spacing: 0.05em;">© 2026 PHYSICAL SUPERINTELLIGENCE PBC (PSI)</span>
     </div>
 </div>
 <!-- FOOTER LINKS — HORIZONTAL ROW -->
