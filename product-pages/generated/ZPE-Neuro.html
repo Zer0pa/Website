@@ -2,7 +2,37 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ZER0PA // ZPE-NEURO // FORENSIC_AUDIT</title>
+<title>ZPE-Neuro — Deterministic Neural Recording Codec | Zer0pa</title>
+<meta name="description" content="ZPE-Neuro applies the ZPE deterministic 8-primitive encoding architecture to extracellular neural recordings. Lossless spike-train compression with pattern search."/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<meta name="author" content="Zer0pa"/>
+<meta name="keywords" content="neural recording codec, spike train compression, neuroscience, ZPE-Neuro, Zer0pa"/>
+<link rel="canonical" href="https://zer0pa.ai/pages/ZPE-Neuro.html"/>
+<meta property="og:title" content="ZPE-Neuro — Deterministic Neural Recording Codec | Zer0pa"/>
+<meta property="og:description" content="ZPE-Neuro applies the ZPE deterministic 8-primitive encoding architecture to extracellular neural recordings. Lossless spike-train compression with pattern search."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://zer0pa.ai/pages/ZPE-Neuro.html"/>
+<meta property="og:site_name" content="Zer0pa"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ZPE-Neuro — Deterministic Neural Recording Codec | Zer0pa"/>
+<meta name="twitter:description" content="ZPE-Neuro applies the ZPE deterministic 8-primitive encoding architecture to extracellular neural recordings. Lossless spike-train compression with pattern search."/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ZPE-Neuro",
+  "description": "ZPE-Neuro applies the ZPE deterministic 8-primitive encoding architecture to extracellular neural recordings. Lossless spike-train compression with pattern search.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Cross-platform",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zer0pa",
+    "url": "https://zer0pa.ai"
+  }
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -62,7 +92,9 @@
 
         /* -- Section / card hover inversion -- */
         .inv { transition: all 0.3s ease; }
-        .inv:hover { background-color: #ffffff !important; border-color: #ffffff !important; }
+        @media (hover: hover) {
+.inv:hover { background-color: #ffffff !important; border-color: #ffffff !important; }
+}
         .inv .font-headline, .inv .mono-label, .inv .mono-meta,
         .inv .text-white, .inv .text-secondary, .inv .text-tertiary,
         .inv .material-symbols-outlined, .inv p, .inv code { transition: color 0.3s ease; }
@@ -83,14 +115,14 @@
 <!-- HEADER (ZONES 1, 2, 3, 4) -->
 <header class="bg-background/65 backdrop-blur-md h-20 fixed top-0 left-0 right-0 z-50 px-8 flex items-center max-w-[1440px] mx-auto transition-transform duration-300">
 <!-- ZONE 1: LOGO -->
-<a href="#" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
+<a href="landing.html" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
 <!-- ZONE 2: NAVIGATION MENU -->
-<nav class="hidden lg:flex gap-10 items-center ml-10">
-<a class="mono-label text-white border-b border-white" href="#">ZERO-POINT-ENCODING</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZER0SHIP</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">WHITEPAPERS</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">LICENSES</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">CONTACT</a>
+<nav class="hidden md:flex gap-6 lg:gap-10 items-center ml-10">
+<a class="mono-label text-white border-b border-white" href="zpe-landing.html">ZERO-POINT-ENCODING</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="zeroship.html">ZER0SHIP</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="whitepapers.html">WHITEPAPERS</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="licensing.html">LICENSES</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="contact.html">CONTACT</a>
 </nav>
 <!-- ZONE 3 & 4: EXTERNAL LINKS & CTA -->
 <div class="flex items-center gap-8 ml-auto">
@@ -110,7 +142,7 @@
 </header>
 <main class="pt-20 grid-overlay min-h-screen w-full max-w-[1440px] mx-auto border-x border-outline-variant">
 <!-- HERO SECTION (ZONES 5, 6, 7) -->
-<section class="px-12 py-20 border-b border-outline-variant flex justify-between items-start bg-black">
+<section class="px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20 border-b border-outline-variant flex flex-col sm:flex-row justify-between items-start bg-black">
 <div class="flex flex-col gap-4">
 <!-- ZONE 7: STATUS BADGES -->
 <div class="flex gap-4">
@@ -118,7 +150,7 @@
 <span class="mono-meta text-secondary">[ STATUS: <span class="text-white">UNREDACTED</span> ]</span>
 </div>
 <!-- ZONE 6: PRODUCT NAME -->
-<h1 class="font-headline text-[8rem] font-bold tracking-tighter uppercase leading-[0.85] text-white">ZPE-NEURO</h1>
+<h1 class="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter uppercase leading-[0.85] text-white">ZPE-NEURO</h1>
 <div class="mt-4 flex items-center gap-6">
 <span class="px-3 py-1 bg-surface border border-outline-variant mono-label text-white">CLASS: SINGULARITY</span>
 <span class="mono-meta text-tertiary">TIMESTAMP: 2026.04.11.22:22:27_UTC</span>
@@ -161,7 +193,7 @@
 </section>
 <!-- ZONE 10: KEY METRICS -->
 <section class="border-b border-outline-variant">
-<div class="px-12 pt-12 pb-6">
+<div class="px-4 sm:px-6 md:px-8 lg:px-12 pt-8 sm:pt-10 md:pt-12 pb-4 sm:pb-6">
 <h2 class="mono-label text-secondary">03 // KEY METRICS</h2>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-4">
@@ -185,7 +217,7 @@
 <div class="text-7xl font-headline font-bold text-white mt-4 whitespace-nowrap">41/41</div>
 </div>
 </div>
-<div class="px-12 py-4 border-t border-outline-variant">
+<div class="px-4 sm:px-6 md:px-8 lg:px-12 py-4 border-t border-outline-variant">
 <p class="text-xs font-mono text-tertiary">* Baselines are approximate analogues — not direct comparisons. Corpus, scope, and conditions differ.</p>
 </div>
 </section>
@@ -272,36 +304,32 @@
 <span class="px-2 py-1 bg-success/20 text-success border-success/40 mono-label text-[11px] border">PASS</span>
 </div>
 <div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">BLIND-CLONE_AUTHORITY_REPLAY</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">INC</span>
+<span class="mono-label text-white">BLIND_CLONE_AUTHORITY_REPLAY</span>
+<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">INCOMPLETE</span>
 </div>
 <div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">CURRENT_STATE</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">WHY IT MATTERS</span>
+<span class="mono-label text-white">PACKAGE_SURFACE_TRUTH</span>
+<span class="px-2 py-1 bg-success/20 text-success border-success/40 mono-label text-[11px] border">PASS</span>
 </div>
 <div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">PASS</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">THE REPO NOW SHIPS A TRUTHFUL PYTHON PACKAGE SURFACE RATHER THAN RELYING ON UNDECLARED RUNTIME ASSUMPTIONS.</span>
+<span class="mono-label text-white">UNIT_TEST_REGRESSION_CHECK</span>
+<span class="px-2 py-1 bg-success/20 text-success border-success/40 mono-label text-[11px] border">PASS</span>
 </div>
 <div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">PASS_ON_THE_CURRENT_SHIPPED_UNIT...</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">THE STAGED CODE SURFACE HAS A SMALL BUT REAL REGRESSION CHECK THAT SHIPS WITH THE REPO.</span>
+<span class="mono-label text-white">SEQUENTIAL_GATE_C_D_REPLAY</span>
+<span class="px-2 py-1 bg-success/20 text-success border-success/40 mono-label text-[11px] border">PASS</span>
 </div>
 <div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">PASS_FOR_SEQUENTIAL_GATE_C_AND_G...</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">THIS IS THE STRONGEST CURRENT SHIPPED REPLAY BASELINE IN THE REPO.</span>
+<span class="mono-label text-white">PROOF_INSTALL_VERIFICATION</span>
+<span class="px-2 py-1 bg-success/20 text-success border-success/40 mono-label text-[11px] border">PASS</span>
 </div>
 <div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">PASS_FOR_THE_DECLARED_.[PROOF]_I...</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">THIS KEEPS THE DOCS HONEST ABOUT WHAT THE PACKAGED REPLAY STACK ACTUALLY INSTALLS CLEANLY.</span>
+<span class="mono-label text-white">OPERATOR_ONLY_DEPENDENCIES</span>
+<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">DEFERRED</span>
 </div>
 <div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">OPERATOR_ONLY</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">THOSE PATHS CURRENTLY REQUIRE MANUAL DEPENDENCY OR TOOLCHAIN WORK AROUND ONE-API, IBL-NEUROPIXEL, LLVMLITE OR NUMBA, OR ALLENSDK CONFLICTS AND ARE INTENTIONALLY NOT SHIPPED AS CLEAN EXTRAS.</span>
-</div>
-<div class="inv border border-outline-variant p-6 flex justify-between items-center transition-all duration-300 cursor-default">
-<span class="mono-label text-white">PASS_FOR_STATIC_VERIFICATION_COV...</span>
-<span class="px-2 py-1 bg-tertiary/20 text-tertiary border-tertiary/40 mono-label text-[11px] border">THE REPO NOW HAS A VERIFICATION WORKFLOW THAT CHECKS PACKAGE, BUILD, AND INSTALL TRUTH WITHOUT IMPLYING A LIVE PUBLISH PIPELINE OR AUTOMATED PUBLISH STEP.</span>
+<span class="mono-label text-white">STATIC_VERIFICATION_COVERAGE</span>
+<span class="px-2 py-1 bg-success/20 text-success border-success/40 mono-label text-[11px] border">PASS</span>
 </div>
 </div>
 </section>
@@ -353,7 +381,7 @@
 <p class="mono-meta text-secondary">GEOMETRIC PROOF OF ZERO-STATE</p>
 </div>
 <div class="w-full aspect-square border border-outline-variant flex items-center justify-center relative bg-black/50">
-<div class="text-white/10 font-headline text-[8rem]">NEURO</div>
+<div class="text-white/10 font-headline text-4xl sm:text-6xl md:text-7xl lg:text-[8rem]">NEURO</div>
 <div class="absolute top-4 left-4 mono-meta text-tertiary">LOC: 00.0000 N</div>
 <div class="absolute bottom-4 right-4 mono-meta text-tertiary">V: 1.0.0.1</div>
 </div>
@@ -439,15 +467,9 @@
 .footer-watermark:hover .gpd-line { color: #000000 !important; }
 </style>
 <!-- ZER0PA watermark with flanking details -->
-<div class="footer-watermark relative px-12 py-20">
-    <!-- Left: email — centered in space between left edge and watermark -->
-    <a href="mailto:architects@zer0pa.ai" class="mono-meta absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; left: 4%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
-    <!-- Watermark — centered -->
-    <div class="flex items-center justify-center pointer-events-none">
-        <div class="wm-text font-headline font-medium text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span class="wm-zero" style="color: #ffffff;">0</span>PA</div>
-    </div>
-    <!-- Right: GPD mark — centered in space between watermark and right edge -->
-    <div class="absolute z-10" style="right: 6%; top: 50%; transform: translateY(-50%);">
+<div class="footer-watermark relative px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20">
+    <!-- Left: GPD mark — centered in space between left edge and watermark -->
+    <div class="absolute z-10" style="left: 8%; top: 50%; transform: translateY(-50%);">
         <pre class="select-none" style="color: #ffffff; font-size: 8px; line-height: 1.1; font-family: monospace; letter-spacing: 0;">&#x20;██████╗ ██████╗ ██████╗
 ██╔════╝ ██╔══██╗██╔══██╗
 ██║  ███╗██████╔╝██║  ██║
@@ -457,10 +479,16 @@
         <span class="gpd-line block mt-1" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.08em;">GPD v1.0.1 — GET PHYSICS DONE</span>
         <span class="gpd-line block" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 7px; letter-spacing: 0.05em;">© 2026 PHYSICAL SUPERINTELLIGENCE PBC (PSI)</span>
     </div>
+    <!-- Watermark — centered -->
+    <div class="flex items-center justify-center pointer-events-none">
+        <div class="wm-text font-headline font-medium text-[4rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span class="wm-zero" style="color: #ffffff;">0</span>PA</div>
+    </div>
+    <!-- Right: email — centered in space between watermark and right edge -->
+    <a href="mailto:architects@zer0pa.ai" class="mono-meta absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; right: 6%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
 </div>
 <!-- FOOTER LINKS — HORIZONTAL ROW -->
 <div class="px-6 pb-6">
-    <div class="flex items-center justify-center gap-3">
+    <div class="flex flex-wrap items-center justify-center gap-3">
         <a href="https://reddit.com/r/zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">REDDIT</a>
         <a href="https://huggingface.co/Zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">HUGGING FACE</a>
         <a href="https://github.com/Zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">GITHUB</a>

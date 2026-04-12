@@ -2,7 +2,37 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ZER0PA // ZPE-IOT // FORENSIC_AUDIT</title>
+<title>ZPE-IoT — Deterministic Sensor Compression SDK for IoT | Zer0pa</title>
+<meta name="description" content="ZPE-IoT is a deterministic sensor compression SDK for constrained IoT streams — built for environments where bandwidth is expensive and lossy codecs are unacceptable."/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<meta name="author" content="Zer0pa"/>
+<meta name="keywords" content="IoT compression, sensor codec, edge computing, deterministic SDK, ZPE-IoT, Zer0pa"/>
+<link rel="canonical" href="https://zer0pa.ai/pages/ZPE-IoT.html"/>
+<meta property="og:title" content="ZPE-IoT — Deterministic Sensor Compression SDK for IoT | Zer0pa"/>
+<meta property="og:description" content="ZPE-IoT is a deterministic sensor compression SDK for constrained IoT streams — built for environments where bandwidth is expensive and lossy codecs are unacceptable."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://zer0pa.ai/pages/ZPE-IoT.html"/>
+<meta property="og:site_name" content="Zer0pa"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ZPE-IoT — Deterministic Sensor Compression SDK for IoT | Zer0pa"/>
+<meta name="twitter:description" content="ZPE-IoT is a deterministic sensor compression SDK for constrained IoT streams — built for environments where bandwidth is expensive and lossy codecs are unacceptable."/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ZPE-IoT",
+  "description": "ZPE-IoT is a deterministic sensor compression SDK for constrained IoT streams \u2014 built for environments where bandwidth is expensive and lossy codecs are unacceptable.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zer0pa",
+    "url": "https://zer0pa.ai"
+  }
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -62,7 +92,9 @@
 
         /* -- Section / card hover inversion -- */
         .inv { transition: all 0.3s ease; }
-        .inv:hover { background-color: #ffffff !important; border-color: #ffffff !important; }
+        @media (hover: hover) {
+.inv:hover { background-color: #ffffff !important; border-color: #ffffff !important; }
+}
         .inv .font-headline, .inv .mono-label, .inv .mono-meta,
         .inv .text-white, .inv .text-secondary, .inv .text-tertiary,
         .inv .material-symbols-outlined, .inv p, .inv code { transition: color 0.3s ease; }
@@ -83,14 +115,14 @@
 <!-- HEADER (ZONES 1, 2, 3, 4) -->
 <header class="bg-background/65 backdrop-blur-md h-20 fixed top-0 left-0 right-0 z-50 px-8 flex items-center max-w-[1440px] mx-auto transition-transform duration-300">
 <!-- ZONE 1: LOGO -->
-<a href="#" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
+<a href="landing.html" class="font-headline font-medium text-4xl tracking-tighter select-none shrink-0" style="color: #333333;">ZER<span style="color: #ffffff;">0</span>PA</a>
 <!-- ZONE 2: NAVIGATION MENU -->
-<nav class="hidden lg:flex gap-10 items-center ml-10">
-<a class="mono-label text-white border-b border-white" href="#">ZERO-POINT-ENCODING</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">ZER0SHIP</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">WHITEPAPERS</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">LICENSES</a>
-<a class="mono-label text-secondary hover:text-white transition-colors" href="#">CONTACT</a>
+<nav class="hidden md:flex gap-6 lg:gap-10 items-center ml-10">
+<a class="mono-label text-white border-b border-white" href="zpe-landing.html">ZERO-POINT-ENCODING</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="zeroship.html">ZER0SHIP</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="whitepapers.html">WHITEPAPERS</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="licensing.html">LICENSES</a>
+<a class="mono-label text-secondary hover:text-white transition-colors" href="contact.html">CONTACT</a>
 </nav>
 <!-- ZONE 3 & 4: EXTERNAL LINKS & CTA -->
 <div class="flex items-center gap-8 ml-auto">
@@ -110,7 +142,7 @@
 </header>
 <main class="pt-20 grid-overlay min-h-screen w-full max-w-[1440px] mx-auto border-x border-outline-variant">
 <!-- HERO SECTION (ZONES 5, 6, 7) -->
-<section class="px-12 py-20 border-b border-outline-variant flex justify-between items-start bg-black">
+<section class="px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20 border-b border-outline-variant flex flex-col sm:flex-row justify-between items-start bg-black">
 <div class="flex flex-col gap-4">
 <!-- ZONE 7: STATUS BADGES -->
 <div class="flex gap-4">
@@ -118,7 +150,7 @@
 <span class="mono-meta text-secondary">[ STATUS: <span class="text-white">UNREDACTED</span> ]</span>
 </div>
 <!-- ZONE 6: PRODUCT NAME -->
-<h1 class="font-headline text-[8rem] font-bold tracking-tighter uppercase leading-[0.85] text-white">ZPE-IOT</h1>
+<h1 class="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter uppercase leading-[0.85] text-white">ZPE-IOT</h1>
 <div class="mt-4 flex items-center gap-6">
 <span class="px-3 py-1 bg-surface border border-outline-variant mono-label text-white">CLASS: SINGULARITY</span>
 <span class="mono-meta text-tertiary">TIMESTAMP: 2026.04.11.22:22:27_UTC</span>
@@ -163,7 +195,7 @@
 </section>
 <!-- ZONE 10: KEY METRICS -->
 <section class="border-b border-outline-variant">
-<div class="px-12 pt-12 pb-6">
+<div class="px-4 sm:px-6 md:px-8 lg:px-12 pt-8 sm:pt-10 md:pt-12 pb-4 sm:pb-6">
 <h2 class="mono-label text-secondary">03 // KEY METRICS</h2>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-4">
@@ -175,17 +207,20 @@
 <div class="inv pl-8 pr-4 py-12 border-r border-outline-variant border-t border-outline-variant hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
 <span class="mono-meta text-secondary group-hover:text-white transition-colors">DESTRUCTIVE_TESTS</span>
 <div class="text-7xl font-headline font-bold text-white mt-4 whitespace-nowrap">27/27</div>
+<div class="text-lg font-mono text-secondary mt-1">pass</div>
 </div>
 <div class="inv px-8 py-12 border-r border-outline-variant border-t border-outline-variant hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
-<span class="mono-meta text-secondary group-hover:text-white transition-colors">REPLAY</span>
-<div class="text-7xl font-headline font-bold text-white mt-4 whitespace-nowrap">byte-identical</div>
+<span class="mono-meta text-secondary group-hover:text-white transition-colors">REPLAY_DEVIATION</span>
+<div class="text-7xl font-headline font-bold text-white mt-4 whitespace-nowrap">0.0%</div>
+<div class="text-lg font-mono text-secondary mt-1">byte-identical</div>
 </div>
 <div class="inv pl-8 pr-4 py-12 border-t border-outline-variant hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
 <span class="mono-meta text-secondary group-hover:text-white transition-colors">DATASETS</span>
 <div class="text-7xl font-headline font-bold text-white mt-4 whitespace-nowrap">11</div>
+<div class="text-lg font-mono text-secondary mt-1">verified</div>
 </div>
 </div>
-<div class="px-12 py-4 border-t border-outline-variant">
+<div class="px-4 sm:px-6 md:px-8 lg:px-12 py-4 border-t border-outline-variant">
 <p class="text-xs font-mono text-tertiary">* Baselines are approximate analogues — not direct comparisons. Corpus, scope, and conditions differ.</p>
 </div>
 </section>
@@ -321,7 +356,7 @@
 <p class="mono-meta text-secondary">GEOMETRIC PROOF OF ZERO-STATE</p>
 </div>
 <div class="w-full aspect-square border border-outline-variant flex items-center justify-center relative bg-black/50">
-<div class="text-white/10 font-headline text-[8rem]">IOT</div>
+<div class="text-white/10 font-headline text-4xl sm:text-6xl md:text-7xl lg:text-[8rem]">IOT</div>
 <div class="absolute top-4 left-4 mono-meta text-tertiary">LOC: 00.0000 N</div>
 <div class="absolute bottom-4 right-4 mono-meta text-tertiary">V: 1.0.0.1</div>
 </div>
@@ -407,15 +442,9 @@
 .footer-watermark:hover .gpd-line { color: #000000 !important; }
 </style>
 <!-- ZER0PA watermark with flanking details -->
-<div class="footer-watermark relative px-12 py-20">
-    <!-- Left: email — centered in space between left edge and watermark -->
-    <a href="mailto:architects@zer0pa.ai" class="mono-meta absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; left: 4%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
-    <!-- Watermark — centered -->
-    <div class="flex items-center justify-center pointer-events-none">
-        <div class="wm-text font-headline font-medium text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span class="wm-zero" style="color: #ffffff;">0</span>PA</div>
-    </div>
-    <!-- Right: GPD mark — centered in space between watermark and right edge -->
-    <div class="absolute z-10" style="right: 6%; top: 50%; transform: translateY(-50%);">
+<div class="footer-watermark relative px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20">
+    <!-- Left: GPD mark — centered in space between left edge and watermark -->
+    <div class="absolute z-10" style="left: 8%; top: 50%; transform: translateY(-50%);">
         <pre class="select-none" style="color: #ffffff; font-size: 8px; line-height: 1.1; font-family: monospace; letter-spacing: 0;">&#x20;██████╗ ██████╗ ██████╗
 ██╔════╝ ██╔══██╗██╔══██╗
 ██║  ███╗██████╔╝██║  ██║
@@ -425,10 +454,16 @@
         <span class="gpd-line block mt-1" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.08em;">GPD v1.0.1 — GET PHYSICS DONE</span>
         <span class="gpd-line block" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 7px; letter-spacing: 0.05em;">© 2026 PHYSICAL SUPERINTELLIGENCE PBC (PSI)</span>
     </div>
+    <!-- Watermark — centered -->
+    <div class="flex items-center justify-center pointer-events-none">
+        <div class="wm-text font-headline font-medium text-[4rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span class="wm-zero" style="color: #ffffff;">0</span>PA</div>
+    </div>
+    <!-- Right: email — centered in space between watermark and right edge -->
+    <a href="mailto:architects@zer0pa.ai" class="mono-meta absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; right: 6%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
 </div>
 <!-- FOOTER LINKS — HORIZONTAL ROW -->
 <div class="px-6 pb-6">
-    <div class="flex items-center justify-center gap-3">
+    <div class="flex flex-wrap items-center justify-center gap-3">
         <a href="https://reddit.com/r/zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">REDDIT</a>
         <a href="https://huggingface.co/Zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">HUGGING FACE</a>
         <a href="https://github.com/Zer0pa" target="_blank" rel="noopener noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">GITHUB</a>
