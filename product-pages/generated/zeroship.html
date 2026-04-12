@@ -57,6 +57,23 @@
             flex-direction: column;
             padding: 1.5rem;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .video-card:hover {
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+        .video-card span {
+            transition: color 0.3s ease;
+        }
+        .video-card:hover .font-headline {
+            color: #000000;
+        }
+        .video-card:hover .mono-label {
+            color: #333333;
+        }
+        .video-card:hover .mono-meta {
+            color: #555555;
         }
         .video-card video {
             width: 100%;

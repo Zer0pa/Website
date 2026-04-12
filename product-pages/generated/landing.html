@@ -58,7 +58,23 @@
             transition: all 0.3s ease;
         }
         .division-block:hover {
-            border-color: #333333;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+        .division-block h2,
+        .division-block .mono-label,
+        .division-block .mono-meta,
+        .division-block .division-cta span {
+            transition: color 0.3s ease;
+        }
+        .division-block:hover h2 {
+            color: #000000;
+        }
+        .division-block:hover .mono-label {
+            color: #333333;
+        }
+        .division-block:hover .mono-meta {
+            color: #555555;
         }
         .division-cta {
             border-top: 1px solid #1a1a1a;
@@ -66,10 +82,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         .division-block:hover .division-cta {
-            color: #4ade80;
+            border-top-color: #e0e0e0;
+            color: #000000;
+        }
+        .division-block:hover .division-cta span {
+            color: #000000;
         }
     </style>
 </head>
