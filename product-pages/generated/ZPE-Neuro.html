@@ -403,19 +403,37 @@
 </div>
 </div>
 </section>
-<!-- FOOTER (ZONE 18) -->
-<footer class="bg-black py-24 px-12 relative overflow-hidden">
-<div class="w-full flex items-center justify-between relative">
-<!-- ZER0PA watermark logo — left-justified, off-black, white 0 -->
-<div class="font-headline font-medium text-[20rem] leading-none tracking-tighter select-none pointer-events-none" style="color: #111111;">ZER<span style="color: #ffffff;">0</span>PA</div>
-<!-- ZONE 18: BUTTONS — stacked, right-justified -->
-<div class="flex flex-col gap-3 w-80 shrink-0 relative z-10">
-<a href="https://reddit.com/r/zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">REDDIT</a>
-<a href="https://huggingface.co/Zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">HUGGING FACE</a>
-<a href="https://github.com/Zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">GITHUB</a>
-<a href="#" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">WHITEPAPERS</a>
-<a href="https://github.com/Zer0pa/ZPE-IMC/blob/main/LICENSE" target="_blank" rel="noreferrer" class="bg-[#111111] text-white py-4 mono-label font-bold text-xl hover:bg-white hover:text-black transition-all text-center block">DOWNLOAD LICENSES</a>
+<!-- FOOTER -->
+<footer class="bg-black relative overflow-hidden">
+<!-- ZER0PA watermark with flanking details -->
+<div class="relative px-12 py-20">
+    <!-- Left: email — centered in space between left edge and watermark -->
+    <a href="mailto:architects@zer0pa.ai" class="mono-meta hover:text-secondary transition-colors absolute z-10" style="color: #ffffff; font-size: 20px; letter-spacing: 0.05em; left: 4%; top: 50%; transform: translateY(-50%);">architects@zer0pa.ai</a>
+    <!-- Watermark — centered -->
+    <div class="flex items-center justify-center pointer-events-none">
+        <div class="font-headline font-medium text-[16rem] leading-none tracking-tighter select-none" style="color: #111111;">ZER<span style="color: #ffffff;">0</span>PA</div>
+    </div>
+    <!-- Right: GPD mark — centered in space between watermark and right edge -->
+    <div class="absolute z-10" style="right: 6%; top: 50%; transform: translateY(-50%);">
+        <pre class="select-none" style="color: #ffffff; font-size: 8px; line-height: 1.1; font-family: monospace; letter-spacing: 0;">&#x20;██████╗ ██████╗ ██████╗
+██╔════╝ ██╔══██╗██╔══██╗
+██║  ███╗██████╔╝██║  ██║
+██║   ██║██╔═══╝ ██║  ██║
+╚██████╔╝██║     ██████╔╝
+&#x20;╚═════╝ ╚═╝     ╚═════╝</pre>
+        <span class="block mt-1" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.08em;">GPD v1.0.1 — GET PHYSICS DONE</span>
+        <span class="block" style="color: #ffffff; font-family: 'Courier Prime', monospace; font-size: 7px; letter-spacing: 0.05em;">© 2026 PHYSICAL SUPERINTELLIGENCE PBC (PSI)</span>
+    </div>
 </div>
+<!-- FOOTER LINKS — HORIZONTAL ROW -->
+<div class="px-6 pb-6">
+    <div class="flex items-center justify-center gap-3">
+        <a href="https://reddit.com/r/zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">REDDIT</a>
+        <a href="https://huggingface.co/Zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">HUGGING FACE</a>
+        <a href="https://github.com/Zer0pa" target="_blank" rel="noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">GITHUB</a>
+        <a href="whitepapers.html" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">WHITEPAPERS</a>
+        <a href="https://github.com/Zer0pa/ZPE-IMC/blob/main/LICENSE" target="_blank" rel="noreferrer" class="bg-[#111111] border border-[#1a1a1a] text-white py-4 px-6 mono-label font-bold hover:bg-white hover:text-black transition-all text-center block flex-1">DOWNLOAD LICENSES</a>
+    </div>
 </div>
 </footer>
 </main>
